@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="Git配置多个SSH-Key在使用hexo搭建个人博客时，使用github pages托管，而源码寄存到码云上 这时就需要2个git账号 设置方式生成github用的SSH-Key 1ssh-keygen -t rsa -C &amp;apos;loickengit@github.com&amp;apos; -f ~/.ssh/github_id_rsa 生成gitee用的SSH-Key 1ssh-keygen">
+<meta name="description" content="分支创建分支从当前分支创建新分支，并切换到该分支上 1git checkout -b new_branch 删除分支删除远程分支 1234git push --delete &amp;lt;remote_name&amp;gt; &amp;lt;branch_name&amp;gt;	e.g.git push --delete origin branch1 删除本地分支，使用-d参数，如果删除分支没有充分merge会删除失败，强">
 <meta name="keywords" content="git">
 <meta property="og:type" content="article">
 <meta property="og:title" content="git使用技巧">
 <meta property="og:url" content="http://localhost/2019/04/13/git/index.html">
 <meta property="og:site_name" content="tgs&#39;s blog">
-<meta property="og:description" content="Git配置多个SSH-Key在使用hexo搭建个人博客时，使用github pages托管，而源码寄存到码云上 这时就需要2个git账号 设置方式生成github用的SSH-Key 1ssh-keygen -t rsa -C &amp;apos;loickengit@github.com&amp;apos; -f ~/.ssh/github_id_rsa 生成gitee用的SSH-Key 1ssh-keygen">
+<meta property="og:description" content="分支创建分支从当前分支创建新分支，并切换到该分支上 1git checkout -b new_branch 删除分支删除远程分支 1234git push --delete &amp;lt;remote_name&amp;gt; &amp;lt;branch_name&amp;gt;	e.g.git push --delete origin branch1 删除本地分支，使用-d参数，如果删除分支没有充分merge会删除失败，强">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-04-14T13:56:17.073Z">
+<meta property="og:updated_time" content="2019-04-14T14:06:55.879Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git使用技巧">
-<meta name="twitter:description" content="Git配置多个SSH-Key在使用hexo搭建个人博客时，使用github pages托管，而源码寄存到码云上 这时就需要2个git账号 设置方式生成github用的SSH-Key 1ssh-keygen -t rsa -C &amp;apos;loickengit@github.com&amp;apos; -f ~/.ssh/github_id_rsa 生成gitee用的SSH-Key 1ssh-keygen">
+<meta name="twitter:description" content="分支创建分支从当前分支创建新分支，并切换到该分支上 1git checkout -b new_branch 删除分支删除远程分支 1234git push --delete &amp;lt;remote_name&amp;gt; &amp;lt;branch_name&amp;gt;	e.g.git push --delete origin branch1 删除本地分支，使用-d参数，如果删除分支没有充分merge会删除失败，强">
 
 
 
@@ -231,12 +231,12 @@
         </li>
       
         
-        <li class="menu-item menu-item-travel">
-          <a href="/categories/travel" rel="section">
+        <li class="menu-item menu-item-reflect">
+          <a href="/categories/reflect" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-yelp"></i> <br>
             
-            travel
+            reflect
           </a>
         </li>
       
@@ -362,7 +362,13 @@
       
 
       
-        <h4 id="Git配置多个SSH-Key"><a href="#Git配置多个SSH-Key" class="headerlink" title="Git配置多个SSH-Key"></a>Git配置多个SSH-Key</h4><p>在使用hexo搭建个人博客时，使用github pages托管，而源码寄存到码云上</p>
+        <h3 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h3><h4 id="创建分支"><a href="#创建分支" class="headerlink" title="创建分支"></a>创建分支</h4><p>从当前分支创建新分支，并切换到该分支上</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b new_branch</span><br></pre></td></tr></table></figure>
+<h4 id="删除分支"><a href="#删除分支" class="headerlink" title="删除分支"></a>删除分支</h4><p>删除远程分支</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git push --delete &lt;remote_name&gt; &lt;branch_name&gt;	</span><br><span class="line"></span><br><span class="line">e.g.</span><br><span class="line">git push --delete origin branch1</span><br></pre></td></tr></table></figure>
+<p>删除本地分支，使用-d参数，如果删除分支没有充分merge会删除失败，强制删除可以用 -D</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -d &lt;branch_name&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="Git配置多个SSH-Key"><a href="#Git配置多个SSH-Key" class="headerlink" title="Git配置多个SSH-Key"></a>Git配置多个SSH-Key</h3><p>在使用hexo搭建个人博客时，使用github pages托管，而源码寄存到码云上</p>
 <p>这时就需要2个git账号</p>
 <h5 id="设置方式"><a href="#设置方式" class="headerlink" title="设置方式"></a>设置方式</h5><p>生成github用的SSH-Key</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &apos;loickengit@github.com&apos; -f ~/.ssh/github_id_rsa</span><br></pre></td></tr></table></figure>
@@ -374,13 +380,15 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@gitee.com</span><br><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
 <p>这里以gitee为例，成功的话会返回下图内容</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hi loick! You&apos;ve successfully authenticated, but GITEE.COM does not provide shell access.</span><br></pre></td></tr></table></figure>
-<h4 id="Issues"><a href="#Issues" class="headerlink" title="Issues"></a>Issues</h4><h6 id="Hi-xxxxxx-You’ve-successfully-authenticated-but-GitHub-Gitee-does-not-provide-shell-access"><a href="#Hi-xxxxxx-You’ve-successfully-authenticated-but-GitHub-Gitee-does-not-provide-shell-access" class="headerlink" title="Hi xxxxxx! You’ve successfully authenticated, but GitHub/Gitee does not provide shell access."></a>Hi xxxxxx! You’ve successfully authenticated, but GitHub/Gitee does not provide shell access.</h6><p>git pull/git push时遇到上面的情况，这意思是不提供ssh访问，那就改成https的方式吧</p>
-<p>查看 .git/config 设置的访问方式如下，url是ssh的连接方式</p>
+<h3 id="Git访问方式"><a href="#Git访问方式" class="headerlink" title="Git访问方式"></a>Git访问方式</h3><h5 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h5><p>查看 .git/config 设置的访问方式如下，url是ssh的连接方式</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&gt; cat .git/config</span><br><span class="line">[core]</span><br><span class="line">	repositoryformatversion = 0</span><br><span class="line">	filemode = true</span><br><span class="line">	bare = false</span><br><span class="line">	logallrefupdates = true</span><br><span class="line">	ignorecase = true</span><br><span class="line">	precomposeunicode = true</span><br><span class="line">[remote &quot;origin&quot;]</span><br><span class="line">	url = git@github.com:loickengit/loickengit.github.io.git</span><br><span class="line">	fetch = +refs/heads/*:refs/remotes/origin/*</span><br><span class="line">[branch &quot;master&quot;]</span><br><span class="line">	remote = origin</span><br><span class="line">	merge = refs/heads/master</span><br></pre></td></tr></table></figure>
-<p>将上述url改为https方式即可正常push</p>
+<p>如果使用如下的https方式访问，每次都需要输入username和password</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">url = https://github.com/loickengit/loickengit.github.io.git</span><br></pre></td></tr></table></figure>
+<h5 id="git命令设置访问方式"><a href="#git命令设置访问方式" class="headerlink" title="git命令设置访问方式"></a>git命令设置访问方式</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote set-url origin git@github.com:loickengit/loickengit.github.io.git</span><br></pre></td></tr></table></figure>
+<h4 id="Issues"><a href="#Issues" class="headerlink" title="Issues"></a>Issues</h4><h6 id="Hi-xxxxxx-You’ve-successfully-authenticated-but-GitHub-Gitee-does-not-provide-shell-access"><a href="#Hi-xxxxxx-You’ve-successfully-authenticated-but-GitHub-Gitee-does-not-provide-shell-access" class="headerlink" title="Hi xxxxxx! You’ve successfully authenticated, but GitHub/Gitee does not provide shell access."></a>Hi xxxxxx! You’ve successfully authenticated, but GitHub/Gitee does not provide shell access.</h6><p>git pull/git push时遇到上面的情况，可能是没有在github/gitee上设置公钥</p>
 <h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="https://gitee.com/help/articles/4229#article-header0" target="_blank" rel="noopener">Git配置多个SSH-Key</a></p>
 <p><a href="https://youcanping.cn/2017/12/20/ssh-Permission-denied/" target="_blank" rel="noopener">ssh Permission denied</a></p>
+<p><a href="https://stackoverflow.com/questions/6565357/git-push-requires-username-and-password" target="_blank" rel="noopener">Git push requires username and password</a></p>
 
       
     </div>
@@ -420,6 +428,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/16/path-sum-III/" rel="prev" title="path_sum_III">
+                path_sum_III <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -498,7 +510,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -509,7 +521,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -520,7 +532,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -569,7 +581,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Git配置多个SSH-Key"><span class="nav-number">1.</span> <span class="nav-text">Git配置多个SSH-Key</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#设置方式"><span class="nav-number">1.1.</span> <span class="nav-text">设置方式</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Issues"><span class="nav-number">2.</span> <span class="nav-text">Issues</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#Hi-xxxxxx-You’ve-successfully-authenticated-but-GitHub-Gitee-does-not-provide-shell-access"><span class="nav-number">2.0.1.</span> <span class="nav-text">Hi xxxxxx! You’ve successfully authenticated, but GitHub/Gitee does not provide shell access.</span></a></li></ol></li></ol><li class="nav-item nav-level-4"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#分支"><span class="nav-number">1.</span> <span class="nav-text">分支</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建分支"><span class="nav-number">1.1.</span> <span class="nav-text">创建分支</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除分支"><span class="nav-number">1.2.</span> <span class="nav-text">删除分支</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git配置多个SSH-Key"><span class="nav-number">2.</span> <span class="nav-text">Git配置多个SSH-Key</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#设置方式"><span class="nav-number">2.0.1.</span> <span class="nav-text">设置方式</span></a></li></ol></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#Git访问方式"><span class="nav-number">3.</span> <span class="nav-text">Git访问方式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#配置文件"><span class="nav-number">3.0.1.</span> <span class="nav-text">配置文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#git命令设置访问方式"><span class="nav-number">3.0.2.</span> <span class="nav-text">git命令设置访问方式</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Issues"><span class="nav-number">3.1.</span> <span class="nav-text">Issues</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#Hi-xxxxxx-You’ve-successfully-authenticated-but-GitHub-Gitee-does-not-provide-shell-access"><span class="nav-number">3.1.0.1.</span> <span class="nav-text">Hi xxxxxx! You’ve successfully authenticated, but GitHub/Gitee does not provide shell access.</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参考"><span class="nav-number">3.2.</span> <span class="nav-text">参考</span></a></li></div>
             
 
           </div>

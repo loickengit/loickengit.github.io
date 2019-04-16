@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="Apache,">
 
 
 
@@ -79,17 +79,22 @@
 
 
 
-<meta name="keywords" content="blog, notes">
+<meta name="description" content="Kafka是一个分布式流处理平台 Kafka有四个核心API：  Producer API Consumer API Streams API  允许应用把记录从一个topic处理后，放到另一个topic  Connector API  允许一个应用在数据库表发生变化时，得到通知。 相当于触发器？ TopicKafka使用topic来管理消息发布与接收，topic可以有很多发布者，订阅者，让我们来看">
+<meta name="keywords" content="Apache">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Apache kafka">
 <meta property="og:url" content="http://localhost/2019/04/12/kafka/index.html">
 <meta property="og:site_name" content="tgs&#39;s blog">
+<meta property="og:description" content="Kafka是一个分布式流处理平台 Kafka有四个核心API：  Producer API Consumer API Streams API  允许应用把记录从一个topic处理后，放到另一个topic  Connector API  允许一个应用在数据库表发生变化时，得到通知。 相当于触发器？ TopicKafka使用topic来管理消息发布与接收，topic可以有很多发布者，订阅者，让我们来看">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://localhost/2019/04/12/kafka/images/kafka_anatomy.png">
-<meta property="og:updated_time" content="2019-04-13T07:38:35.853Z">
+<meta property="og:image" content="http://localhost/images/kafka_anatomy.png">
+<meta property="og:image" content="http://localhost/images/kafka_consumer.png">
+<meta property="og:image" content="http://localhost/images/kafka_consumer-groups.png">
+<meta property="og:updated_time" content="2019-04-14T14:06:55.879Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Apache kafka">
-<meta name="twitter:image" content="http://localhost/2019/04/12/kafka/images/kafka_anatomy.png">
+<meta name="twitter:description" content="Kafka是一个分布式流处理平台 Kafka有四个核心API：  Producer API Consumer API Streams API  允许应用把记录从一个topic处理后，放到另一个topic  Connector API  允许一个应用在数据库表发生变化时，得到通知。 相当于触发器？ TopicKafka使用topic来管理消息发布与接收，topic可以有很多发布者，订阅者，让我们来看">
+<meta name="twitter:image" content="http://localhost/images/kafka_anatomy.png">
 
 
 
@@ -230,12 +235,12 @@
         </li>
       
         
-        <li class="menu-item menu-item-travel">
-          <a href="/categories/travel" rel="section">
+        <li class="menu-item menu-item-reflect">
+          <a href="/categories/reflect" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-yelp"></i> <br>
             
-            travel
+            reflect
           </a>
         </li>
       
@@ -361,8 +366,34 @@
       
 
       
-        <p><img src="images/kafka_anatomy.png" alt="Anatomy of Topic"></p>
-<p><img src alt></p>
+        <p>Kafka是一个分布式流处理平台</p>
+<p>Kafka有四个核心API：</p>
+<ol>
+<li>Producer API</li>
+<li>Consumer API</li>
+<li>Streams API</li>
+</ol>
+<p>允许应用把记录从一个topic处理后，放到另一个topic</p>
+<ol start="4">
+<li>Connector API</li>
+</ol>
+<p>允许一个应用在数据库表发生变化时，得到通知。</p>
+<p>相当于触发器？</p>
+<h4 id="Topic"><a href="#Topic" class="headerlink" title="Topic"></a>Topic</h4><p>Kafka使用topic来管理消息发布与接收，topic可以有很多发布者，订阅者，让我们来看看topic的结构</p>
+<h4 id="Topic结构"><a href="#Topic结构" class="headerlink" title="Topic结构"></a>Topic结构</h4><p><img src="/images/kafka_anatomy.png" alt="Anatomy of Topic"></p>
+<p>​    每一个topic可以有很多个分区，分区是顺序写入的，每条记录都有一个唯一的sequential id，Kafka会保留记录一段时间，无论有没有消费，超过时间就会清楚，时间长短可以配置。</p>
+<p>订阅的消费者自己记录在分区上读取到的位置，所以消费者的行为对kafka本身影响不大。消费者可以随便改变读取的位置……读完了当没读，再回头读一次</p>
+<p><img src="/images/kafka_consumer.png" alt="consumer读取分区消息"></p>
+<h4 id="Distribution"><a href="#Distribution" class="headerlink" title="Distribution"></a>Distribution</h4><p>The partitions分布在众多的server上，分区还有复制集做容错处理，分区对应的servers有一个是leader，负责读和写，其他server都是followers，they passively 复制leader， 当leader挂掉的时候，会自动从followers中选举出一个leader。</p>
+<h4 id="Producers"><a href="#Producers" class="headerlink" title="Producers"></a>Producers</h4><p>producers创造的消息可以在不同的分区之间做负载均衡</p>
+<h4 id="Consumers"><a href="#Consumers" class="headerlink" title="Consumers"></a>Consumers</h4><p>每一个consumer都有一个group name，每条topic的消息，在一个group内，只能由一个consumer去消费，相当于在group内有一个topic的队列，topic的消息发送到这个队列里，consumer们先到先得（负载均衡）。</p>
+<p>如果一个topic有很多个group关注它，topic会向每个group广播每一条消息。</p>
+<p>同一个group的consumer可以分布在不同的机器上。</p>
+<p>这里说一下partition数量和consumer数量的关系，两者没有太大的关联，一个consumer可以消费很多partition….</p>
+<p><img src="/images/kafka_consumer-groups.png" alt="Kafka Cluster"></p>
+<p>图说明：</p>
+<p>一个topic有4个分区，4个分区分布在不同的server上，有2个group关注这个topic，A有2个消费者，B有4个消费者。图中的分区分配到group中的consumer，这是常见的分配方式。</p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="http://kafka.apache.org/quickstart" target="_blank" rel="noopener">Apache Kafka</a></p>
 
       
     </div>
@@ -378,6 +409,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/Apache/" rel="tag"># Apache</a>
+          
+        </div>
+      
 
       
       
@@ -387,8 +424,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/11/2019-4-11-反思/" rel="next" title="2019/4/11_反思">
-                <i class="fa fa-chevron-left"></i> 2019/4/11_反思
+              <a href="/2019/04/11/2019-4-1-conclusion/" rel="next" title="2019/4/11_conclusion">
+                <i class="fa fa-chevron-left"></i> 2019/4/11_conclusion
               </a>
             
           </div>
@@ -451,8 +488,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -469,7 +515,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -480,7 +526,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -491,7 +537,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -530,6 +576,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Topic"><span class="nav-number">1.</span> <span class="nav-text">Topic</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Topic结构"><span class="nav-number">2.</span> <span class="nav-text">Topic结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Distribution"><span class="nav-number">3.</span> <span class="nav-text">Distribution</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Producers"><span class="nav-number">4.</span> <span class="nav-text">Producers</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Consumers"><span class="nav-number">5.</span> <span class="nav-text">Consumers</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

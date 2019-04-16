@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="tools,">
+  <meta name="keywords" content="dfs,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="Lomboklombok是一个java工具包，通过在实体上添加注解，避免代码里很多重复繁琐的代码 lombok features12@var// 相当于js里的var 12@NotNull// 在方法参数或对象字段中，检查字段是否null，报NullPointerException 1234@Cleanup// 在使用后需要关闭的对象上添加，可以省去close@Cleanup InputStrea">
-<meta name="keywords" content="tools">
+<meta name="description" content="Path Sum IIIYou are given a binary tree in which each node contains an integer value. Find the number of paths that sum to a given value. The path does not need to start or end at the root or a leaf,">
+<meta name="keywords" content="dfs">
 <meta property="og:type" content="article">
-<meta property="og:title" content="lombok">
-<meta property="og:url" content="http://localhost/2019/04/10/lombok/index.html">
+<meta property="og:title" content="path_sum_III">
+<meta property="og:url" content="http://localhost/2019/04/16/path-sum-III/index.html">
 <meta property="og:site_name" content="tgs&#39;s blog">
-<meta property="og:description" content="Lomboklombok是一个java工具包，通过在实体上添加注解，避免代码里很多重复繁琐的代码 lombok features12@var// 相当于js里的var 12@NotNull// 在方法参数或对象字段中，检查字段是否null，报NullPointerException 1234@Cleanup// 在使用后需要关闭的对象上添加，可以省去close@Cleanup InputStrea">
+<meta property="og:description" content="Path Sum IIIYou are given a binary tree in which each node contains an integer value. Find the number of paths that sum to a given value. The path does not need to start or end at the root or a leaf,">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-04-13T07:38:35.853Z">
+<meta property="og:updated_time" content="2019-04-16T14:56:31.341Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="lombok">
-<meta name="twitter:description" content="Lomboklombok是一个java工具包，通过在实体上添加注解，避免代码里很多重复繁琐的代码 lombok features12@var// 相当于js里的var 12@NotNull// 在方法参数或对象字段中，检查字段是否null，报NullPointerException 1234@Cleanup// 在使用后需要关闭的对象上添加，可以省去close@Cleanup InputStrea">
+<meta name="twitter:title" content="path_sum_III">
+<meta name="twitter:description" content="Path Sum IIIYou are given a binary tree in which each node contains an integer value. Find the number of paths that sum to a given value. The path does not need to start or end at the root or a leaf,">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://localhost/2019/04/10/lombok/">
+  <link rel="canonical" href="http://localhost/2019/04/16/path-sum-III/">
 
 
 
 
 
-  <title>lombok | tgs's blog</title>
+  <title>path_sum_III | tgs's blog</title>
   
 
 
@@ -273,7 +273,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://localhost/2019/04/10/lombok/">
+    <link itemprop="mainEntityOfPage" href="http://localhost/2019/04/16/path-sum-III/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="tiangs">
@@ -290,7 +290,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">lombok</h1>
+          <h1 class="post-title" itemprop="name headline">path_sum_III</h1>
         
 
         <div class="post-meta">
@@ -302,8 +302,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-10T10:21:05+08:00">
-                2019-04-10
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-16T22:52:27+08:00">
+                2019-04-16
               </time>
             
 
@@ -325,8 +325,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
+                  <a href="/categories/Algorithms/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithms</span>
                   </a>
                 </span>
 
@@ -362,21 +362,15 @@
       
 
       
-        <h3 id="Lombok"><a href="#Lombok" class="headerlink" title="Lombok"></a>Lombok</h3><p>lombok是一个java工具包，通过在实体上添加注解，避免代码里很多重复繁琐的代码</p>
-<h5 id="lombok-features"><a href="#lombok-features" class="headerlink" title="lombok features"></a>lombok features</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@var</span><br><span class="line">// 相当于js里的var</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@NotNull</span><br><span class="line">// 在方法参数或对象字段中，检查字段是否null，报NullPointerException</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@Cleanup</span><br><span class="line">// 在使用后需要关闭的对象上添加，可以省去close</span><br><span class="line"></span><br><span class="line">@Cleanup InputStream in = new FileInputStream(args[0]);</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@Getter/@Setter</span><br><span class="line">// 自动为对象字段生成getter和setter方法</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@ToString</span><br><span class="line">// 生成toString方法</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@EqualsAndHashCode</span><br><span class="line">// 生成hashCode 和 equals方法</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@NoArgsConstructor, @RequiredArgsConstructor, @AllArgsConstructor</span><br><span class="line">// 构造方法</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@Data</span><br><span class="line">// @ToString, @EqualsAndHashCode, @Getter on all fields, and @Setter on all non-final fields, and @RequiredArgsConstructor!</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@Builder</span><br><span class="line">// new Person().age(17).name(&quot;mike&quot;);</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@Synchronized</span><br><span class="line">// 使用私有的，不暴露的对象锁；如果直接在方法上添加Synchronized关键字使用的是当前对象的锁，因此可能会导致死锁</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Getter(lazy=true)</span><br><span class="line"></span><br><span class="line">// 延迟初始化</span><br><span class="line">	@Getter(lazy=true) private final double[] cached = expensive();</span><br><span class="line">  private double[] expensive() &#123;</span><br><span class="line">    double[] result = new double[1000000];</span><br><span class="line">    for (int i = 0; i &lt; result.length; i++) &#123;</span><br><span class="line">      result[i] = Math.asin(i);</span><br><span class="line">    &#125;</span><br><span class="line">    return result;</span><br><span class="line"> 	&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@Slf4j // or: @Log @CommonsLog @Log4j @Log4j2 @XSlf4j</span><br><span class="line"></span><br><span class="line">//代替以下语句</span><br><span class="line">private static Logger LOG = LoggerFactory.getLogger(ApiClientConfiguration.class);</span><br></pre></td></tr></table></figure>
-<h5 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h5><p><a href>https://projectlombok.org/features/all</a></p>
-<p><a href>https://www.baeldung.com/intro-to-project-lombok</a></p>
+        <h3 id="Path-Sum-III"><a href="#Path-Sum-III" class="headerlink" title="Path Sum III"></a>Path Sum III</h3><p>You are given a binary tree in which each node contains an integer value.</p>
+<p>Find the number of paths that sum to a given value.</p>
+<p>The path does not need to start or end at the root or a leaf, but it must go downwards (traveling only from parent nodes to child nodes).</p>
+<p><strong>Example:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">root = [10,5,-3,3,2,null,11,3,-2,null,1], sum = 8</span><br><span class="line"></span><br><span class="line">      10</span><br><span class="line">     /  \</span><br><span class="line">    5   -3</span><br><span class="line">   / \    \</span><br><span class="line">  3   2   11</span><br><span class="line"> / \   \</span><br><span class="line">3  -2   1</span><br><span class="line"></span><br><span class="line">Return 3. The paths that sum to 8 are:</span><br><span class="line"></span><br><span class="line">1.  5 -&gt; 3</span><br><span class="line">2.  5 -&gt; 2 -&gt; 1</span><br><span class="line">3. -3 -&gt; 11</span><br></pre></td></tr></table></figure>
+<h4 id="High-post"><a href="#High-post" class="headerlink" title="High post"></a>High post</h4><p>So the idea is similar as Two sum, using HashMap to store ( key : the prefix sum, value : how many ways get to this prefix sum) , and whenever reach a node, we check if prefix sum - target exists in hashmap or not, if it does, we added up the ways of prefix sum - target into res.<br>For instance : in one path we have 1,2,-1,-1,2, then the prefix sum will be: 1, 3, 2, 1, 3, let’s say we want to find target sum is 2, then we will have{2}, {1,2,-1}, {2,-1,-1,2} and {2}ways.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public int pathSum(TreeNode root, int sum) &#123;</span><br><span class="line">    HashMap&lt;Integer, Integer&gt; preSum = new HashMap();</span><br><span class="line">    preSum.put(0,1);</span><br><span class="line">    return helper(root, 0, sum, preSum);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public int helper(TreeNode root, int currSum, int target, HashMap&lt;Integer, Integer&gt; preSum) &#123;</span><br><span class="line">    if (root == null) &#123;</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    currSum += root.val;</span><br><span class="line">    int res = preSum.getOrDefault(currSum - target, 0);</span><br><span class="line">    preSum.put(currSum, preSum.getOrDefault(currSum, 0) + 1);</span><br><span class="line">    </span><br><span class="line">    res += helper(root.left, currSum, target, preSum) + helper(root.right, currSum, target, preSum);</span><br><span class="line">    preSum.put(currSum, preSum.get(currSum) - 1);</span><br><span class="line">    return res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h4><p><a href="https://leetcode.com/problems/path-sum-iii/" target="_blank" rel="noopener">Path Sum III</a></p>
+<p><a href="https://leetcode.com/problems/path-sum-iii/discuss/91878/17-ms-O(n" target="_blank" rel="noopener">17 ms O(n) java Prefix sum method</a>-java-Prefix-sum-method)</p>
 
       
     </div>
@@ -394,7 +388,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/tools/" rel="tag"># tools</a>
+            <a href="/tags/dfs/" rel="tag"># dfs</a>
           
         </div>
       
@@ -407,8 +401,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/09/hexo/" rel="next" title="Hexo 使用技巧">
-                <i class="fa fa-chevron-left"></i> Hexo 使用技巧
+              <a href="/2019/04/13/git/" rel="next" title="git使用技巧">
+                <i class="fa fa-chevron-left"></i> git使用技巧
               </a>
             
           </div>
@@ -416,10 +410,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/11/quick_pow_mod/" rel="prev" title="快速幂取模">
-                快速幂取模 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -569,7 +559,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Lombok"><span class="nav-number">1.</span> <span class="nav-text">Lombok</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#lombok-features"><span class="nav-number">1.0.1.</span> <span class="nav-text">lombok features</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#参考"><span class="nav-number">1.0.2.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Path-Sum-III"><span class="nav-number">1.</span> <span class="nav-text">Path Sum III</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#High-post"><span class="nav-number">1.1.</span> <span class="nav-text">High post</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#reference"><span class="nav-number">1.2.</span> <span class="nav-text">reference</span></a></li></ol></li></ol></div>
             
 
           </div>

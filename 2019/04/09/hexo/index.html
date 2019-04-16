@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="tgs&#39;s blog">
 <meta property="og:description" content="快速开始12345npm install hexo-cli -ghexo init blogcd blognpm installhexo server 常用命令1234567891011121314151617// 初始化websitehexo init [folder]// 创建文章hexo new [layout] &amp;lt;title&amp;gt;// 创建pagehexo new page &amp;lt">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-04-13T07:38:35.852Z">
+<meta property="og:updated_time" content="2019-04-16T15:04:35.437Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo 使用技巧">
 <meta name="twitter:description" content="快速开始12345npm install hexo-cli -ghexo init blogcd blognpm installhexo server 常用命令1234567891011121314151617// 初始化websitehexo init [folder]// 创建文章hexo new [layout] &amp;lt;title&amp;gt;// 创建pagehexo new page &amp;lt">
@@ -231,12 +231,12 @@
         </li>
       
         
-        <li class="menu-item menu-item-travel">
-          <a href="/categories/travel" rel="section">
+        <li class="menu-item menu-item-reflect">
+          <a href="/categories/reflect" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-yelp"></i> <br>
             
-            travel
+            reflect
           </a>
         </li>
       
@@ -364,8 +364,11 @@
       
         <h4 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br><span class="line">hexo init blog</span><br><span class="line">cd blog</span><br><span class="line">npm install</span><br><span class="line">hexo server</span><br></pre></td></tr></table></figure>
 <h4 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始化website</span></span><br><span class="line">hexo init [folder]</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建文章</span></span><br><span class="line">hexo <span class="keyword">new</span> [layout] &lt;title&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建page</span></span><br><span class="line">hexo <span class="keyword">new</span> page &lt;pagename&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// generate</span></span><br><span class="line">hexo generate</span><br><span class="line"></span><br><span class="line"><span class="comment">// server</span></span><br><span class="line">hexo server</span><br><span class="line"></span><br><span class="line"><span class="comment">// deploy</span></span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
-<p>更多见 <a href>https://hexo.io/docs/commands</a></p>
-<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><p>在_config.yml可以设置博客名称，git地址等，详情见<a href>https://hexo.io/docs/configuration</a></p>
+<p>更多命令<a href="[https://hexo.io/docs/commands](">hexo_commands</a>)</p>
+<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><p>在_config.yml可以设置博客名称，git地址等，<a href="https://hexo.io/docs/configuration" target="_blank" rel="noopener">hexo_git配置</a></p>
+<p>在使用github pages时，每次使用hexo deploy都需要输入git用户名与密码，如果想要通过ssh密钥连接（<a href="/2019/04/13/git/" title="git与ssh密钥设置">git与ssh密钥设置</a>），可以修改2个地方</p>
+<h5 id="在hexo配置文件-config-yml中，修改deploy-repo"><a href="#在hexo配置文件-config-yml中，修改deploy-repo" class="headerlink" title="在hexo配置文件_config.yml中，修改deploy repo"></a>在hexo配置文件_config.yml中，修改deploy repo</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># https://github.com/loickengit/loickengit.github.io.git</span><br><span class="line">repo: git@github.com:loickengit/loickengit.github.io.git</span><br></pre></td></tr></table></figure>
+<h5 id="修改-deploy-git-git-config"><a href="#修改-deploy-git-git-config" class="headerlink" title="修改.deploy_git/.git/config"></a>修改.deploy_git/.git/config</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[core]</span><br><span class="line">	repositoryformatversion = 0</span><br><span class="line">	filemode = true</span><br><span class="line">	bare = false</span><br><span class="line">	logallrefupdates = true</span><br><span class="line">	ignorecase = true</span><br><span class="line">	precomposeunicode = true</span><br><span class="line">[branch &quot;master&quot;]</span><br><span class="line">  # remote = https://github.com/loickengit/loickengit.github.io.git</span><br><span class="line">	remote = git@github.com:loickengit/loickengit.github.io.git</span><br><span class="line">	merge = refs/heads/master</span><br></pre></td></tr></table></figure>
 <p>Menu，边栏等需要到对应Theme的_config.yml中设置</p>
 <h4 id="增加一个页面"><a href="#增加一个页面" class="headerlink" title="增加一个页面"></a>增加一个页面</h4><p>创建about页面</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page --path about/index &quot;about&quot;</span><br></pre></td></tr></table></figure>
@@ -377,8 +380,18 @@
 <p>在theme/_config.yml中添加tags页面</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">menu:</span><br><span class="line">	...</span><br><span class="line">  tags: /tags || tags</span><br></pre></td></tr></table></figure>
 <p>分类页把关键字换成categories，流程如上</p>
+<h4 id="把分类放到边栏"><a href="#把分类放到边栏" class="headerlink" title="把分类放到边栏"></a>把分类放到边栏</h4><p>创建分类页面</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page &quot;travel&quot;</span><br></pre></td></tr></table></figure>
+<p>在theme/_config.yml中添加travel页面与travel的图标（<a href="http://www.fontawesome.com.cn/faicons/" target="_blank" rel="noopener">图标参照</a>）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">menu:</span><br><span class="line">	...</span><br><span class="line">  travel: /categories/travle || yelp</span><br></pre></td></tr></table></figure>
+<p>模板添加分类categories</p>
+<p>打开<code>./scaffolds/post.md</code>添加一行<code>categories:</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: &#123;&#123; title &#125;&#125;</span><br><span class="line">date: &#123;&#123; date &#125;&#125;</span><br><span class="line">tags:</span><br><span class="line">categories:</span><br><span class="line">comments: true</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<p>这时新建文章，指定categories为travel就可以在边栏看到travel分类，点击travel就可以看到travel分类的文章。</p>
 <h4 id="替换主题"><a href="#替换主题" class="headerlink" title="替换主题"></a>替换主题</h4><p>下载hexo主题(next) 到themes文件夹下，更改hexo _config.yml主题</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme: next</span><br></pre></td></tr></table></figure>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="https://hexo.io/docs/" target="_blank" rel="noopener">hexo.io</a></p>
+<p><a href="https://blog.csdn.net/shenyuflying/article/details/53244858" target="_blank" rel="noopener">hexo静态博客修改侧边栏</a></p>
 
       
     </div>
@@ -500,7 +513,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -511,7 +524,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -522,7 +535,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -571,7 +584,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#快速开始"><span class="nav-number">1.</span> <span class="nav-text">快速开始</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常用命令"><span class="nav-number">2.</span> <span class="nav-text">常用命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置"><span class="nav-number">3.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#增加一个页面"><span class="nav-number">4.</span> <span class="nav-text">增加一个页面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#增加标签页或分类"><span class="nav-number">5.</span> <span class="nav-text">增加标签页或分类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#替换主题"><span class="nav-number">6.</span> <span class="nav-text">替换主题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#快速开始"><span class="nav-number">1.</span> <span class="nav-text">快速开始</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常用命令"><span class="nav-number">2.</span> <span class="nav-text">常用命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置"><span class="nav-number">3.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#在hexo配置文件-config-yml中，修改deploy-repo"><span class="nav-number">3.1.</span> <span class="nav-text">在hexo配置文件_config.yml中，修改deploy repo</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#修改-deploy-git-git-config"><span class="nav-number">3.2.</span> <span class="nav-text">修改.deploy_git/.git/config</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#增加一个页面"><span class="nav-number">4.</span> <span class="nav-text">增加一个页面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#增加标签页或分类"><span class="nav-number">5.</span> <span class="nav-text">增加标签页或分类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#把分类放到边栏"><span class="nav-number">6.</span> <span class="nav-text">把分类放到边栏</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#替换主题"><span class="nav-number">7.</span> <span class="nav-text">替换主题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参考"><span class="nav-number">8.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>

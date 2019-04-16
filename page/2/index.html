@@ -231,12 +231,12 @@
         </li>
       
         
-        <li class="menu-item menu-item-travel">
-          <a href="/categories/travel" rel="section">
+        <li class="menu-item menu-item-reflect">
+          <a href="/categories/reflect" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-yelp"></i> <br>
             
-            travel
+            reflect
           </a>
         </li>
       
@@ -259,6 +259,150 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://localhost/2019/04/09/Spring Cloud服务注册与发现组件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tiangs">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tgs's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/09/Spring Cloud服务注册与发现组件/" itemprop="url">Spring Cloud服务注册与发现</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-09T21:26:17+08:00">
+                2019-04-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Eureka"><a href="#Eureka" class="headerlink" title="Eureka"></a>Eureka</h3><p>利用 Eureka 组件可以很轻松地实现服务的注册和发现的功能。 </p>
+<p>Eureka 组件提供了服务的健康监测，以及界面友好的 UI。通过 Eureka 组件提供的 UI, Eureka 组件可以让开发人员随时了 解服务单元的运行情况。</p>
+<p>另外 Spring Cloud 也支持 Consul 和 Zookeeper，用于注册和发现服务 。 </p>
+<p>Eureka是 SpringCloud首选推荐的服务注册与发现组件， 与 SpringCloud其他组件可以无缝对接。</p>
+<h4 id="基本架构"><a href="#基本架构" class="headerlink" title="基本架构"></a>基本架构</h4><p>主要包括3种角色：</p>
+<ul>
+<li>Register Service:服务注册中心，它是一个 Eureka Server，提供服务注册和发现的功能。 </li>
+<li>Provider Service:服务提供者，它是一个 EurekaClient，提供服务。 </li>
+<li>Consumer Service:服务消费者，它是 一个 Eureka Cient，消费服务 。 </li>
+</ul>
+<h4 id="编写"><a href="#编写" class="headerlink" title="编写"></a>编写</h4><h5 id="Eureka-Server"><a href="#Eureka-Server" class="headerlink" title="Eureka Server"></a>Eureka Server</h5><p>起步依赖 spring-cloud-starter-eureka-server</p>
+<p>在默认情况下， Eureka Server 会向自己注 册，这时需要配置eureka.client.registerWithEureka和eureka.client.fetchRegistry为false，防止自己注册自己。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">server:</span><br><span class="line">	port: 8761</span><br><span class="line"></span><br><span class="line">eureka:</span><br><span class="line">	instance: </span><br><span class="line">		hostname: localhost</span><br><span class="line">	client:</span><br><span class="line">		registerWithEureka: false</span><br><span class="line">		fetchRegistry: false</span><br><span class="line">		serviceUrl:</span><br><span class="line">			defaultZone:</span><br><span class="line">				http://$(eureka . instance . hostname ) : ♀( server . port)/eureka/</span><br></pre></td></tr></table></figure>
+<p>启动代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@EnableEurekaServer</span> </span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> class <span class="title">EurekaServerApplication</span> <span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">		<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(String[] args)</span> </span>&#123;</span><br><span class="line">				SpringApplication.run(EurekaServerApplication.class,args);</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="Eureka-client"><a href="#Eureka-client" class="headerlink" title="Eureka client"></a>Eureka client</h5><p>依赖 spring-cloud-starter-eureka</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">eureka: </span><br><span class="line">	client:</span><br><span class="line">		serviceUrl:</span><br><span class="line">			defaultZone: http://localhost:8761/eureka/</span><br><span class="line">server:</span><br><span class="line">	port: 8762 </span><br><span class="line">spring:</span><br><span class="line">	application:</span><br><span class="line">		name: eureka-client</span><br></pre></td></tr></table></figure>
+<p>启动：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@EnableEurekaClient</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> class <span class="title">EurekaClientApplication</span> <span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">		<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(String[] args)</span> </span>&#123;</span><br><span class="line">				SpringApplication.run(EurekaClientApplication.class,args);</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="zookeeper"><a href="#zookeeper" class="headerlink" title="zookeeper"></a>zookeeper</h3><h4 id="What-is-zookeeper"><a href="#What-is-zookeeper" class="headerlink" title="What is zookeeper?"></a>What is zookeeper?</h4><p>ZooKeeper is a centralized service for maintaining configuration information, naming, providing distributed synchronization, and providing group services. </p>
+<p>注册server是集群的，每一个client只向一个server发送请求</p>
+<p>read比write快，servers有一个leader，写必须写到leader，再由leader分发给followers。</p>
+<p>write是原子的</p>
+<p>当leader挂掉的时候，会有选举算法推出新的leader</p>
+<p>采用文件结构，但文件夹有内容，相当于B+树</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -344,7 +488,7 @@
       
         
           
-            <h3 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h3><h4 id="单体架构"><a href="#单体架构" class="headerlink" title="单体架构"></a>单体架构</h4><p><img src="/Users/tgs/Documents/demo/source/images/single.png" alt="single"></p>
+            <h3 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h3><h4 id="单体架构"><a href="#单体架构" class="headerlink" title="单体架构"></a>单体架构</h4><p><img src="/images/single.png" alt="single"></p>
 <p>不足之处：</p>
 <ol>
 <li>所有代码都在一起，业务复杂后，代码可读性、可维护性、可扩展性下降，业务扩展带来的代价越来越大</li>
@@ -353,7 +497,7 @@
 <h4 id="单体架构使用服务器集群"><a href="#单体架构使用服务器集群" class="headerlink" title="单体架构使用服务器集群"></a>单体架构使用服务器集群</h4><h5 id="服务器集群"><a href="#服务器集群" class="headerlink" title="服务器集群"></a>服务器集群</h5><p>随着业务的发展，大多数公司会将单体应用进行集群部署，并增加负载均衡服务器（Nginx），另外，还需要增加集群部署的缓存服务器和文件服务器，并将数据库读写分离，以应对用户量的增加而带来的高并发访问量。</p>
 <p>用负载均衡服务器分发高并发的网络请求，用户的访问被分派到不同的应用服务器，应用 服务器的负载不再成为瓶颈，用户量增加时，添加应用服务器即可。 </p>
 <h5 id="缓存与数据库读写分离"><a href="#缓存与数据库读写分离" class="headerlink" title="缓存与数据库读写分离"></a>缓存与数据库读写分离</h5><p>通过添加缓存服务器来缓解数据库的数据以及数据库读取数据的压力。大多数的读取操作是由缓存完成的，但是仍然有少数读操作是从数据库读取的，例如缓存失效、实时数据等 。当有大量的读写操作时，将数据库进行读写分离是一个不错的选择，例如 MySQL 的主从热备份，通过相关配置可 以将主数据 库服务器的数据同步到从数据库服务器， 实现数据库的读写分离， 读写分离能够改善数据库的负载能力。 </p>
-<p><img src="/Users/tgs/Documents/demo/source/images/single2.png" alt="single2"></p>
+<p><img src="/images/single2.png" alt="single2"></p>
 <h5 id="不足："><a href="#不足：" class="headerlink" title="不足："></a>不足：</h5><ol>
 <li>仍然是单体应用，大量的业务必然有大量的代码，维护困难</li>
 <li>面对海量的用户，数据库会成为瓶颈，解决方案将使用分布式数据库，也就是将数据库进行分库分表。</li>
@@ -751,7 +895,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -762,7 +906,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -773,7 +917,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

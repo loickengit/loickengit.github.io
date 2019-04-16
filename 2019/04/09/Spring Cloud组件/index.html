@@ -87,12 +87,12 @@
 <meta property="og:site_name" content="tgs&#39;s blog">
 <meta property="og:description" content="Spring Cloud组件负载均衡组件 RibbonRibbon 是一个负载均衡组件，它通常和 Eureka、 Zuul、 RestTemplate、 Feign 配合使用。Ribbon和 Zuul配合，很容易做到负载均衡，将请求根据负载均衡策略分配到不同的服务实例中。 Ribbon 和RestTemplate、 Feign 配合，在消费服务时能够做到负载均衡 。 编写起步依赖spring-cl">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://localhost/Users/tgs/Documents/demo/source/images/ribbon.png">
-<meta property="og:updated_time" content="2019-04-13T07:38:35.852Z">
+<meta property="og:image" content="http://localhost/images/ribbon.png">
+<meta property="og:updated_time" content="2019-04-14T14:06:55.878Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring Cloud组件">
 <meta name="twitter:description" content="Spring Cloud组件负载均衡组件 RibbonRibbon 是一个负载均衡组件，它通常和 Eureka、 Zuul、 RestTemplate、 Feign 配合使用。Ribbon和 Zuul配合，很容易做到负载均衡，将请求根据负载均衡策略分配到不同的服务实例中。 Ribbon 和RestTemplate、 Feign 配合，在消费服务时能够做到负载均衡 。 编写起步依赖spring-cl">
-<meta name="twitter:image" content="http://localhost/Users/tgs/Documents/demo/source/images/ribbon.png">
+<meta name="twitter:image" content="http://localhost/images/ribbon.png">
 
 
 
@@ -233,12 +233,12 @@
         </li>
       
         
-        <li class="menu-item menu-item-travel">
-          <a href="/categories/travel" rel="section">
+        <li class="menu-item menu-item-reflect">
+          <a href="/categories/reflect" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-yelp"></i> <br>
             
-            travel
+            reflect
           </a>
         </li>
       
@@ -351,7 +351,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableDiscoveryClient</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServiceRibbonApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		SpringApplication.run(ServiceRibbonApplication.class, args);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Bean</span></span><br><span class="line">	<span class="meta">@LoadBalanced</span></span><br><span class="line">	<span class="function">RestTemplate <span class="title">restTemplate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> RestTemplate();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>写一个测试类HelloService，通过之前注入ioc容器的restTemplate来消费service-hi服务的“/hi”接口，在这里我们直接用的程序名替代了具体的url地址，在ribbon中它会根据服务名来选择具体的服务实例，根据服务实例在请求的时候会用具体的url替换掉服务名，代码如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloService</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    RestTemplate restTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hiService</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> restTemplate.getForObject(<span class="string">"http://SERVICE-HI/hi?name="</span>+name,String.class);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="/Users/tgs/Documents/demo/source/images/ribbon.png" alt="ribbon"></p>
+<p><img src="/images/ribbon.png" alt="ribbon"></p>
 <h3 id="Feign"><a href="#Feign" class="headerlink" title="Feign"></a>Feign</h3><p>上一节，讲述了如何通过RestTemplate+Ribbon去消费服务，这篇文章主要讲述如何通过Feign去消费服务。</p>
 <p>Feign是一个声明式的伪Http客户端，它使得写Http客户端变得更简单。使用Feign，只需要创建一个接口并注解。它具有可插拔的注解特性，可使用Feign 注解和JAX-RS注解。Feign支持可插拔的编码器和解码器。Feign默认集成了Ribbon，并和Eureka结合，默认实现了负载均衡的效果。</p>
 <p>application.yml</p>
@@ -417,8 +417,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/09/Spring Cloud服务注册与发现组件/" rel="next" title="Spring Cloud服务注册与发现">
-                <i class="fa fa-chevron-left"></i> Spring Cloud服务注册与发现
+              <a href="/2019/04/09/Spring Boot Security/" rel="next" title="Spring Boot Security">
+                <i class="fa fa-chevron-left"></i> Spring Boot Security
               </a>
             
           </div>
@@ -508,7 +508,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -519,7 +519,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -530,7 +530,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

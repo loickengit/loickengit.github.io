@@ -231,12 +231,12 @@
         </li>
       
         
-        <li class="menu-item menu-item-travel">
-          <a href="/categories/travel" rel="section">
+        <li class="menu-item menu-item-reflect">
+          <a href="/categories/reflect" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-yelp"></i> <br>
             
-            travel
+            reflect
           </a>
         </li>
       
@@ -259,6 +259,156 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://localhost/2019/04/16/path-sum-III/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tiangs">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tgs's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/16/path-sum-III/" itemprop="url">path_sum_III</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-16T22:52:27+08:00">
+                2019-04-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithms/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithms</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Path-Sum-III"><a href="#Path-Sum-III" class="headerlink" title="Path Sum III"></a>Path Sum III</h3><p>You are given a binary tree in which each node contains an integer value.</p>
+<p>Find the number of paths that sum to a given value.</p>
+<p>The path does not need to start or end at the root or a leaf, but it must go downwards (traveling only from parent nodes to child nodes).</p>
+<p><strong>Example:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">root = [10,5,-3,3,2,null,11,3,-2,null,1], sum = 8</span><br><span class="line"></span><br><span class="line">      10</span><br><span class="line">     /  \</span><br><span class="line">    5   -3</span><br><span class="line">   / \    \</span><br><span class="line">  3   2   11</span><br><span class="line"> / \   \</span><br><span class="line">3  -2   1</span><br><span class="line"></span><br><span class="line">Return 3. The paths that sum to 8 are:</span><br><span class="line"></span><br><span class="line">1.  5 -&gt; 3</span><br><span class="line">2.  5 -&gt; 2 -&gt; 1</span><br><span class="line">3. -3 -&gt; 11</span><br></pre></td></tr></table></figure>
+<h4 id="High-post"><a href="#High-post" class="headerlink" title="High post"></a>High post</h4><p>So the idea is similar as Two sum, using HashMap to store ( key : the prefix sum, value : how many ways get to this prefix sum) , and whenever reach a node, we check if prefix sum - target exists in hashmap or not, if it does, we added up the ways of prefix sum - target into res.<br>For instance : in one path we have 1,2,-1,-1,2, then the prefix sum will be: 1, 3, 2, 1, 3, let’s say we want to find target sum is 2, then we will have{2}, {1,2,-1}, {2,-1,-1,2} and {2}ways.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public int pathSum(TreeNode root, int sum) &#123;</span><br><span class="line">    HashMap&lt;Integer, Integer&gt; preSum = new HashMap();</span><br><span class="line">    preSum.put(0,1);</span><br><span class="line">    return helper(root, 0, sum, preSum);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public int helper(TreeNode root, int currSum, int target, HashMap&lt;Integer, Integer&gt; preSum) &#123;</span><br><span class="line">    if (root == null) &#123;</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    currSum += root.val;</span><br><span class="line">    int res = preSum.getOrDefault(currSum - target, 0);</span><br><span class="line">    preSum.put(currSum, preSum.getOrDefault(currSum, 0) + 1);</span><br><span class="line">    </span><br><span class="line">    res += helper(root.left, currSum, target, preSum) + helper(root.right, currSum, target, preSum);</span><br><span class="line">    preSum.put(currSum, preSum.get(currSum) - 1);</span><br><span class="line">    return res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h4><p><a href="https://leetcode.com/problems/path-sum-iii/" target="_blank" rel="noopener">Path Sum III</a></p>
+<p><a href="https://leetcode.com/problems/path-sum-iii/discuss/91878/17-ms-O(n" target="_blank" rel="noopener">17 ms O(n) java Prefix sum method</a>-java-Prefix-sum-method)</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -366,7 +516,13 @@
       
         
           
-            <h4 id="Git配置多个SSH-Key"><a href="#Git配置多个SSH-Key" class="headerlink" title="Git配置多个SSH-Key"></a>Git配置多个SSH-Key</h4><p>在使用hexo搭建个人博客时，使用github pages托管，而源码寄存到码云上</p>
+            <h3 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h3><h4 id="创建分支"><a href="#创建分支" class="headerlink" title="创建分支"></a>创建分支</h4><p>从当前分支创建新分支，并切换到该分支上</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b new_branch</span><br></pre></td></tr></table></figure>
+<h4 id="删除分支"><a href="#删除分支" class="headerlink" title="删除分支"></a>删除分支</h4><p>删除远程分支</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git push --delete &lt;remote_name&gt; &lt;branch_name&gt;	</span><br><span class="line"></span><br><span class="line">e.g.</span><br><span class="line">git push --delete origin branch1</span><br></pre></td></tr></table></figure>
+<p>删除本地分支，使用-d参数，如果删除分支没有充分merge会删除失败，强制删除可以用 -D</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -d &lt;branch_name&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="Git配置多个SSH-Key"><a href="#Git配置多个SSH-Key" class="headerlink" title="Git配置多个SSH-Key"></a>Git配置多个SSH-Key</h3><p>在使用hexo搭建个人博客时，使用github pages托管，而源码寄存到码云上</p>
 <p>这时就需要2个git账号</p>
 <h5 id="设置方式"><a href="#设置方式" class="headerlink" title="设置方式"></a>设置方式</h5><p>生成github用的SSH-Key</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &apos;loickengit@github.com&apos; -f ~/.ssh/github_id_rsa</span><br></pre></td></tr></table></figure>
@@ -378,13 +534,15 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@gitee.com</span><br><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
 <p>这里以gitee为例，成功的话会返回下图内容</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hi loick! You&apos;ve successfully authenticated, but GITEE.COM does not provide shell access.</span><br></pre></td></tr></table></figure>
-<h4 id="Issues"><a href="#Issues" class="headerlink" title="Issues"></a>Issues</h4><h6 id="Hi-xxxxxx-You’ve-successfully-authenticated-but-GitHub-Gitee-does-not-provide-shell-access"><a href="#Hi-xxxxxx-You’ve-successfully-authenticated-but-GitHub-Gitee-does-not-provide-shell-access" class="headerlink" title="Hi xxxxxx! You’ve successfully authenticated, but GitHub/Gitee does not provide shell access."></a>Hi xxxxxx! You’ve successfully authenticated, but GitHub/Gitee does not provide shell access.</h6><p>git pull/git push时遇到上面的情况，这意思是不提供ssh访问，那就改成https的方式吧</p>
-<p>查看 .git/config 设置的访问方式如下，url是ssh的连接方式</p>
+<h3 id="Git访问方式"><a href="#Git访问方式" class="headerlink" title="Git访问方式"></a>Git访问方式</h3><h5 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h5><p>查看 .git/config 设置的访问方式如下，url是ssh的连接方式</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&gt; cat .git/config</span><br><span class="line">[core]</span><br><span class="line">	repositoryformatversion = 0</span><br><span class="line">	filemode = true</span><br><span class="line">	bare = false</span><br><span class="line">	logallrefupdates = true</span><br><span class="line">	ignorecase = true</span><br><span class="line">	precomposeunicode = true</span><br><span class="line">[remote &quot;origin&quot;]</span><br><span class="line">	url = git@github.com:loickengit/loickengit.github.io.git</span><br><span class="line">	fetch = +refs/heads/*:refs/remotes/origin/*</span><br><span class="line">[branch &quot;master&quot;]</span><br><span class="line">	remote = origin</span><br><span class="line">	merge = refs/heads/master</span><br></pre></td></tr></table></figure>
-<p>将上述url改为https方式即可正常push</p>
+<p>如果使用如下的https方式访问，每次都需要输入username和password</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">url = https://github.com/loickengit/loickengit.github.io.git</span><br></pre></td></tr></table></figure>
+<h5 id="git命令设置访问方式"><a href="#git命令设置访问方式" class="headerlink" title="git命令设置访问方式"></a>git命令设置访问方式</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote set-url origin git@github.com:loickengit/loickengit.github.io.git</span><br></pre></td></tr></table></figure>
+<h4 id="Issues"><a href="#Issues" class="headerlink" title="Issues"></a>Issues</h4><h6 id="Hi-xxxxxx-You’ve-successfully-authenticated-but-GitHub-Gitee-does-not-provide-shell-access"><a href="#Hi-xxxxxx-You’ve-successfully-authenticated-but-GitHub-Gitee-does-not-provide-shell-access" class="headerlink" title="Hi xxxxxx! You’ve successfully authenticated, but GitHub/Gitee does not provide shell access."></a>Hi xxxxxx! You’ve successfully authenticated, but GitHub/Gitee does not provide shell access.</h6><p>git pull/git push时遇到上面的情况，可能是没有在github/gitee上设置公钥</p>
 <h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="https://gitee.com/help/articles/4229#article-header0" target="_blank" rel="noopener">Git配置多个SSH-Key</a></p>
 <p><a href="https://youcanping.cn/2017/12/20/ssh-Permission-denied/" target="_blank" rel="noopener">ssh Permission denied</a></p>
+<p><a href="https://stackoverflow.com/questions/6565357/git-push-requires-username-and-password" target="_blank" rel="noopener">Git push requires username and password</a></p>
 
           
         
@@ -686,8 +844,34 @@
       
         
           
-            <p><img src="images/kafka_anatomy.png" alt="Anatomy of Topic"></p>
-<p><img src alt></p>
+            <p>Kafka是一个分布式流处理平台</p>
+<p>Kafka有四个核心API：</p>
+<ol>
+<li>Producer API</li>
+<li>Consumer API</li>
+<li>Streams API</li>
+</ol>
+<p>允许应用把记录从一个topic处理后，放到另一个topic</p>
+<ol start="4">
+<li>Connector API</li>
+</ol>
+<p>允许一个应用在数据库表发生变化时，得到通知。</p>
+<p>相当于触发器？</p>
+<h4 id="Topic"><a href="#Topic" class="headerlink" title="Topic"></a>Topic</h4><p>Kafka使用topic来管理消息发布与接收，topic可以有很多发布者，订阅者，让我们来看看topic的结构</p>
+<h4 id="Topic结构"><a href="#Topic结构" class="headerlink" title="Topic结构"></a>Topic结构</h4><p><img src="/images/kafka_anatomy.png" alt="Anatomy of Topic"></p>
+<p>​    每一个topic可以有很多个分区，分区是顺序写入的，每条记录都有一个唯一的sequential id，Kafka会保留记录一段时间，无论有没有消费，超过时间就会清楚，时间长短可以配置。</p>
+<p>订阅的消费者自己记录在分区上读取到的位置，所以消费者的行为对kafka本身影响不大。消费者可以随便改变读取的位置……读完了当没读，再回头读一次</p>
+<p><img src="/images/kafka_consumer.png" alt="consumer读取分区消息"></p>
+<h4 id="Distribution"><a href="#Distribution" class="headerlink" title="Distribution"></a>Distribution</h4><p>The partitions分布在众多的server上，分区还有复制集做容错处理，分区对应的servers有一个是leader，负责读和写，其他server都是followers，they passively 复制leader， 当leader挂掉的时候，会自动从followers中选举出一个leader。</p>
+<h4 id="Producers"><a href="#Producers" class="headerlink" title="Producers"></a>Producers</h4><p>producers创造的消息可以在不同的分区之间做负载均衡</p>
+<h4 id="Consumers"><a href="#Consumers" class="headerlink" title="Consumers"></a>Consumers</h4><p>每一个consumer都有一个group name，每条topic的消息，在一个group内，只能由一个consumer去消费，相当于在group内有一个topic的队列，topic的消息发送到这个队列里，consumer们先到先得（负载均衡）。</p>
+<p>如果一个topic有很多个group关注它，topic会向每个group广播每一条消息。</p>
+<p>同一个group的consumer可以分布在不同的机器上。</p>
+<p>这里说一下partition数量和consumer数量的关系，两者没有太大的关联，一个consumer可以消费很多partition….</p>
+<p><img src="/images/kafka_consumer-groups.png" alt="Kafka Cluster"></p>
+<p>图说明：</p>
+<p>一个topic有4个分区，4个分区分布在不同的server上，有2个group关注这个topic，A有2个消费者，B有4个消费者。图中的分区分配到group中的consumer，这是常见的分配方式。</p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="http://kafka.apache.org/quickstart" target="_blank" rel="noopener">Apache Kafka</a></p>
 
           
         
@@ -736,7 +920,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://localhost/2019/04/11/2019-4-11-反思/">
+    <link itemprop="mainEntityOfPage" href="http://localhost/2019/04/11/2019-4-1-conclusion/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="tiangs">
@@ -755,7 +939,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/04/11/2019-4-11-反思/" itemprop="url">2019/4/11_反思</a></h1>
+                <a class="post-title-link" href="/2019/04/11/2019-4-1-conclusion/" itemprop="url">2019/4/11_conclusion</a></h1>
         
 
         <div class="post-meta">
@@ -790,8 +974,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/反思/" itemprop="url" rel="index">
-                    <span itemprop="name">反思</span>
+                  <a href="/categories/reflect/" itemprop="url" rel="index">
+                    <span itemprop="name">reflect</span>
                   </a>
                 </span>
 
@@ -829,9 +1013,41 @@
       
         
           
-            <p>今天去考科目一，去的过程一直没有查</p>
+            <h3 id="11号，Thursday"><a href="#11号，Thursday" class="headerlink" title="11号，Thursday"></a>11号，Thursday</h3><p>今天去考科目一，去的过程一直没有查</p>
 <p>在哪里考，怎么去，路上多长时间，考多久等信息，都是sissi查的</p>
 <p><strong>还是不主动承担事务的毛病</strong></p>
+<h3 id="12号，Friday"><a href="#12号，Friday" class="headerlink" title="12号，Friday"></a>12号，Friday</h3><p>昨天弄清楚apache kafka的原理，稍微看了node-kafka的API，知道怎么在nodejs中使用kafka了。</p>
+<p>晚上做了牛客网的周赛，一道题没通过，感觉是python和他们平台输入的问题。</p>
+<h3 id="13号，Saturday"><a href="#13号，Saturday" class="headerlink" title="13号，Saturday"></a>13号，Saturday</h3><p>昨天牛客网的问题弄清楚了，有2个问题：</p>
+<ol>
+<li>python的小数有精度限制（整数没有），在使用斐波那契通项公式计算第N项的时候，N太大，程序出错了</li>
+<li>牛客网说的一行可能不只是一行，直接用input()，数据多的时候可能没法获取到全部的数据</li>
+</ol>
+<p>弄清楚多个git账户怎么在一台机器上共存了，把hexo blog托管到码云上，可以在任何机器上总结博客了。</p>
+<p>稍微总结了一下kafka的原理，放到了博客上。</p>
+<p>发现：</p>
+<p>git上传hexo blog的时候，next主题git add不了，因为next已经有git了～～～～</p>
+<p>明日计划：</p>
+<ol>
+<li>学车</li>
+<li>写毕设</li>
+</ol>
+<h3 id="14号，Sunday"><a href="#14号，Sunday" class="headerlink" title="14号，Sunday"></a>14号，Sunday</h3><p>今天早上去学车，中午回来发现自己发烧了，一个下午和晚上浑浑噩噩的。写了一点毕设，把反思的分类放到了hexo的边栏上。</p>
+<p>明日计划：</p>
+<ol>
+<li>看病</li>
+<li><p>实现思目会话eternal用户sign in/sign out是kafka发送通知消息</p>
+</li>
+<li><p>毕设第三章写完（粗略地）</p>
+</li>
+<li>和sissi一起看《权利的游戏》！！！！！</li>
+</ol>
+<h3 id="16号，Tuesday"><a href="#16号，Tuesday" class="headerlink" title="16号，Tuesday"></a>16号，Tuesday</h3><p>两天没写毕设，一直在和细菌作战，周三约的学车也去不了了，去校医院看病。权利的游戏看了，腾讯vip+百度网盘和谐片段。</p>
+<p>明天一定要完成：</p>
+<ol>
+<li>毕设第三章</li>
+<li>DNS，域名服务器之类的，理清楚</li>
+</ol>
 
           
         
@@ -880,7 +1096,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://localhost/2019/04/11/快速幂取模/">
+    <link itemprop="mainEntityOfPage" href="http://localhost/2019/04/11/quick_pow_mod/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="tiangs">
@@ -899,7 +1115,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/04/11/快速幂取模/" itemprop="url">快速幂取模</a></h1>
+                <a class="post-title-link" href="/2019/04/11/quick_pow_mod/" itemprop="url">快速幂取模</a></h1>
         
 
         <div class="post-meta">
@@ -1279,8 +1495,11 @@
           
             <h4 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br><span class="line">hexo init blog</span><br><span class="line">cd blog</span><br><span class="line">npm install</span><br><span class="line">hexo server</span><br></pre></td></tr></table></figure>
 <h4 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始化website</span></span><br><span class="line">hexo init [folder]</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建文章</span></span><br><span class="line">hexo <span class="keyword">new</span> [layout] &lt;title&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建page</span></span><br><span class="line">hexo <span class="keyword">new</span> page &lt;pagename&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// generate</span></span><br><span class="line">hexo generate</span><br><span class="line"></span><br><span class="line"><span class="comment">// server</span></span><br><span class="line">hexo server</span><br><span class="line"></span><br><span class="line"><span class="comment">// deploy</span></span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
-<p>更多见 <a href>https://hexo.io/docs/commands</a></p>
-<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><p>在_config.yml可以设置博客名称，git地址等，详情见<a href>https://hexo.io/docs/configuration</a></p>
+<p>更多命令<a href="[https://hexo.io/docs/commands](">hexo_commands</a>)</p>
+<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><p>在_config.yml可以设置博客名称，git地址等，<a href="https://hexo.io/docs/configuration" target="_blank" rel="noopener">hexo_git配置</a></p>
+<p>在使用github pages时，每次使用hexo deploy都需要输入git用户名与密码，如果想要通过ssh密钥连接（<a href="/2019/04/13/git/" title="git与ssh密钥设置">git与ssh密钥设置</a>），可以修改2个地方</p>
+<h5 id="在hexo配置文件-config-yml中，修改deploy-repo"><a href="#在hexo配置文件-config-yml中，修改deploy-repo" class="headerlink" title="在hexo配置文件_config.yml中，修改deploy repo"></a>在hexo配置文件_config.yml中，修改deploy repo</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># https://github.com/loickengit/loickengit.github.io.git</span><br><span class="line">repo: git@github.com:loickengit/loickengit.github.io.git</span><br></pre></td></tr></table></figure>
+<h5 id="修改-deploy-git-git-config"><a href="#修改-deploy-git-git-config" class="headerlink" title="修改.deploy_git/.git/config"></a>修改.deploy_git/.git/config</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[core]</span><br><span class="line">	repositoryformatversion = 0</span><br><span class="line">	filemode = true</span><br><span class="line">	bare = false</span><br><span class="line">	logallrefupdates = true</span><br><span class="line">	ignorecase = true</span><br><span class="line">	precomposeunicode = true</span><br><span class="line">[branch &quot;master&quot;]</span><br><span class="line">  # remote = https://github.com/loickengit/loickengit.github.io.git</span><br><span class="line">	remote = git@github.com:loickengit/loickengit.github.io.git</span><br><span class="line">	merge = refs/heads/master</span><br></pre></td></tr></table></figure>
 <p>Menu，边栏等需要到对应Theme的_config.yml中设置</p>
 <h4 id="增加一个页面"><a href="#增加一个页面" class="headerlink" title="增加一个页面"></a>增加一个页面</h4><p>创建about页面</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page --path about/index &quot;about&quot;</span><br></pre></td></tr></table></figure>
@@ -1292,8 +1511,18 @@
 <p>在theme/_config.yml中添加tags页面</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">menu:</span><br><span class="line">	...</span><br><span class="line">  tags: /tags || tags</span><br></pre></td></tr></table></figure>
 <p>分类页把关键字换成categories，流程如上</p>
+<h4 id="把分类放到边栏"><a href="#把分类放到边栏" class="headerlink" title="把分类放到边栏"></a>把分类放到边栏</h4><p>创建分类页面</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page &quot;travel&quot;</span><br></pre></td></tr></table></figure>
+<p>在theme/_config.yml中添加travel页面与travel的图标（<a href="http://www.fontawesome.com.cn/faicons/" target="_blank" rel="noopener">图标参照</a>）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">menu:</span><br><span class="line">	...</span><br><span class="line">  travel: /categories/travle || yelp</span><br></pre></td></tr></table></figure>
+<p>模板添加分类categories</p>
+<p>打开<code>./scaffolds/post.md</code>添加一行<code>categories:</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: &#123;&#123; title &#125;&#125;</span><br><span class="line">date: &#123;&#123; date &#125;&#125;</span><br><span class="line">tags:</span><br><span class="line">categories:</span><br><span class="line">comments: true</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<p>这时新建文章，指定categories为travel就可以在边栏看到travel分类，点击travel就可以看到travel分类的文章。</p>
 <h4 id="替换主题"><a href="#替换主题" class="headerlink" title="替换主题"></a>替换主题</h4><p>下载hexo主题(next) 到themes文件夹下，更改hexo _config.yml主题</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme: next</span><br></pre></td></tr></table></figure>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="https://hexo.io/docs/" target="_blank" rel="noopener">hexo.io</a></p>
+<p><a href="https://blog.csdn.net/shenyuflying/article/details/53244858" target="_blank" rel="noopener">hexo静态博客修改侧边栏</a></p>
 
           
         
@@ -1422,7 +1651,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableDiscoveryClient</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServiceRibbonApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		SpringApplication.run(ServiceRibbonApplication.class, args);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Bean</span></span><br><span class="line">	<span class="meta">@LoadBalanced</span></span><br><span class="line">	<span class="function">RestTemplate <span class="title">restTemplate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> RestTemplate();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>写一个测试类HelloService，通过之前注入ioc容器的restTemplate来消费service-hi服务的“/hi”接口，在这里我们直接用的程序名替代了具体的url地址，在ribbon中它会根据服务名来选择具体的服务实例，根据服务实例在请求的时候会用具体的url替换掉服务名，代码如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloService</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    RestTemplate restTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hiService</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> restTemplate.getForObject(<span class="string">"http://SERVICE-HI/hi?name="</span>+name,String.class);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="/Users/tgs/Documents/demo/source/images/ribbon.png" alt="ribbon"></p>
+<p><img src="/images/ribbon.png" alt="ribbon"></p>
 <h3 id="Feign"><a href="#Feign" class="headerlink" title="Feign"></a>Feign</h3><p>上一节，讲述了如何通过RestTemplate+Ribbon去消费服务，这篇文章主要讲述如何通过Feign去消费服务。</p>
 <p>Feign是一个声明式的伪Http客户端，它使得写Http客户端变得更简单。使用Feign，只需要创建一个接口并注解。它具有可插拔的注解特性，可使用Feign 注解和JAX-RS注解。Feign支持可插拔的编码器和解码器。Feign默认集成了Ribbon，并和Eureka结合，默认实现了负载均衡的效果。</p>
 <p>application.yml</p>
@@ -1458,150 +1687,6 @@
 <h3 id="Spring-Cloud-Security"><a href="#Spring-Cloud-Security" class="headerlink" title="Spring Cloud Security"></a>Spring Cloud Security</h3><p>Spring Cloud Security 是对 Spring Security 组件的封装 ， Spring Cloud Security 向服务单元<br>提供了用户验证和权限认证 。一般来说，单独在微服务系统中使用 Spring Cloud Security 是很<br>少见的， 一般它会配合 Spring Security 0Auth2 组件一起使用，通过搭建授权服务，验证 Token<br>或者 JWT 这种形式对整个微服务系统进行安全验证。</p>
 <h3 id="Spring-Cloud-Sleuth"><a href="#Spring-Cloud-Sleuth" class="headerlink" title="Spring Cloud Sleuth"></a>Spring Cloud Sleuth</h3><p>Spring Cloud Sleuth是一个分布式链路追踪组件，它封装了 Dapper、 Zipkin和 Kibana等组<br>件，通过它可以知道服务之间的相互依赖关系，并实时观察链路的调用情况 。</p>
 <h3 id="Spring-Cloud-Stream"><a href="#Spring-Cloud-Stream" class="headerlink" title="Spring Cloud Stream"></a>Spring Cloud Stream</h3><p>Spring Cloud Stream 是 Spring Cloud 框架的 数据流操作包 ，可以封装 RabbitMq、ActiveMq、<br>Kafka、 Redis 等消息组件， 利用 Spring Cloud Stream 可以 实现消息的接收和发送。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://localhost/2019/04/09/Spring Cloud服务注册与发现组件/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="tiangs">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="tgs's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/09/Spring Cloud服务注册与发现组件/" itemprop="url">Spring Cloud服务注册与发现</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-09T21:26:17+08:00">
-                2019-04-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Eureka"><a href="#Eureka" class="headerlink" title="Eureka"></a>Eureka</h3><p>利用 Eureka 组件可以很轻松地实现服务的注册和发现的功能。 </p>
-<p>Eureka 组件提供了服务的健康监测，以及界面友好的 UI。通过 Eureka 组件提供的 UI, Eureka 组件可以让开发人员随时了 解服务单元的运行情况。</p>
-<p>另外 Spring Cloud 也支持 Consul 和 Zookeeper，用于注册和发现服务 。 </p>
-<p>Eureka是 SpringCloud首选推荐的服务注册与发现组件， 与 SpringCloud其他组件可以无缝对接。</p>
-<h4 id="基本架构"><a href="#基本架构" class="headerlink" title="基本架构"></a>基本架构</h4><p>主要包括3种角色：</p>
-<ul>
-<li>Register Service:服务注册中心，它是一个 Eureka Server，提供服务注册和发现的功能。 </li>
-<li>Provider Service:服务提供者，它是一个 EurekaClient，提供服务。 </li>
-<li>Consumer Service:服务消费者，它是 一个 Eureka Cient，消费服务 。 </li>
-</ul>
-<h4 id="编写"><a href="#编写" class="headerlink" title="编写"></a>编写</h4><h5 id="Eureka-Server"><a href="#Eureka-Server" class="headerlink" title="Eureka Server"></a>Eureka Server</h5><p>起步依赖 spring-cloud-starter-eureka-server</p>
-<p>在默认情况下， Eureka Server 会向自己注 册，这时需要配置eureka.client.registerWithEureka和eureka.client.fetchRegistry为false，防止自己注册自己。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">server:</span><br><span class="line">	port: 8761</span><br><span class="line"></span><br><span class="line">eureka:</span><br><span class="line">	instance: </span><br><span class="line">		hostname: localhost</span><br><span class="line">	client:</span><br><span class="line">		registerWithEureka: false</span><br><span class="line">		fetchRegistry: false</span><br><span class="line">		serviceUrl:</span><br><span class="line">			defaultZone:</span><br><span class="line">				http://$(eureka . instance . hostname ) : ♀( server . port)/eureka/</span><br></pre></td></tr></table></figure>
-<p>启动代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@EnableEurekaServer</span> </span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> class <span class="title">EurekaServerApplication</span> <span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">		<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(String[] args)</span> </span>&#123;</span><br><span class="line">				SpringApplication.run(EurekaServerApplication.class,args);</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="Eureka-client"><a href="#Eureka-client" class="headerlink" title="Eureka client"></a>Eureka client</h5><p>依赖 spring-cloud-starter-eureka</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">eureka: </span><br><span class="line">	client:</span><br><span class="line">		serviceUrl:</span><br><span class="line">			defaultZone: http://localhost:8761/eureka/</span><br><span class="line">server:</span><br><span class="line">	port: 8762 </span><br><span class="line">spring:</span><br><span class="line">	application:</span><br><span class="line">		name: eureka-client</span><br></pre></td></tr></table></figure>
-<p>启动：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@EnableEurekaClient</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> class <span class="title">EurekaClientApplication</span> <span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">		<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(String[] args)</span> </span>&#123;</span><br><span class="line">				SpringApplication.run(EurekaClientApplication.class,args);</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="zookeeper"><a href="#zookeeper" class="headerlink" title="zookeeper"></a>zookeeper</h3><h4 id="What-is-zookeeper"><a href="#What-is-zookeeper" class="headerlink" title="What is zookeeper?"></a>What is zookeeper?</h4><p>ZooKeeper is a centralized service for maintaining configuration information, naming, providing distributed synchronization, and providing group services. </p>
-<p>注册server是集群的，每一个client只向一个server发送请求</p>
-<p>read比write快，servers有一个leader，写必须写到leader，再由leader分发给followers。</p>
-<p>write是原子的</p>
-<p>当leader挂掉的时候，会有选举算法推出新的leader</p>
-<p>采用文件结构，但文件夹有内容，相当于B+树</p>
 
           
         
@@ -1812,7 +1897,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1823,7 +1908,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -1834,7 +1919,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

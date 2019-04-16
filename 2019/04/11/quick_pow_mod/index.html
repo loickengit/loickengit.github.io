@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="skill,">
 
 
 
@@ -79,17 +79,20 @@
 
 
 
-<meta name="description" content="There should be a moto">
-<meta name="keywords" content="blog, notes">
-<meta property="og:type" content="website">
-<meta property="og:title" content="tgs&#39;s blog">
-<meta property="og:url" content="http://localhost/archives/page/2/index.html">
+<meta name="description" content="快速幂取模前奏今晚在做一道算法题： 输入m, n, K1, K2 求m/n小数点后K1到K2位 如果直接暴力解，遇到K1很大时会Time limit，此时就需要用快速幂取模，直接获取m/n小数点后第K1位，在求解K1到K2位 快速幂取模实现最简单的实现方法，直接按照递归式来做 12345678910int power(int a, int N)&amp;#123;    int result = 1;">
+<meta name="keywords" content="skill">
+<meta property="og:type" content="article">
+<meta property="og:title" content="快速幂取模">
+<meta property="og:url" content="http://localhost/2019/04/11/quick_pow_mod/index.html">
 <meta property="og:site_name" content="tgs&#39;s blog">
-<meta property="og:description" content="There should be a moto">
+<meta property="og:description" content="快速幂取模前奏今晚在做一道算法题： 输入m, n, K1, K2 求m/n小数点后K1到K2位 如果直接暴力解，遇到K1很大时会Time limit，此时就需要用快速幂取模，直接获取m/n小数点后第K1位，在求解K1到K2位 快速幂取模实现最简单的实现方法，直接按照递归式来做 12345678910int power(int a, int N)&amp;#123;    int result = 1;">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=%5Cbegin%7Balign%7D%0Aa%5E0+%26+%3D+1+%5C%5C%0Aa%5EN+%26+%3D+%28a%5Ccdot+a%29%5E%7BN%2F2%7D%2C+N%5Cmod+2%5Cequiv+0+%5C%5C%0Aa%5EN+%26+%3D+a+%5Ccdot+%28a%5Ccdot+a%29%5E%7BN%2F2%7D%2C+N%5Cmod+2%5Cequiv+1%0A%5Cend%7Balign%7D">
+<meta property="og:updated_time" content="2019-04-14T14:06:55.879Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="tgs&#39;s blog">
-<meta name="twitter:description" content="There should be a moto">
+<meta name="twitter:title" content="快速幂取模">
+<meta name="twitter:description" content="快速幂取模前奏今晚在做一道算法题： 输入m, n, K1, K2 求m/n小数点后K1到K2位 如果直接暴力解，遇到K1很大时会Time limit，此时就需要用快速幂取模，直接获取m/n小数点后第K1位，在求解K1到K2位 快速幂取模实现最简单的实现方法，直接按照递归式来做 12345678910int power(int a, int N)&amp;#123;    int result = 1;">
+<meta name="twitter:image" content="https://www.zhihu.com/equation?tex=%5Cbegin%7Balign%7D%0Aa%5E0+%26+%3D+1+%5C%5C%0Aa%5EN+%26+%3D+%28a%5Ccdot+a%29%5E%7BN%2F2%7D%2C+N%5Cmod+2%5Cequiv+0+%5C%5C%0Aa%5EN+%26+%3D+a+%5Ccdot+%28a%5Ccdot+a%29%5E%7BN%2F2%7D%2C+N%5Cmod+2%5Cequiv+1%0A%5Cend%7Balign%7D">
 
 
 
@@ -119,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://localhost/archives/page/2/">
+  <link rel="canonical" href="http://localhost/2019/04/11/quick_pow_mod/">
 
 
 
 
 
-  <title>Archive | tgs's blog</title>
+  <title>快速幂取模 | tgs's blog</title>
   
 
 
@@ -144,7 +147,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -258,181 +261,179 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://localhost/2019/04/11/quick_pow_mod/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tiangs">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tgs's blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">快速幂取模</h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-11T22:50:09+08:00">
+                2019-04-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        Um..! 14 posts in total. Keep on posting.
-      </span>
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithms/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithms</span>
+                  </a>
+                </span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2019">2019</h1>
-          </div>
-        
-        
 
-        
+          
+            
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/09/Spring Cloud服务注册与发现组件/" itemprop="url">
-              
-                <span itemprop="name">Spring Cloud服务注册与发现</span>
-              
-            </a>
-        
-      </h2>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-09T21:26:17+08:00" content="2019-04-09">
-          04-09
-        </time>
-      </div>
+          
 
-    </header>
-  </article>
+          
 
+        </div>
+      </header>
+    
 
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/09/单体架构/" itemprop="url">
-              
-                <span itemprop="name">单体架构</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-09T21:26:17+08:00" content="2019-04-09">
-          04-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/09/微服务/" itemprop="url">
-              
-                <span itemprop="name">微服务</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-09T21:26:17+08:00" content="2019-04-09">
-          04-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <h2 id="快速幂取模"><a href="#快速幂取模" class="headerlink" title="快速幂取模"></a>快速幂取模</h2><h4 id="前奏"><a href="#前奏" class="headerlink" title="前奏"></a>前奏</h4><p>今晚在做一道算法题：</p>
+<p>输入m, n, K1, K2</p>
+<p>求m/n小数点后K1到K2位</p>
+<p>如果直接暴力解，遇到K1很大时会Time limit，此时就需要用快速幂取模，直接获取m/n小数点后第K1位，在求解K1到K2位</p>
+<h4 id="快速幂取模实现"><a href="#快速幂取模实现" class="headerlink" title="快速幂取模实现"></a>快速幂取模实现</h4><p>最简单的实现方法，直接按照递归式来做<br><img src="https://www.zhihu.com/equation?tex=%5Cbegin%7Balign%7D%0Aa%5E0+%26+%3D+1+%5C%5C%0Aa%5EN+%26+%3D+%28a%5Ccdot+a%29%5E%7BN%2F2%7D%2C+N%5Cmod+2%5Cequiv+0+%5C%5C%0Aa%5EN+%26+%3D+a+%5Ccdot+%28a%5Ccdot+a%29%5E%7BN%2F2%7D%2C+N%5Cmod+2%5Cequiv+1%0A%5Cend%7Balign%7D" alt="\begin{align} a^0 &amp; = 1 \\ a^N &amp; = (a\cdot a)^{N/2}, N\mod 2\equiv 0 \\ a^N &amp; = a \cdot (a\cdot a)^{N/2}, N\mod 2\equiv 1 \end{align}"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">int power(int a, int N)&#123;</span><br><span class="line">    int result = 1;</span><br><span class="line">    while(N &gt; 0)&#123;</span><br><span class="line">    		// 涉及同余定理</span><br><span class="line">        if(N % 2 == 1) result = (result * a) % mod;</span><br><span class="line">        a = (a * a) % mod;</span><br><span class="line">        N /= 2;</span><br><span class="line">    &#125;</span><br><span class="line">    return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="https://www.zhihu.com/question/29326975" target="_blank" rel="noopener">快速幂取模算法如何实现？_知乎</a></p>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/03/30/mongo_secure/" itemprop="url">
-              
-                <span itemprop="name">Mongo 安装、鉴权与主副本设置</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-03-30T17:19:17+08:00" content="2019-03-30">
-          03-30
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/skill/" rel="tag"># skill</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/10/lombok/" rel="next" title="lombok">
+                <i class="fa fa-chevron-left"></i> lombok
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/11/2019-4-1-conclusion/" rel="prev" title="2019/4/11_conclusion">
+                2019/4/11_conclusion <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span>
-  </nav>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -440,6 +441,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -460,8 +465,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -539,6 +553,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#快速幂取模"><span class="nav-number">1.</span> <span class="nav-text">快速幂取模</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#前奏"><span class="nav-number">1.0.1.</span> <span class="nav-text">前奏</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#快速幂取模实现"><span class="nav-number">1.0.2.</span> <span class="nav-text">快速幂取模实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参考"><span class="nav-number">1.0.3.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -679,6 +709,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
