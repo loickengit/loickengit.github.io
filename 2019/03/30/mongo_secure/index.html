@@ -79,19 +79,19 @@
 
 
 
-<meta name="description" content="Mongo鉴权创建管理员12345678910$ mongo&amp;gt; use admin&amp;gt; db.createUser(&amp;gt;   &amp;#123;&amp;gt;     user: &amp;quot;AdminSammy&amp;quot;,&amp;gt;     pwd: &amp;quot;AdminSammy&amp;apos;sSecurePassword&amp;quot;,&amp;gt;     roles: [ &amp;#123; rol">
+<meta name="description" content="Mongo鉴权创建管理员12345678910$ mongouse admindb.createUser(   &amp;#123;     user: &amp;quot;admin&amp;quot;,     pwd: &amp;quot;simu1234&amp;quot;,     roles: [ &amp;#123; role: &amp;quot;userAdminAnyDatabase&amp;quot;, db: &amp;quot;admin&amp;q">
 <meta name="keywords" content="Mongo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mongo 安装、鉴权与主副本设置">
 <meta property="og:url" content="http://localhost/2019/03/30/mongo_secure/index.html">
 <meta property="og:site_name" content="tgs&#39;s blog">
-<meta property="og:description" content="Mongo鉴权创建管理员12345678910$ mongo&amp;gt; use admin&amp;gt; db.createUser(&amp;gt;   &amp;#123;&amp;gt;     user: &amp;quot;AdminSammy&amp;quot;,&amp;gt;     pwd: &amp;quot;AdminSammy&amp;apos;sSecurePassword&amp;quot;,&amp;gt;     roles: [ &amp;#123; rol">
+<meta property="og:description" content="Mongo鉴权创建管理员12345678910$ mongouse admindb.createUser(   &amp;#123;     user: &amp;quot;admin&amp;quot;,     pwd: &amp;quot;simu1234&amp;quot;,     roles: [ &amp;#123; role: &amp;quot;userAdminAnyDatabase&amp;quot;, db: &amp;quot;admin&amp;q">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://localhost/images/mongo_replication.png">
-<meta property="og:updated_time" content="2019-04-13T07:38:35.853Z">
+<meta property="og:updated_time" content="2019-04-17T13:15:00.485Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mongo 安装、鉴权与主副本设置">
-<meta name="twitter:description" content="Mongo鉴权创建管理员12345678910$ mongo&amp;gt; use admin&amp;gt; db.createUser(&amp;gt;   &amp;#123;&amp;gt;     user: &amp;quot;AdminSammy&amp;quot;,&amp;gt;     pwd: &amp;quot;AdminSammy&amp;apos;sSecurePassword&amp;quot;,&amp;gt;     roles: [ &amp;#123; rol">
+<meta name="twitter:description" content="Mongo鉴权创建管理员12345678910$ mongouse admindb.createUser(   &amp;#123;     user: &amp;quot;admin&amp;quot;,     pwd: &amp;quot;simu1234&amp;quot;,     roles: [ &amp;#123; role: &amp;quot;userAdminAnyDatabase&amp;quot;, db: &amp;quot;admin&amp;q">
 <meta name="twitter:image" content="http://localhost/images/mongo_replication.png">
 
 
@@ -315,6 +315,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mongo/" itemprop="url" rel="index">
+                    <span itemprop="name">mongo</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -342,7 +364,7 @@
       
 
       
-        <h3 id="Mongo鉴权"><a href="#Mongo鉴权" class="headerlink" title="Mongo鉴权"></a>Mongo鉴权</h3><h4 id="创建管理员"><a href="#创建管理员" class="headerlink" title="创建管理员"></a>创建管理员</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ mongo</span><br><span class="line"></span><br><span class="line">&gt; use admin</span><br><span class="line">&gt; db.createUser(</span><br><span class="line">&gt;   &#123;</span><br><span class="line">&gt;     user: &quot;AdminSammy&quot;,</span><br><span class="line">&gt;     pwd: &quot;AdminSammy&apos;sSecurePassword&quot;,</span><br><span class="line">&gt;     roles: [ &#123; role: &quot;userAdminAnyDatabase&quot;, db: &quot;admin&quot; &#125; ]</span><br><span class="line">&gt;   &#125;</span><br><span class="line">&gt; )</span><br></pre></td></tr></table></figure>
+        <h3 id="Mongo鉴权"><a href="#Mongo鉴权" class="headerlink" title="Mongo鉴权"></a>Mongo鉴权</h3><h4 id="创建管理员"><a href="#创建管理员" class="headerlink" title="创建管理员"></a>创建管理员</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ mongo</span><br><span class="line"></span><br><span class="line">use admin</span><br><span class="line">db.createUser(</span><br><span class="line">   &#123;</span><br><span class="line">     user: &quot;admin&quot;,</span><br><span class="line">     pwd: &quot;simu1234&quot;,</span><br><span class="line">     roles: [ &#123; role: &quot;userAdminAnyDatabase&quot;, db: &quot;admin&quot; &#125; ]</span><br><span class="line">   &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 <h4 id="开启鉴权"><a href="#开启鉴权" class="headerlink" title="开启鉴权"></a>开启鉴权</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo nano /etc/mongod.conf</span><br></pre></td></tr></table></figure>
 <p>在mongodb.conf添加字段</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> . . .</span><br><span class="line">security:</span><br><span class="line">  authorization: &quot;enabled&quot;</span><br><span class="line"> . . .</span><br></pre></td></tr></table></figure>
@@ -353,21 +375,21 @@
 <li>创建一般用户</li>
 </ol>
 <p>在mongo shell中</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.createUser(</span><br><span class="line">	&#123;user:&quot;user&quot;,</span><br><span class="line">	 pwd: &quot;password&quot;,</span><br><span class="line">	 roles: [&#123;role:&quot;readWrite&quot;, db:&quot;admin&quot;&#125;]</span><br><span class="line">	 &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">db.createUser(</span><br><span class="line">	&#123;user:&quot;simu_chat&quot;,</span><br><span class="line">	 pwd: &quot;simu1234&quot;,</span><br><span class="line">	 roles: [&#123;role:&quot;readWrite&quot;, db:&quot;new-cloud-chat&quot;&#125;]</span><br><span class="line">	 &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 <ol start="2">
 <li>local数据库不能创建用户，但可以授权其他用户访问权限</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.grantRolesToUser(&quot;user&quot;, [&#123;role: &quot;readWrite&quot;, db: &quot;local&quot;&#125;])</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">db.grantRolesToUser(&quot;simu_chat&quot;, [&#123;role: &quot;readWrite&quot;, db: &quot;new_test&quot;&#125;])</span><br><span class="line">db.grantRolesToUser(&quot;simu_chat&quot;, [&#123;role: &quot;readWrite&quot;, db: &quot;audit&quot;&#125;])</span><br><span class="line">db.grantRolesToUser(&quot;simu_chat&quot;, [&#123;role: &quot;readWrite&quot;, db: &quot;collector&quot;&#125;])</span><br><span class="line">db.grantRolesToUser(&quot;simu_chat&quot;, [&#123;role: &quot;readWrite&quot;, db: &quot;local&quot;&#125;])</span><br><span class="line">db.grantRolesToUser(&quot;simu_chat&quot;, [&#123;role: &quot;readWrite&quot;, db: &quot;lotor_test&quot;&#125;])</span><br><span class="line">db.grantRolesToUser(&quot;simu_chat&quot;, [&#123;role: &quot;readWrite&quot;, db: &quot;new_test&quot;&#125;])</span><br><span class="line">db.grantRolesToUser(&quot;simu_chat&quot;, [&#123;role: &quot;readWrite&quot;, db: &quot;question&quot;&#125;])</span><br></pre></td></tr></table></figure>
 <h4 id="配置远程连接"><a href="#配置远程连接" class="headerlink" title="配置远程连接"></a>配置远程连接</h4><h5 id="开启UFW"><a href="#开启UFW" class="headerlink" title="开启UFW"></a>开启UFW</h5><p>查看UFW状态</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo ufw status</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw status</span><br></pre></td></tr></table></figure>
 <p>开启</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo ufw enable</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw enable</span><br></pre></td></tr></table></figure>
 <p>允许连接mongo的端口，默认是27017</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo ufw allow from client_ip_address to any port 27017</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw allow from client_ip_address to any port 27017</span><br></pre></td></tr></table></figure>
 <h5 id="配置bindIP"><a href="#配置bindIP" class="headerlink" title="配置bindIP"></a>配置bindIP</h5><p>在 /etc/mongod.conf添加</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> . . .</span><br><span class="line">net:</span><br><span class="line">  port: 27017</span><br><span class="line">  bindIp: 127.0.0.1,IP_of_MongoHost</span><br><span class="line"> . . .</span><br></pre></td></tr></table></figure>
 <p>重启mongo</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo systemctl restart mongod</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl restart mongod</span><br></pre></td></tr></table></figure>
 <h3 id="Mongo-主副本设置"><a href="#Mongo-主副本设置" class="headerlink" title="Mongo 主副本设置"></a>Mongo 主副本设置</h3><p>mongodb的复制至少需要两个节点，主节点记录在其上的所有操作oplog，从节点定期轮询主节点获取这些操作，然后对自己的数据副本执行这些操作，从而保证从节点的数据与主节点一致。</p>
 <p>MongoDB复制结构图如下</p>
 <p><img src="/images/mongo_replication.png" alt="Mongo主副本"></p>
@@ -377,11 +399,11 @@
 <p>在Mongo客户端使用命令rs.initiate()来启动一个新的副本集。</p>
 <p>我们可以使用rs.conf()来查看副本集的配置</p>
 <p>查看副本集状态使用 rs.status() 命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt; rs.initiate(</span><br><span class="line">	&#123;_id: &quot;repl_name,</span><br><span class="line">	 version: &quot;1&quot;,</span><br><span class="line">	 members:[</span><br><span class="line">     &#123;_id: 0, host: &quot;localhost:27017&quot;&#125;</span><br><span class="line">	 ]</span><br><span class="line">	&#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">rs.initiate(</span><br><span class="line">	&#123;_id: &quot;repl_name,</span><br><span class="line">	 version: &quot;1&quot;,</span><br><span class="line">	 members:[</span><br><span class="line">     &#123;_id: 0, host: &quot;localhost:27017&quot;&#125;</span><br><span class="line">	 ]</span><br><span class="line">	&#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 <p>如果已经init过了，可以通过如下方式重新init</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; rsconf = rs.conf()</span><br><span class="line">&gt; rsconf.members = [&#123;_id: 0, host: &quot;localhost:27017”&#125;]</span><br><span class="line">&gt; rs.reconfig(rsconf, &#123;force: true&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rsconf = rs.conf()</span><br><span class="line">rsconf.members = [&#123;_id: 0, host: &quot;localhost:27017”&#125;]</span><br><span class="line">rs.reconfig(rsconf, &#123;force: true&#125;)</span><br></pre></td></tr></table></figure>
 <p>添加成员</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; rs.add(HOST_NAME:PORT)</span><br><span class="line"></span><br><span class="line">eg.</span><br><span class="line">&gt; rs.add(&quot;localhost:27018&quot;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rs.add(HOST_NAME:PORT)</span><br><span class="line"></span><br><span class="line">eg.</span><br><span class="line">rs.add(&quot;localhost:27018&quot;)</span><br></pre></td></tr></table></figure>
 <p>MongoDB中，只能通过主节点将Mongo服务添加到副本集，可通过mongo shell看是否是PRIMARY，或者</p>
 <p><strong>使用db.isMaster()</strong>查看是否是主节点。</p>
 <h3 id="应用程序连接"><a href="#应用程序连接" class="headerlink" title="应用程序连接"></a>应用程序连接</h3><h4 id="Springboot"><a href="#Springboot" class="headerlink" title="Springboot"></a>Springboot</h4><p>在application.yml中添加下面配置</p>
@@ -424,8 +446,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/04/09/微服务/" rel="prev" title="微服务">
-                微服务 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/04/09/单体架构/" rel="prev" title="单体架构">
+                单体架构 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -505,7 +527,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -516,7 +538,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -527,7 +549,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

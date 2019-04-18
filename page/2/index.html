@@ -273,6 +273,1273 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://localhost/2019/04/13/python-virtualenv/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tiangs">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tgs's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/13/python-virtualenv/" itemprop="url">Python virtualenv</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-13T15:56:50+08:00">
+                2019-04-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>有两种方式创建python virtualenv， 使用pip 安装virtualenv包或者通过Anaconda管理virtualenv</p>
+<h3 id="Pip-virtualenv"><a href="#Pip-virtualenv" class="headerlink" title="Pip virtualenv"></a>Pip virtualenv</h3><p>安装virtualenv包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install virtualenv</span><br></pre></td></tr></table></figure>
+<p>创建一个独立的python运行环境newEnv，不安装任何包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">virtualenv --no-site-packages newEnv</span><br><span class="line"># virtualenv newEnv --python=python3    指定版本</span><br></pre></td></tr></table></figure>
+<p>用source进入该环境</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source newEnv/bin/activate</span><br></pre></td></tr></table></figure>
+<p>退出当前venv环境</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">deactivate</span><br></pre></td></tr></table></figure>
+<h3 id="Anaconda-管理virtualenv"><a href="#Anaconda-管理virtualenv" class="headerlink" title="Anaconda 管理virtualenv"></a>Anaconda 管理virtualenv</h3><p>显示当前已有的virtualenv</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda env list</span><br><span class="line">或者 conda info -e</span><br></pre></td></tr></table></figure>
+<p>创建</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create -n env_name python=3.6</span><br></pre></td></tr></table></figure>
+<p>激活</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source activate env_name</span><br></pre></td></tr></table></figure>
+<p>失效</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source deactivate env_name</span><br></pre></td></tr></table></figure>
+<p>移除</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda remove -n env_name --all</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://localhost/2019/04/12/kafka/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tiangs">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tgs's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/12/kafka/" itemprop="url">Apache kafka</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-12T14:43:25+08:00">
+                2019-04-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/platform/" itemprop="url" rel="index">
+                    <span itemprop="name">platform</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Kafka是一个分布式流处理平台</p>
+<p>Kafka有四个核心API：</p>
+<ol>
+<li>Producer API</li>
+<li>Consumer API</li>
+<li>Streams API</li>
+</ol>
+<p>允许应用把记录从一个topic处理后，放到另一个topic</p>
+<ol start="4">
+<li>Connector API</li>
+</ol>
+<p>允许一个应用在数据库表发生变化时，得到通知。</p>
+<p>相当于触发器？</p>
+<h4 id="Topic"><a href="#Topic" class="headerlink" title="Topic"></a>Topic</h4><p>Kafka使用topic来管理消息发布与接收，topic可以有很多发布者，订阅者，让我们来看看topic的结构</p>
+<h4 id="Topic结构"><a href="#Topic结构" class="headerlink" title="Topic结构"></a>Topic结构</h4><p><img src="/images/kafka_anatomy.png" alt="Anatomy of Topic"></p>
+<p>​    每一个topic可以有很多个分区，分区是顺序写入的，每条记录都有一个唯一的sequential id，Kafka会保留记录一段时间，无论有没有消费，超过时间就会清楚，时间长短可以配置。</p>
+<p>订阅的消费者自己记录在分区上读取到的位置，所以消费者的行为对kafka本身影响不大。消费者可以随便改变读取的位置……读完了当没读，再回头读一次</p>
+<p><img src="/images/kafka_consumer.png" alt="consumer读取分区消息"></p>
+<h4 id="Distribution"><a href="#Distribution" class="headerlink" title="Distribution"></a>Distribution</h4><p>The partitions分布在众多的server上，分区还有复制集做容错处理，分区对应的servers有一个是leader，负责读和写，其他server都是followers，they passively 复制leader， 当leader挂掉的时候，会自动从followers中选举出一个leader。</p>
+<h4 id="Producers"><a href="#Producers" class="headerlink" title="Producers"></a>Producers</h4><p>producers创造的消息可以在不同的分区之间做负载均衡</p>
+<h4 id="Consumers"><a href="#Consumers" class="headerlink" title="Consumers"></a>Consumers</h4><p>每一个consumer都有一个group name，每条topic的消息，在一个group内，只能由一个consumer去消费，相当于在group内有一个topic的队列，topic的消息发送到这个队列里，consumer们先到先得（负载均衡）。</p>
+<p>如果一个topic有很多个group关注它，topic会向每个group广播每一条消息。</p>
+<p>同一个group的consumer可以分布在不同的机器上。</p>
+<p>这里说一下partition数量和consumer数量的关系，两者没有太大的关联，一个consumer可以消费很多partition….</p>
+<p><img src="/images/kafka_consumer-groups.png" alt="Kafka Cluster"></p>
+<p>图说明：</p>
+<p>一个topic有4个分区，4个分区分布在不同的server上，有2个group关注这个topic，A有2个消费者，B有4个消费者。图中的分区分配到group中的consumer，这是常见的分配方式。</p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="http://kafka.apache.org/quickstart" target="_blank" rel="noopener">Apache Kafka</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://localhost/2019/04/11/2019-4-1-conclusion/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tiangs">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tgs's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/11/2019-4-1-conclusion/" itemprop="url">2019/4/11_conclusion</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-11T23:09:33+08:00">
+                2019-04-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/reflect/" itemprop="url" rel="index">
+                    <span itemprop="name">reflect</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="11号，Thursday"><a href="#11号，Thursday" class="headerlink" title="11号，Thursday"></a>11号，Thursday</h3><p>今天去考科目一，去的过程一直没有查</p>
+<p>在哪里考，怎么去，路上多长时间，考多久等信息，都是sissi查的</p>
+<p><strong>还是不主动承担事务的毛病</strong></p>
+<h3 id="12号，Friday"><a href="#12号，Friday" class="headerlink" title="12号，Friday"></a>12号，Friday</h3><p>昨天弄清楚apache kafka的原理，稍微看了node-kafka的API，知道怎么在nodejs中使用kafka了。</p>
+<p>晚上做了牛客网的周赛，一道题没通过，感觉是python和他们平台输入的问题。</p>
+<h3 id="13号，Saturday"><a href="#13号，Saturday" class="headerlink" title="13号，Saturday"></a>13号，Saturday</h3><p>昨天牛客网的问题弄清楚了，有2个问题：</p>
+<ol>
+<li>python的小数有精度限制（整数没有），在使用斐波那契通项公式计算第N项的时候，N太大，程序出错了</li>
+<li>牛客网说的一行可能不只是一行，直接用input()，数据多的时候可能没法获取到全部的数据</li>
+</ol>
+<p>弄清楚多个git账户怎么在一台机器上共存了，把hexo blog托管到码云上，可以在任何机器上总结博客了。</p>
+<p>稍微总结了一下kafka的原理，放到了博客上。</p>
+<p>发现：</p>
+<p>git上传hexo blog的时候，next主题git add不了，因为next已经有git了～～～～</p>
+<p>明日计划：</p>
+<ol>
+<li>学车</li>
+<li>写毕设</li>
+</ol>
+<h3 id="14号，Sunday"><a href="#14号，Sunday" class="headerlink" title="14号，Sunday"></a>14号，Sunday</h3><p>今天早上去学车，中午回来发现自己发烧了，一个下午和晚上浑浑噩噩的。写了一点毕设，把反思的分类放到了hexo的边栏上。</p>
+<p>明日计划：</p>
+<ol>
+<li>看病</li>
+<li><p>实现思目会话eternal用户sign in/sign out是kafka发送通知消息</p>
+</li>
+<li><p>毕设第三章写完（粗略地）</p>
+</li>
+<li>和sissi一起看《权利的游戏》！！！！！</li>
+</ol>
+<h3 id="16号，Tuesday"><a href="#16号，Tuesday" class="headerlink" title="16号，Tuesday"></a>16号，Tuesday</h3><p>两天没写毕设，一直在和细菌作战，周三约的学车也去不了了，去校医院看病。权利的游戏看了，腾讯vip+百度网盘和谐片段。</p>
+<p>明天一定要完成：</p>
+<ol>
+<li>毕设第三章</li>
+<li>DNS，域名服务器之类的，理清楚</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://localhost/2019/04/11/quick_pow_mod/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tiangs">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tgs's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/11/quick_pow_mod/" itemprop="url">快速幂取模</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-11T22:50:09+08:00">
+                2019-04-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithms/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithms</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="快速幂取模"><a href="#快速幂取模" class="headerlink" title="快速幂取模"></a>快速幂取模</h2><h4 id="前奏"><a href="#前奏" class="headerlink" title="前奏"></a>前奏</h4><p>今晚在做一道算法题：</p>
+<p>输入m, n, K1, K2</p>
+<p>求m/n小数点后K1到K2位</p>
+<p>如果直接暴力解，遇到K1很大时会Time limit，此时就需要用快速幂取模，直接获取m/n小数点后第K1位，在求解K1到K2位</p>
+<h4 id="快速幂取模实现"><a href="#快速幂取模实现" class="headerlink" title="快速幂取模实现"></a>快速幂取模实现</h4><p>最简单的实现方法，直接按照递归式来做<br><img src="https://www.zhihu.com/equation?tex=%5Cbegin%7Balign%7D%0Aa%5E0+%26+%3D+1+%5C%5C%0Aa%5EN+%26+%3D+%28a%5Ccdot+a%29%5E%7BN%2F2%7D%2C+N%5Cmod+2%5Cequiv+0+%5C%5C%0Aa%5EN+%26+%3D+a+%5Ccdot+%28a%5Ccdot+a%29%5E%7BN%2F2%7D%2C+N%5Cmod+2%5Cequiv+1%0A%5Cend%7Balign%7D" alt="\begin{align} a^0 &amp; = 1 \\ a^N &amp; = (a\cdot a)^{N/2}, N\mod 2\equiv 0 \\ a^N &amp; = a \cdot (a\cdot a)^{N/2}, N\mod 2\equiv 1 \end{align}"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">int power(int a, int N)&#123;</span><br><span class="line">    int result = 1;</span><br><span class="line">    while(N &gt; 0)&#123;</span><br><span class="line">    		// 涉及同余定理</span><br><span class="line">        if(N % 2 == 1) result = (result * a) % mod;</span><br><span class="line">        a = (a * a) % mod;</span><br><span class="line">        N /= 2;</span><br><span class="line">    &#125;</span><br><span class="line">    return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="https://www.zhihu.com/question/29326975" target="_blank" rel="noopener">快速幂取模算法如何实现？_知乎</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://localhost/2019/04/10/lombok/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tiangs">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tgs's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/10/lombok/" itemprop="url">lombok</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-10T10:21:05+08:00">
+                2019-04-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Lombok"><a href="#Lombok" class="headerlink" title="Lombok"></a>Lombok</h3><p>lombok是一个java工具包，通过在实体上添加注解，避免代码里很多重复繁琐的代码</p>
+<h5 id="lombok-features"><a href="#lombok-features" class="headerlink" title="lombok features"></a>lombok features</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@var</span><br><span class="line">// 相当于js里的var</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@NotNull</span><br><span class="line">// 在方法参数或对象字段中，检查字段是否null，报NullPointerException</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@Cleanup</span><br><span class="line">// 在使用后需要关闭的对象上添加，可以省去close</span><br><span class="line"></span><br><span class="line">@Cleanup InputStream in = new FileInputStream(args[0]);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@Getter/@Setter</span><br><span class="line">// 自动为对象字段生成getter和setter方法</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@ToString</span><br><span class="line">// 生成toString方法</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@EqualsAndHashCode</span><br><span class="line">// 生成hashCode 和 equals方法</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@NoArgsConstructor, @RequiredArgsConstructor, @AllArgsConstructor</span><br><span class="line">// 构造方法</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@Data</span><br><span class="line">// @ToString, @EqualsAndHashCode, @Getter on all fields, and @Setter on all non-final fields, and @RequiredArgsConstructor!</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@Builder</span><br><span class="line">// new Person().age(17).name(&quot;mike&quot;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@Synchronized</span><br><span class="line">// 使用私有的，不暴露的对象锁；如果直接在方法上添加Synchronized关键字使用的是当前对象的锁，因此可能会导致死锁</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Getter(lazy=true)</span><br><span class="line"></span><br><span class="line">// 延迟初始化</span><br><span class="line">	@Getter(lazy=true) private final double[] cached = expensive();</span><br><span class="line">  private double[] expensive() &#123;</span><br><span class="line">    double[] result = new double[1000000];</span><br><span class="line">    for (int i = 0; i &lt; result.length; i++) &#123;</span><br><span class="line">      result[i] = Math.asin(i);</span><br><span class="line">    &#125;</span><br><span class="line">    return result;</span><br><span class="line"> 	&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@Slf4j // or: @Log @CommonsLog @Log4j @Log4j2 @XSlf4j</span><br><span class="line"></span><br><span class="line">//代替以下语句</span><br><span class="line">private static Logger LOG = LoggerFactory.getLogger(ApiClientConfiguration.class);</span><br></pre></td></tr></table></figure>
+<h5 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h5><p><a href>https://projectlombok.org/features/all</a></p>
+<p><a href>https://www.baeldung.com/intro-to-project-lombok</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://localhost/2019/04/09/hexo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tiangs">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tgs's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/09/hexo/" itemprop="url">Hexo 使用技巧</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-09T21:32:10+08:00">
+                2019-04-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Productivity/" itemprop="url" rel="index">
+                    <span itemprop="name">Productivity</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br><span class="line">hexo init blog</span><br><span class="line">cd blog</span><br><span class="line">npm install</span><br><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+<h4 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始化website</span></span><br><span class="line">hexo init [folder]</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建文章</span></span><br><span class="line">hexo <span class="keyword">new</span> [layout] &lt;title&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建page</span></span><br><span class="line">hexo <span class="keyword">new</span> page &lt;pagename&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// generate</span></span><br><span class="line">hexo generate</span><br><span class="line"></span><br><span class="line"><span class="comment">// server</span></span><br><span class="line">hexo server</span><br><span class="line"></span><br><span class="line"><span class="comment">// deploy</span></span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
+<p>更多命令<a href="[https://hexo.io/docs/commands](">hexo_commands</a>)</p>
+<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><p>在_config.yml可以设置博客名称，git地址等，<a href="https://hexo.io/docs/configuration" target="_blank" rel="noopener">hexo_git配置</a></p>
+<p>在使用github pages时，每次使用hexo deploy都需要输入git用户名与密码，如果想要通过ssh密钥连接（<a href="/2019/04/13/git/" title="git与ssh密钥设置">git与ssh密钥设置</a>），可以修改2个地方</p>
+<h5 id="在hexo配置文件-config-yml中，修改deploy-repo"><a href="#在hexo配置文件-config-yml中，修改deploy-repo" class="headerlink" title="在hexo配置文件_config.yml中，修改deploy repo"></a>在hexo配置文件_config.yml中，修改deploy repo</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># https://github.com/loickengit/loickengit.github.io.git</span><br><span class="line">repo: git@github.com:loickengit/loickengit.github.io.git</span><br></pre></td></tr></table></figure>
+<h5 id="修改-deploy-git-git-config"><a href="#修改-deploy-git-git-config" class="headerlink" title="修改.deploy_git/.git/config"></a>修改.deploy_git/.git/config</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[core]</span><br><span class="line">	repositoryformatversion = 0</span><br><span class="line">	filemode = true</span><br><span class="line">	bare = false</span><br><span class="line">	logallrefupdates = true</span><br><span class="line">	ignorecase = true</span><br><span class="line">	precomposeunicode = true</span><br><span class="line">[branch &quot;master&quot;]</span><br><span class="line">  # remote = https://github.com/loickengit/loickengit.github.io.git</span><br><span class="line">	remote = git@github.com:loickengit/loickengit.github.io.git</span><br><span class="line">	merge = refs/heads/master</span><br></pre></td></tr></table></figure>
+<p>Menu，边栏等需要到对应Theme的_config.yml中设置</p>
+<h4 id="增加一个页面"><a href="#增加一个页面" class="headerlink" title="增加一个页面"></a>增加一个页面</h4><p>创建about页面</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page --path about/index &quot;about&quot;</span><br></pre></td></tr></table></figure>
+<p>在theme/_config.yml中添加about页面</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">menu:</span><br><span class="line">	...</span><br><span class="line">  about: /about || about</span><br></pre></td></tr></table></figure>
+<h4 id="增加标签页或分类"><a href="#增加标签页或分类" class="headerlink" title="增加标签页或分类"></a>增加标签页或分类</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page tags</span><br></pre></td></tr></table></figure>
+<p>编辑source/tags/index.md，添加<strong>type: “tags”</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: tags</span><br><span class="line">date: 2019-04-09 22:09:16</span><br><span class="line">type: &quot;tags&quot;										</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<p>在theme/_config.yml中添加tags页面</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">menu:</span><br><span class="line">	...</span><br><span class="line">  tags: /tags || tags</span><br></pre></td></tr></table></figure>
+<p>分类页把关键字换成categories，流程如上</p>
+<h4 id="把分类放到边栏"><a href="#把分类放到边栏" class="headerlink" title="把分类放到边栏"></a>把分类放到边栏</h4><p>创建分类页面</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page &quot;travel&quot;</span><br></pre></td></tr></table></figure>
+<p>在theme/_config.yml中添加travel页面与travel的图标（<a href="http://www.fontawesome.com.cn/faicons/" target="_blank" rel="noopener">图标参照</a>）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">menu:</span><br><span class="line">	...</span><br><span class="line">  travel: /categories/travle || yelp</span><br></pre></td></tr></table></figure>
+<p>模板添加分类categories</p>
+<p>打开<code>./scaffolds/post.md</code>添加一行<code>categories:</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: &#123;&#123; title &#125;&#125;</span><br><span class="line">date: &#123;&#123; date &#125;&#125;</span><br><span class="line">tags:</span><br><span class="line">categories:</span><br><span class="line">comments: true</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<p>这时新建文章，指定categories为travel就可以在边栏看到travel分类，点击travel就可以看到travel分类的文章。</p>
+<h4 id="替换主题"><a href="#替换主题" class="headerlink" title="替换主题"></a>替换主题</h4><p>下载hexo主题(next) 到themes文件夹下，更改hexo _config.yml主题</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme: next</span><br></pre></td></tr></table></figure>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="https://hexo.io/docs/" target="_blank" rel="noopener">hexo.io</a></p>
+<p><a href="https://blog.csdn.net/shenyuflying/article/details/53244858" target="_blank" rel="noopener">hexo静态博客修改侧边栏</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://localhost/2019/04/09/Spring Boot Security/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tiangs">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tgs's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/09/Spring Boot Security/" itemprop="url">Spring Boot Security</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-09T21:26:17+08:00">
+                2019-04-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="Spring-Boot-Security"><a href="#Spring-Boot-Security" class="headerlink" title="Spring Boot Security"></a>Spring Boot Security</h4><p>Spring Security可以在controller层、Service层、DAO层等以加注解的方式来保护应用程序的安全。</p>
+<p>Spring Security提供细粒度的权限控制，可以精细到每一个API接口、每一个业务方法，或者每一个操作数据库的DAO层的方法。</p>
+<p>Spring Security提供的是应用程序层的安全解决方案，一个系统的安全还需要考虑传输层和系统层的安全，例如采用Https协议、服务器部署防火墙等。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">		&lt;groupid&gt;org.springframework.boot&lt;/groupid&gt;</span><br><span class="line">		&lt;artifactid&gt;spring-boot-starter-security&lt;/artifactid&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://localhost/2019/04/09/Spring Cloud组件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tiangs">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tgs's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/09/Spring Cloud组件/" itemprop="url">Spring Cloud组件</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-09T21:26:17+08:00">
+                2019-04-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Spring-Cloud组件"><a href="#Spring-Cloud组件" class="headerlink" title="Spring Cloud组件"></a>Spring Cloud组件</h2><h3 id="负载均衡组件-Ribbon"><a href="#负载均衡组件-Ribbon" class="headerlink" title="负载均衡组件 Ribbon"></a>负载均衡组件 Ribbon</h3><p>Ribbon 是一个负载均衡组件，它通常和 Eureka、 Zuul、 RestTemplate、 Feign 配合使用。<br>Ribbon和 Zuul配合，很容易做到负载均衡，将请求根据负载均衡策略分配到不同的服务实例中。</p>
+<p>Ribbon 和RestTemplate、 Feign 配合，在消费服务时能够做到负载均衡 。</p>
+<h5 id="编写"><a href="#编写" class="headerlink" title="编写"></a>编写</h5><p>起步依赖spring-cloud-starter-eureka、spring-cloud-starter-ribbon</p>
+<p>配置文件application.yml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">eureka:</span><br><span class="line">  client:</span><br><span class="line">    serviceUrl:</span><br><span class="line">      defaultZone: http://localhost:8761/eureka/</span><br><span class="line">server:</span><br><span class="line">  port: 8764</span><br><span class="line">spring:</span><br><span class="line">  application:</span><br><span class="line">    name: service-ribbon</span><br></pre></td></tr></table></figure>
+<p>在工程的启动类中,通过@EnableDiscoveryClient向服务中心注册；并且向程序的ioc注入一个bean: restTemplate;并通过@LoadBalanced注解表明这个restRemplate开启负载均衡的功能。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableDiscoveryClient</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServiceRibbonApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		SpringApplication.run(ServiceRibbonApplication.class, args);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Bean</span></span><br><span class="line">	<span class="meta">@LoadBalanced</span></span><br><span class="line">	<span class="function">RestTemplate <span class="title">restTemplate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> RestTemplate();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>写一个测试类HelloService，通过之前注入ioc容器的restTemplate来消费service-hi服务的“/hi”接口，在这里我们直接用的程序名替代了具体的url地址，在ribbon中它会根据服务名来选择具体的服务实例，根据服务实例在请求的时候会用具体的url替换掉服务名，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloService</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    RestTemplate restTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hiService</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> restTemplate.getForObject(<span class="string">"http://SERVICE-HI/hi?name="</span>+name,String.class);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/ribbon.png" alt="ribbon"></p>
+<h3 id="Feign"><a href="#Feign" class="headerlink" title="Feign"></a>Feign</h3><p>上一节，讲述了如何通过RestTemplate+Ribbon去消费服务，这篇文章主要讲述如何通过Feign去消费服务。</p>
+<p>Feign是一个声明式的伪Http客户端，它使得写Http客户端变得更简单。使用Feign，只需要创建一个接口并注解。它具有可插拔的注解特性，可使用Feign 注解和JAX-RS注解。Feign支持可插拔的编码器和解码器。Feign默认集成了Ribbon，并和Eureka结合，默认实现了负载均衡的效果。</p>
+<p>application.yml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">eureka:</span><br><span class="line">  client:</span><br><span class="line">    serviceUrl:</span><br><span class="line">      defaultZone: http://localhost:8761/eureka/</span><br><span class="line">server:</span><br><span class="line">  port: 8765</span><br><span class="line">spring:</span><br><span class="line">  application:</span><br><span class="line">    name: service-feign</span><br></pre></td></tr></table></figure>
+<p>在程序的启动类ServiceFeignApplication ，加上@EnableFeignClients注解开启Feign的功能：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableDiscoveryClient</span></span><br><span class="line"><span class="meta">@EnableFeignClients</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServiceFeignApplication</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		SpringApplication.run(ServiceFeignApplication.class, args);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>定义一个feign接口，通过@ FeignClient（“服务名”），来指定调用哪个服务。比如在代码中调用了service-hi服务的“/hi”接口，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FeignClient</span>(value = <span class="string">"service-hi"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">SchedualServiceHi</span> </span>&#123;</span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/hi"</span>,method = RequestMethod.GET)</span><br><span class="line">    <span class="function">String <span class="title">sayHiFromClientOne</span><span class="params">(@RequestParam(value = <span class="string">"name"</span>)</span> String name)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在Web层的controller层，对外暴露一个”/hi”的API接口，通过上面定义的Feign客户端SchedualServiceHi 来消费服务。代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HiController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    SchedualServiceHi schedualServiceHi;</span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/hi"</span>,method = RequestMethod.GET)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">sayHi</span><span class="params">(@RequestParam String name)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> schedualServiceHi.sayHiFromClientOne(name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="熔断组件-Hystrix"><a href="#熔断组件-Hystrix" class="headerlink" title="熔断组件 Hystrix"></a>熔断组件 Hystrix</h3><p>Hystrix 是一个熔断组件，它除了 有一些基本的熔断器功能外，还能够实现服务降级、服<br>务限流的功能。</p>
+<p>另外 Hystrix 提供了熔断器的健康监测，以及熔断器健康数据的 API 接 口。</p>
+<p>Hystrix Dashboard 组件提供了单 个服务熔断器的健康状态数据的界面展示功能 。</p>
+<p>HystrixTurbine 组件提供了多个服务的熔断器的健康状态数据的界面展示功能 。</p>
+<h4 id="在ribbon使用断路器"><a href="#在ribbon使用断路器" class="headerlink" title="在ribbon使用断路器"></a>在ribbon使用断路器</h4><p>依赖spring-cloud-starter-hystrix</p>
+<p>在程序的启动类ServiceRibbonApplication 加@EnableHystrix注解开启Hystrix</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableDiscoveryClient</span></span><br><span class="line"><span class="meta">@EnableHystrix</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServiceRibbonApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		SpringApplication.run(ServiceRibbonApplication.class, args);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Bean</span></span><br><span class="line">	<span class="meta">@LoadBalanced</span></span><br><span class="line">	<span class="function">RestTemplate <span class="title">restTemplate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> RestTemplate();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>改造HelloService类，在hiService方法上加上@HystrixCommand注解。该注解对该方法创建了熔断器的功能，并指定了fallbackMethod熔断方法，熔断方法直接返回了一个字符串，字符串为”hi,”+name+”,sorry,error!”，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloService</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    RestTemplate restTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@HystrixCommand</span>(fallbackMethod = <span class="string">"hiError"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hiService</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> restTemplate.getForObject(<span class="string">"http://SERVICE-HI/hi?name="</span>+name,String.class);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hiError</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"hi,"</span>+name+<span class="string">",sorry,error!"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当 service-hi 工程不可用的时候，service-ribbon调用 service-hi的API接口时，会执行快速失败，直接返回一组字符串，而不是等待响应超时，这很好的控制了容器的线程阻塞。</p>
+<h4 id="Feign中使用断路器"><a href="#Feign中使用断路器" class="headerlink" title="Feign中使用断路器"></a>Feign中使用断路器</h4><p>application.yml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">feign.hystrix.enabled=true</span><br></pre></td></tr></table></figure>
+<p>基于service-feign工程进行改造，只需要在FeignClient的SchedualServiceHi接口的注解中加上fallback的指定类就行了：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FeignClient</span>(value = <span class="string">"service-hi"</span>,fallback = SchedualServiceHiHystric.class)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">SchedualServiceHi</span> </span>&#123;</span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/hi"</span>,method = RequestMethod.GET)</span><br><span class="line">    <span class="function">String <span class="title">sayHiFromClientOne</span><span class="params">(@RequestParam(value = <span class="string">"name"</span>)</span> String name)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>SchedualServiceHiHystric需要实现SchedualServiceHi 接口，并注入到Ioc容器中，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SchedualServiceHiHystric</span> <span class="keyword">implements</span> <span class="title">SchedualServiceHi</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">sayHiFromClientOne</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"sorry "</span>+name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="路由网关-Zuul"><a href="#路由网关-Zuul" class="headerlink" title="路由网关 Zuul"></a>路由网关 Zuul</h3><p>路由网关 Zuul 有智能路由和过滤的功能。</p>
+<p>内部服务的 API 接口通过 Zuul 网关统一对外暴露， 内部服务的 API 接口不直接暴露，防止了内部服务敏感信息对外暴露。</p>
+<p>在默认的情况下， Zuul 和 Ribbon 相结合，能够做到负载均衡 、 智能路由。 </p>
+<p>Zuul 的过滤功能是通过拦截请求来实现的 ， 可以对一些用户的角色和权限进行判断 ，起到安全验证的作用 ， 同时也可以用于输山实时的请求曰志。</p>
+<h3 id="Spring-Cloud-Config"><a href="#Spring-Cloud-Config" class="headerlink" title="Spring Cloud Config"></a>Spring Cloud Config</h3><p>Spring Cloud Config组件提供了配置文件统一管理的功能。SpringCloud Config包括 Server </p>
+<p>端和 Client 端 ， Server 端读取本地仓库或者远程仓库的配置文件，所有的 Client 向 Server 读 取配置信息，从而达到配置文件统一管理的目的。通常情况下， SpringCloudConfig和 Spring CloudBus相互配合刷新指定 Client或所有 Client的配置文件。 </p>
+<h3 id="Spring-Cloud-Security"><a href="#Spring-Cloud-Security" class="headerlink" title="Spring Cloud Security"></a>Spring Cloud Security</h3><p>Spring Cloud Security 是对 Spring Security 组件的封装 ， Spring Cloud Security 向服务单元<br>提供了用户验证和权限认证 。一般来说，单独在微服务系统中使用 Spring Cloud Security 是很<br>少见的， 一般它会配合 Spring Security 0Auth2 组件一起使用，通过搭建授权服务，验证 Token<br>或者 JWT 这种形式对整个微服务系统进行安全验证。</p>
+<h3 id="Spring-Cloud-Sleuth"><a href="#Spring-Cloud-Sleuth" class="headerlink" title="Spring Cloud Sleuth"></a>Spring Cloud Sleuth</h3><p>Spring Cloud Sleuth是一个分布式链路追踪组件，它封装了 Dapper、 Zipkin和 Kibana等组<br>件，通过它可以知道服务之间的相互依赖关系，并实时观察链路的调用情况 。</p>
+<h3 id="Spring-Cloud-Stream"><a href="#Spring-Cloud-Stream" class="headerlink" title="Spring Cloud Stream"></a>Spring Cloud Stream</h3><p>Spring Cloud Stream 是 Spring Cloud 框架的 数据流操作包 ，可以封装 RabbitMq、ActiveMq、<br>Kafka、 Redis 等消息组件， 利用 Spring Cloud Stream 可以 实现消息的接收和发送。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://localhost/2019/04/09/Spring Cloud服务注册与发现组件/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -369,140 +1636,6 @@
 <p>write是原子的</p>
 <p>当leader挂掉的时候，会有选举算法推出新的leader</p>
 <p>采用文件结构，但文件夹有内容，相当于B+树</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://localhost/2019/04/09/单体架构/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="tiangs">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="tgs's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/09/单体架构/" itemprop="url">单体架构</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-09T21:26:17+08:00">
-                2019-04-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h3><h4 id="单体架构"><a href="#单体架构" class="headerlink" title="单体架构"></a>单体架构</h4><p><img src="/images/single.png" alt="single"></p>
-<p>不足之处：</p>
-<ol>
-<li>所有代码都在一起，业务复杂后，代码可读性、可维护性、可扩展性下降，业务扩展带来的代价越来越大</li>
-<li>随着用户越来越多，程序承受的并发越来越高，单体应用的并发能力有限。</li>
-</ol>
-<h4 id="单体架构使用服务器集群"><a href="#单体架构使用服务器集群" class="headerlink" title="单体架构使用服务器集群"></a>单体架构使用服务器集群</h4><h5 id="服务器集群"><a href="#服务器集群" class="headerlink" title="服务器集群"></a>服务器集群</h5><p>随着业务的发展，大多数公司会将单体应用进行集群部署，并增加负载均衡服务器（Nginx），另外，还需要增加集群部署的缓存服务器和文件服务器，并将数据库读写分离，以应对用户量的增加而带来的高并发访问量。</p>
-<p>用负载均衡服务器分发高并发的网络请求，用户的访问被分派到不同的应用服务器，应用 服务器的负载不再成为瓶颈，用户量增加时，添加应用服务器即可。 </p>
-<h5 id="缓存与数据库读写分离"><a href="#缓存与数据库读写分离" class="headerlink" title="缓存与数据库读写分离"></a>缓存与数据库读写分离</h5><p>通过添加缓存服务器来缓解数据库的数据以及数据库读取数据的压力。大多数的读取操作是由缓存完成的，但是仍然有少数读操作是从数据库读取的，例如缓存失效、实时数据等 。当有大量的读写操作时，将数据库进行读写分离是一个不错的选择，例如 MySQL 的主从热备份，通过相关配置可 以将主数据 库服务器的数据同步到从数据库服务器， 实现数据库的读写分离， 读写分离能够改善数据库的负载能力。 </p>
-<p><img src="/images/single2.png" alt="single2"></p>
-<h5 id="不足："><a href="#不足：" class="headerlink" title="不足："></a>不足：</h5><ol>
-<li>仍然是单体应用，大量的业务必然有大量的代码，维护困难</li>
-<li>面对海量的用户，数据库会成为瓶颈，解决方案将使用分布式数据库，也就是将数据库进行分库分表。</li>
-<li>持续交付能力差，业务越复杂，代码越多，修改和增加代码的时间变长。</li>
-</ol>
 
           
         
@@ -678,176 +1811,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://localhost/2019/03/30/mongo_secure/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="tiangs">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="tgs's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/03/30/mongo_secure/" itemprop="url">Mongo 安装、鉴权与主副本设置</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-30T17:19:17+08:00">
-                2019-03-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Mongo鉴权"><a href="#Mongo鉴权" class="headerlink" title="Mongo鉴权"></a>Mongo鉴权</h3><h4 id="创建管理员"><a href="#创建管理员" class="headerlink" title="创建管理员"></a>创建管理员</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ mongo</span><br><span class="line"></span><br><span class="line">&gt; use admin</span><br><span class="line">&gt; db.createUser(</span><br><span class="line">&gt;   &#123;</span><br><span class="line">&gt;     user: &quot;AdminSammy&quot;,</span><br><span class="line">&gt;     pwd: &quot;AdminSammy&apos;sSecurePassword&quot;,</span><br><span class="line">&gt;     roles: [ &#123; role: &quot;userAdminAnyDatabase&quot;, db: &quot;admin&quot; &#125; ]</span><br><span class="line">&gt;   &#125;</span><br><span class="line">&gt; )</span><br></pre></td></tr></table></figure>
-<h4 id="开启鉴权"><a href="#开启鉴权" class="headerlink" title="开启鉴权"></a>开启鉴权</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo nano /etc/mongod.conf</span><br></pre></td></tr></table></figure>
-<p>在mongodb.conf添加字段</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> . . .</span><br><span class="line">security:</span><br><span class="line">  authorization: &quot;enabled&quot;</span><br><span class="line"> . . .</span><br></pre></td></tr></table></figure>
-<p>重启mongo</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo systemctl restart mongod</span><br></pre></td></tr></table></figure>
-<p>现在就需要使用用户名，密码连接了。</p>
-<h4 id="创建一般用户"><a href="#创建一般用户" class="headerlink" title="创建一般用户"></a>创建一般用户</h4><ol>
-<li>创建一般用户</li>
-</ol>
-<p>在mongo shell中</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.createUser(</span><br><span class="line">	&#123;user:&quot;user&quot;,</span><br><span class="line">	 pwd: &quot;password&quot;,</span><br><span class="line">	 roles: [&#123;role:&quot;readWrite&quot;, db:&quot;admin&quot;&#125;]</span><br><span class="line">	 &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>local数据库不能创建用户，但可以授权其他用户访问权限</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.grantRolesToUser(&quot;user&quot;, [&#123;role: &quot;readWrite&quot;, db: &quot;local&quot;&#125;])</span><br></pre></td></tr></table></figure>
-<h4 id="配置远程连接"><a href="#配置远程连接" class="headerlink" title="配置远程连接"></a>配置远程连接</h4><h5 id="开启UFW"><a href="#开启UFW" class="headerlink" title="开启UFW"></a>开启UFW</h5><p>查看UFW状态</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo ufw status</span><br></pre></td></tr></table></figure>
-<p>开启</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo ufw enable</span><br></pre></td></tr></table></figure>
-<p>允许连接mongo的端口，默认是27017</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo ufw allow from client_ip_address to any port 27017</span><br></pre></td></tr></table></figure>
-<h5 id="配置bindIP"><a href="#配置bindIP" class="headerlink" title="配置bindIP"></a>配置bindIP</h5><p>在 /etc/mongod.conf添加</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> . . .</span><br><span class="line">net:</span><br><span class="line">  port: 27017</span><br><span class="line">  bindIp: 127.0.0.1,IP_of_MongoHost</span><br><span class="line"> . . .</span><br></pre></td></tr></table></figure>
-<p>重启mongo</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo systemctl restart mongod</span><br></pre></td></tr></table></figure>
-<h3 id="Mongo-主副本设置"><a href="#Mongo-主副本设置" class="headerlink" title="Mongo 主副本设置"></a>Mongo 主副本设置</h3><p>mongodb的复制至少需要两个节点，主节点记录在其上的所有操作oplog，从节点定期轮询主节点获取这些操作，然后对自己的数据副本执行这些操作，从而保证从节点的数据与主节点一致。</p>
-<p>MongoDB复制结构图如下</p>
-<p><img src="/images/mongo_replication.png" alt="Mongo主副本"></p>
-<p>在 /etc/<strong>mongod.conf</strong> 中增加如下字段</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">replSetName:</span><br><span class="line">  repl_name</span><br></pre></td></tr></table></figure>
-<p>repl_name为”复制集”名称，复制集中的所有mongd实例都必须有相同的名字</p>
-<p>在Mongo客户端使用命令rs.initiate()来启动一个新的副本集。</p>
-<p>我们可以使用rs.conf()来查看副本集的配置</p>
-<p>查看副本集状态使用 rs.status() 命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt; rs.initiate(</span><br><span class="line">	&#123;_id: &quot;repl_name,</span><br><span class="line">	 version: &quot;1&quot;,</span><br><span class="line">	 members:[</span><br><span class="line">     &#123;_id: 0, host: &quot;localhost:27017&quot;&#125;</span><br><span class="line">	 ]</span><br><span class="line">	&#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<p>如果已经init过了，可以通过如下方式重新init</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; rsconf = rs.conf()</span><br><span class="line">&gt; rsconf.members = [&#123;_id: 0, host: &quot;localhost:27017”&#125;]</span><br><span class="line">&gt; rs.reconfig(rsconf, &#123;force: true&#125;)</span><br></pre></td></tr></table></figure>
-<p>添加成员</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; rs.add(HOST_NAME:PORT)</span><br><span class="line"></span><br><span class="line">eg.</span><br><span class="line">&gt; rs.add(&quot;localhost:27018&quot;)</span><br></pre></td></tr></table></figure>
-<p>MongoDB中，只能通过主节点将Mongo服务添加到副本集，可通过mongo shell看是否是PRIMARY，或者</p>
-<p><strong>使用db.isMaster()</strong>查看是否是主节点。</p>
-<h3 id="应用程序连接"><a href="#应用程序连接" class="headerlink" title="应用程序连接"></a>应用程序连接</h3><h4 id="Springboot"><a href="#Springboot" class="headerlink" title="Springboot"></a>Springboot</h4><p>在application.yml中添加下面配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">spring：</span><br><span class="line">	data:</span><br><span class="line">		#uri: mongodb://username:password@host:port/dbname</span><br><span class="line">		host: localhost</span><br><span class="line">		port: 27017</span><br><span class="line">		username: user</span><br><span class="line">		password: pwd</span><br><span class="line">		database: dbname</span><br></pre></td></tr></table></figure>
-<h4 id="Nodejs"><a href="#Nodejs" class="headerlink" title="Nodejs"></a>Nodejs</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const connection = mongoose.createConnection(&apos;mongodb://username:password@host:port/dbname&apos;)</span><br></pre></td></tr></table></figure>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-mongodb-on-ubuntu-16-04" target="_blank" rel="noopener">How to Install and Secure MongoDb on Unbuntu 16.04</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -895,7 +1863,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -906,7 +1874,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -917,7 +1885,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
