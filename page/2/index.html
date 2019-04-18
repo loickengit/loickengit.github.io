@@ -602,7 +602,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://localhost/2019/04/11/2019-4-1-conclusion/">
+    <link itemprop="mainEntityOfPage" href="http://localhost/2019/04/11/reflect4-11/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="tiangs">
@@ -621,7 +621,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/04/11/2019-4-1-conclusion/" itemprop="url">2019/4/11_conclusion</a></h1>
+                <a class="post-title-link" href="/2019/04/11/reflect4-11/" itemprop="url">reflect 4-11</a></h1>
         
 
         <div class="post-meta">
@@ -1253,129 +1253,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://localhost/2019/04/09/Spring Boot Security/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="tiangs">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="tgs's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/09/Spring Boot Security/" itemprop="url">Spring Boot Security</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-09T21:26:17+08:00">
-                2019-04-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="Spring-Boot-Security"><a href="#Spring-Boot-Security" class="headerlink" title="Spring Boot Security"></a>Spring Boot Security</h4><p>Spring Security可以在controller层、Service层、DAO层等以加注解的方式来保护应用程序的安全。</p>
-<p>Spring Security提供细粒度的权限控制，可以精细到每一个API接口、每一个业务方法，或者每一个操作数据库的DAO层的方法。</p>
-<p>Spring Security提供的是应用程序层的安全解决方案，一个系统的安全还需要考虑传输层和系统层的安全，例如采用Https协议、服务器部署防火墙等。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">		&lt;groupid&gt;org.springframework.boot&lt;/groupid&gt;</span><br><span class="line">		&lt;artifactid&gt;spring-boot-starter-security&lt;/artifactid&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://localhost/2019/04/09/Spring Cloud组件/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1684,7 +1561,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://localhost/2019/04/09/微服务/">
+    <link itemprop="mainEntityOfPage" href="http://localhost/2019/04/09/Spring Boot Security/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="tiangs">
@@ -1703,7 +1580,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/04/09/微服务/" itemprop="url">微服务</a></h1>
+                <a class="post-title-link" href="/2019/04/09/Spring Boot Security/" itemprop="url">Spring Boot Security</a></h1>
         
 
         <div class="post-meta">
@@ -1755,27 +1632,144 @@
       
         
           
-            <h3 id="微服务"><a href="#微服务" class="headerlink" title="微服务"></a>微服务</h3><h5 id="微服务特点"><a href="#微服务特点" class="headerlink" title="微服务特点"></a>微服务特点</h5><ul>
-<li>按照业务来划分服务，单个服务代码量小，业务单 一 ，易 于维护。 </li>
-<li>每个微服务都有自 己独立 的基础组件 ，例如数据库、 缓存等 ，且运行在独立的进程中。 </li>
-<li>微服务之间的通信是通过 HTTP 协议或者消息组件，且具有容错能力。 </li>
-<li>微服务有一套服务治理的解决方案，服务之间不相合，可以随时加入和剔除服务。 </li>
-<li>单个微服务能够集群化部署，并且有负载均衡的能力。 </li>
-<li>整个微服务系统应该有 一个完整的安全机制，包括用户验证、权限验证、资源保护 等。 </li>
-<li>整个微服务系统有链路追踪的能力。 </li>
-<li>有一套完整 的实时日志系统 。 </li>
-</ul>
-<h5 id="微服务功能主要体现在以下几点："><a href="#微服务功能主要体现在以下几点：" class="headerlink" title="微服务功能主要体现在以下几点："></a>微服务功能主要体现在以下几点：</h5><ul>
-<li><p>服务的注册和发现。 </p>
-</li>
-<li><p>服务的负载均衡 。 </p>
-</li>
-<li>服务的容错。 </li>
-<li>服务网关。  </li>
-<li>服务配置的统一管理。 </li>
-<li>链路追踪。</li>
-<li>实时日志。 </li>
-</ul>
+            <h4 id="Spring-Boot-Security"><a href="#Spring-Boot-Security" class="headerlink" title="Spring Boot Security"></a>Spring Boot Security</h4><p>Spring Security可以在controller层、Service层、DAO层等以加注解的方式来保护应用程序的安全。</p>
+<p>Spring Security提供细粒度的权限控制，可以精细到每一个API接口、每一个业务方法，或者每一个操作数据库的DAO层的方法。</p>
+<p>Spring Security提供的是应用程序层的安全解决方案，一个系统的安全还需要考虑传输层和系统层的安全，例如采用Https协议、服务器部署防火墙等。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">		&lt;groupid&gt;org.springframework.boot&lt;/groupid&gt;</span><br><span class="line">		&lt;artifactid&gt;spring-boot-starter-security&lt;/artifactid&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://localhost/2019/04/09/单体架构/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tiangs">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tgs's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/09/单体架构/" itemprop="url">单体架构</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-09T21:26:17+08:00">
+                2019-04-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h3><h4 id="单体架构"><a href="#单体架构" class="headerlink" title="单体架构"></a>单体架构</h4><p><img src="/images/single.png" alt="single"></p>
+<p>不足之处：</p>
+<ol>
+<li>所有代码都在一起，业务复杂后，代码可读性、可维护性、可扩展性下降，业务扩展带来的代价越来越大</li>
+<li>随着用户越来越多，程序承受的并发越来越高，单体应用的并发能力有限。</li>
+</ol>
+<h4 id="单体架构使用服务器集群"><a href="#单体架构使用服务器集群" class="headerlink" title="单体架构使用服务器集群"></a>单体架构使用服务器集群</h4><h5 id="服务器集群"><a href="#服务器集群" class="headerlink" title="服务器集群"></a>服务器集群</h5><p>随着业务的发展，大多数公司会将单体应用进行集群部署，并增加负载均衡服务器（Nginx），另外，还需要增加集群部署的缓存服务器和文件服务器，并将数据库读写分离，以应对用户量的增加而带来的高并发访问量。</p>
+<p>用负载均衡服务器分发高并发的网络请求，用户的访问被分派到不同的应用服务器，应用 服务器的负载不再成为瓶颈，用户量增加时，添加应用服务器即可。 </p>
+<h5 id="缓存与数据库读写分离"><a href="#缓存与数据库读写分离" class="headerlink" title="缓存与数据库读写分离"></a>缓存与数据库读写分离</h5><p>通过添加缓存服务器来缓解数据库的数据以及数据库读取数据的压力。大多数的读取操作是由缓存完成的，但是仍然有少数读操作是从数据库读取的，例如缓存失效、实时数据等 。当有大量的读写操作时，将数据库进行读写分离是一个不错的选择，例如 MySQL 的主从热备份，通过相关配置可 以将主数据 库服务器的数据同步到从数据库服务器， 实现数据库的读写分离， 读写分离能够改善数据库的负载能力。 </p>
+<p><img src="/images/single2.png" alt="single2"></p>
+<h5 id="不足："><a href="#不足：" class="headerlink" title="不足："></a>不足：</h5><ol>
+<li>仍然是单体应用，大量的业务必然有大量的代码，维护困难</li>
+<li>面对海量的用户，数据库会成为瓶颈，解决方案将使用分布式数据库，也就是将数据库进行分库分表。</li>
+<li>持续交付能力差，业务越复杂，代码越多，修改和增加代码的时间变长。</li>
+</ol>
 
           
         
