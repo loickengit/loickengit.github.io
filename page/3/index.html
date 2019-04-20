@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="There should be a moto">
+<meta name="description" content="oups, moto is missing!">
 <meta name="keywords" content="blog, notes">
 <meta property="og:type" content="website">
 <meta property="og:title" content="What&#39;s up?">
 <meta property="og:url" content="http://localhost/page/3/index.html">
 <meta property="og:site_name" content="What&#39;s up?">
-<meta property="og:description" content="There should be a moto">
+<meta property="og:description" content="oups, moto is missing!">
 <meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="What&#39;s up?">
-<meta name="twitter:description" content="There should be a moto">
+<meta name="twitter:description" content="oups, moto is missing!">
 
 
 
@@ -161,7 +161,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle">修养生息，好好生活</p>
+        <p class="site-subtitle"></p>
       
   </div>
 
@@ -273,10 +273,154 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://localhost/2019/04/09/Spring Cloud服务注册与发现组件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="loickengit">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="What's up?">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/09/Spring Cloud服务注册与发现组件/" itemprop="url">Spring Cloud服务注册与发现</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-09T21:26:17+08:00">
+                2019-04-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Eureka"><a href="#Eureka" class="headerlink" title="Eureka"></a>Eureka</h3><p>利用 Eureka 组件可以很轻松地实现服务的注册和发现的功能。 </p>
+<p>Eureka 组件提供了服务的健康监测，以及界面友好的 UI。通过 Eureka 组件提供的 UI, Eureka 组件可以让开发人员随时了 解服务单元的运行情况。</p>
+<p>另外 Spring Cloud 也支持 Consul 和 Zookeeper，用于注册和发现服务 。 </p>
+<p>Eureka是 SpringCloud首选推荐的服务注册与发现组件， 与 SpringCloud其他组件可以无缝对接。</p>
+<h4 id="基本架构"><a href="#基本架构" class="headerlink" title="基本架构"></a>基本架构</h4><p>主要包括3种角色：</p>
+<ul>
+<li>Register Service:服务注册中心，它是一个 Eureka Server，提供服务注册和发现的功能。 </li>
+<li>Provider Service:服务提供者，它是一个 EurekaClient，提供服务。 </li>
+<li>Consumer Service:服务消费者，它是 一个 Eureka Cient，消费服务 。 </li>
+</ul>
+<h4 id="编写"><a href="#编写" class="headerlink" title="编写"></a>编写</h4><h5 id="Eureka-Server"><a href="#Eureka-Server" class="headerlink" title="Eureka Server"></a>Eureka Server</h5><p>起步依赖 spring-cloud-starter-eureka-server</p>
+<p>在默认情况下， Eureka Server 会向自己注 册，这时需要配置eureka.client.registerWithEureka和eureka.client.fetchRegistry为false，防止自己注册自己。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">server:</span><br><span class="line">	port: 8761</span><br><span class="line"></span><br><span class="line">eureka:</span><br><span class="line">	instance: </span><br><span class="line">		hostname: localhost</span><br><span class="line">	client:</span><br><span class="line">		registerWithEureka: false</span><br><span class="line">		fetchRegistry: false</span><br><span class="line">		serviceUrl:</span><br><span class="line">			defaultZone:</span><br><span class="line">				http://$(eureka . instance . hostname ) : ♀( server . port)/eureka/</span><br></pre></td></tr></table></figure>
+<p>启动代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@EnableEurekaServer</span> </span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> class <span class="title">EurekaServerApplication</span> <span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">		<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(String[] args)</span> </span>&#123;</span><br><span class="line">				SpringApplication.run(EurekaServerApplication.class,args);</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="Eureka-client"><a href="#Eureka-client" class="headerlink" title="Eureka client"></a>Eureka client</h5><p>依赖 spring-cloud-starter-eureka</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">eureka: </span><br><span class="line">	client:</span><br><span class="line">		serviceUrl:</span><br><span class="line">			defaultZone: http://localhost:8761/eureka/</span><br><span class="line">server:</span><br><span class="line">	port: 8762 </span><br><span class="line">spring:</span><br><span class="line">	application:</span><br><span class="line">		name: eureka-client</span><br></pre></td></tr></table></figure>
+<p>启动：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@EnableEurekaClient</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> class <span class="title">EurekaClientApplication</span> <span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">		<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(String[] args)</span> </span>&#123;</span><br><span class="line">				SpringApplication.run(EurekaClientApplication.class,args);</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="zookeeper"><a href="#zookeeper" class="headerlink" title="zookeeper"></a>zookeeper</h3><h4 id="What-is-zookeeper"><a href="#What-is-zookeeper" class="headerlink" title="What is zookeeper?"></a>What is zookeeper?</h4><p>ZooKeeper is a centralized service for maintaining configuration information, naming, providing distributed synchronization, and providing group services. </p>
+<p>注册server是集群的，每一个client只向一个server发送请求</p>
+<p>read比write快，servers有一个leader，写必须写到leader，再由leader分发给followers。</p>
+<p>write是原子的</p>
+<p>当leader挂掉的时候，会有选举算法推出新的leader</p>
+<p>采用文件结构，但文件夹有内容，相当于B+树</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://localhost/2019/04/09/单体架构/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="tiangs">
+      <meta itemprop="name" content="loickengit">
       <meta itemprop="description" content>
       <meta itemprop="image" content="/images/avatar.png">
     </span>
@@ -410,7 +554,7 @@
     <link itemprop="mainEntityOfPage" href="http://localhost/2019/04/09/微服务/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="tiangs">
+      <meta itemprop="name" content="loickengit">
       <meta itemprop="description" content>
       <meta itemprop="image" content="/images/avatar.png">
     </span>
@@ -547,133 +691,10 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://localhost/2019/04/09/Spring Boot Security/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="tiangs">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="What's up?">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/09/Spring Boot Security/" itemprop="url">Spring Boot Security</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-09T21:26:17+08:00">
-                2019-04-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="Spring-Boot-Security"><a href="#Spring-Boot-Security" class="headerlink" title="Spring Boot Security"></a>Spring Boot Security</h4><p>Spring Security可以在controller层、Service层、DAO层等以加注解的方式来保护应用程序的安全。</p>
-<p>Spring Security提供细粒度的权限控制，可以精细到每一个API接口、每一个业务方法，或者每一个操作数据库的DAO层的方法。</p>
-<p>Spring Security提供的是应用程序层的安全解决方案，一个系统的安全还需要考虑传输层和系统层的安全，例如采用Https协议、服务器部署防火墙等。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">		&lt;groupid&gt;org.springframework.boot&lt;/groupid&gt;</span><br><span class="line">		&lt;artifactid&gt;spring-boot-starter-security&lt;/artifactid&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://localhost/2019/03/30/mongo_secure/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="tiangs">
+      <meta itemprop="name" content="loickengit">
       <meta itemprop="description" content>
       <meta itemprop="image" content="/images/avatar.png">
     </span>
@@ -883,10 +904,10 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="tiangs">
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="loickengit">
             
-              <p class="site-author-name" itemprop="name">tiangs</p>
-              <p class="site-description motion-element" itemprop="description">There should be a moto</p>
+              <p class="site-author-name" itemprop="name">loickengit</p>
+              <p class="site-description motion-element" itemprop="description">oups, moto is missing!</p>
           </div>
 
           <nav class="site-state motion-element">
@@ -975,7 +996,7 @@
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">tiangs</span>
+  <span class="author" itemprop="copyrightHolder">loickengit</span>
 
   
 </div>
