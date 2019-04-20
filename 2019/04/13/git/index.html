@@ -84,10 +84,10 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="git使用技巧">
 <meta property="og:url" content="http://localhost/2019/04/13/git/index.html">
-<meta property="og:site_name" content="tgs&#39;s blog">
+<meta property="og:site_name" content="What&#39;s up?">
 <meta property="og:description" content="分支创建分支从当前分支创建新分支，并切换到该分支上 1git checkout -b new_branch 删除分支删除远程分支 1234git push --delete &amp;lt;remote_name&amp;gt; &amp;lt;branch_name&amp;gt;	e.g.git push --delete origin branch1 删除本地分支，使用-d参数，如果删除分支没有充分merge会删除失败，强">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-04-14T14:06:55.879Z">
+<meta property="og:updated_time" content="2019-04-18T14:38:54.785Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git使用技巧">
 <meta name="twitter:description" content="分支创建分支从当前分支创建新分支，并切换到该分支上 1git checkout -b new_branch 删除分支删除远程分支 1234git push --delete &amp;lt;remote_name&amp;gt; &amp;lt;branch_name&amp;gt;	e.g.git push --delete origin branch1 删除本地分支，使用-d参数，如果删除分支没有充分merge会删除失败，强">
@@ -126,7 +126,7 @@
 
 
 
-  <title>git使用技巧 | tgs's blog</title>
+  <title>git使用技巧 | What's up?</title>
   
 
 
@@ -156,7 +156,7 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">tgs's blog</span>
+        <span class="site-title">What's up?</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -282,7 +282,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="tgs's blog">
+      <meta itemprop="name" content="What's up?">
     </span>
 
     
@@ -368,6 +368,8 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git push --delete &lt;remote_name&gt; &lt;branch_name&gt;	</span><br><span class="line"></span><br><span class="line">e.g.</span><br><span class="line">git push --delete origin branch1</span><br></pre></td></tr></table></figure>
 <p>删除本地分支，使用-d参数，如果删除分支没有充分merge会删除失败，强制删除可以用 -D</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -d &lt;branch_name&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="gitignore"><a href="#gitignore" class="headerlink" title=".gitignore"></a>.gitignore</h3><p>使用通配符匹配文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*dontincludeme*</span><br></pre></td></tr></table></figure>
 <h3 id="Git配置多个SSH-Key"><a href="#Git配置多个SSH-Key" class="headerlink" title="Git配置多个SSH-Key"></a>Git配置多个SSH-Key</h3><p>在使用hexo搭建个人博客时，使用github pages托管，而源码寄存到码云上</p>
 <p>这时就需要2个git账号</p>
 <h5 id="设置方式"><a href="#设置方式" class="headerlink" title="设置方式"></a>设置方式</h5><p>生成github用的SSH-Key</p>
@@ -510,7 +512,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -521,7 +523,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -532,7 +534,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -581,7 +583,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#分支"><span class="nav-number">1.</span> <span class="nav-text">分支</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建分支"><span class="nav-number">1.1.</span> <span class="nav-text">创建分支</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除分支"><span class="nav-number">1.2.</span> <span class="nav-text">删除分支</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git配置多个SSH-Key"><span class="nav-number">2.</span> <span class="nav-text">Git配置多个SSH-Key</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#设置方式"><span class="nav-number">2.0.1.</span> <span class="nav-text">设置方式</span></a></li></ol></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#Git访问方式"><span class="nav-number">3.</span> <span class="nav-text">Git访问方式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#配置文件"><span class="nav-number">3.0.1.</span> <span class="nav-text">配置文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#git命令设置访问方式"><span class="nav-number">3.0.2.</span> <span class="nav-text">git命令设置访问方式</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Issues"><span class="nav-number">3.1.</span> <span class="nav-text">Issues</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#Hi-xxxxxx-You’ve-successfully-authenticated-but-GitHub-Gitee-does-not-provide-shell-access"><span class="nav-number">3.1.0.1.</span> <span class="nav-text">Hi xxxxxx! You’ve successfully authenticated, but GitHub/Gitee does not provide shell access.</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参考"><span class="nav-number">3.2.</span> <span class="nav-text">参考</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#分支"><span class="nav-number">1.</span> <span class="nav-text">分支</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建分支"><span class="nav-number">1.1.</span> <span class="nav-text">创建分支</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除分支"><span class="nav-number">1.2.</span> <span class="nav-text">删除分支</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gitignore"><span class="nav-number">2.</span> <span class="nav-text">.gitignore</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git配置多个SSH-Key"><span class="nav-number">3.</span> <span class="nav-text">Git配置多个SSH-Key</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#设置方式"><span class="nav-number">3.0.1.</span> <span class="nav-text">设置方式</span></a></li></ol></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#Git访问方式"><span class="nav-number">4.</span> <span class="nav-text">Git访问方式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#配置文件"><span class="nav-number">4.0.1.</span> <span class="nav-text">配置文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#git命令设置访问方式"><span class="nav-number">4.0.2.</span> <span class="nav-text">git命令设置访问方式</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Issues"><span class="nav-number">4.1.</span> <span class="nav-text">Issues</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#Hi-xxxxxx-You’ve-successfully-authenticated-but-GitHub-Gitee-does-not-provide-shell-access"><span class="nav-number">4.1.0.1.</span> <span class="nav-text">Hi xxxxxx! You’ve successfully authenticated, but GitHub/Gitee does not provide shell access.</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参考"><span class="nav-number">4.2.</span> <span class="nav-text">参考</span></a></li></div>
             
 
           </div>
