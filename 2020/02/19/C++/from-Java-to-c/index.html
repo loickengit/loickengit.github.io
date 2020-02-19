@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/profile.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/profile.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="c++,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1. 数据类型与变量C++中布尔类型是bool，字符串类型是string 需要注意的点  string 都是 ASCII, 而不是unicode  C++中string可以被修改，而Java不能  substr获取字字符串，s.substr(i, n)从i开始，截取n长  可以直接使用 == != &amp;lt; &amp;lt;= &amp;gt; &amp;gt;= 比较字符串   2. 变量与常量定义一个变量 1int">
+<meta name="keywords" content="c++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java程序员学C++">
+<meta property="og:url" content="http://localhost/2020/02/19/C++/from-Java-to-c/index.html">
+<meta property="og:site_name" content="落花三百多">
+<meta property="og:description" content="1. 数据类型与变量C++中布尔类型是bool，字符串类型是string 需要注意的点  string 都是 ASCII, 而不是unicode  C++中string可以被修改，而Java不能  substr获取字字符串，s.substr(i, n)从i开始，截取n长  可以直接使用 == != &amp;lt; &amp;lt;= &amp;gt; &amp;gt;= 比较字符串   2. 变量与常量定义一个变量 1int">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-02-19T04:16:19.138Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java程序员学C++">
+<meta name="twitter:description" content="1. 数据类型与变量C++中布尔类型是bool，字符串类型是string 需要注意的点  string 都是 ASCII, 而不是unicode  C++中string可以被修改，而Java不能  substr获取字字符串，s.substr(i, n)从i开始，截取n长  可以直接使用 == != &amp;lt; &amp;lt;= &amp;gt; &amp;gt;= 比较字符串   2. 变量与常量定义一个变量 1int">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://localhost/2020/02/19/C++/from-Java-to-c/">
+
+
+
+
+
+  <title>Java程序员学C++ | 落花三百多</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">落花三百多</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-算法">
+          <a href="/categories/algorithms" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tree"></i> <br>
+            
+            算法
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-c++">
+          <a href="/categories/openmind" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-snowflake-o"></i> <br>
+            
+            C++
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-系统设计">
+          <a href="/categories/sketch" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-yelp"></i> <br>
+            
+            系统设计
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-一些思考">
+          <a href="/categories/reflect" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-leaf"></i> <br>
+            
+            一些思考
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://localhost/2020/02/19/C++/from-Java-to-c/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="loick">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="落花三百多">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java程序员学C++</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-19T09:15:34+08:00">
+                2020-02-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="1-数据类型与变量"><a href="#1-数据类型与变量" class="headerlink" title="1. 数据类型与变量"></a>1. 数据类型与变量</h3><p>C++中布尔类型是bool，字符串类型是string</p>
+<p>需要注意的点</p>
+<ol>
+<li><p>string 都是 ASCII, 而不是unicode</p>
+</li>
+<li><p>C++中string可以被修改，而Java不能</p>
+</li>
+<li><p>substr获取字字符串，<code>s.substr(i, n)</code>从i开始，截取n长</p>
+</li>
+<li><p>可以直接使用 <code>== != &lt; &lt;= &gt; &gt;=</code> 比较字符串</p>
+</li>
+</ol>
+<h3 id="2-变量与常量"><a href="#2-变量与常量" class="headerlink" title="2. 变量与常量"></a>2. 变量与常量</h3><p>定义一个变量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int n = 5;</span><br></pre></td></tr></table></figure>
+<p>c++和java不同的是，c++定义的变量在使用前不会去检查是否被初始化了，所以变量指向的位置可能是一个脏的数据。</p>
+<p>c++可以在任何地方定义静态变量，但java只能在class里定义static</p>
+<p>常量可以在任何地方定义，使用const（java final）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const int DAYS_PER_YEAR = 365;</span><br></pre></td></tr></table></figure>
+<h3 id="3-类创建"><a href="#3-类创建" class="headerlink" title="3. 类创建"></a>3. 类创建</h3><p>类的定义不同，一个c++类的形式如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">class Point /* C++ */</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">public:</span><br><span class="line"></span><br><span class="line">   Point();</span><br><span class="line"></span><br><span class="line">   Point(double xval, double yval);</span><br><span class="line"></span><br><span class="line">   void move(double dx, double dy);</span><br><span class="line"></span><br><span class="line">   double getX() const;</span><br><span class="line"></span><br><span class="line">   double getY() const;</span><br><span class="line"></span><br><span class="line">private:</span><br><span class="line"></span><br><span class="line">   double x;</span><br><span class="line"></span><br><span class="line">   double y;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>有以下几点不同：</p>
+<ol>
+<li>在c++中，有public和private两个块，而在java中用public和private关键词修饰</li>
+<li>c++类定义只有定义和方法，和初始化的代码是分开的</li>
+<li>accessor方法被标记为const（java get方法）</li>
+<li>类结尾有分号</li>
+</ol>
+<p>方法实现在类的外面，所以要在方法前加上类名：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Point::Point() &#123; x = 0; y = 0; &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">void Point::move(double dx, double dy)</span><br><span class="line"></span><br><span class="line">&#123;  x = x + dx;</span><br><span class="line"></span><br><span class="line">   y = y + dy;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">double Point::getX() const</span><br><span class="line"></span><br><span class="line">&#123;  return x;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-对象操作"><a href="#4-对象操作" class="headerlink" title="4. 对象操作"></a>4. 对象操作</h3><p>C++类变量包含的是实际的值，new关键词很少用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Point p(1, 2); // 创建一个p对象</span><br></pre></td></tr></table></figure>
+<p>如果不提供构造参数，会使用默认构造函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Time now;  	// 创建 Time::Time()</span><br></pre></td></tr></table></figure>
+<p>在Java里这是一个空的指针，而C++会直接创建一个对象</p>
+<p>在赋值的时候，Java是创建了另一个指针指向同一个对象，而C++是复制，相当于Java clone.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Point q = p; /* 复制p对象 */</span><br><span class="line"></span><br><span class="line">q.move(1, 1); /* 改变q，不改变p */</span><br></pre></td></tr></table></figure>
+<p>相比下，这些情况都需要使用指针：</p>
+<ol>
+<li>修改一个对象的时候</li>
+<li>如果需要两个变量指向同一个对象</li>
+<li>类变量只能是一个基础类型，如果要指向对象，用指针</li>
+<li>如果需要指向null或者一个实际的对象</li>
+</ol>
+<h3 id="5-函数"><a href="#5-函数" class="headerlink" title="5. 函数"></a>5. 函数</h3><p>Java里的函数只能是类实例或者静态函数，而C++可以在类外定义函数，称为全局函数</p>
+<p>函数的传值，Java由于是引用，所以可以修改行参信息，C++是传入的拷贝，所以不会更改行参的信息，当然C++也可以使用引用传递，这样可以完成Java不能写出来的swap函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">void swap(int&amp; a, int&amp; b)</span><br><span class="line"></span><br><span class="line">&#123;  int temp = a;</span><br><span class="line"></span><br><span class="line">   a = b;</span><br><span class="line"></span><br><span class="line">   b = temp;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="6-Vectors"><a href="#6-Vectors" class="headerlink" title="6. Vectors"></a>6. Vectors</h3><p>C++ vector相当于Java ArrayList, 可以动态增长，如果T是一个类型，vector\&lt;T>会创建一个T的动态数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;int&gt; a;</span><br></pre></td></tr></table></figure>
+<p>创建了一个空vector</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;int&gt; a(100);</span><br></pre></td></tr></table></figure>
+<p>创建一个初始有100元素的vector</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a.push_back(n);</span><br></pre></td></tr></table></figure>
+<p>添加可以使用push_back, 移除最后一个使用pop_back</p>
+<p>遍历</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">for (i = 0; i &lt; a.size(); i++)</span><br><span class="line">   sum = sum + a[i];</span><br></pre></td></tr></table></figure>
+<p>在Java中有越界检查，但C++没有，所以需要注意边界size</p>
+<h3 id="7-输入输出"><a href="#7-输入输出" class="headerlink" title="7. 输入输出"></a>7. 输入输出</h3><p>C++标准输入输出使用cin和cout</p>
+<p>输出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cout &lt;&lt; &quot;hello word!&quot;;</span><br></pre></td></tr></table></figure>
+<p>输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">double x;</span><br><span class="line">cin &gt;&gt; x;</span><br><span class="line"></span><br><span class="line">string fname;</span><br><span class="line">cin &gt;&gt; fname;</span><br></pre></td></tr></table></figure>
+<p>getline可以读取一整行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">string inputline;</span><br><span class="line">getline(cin, inputline);</span><br></pre></td></tr></table></figure>
+<p>如果输入到达结尾或者读取遇到错误，比如读数字，但不是数字的情况，输入流会进入错误状态，可以用fail方法检查</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int n;</span><br><span class="line">cin &gt;&gt; n;</span><br><span class="line">if (cin.fail()) cout &lt;&lt; &quot;Bad input&quot;;</span><br></pre></td></tr></table></figure>
+<p>如果流进入错误状态，很难重置，所以如果要处理不好的输入，应该用getline。</p>
+<h3 id="8-指针"><a href="#8-指针" class="headerlink" title="8. 指针"></a>8. 指针</h3><p>定义一个指针</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Employee* p;</span><br><span class="line">Employee* q = new Employee(&quot;loick&quot;, 90000);</span><br><span class="line">Employee* r = q;</span><br></pre></td></tr></table></figure>
+<p>第四种，使用操作符&amp;，指针指向另一个对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Employee boss(&quot;Morris, Melinda&quot;, 83000);</span><br><span class="line">Employee* s = &amp;boss;</span><br></pre></td></tr></table></figure>
+<p>不提倡这样的指向，C++指针应该只指向使用new创建的对象。</p>
+<p>如果p是指向Employee的指针，那么<code>*p</code>表示这个对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Employee* p = . . .;</span><br><span class="line">Employee boss = *p;</span><br></pre></td></tr></table></figure>
+<p>访问对象成员</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(*p).setSalary(91000);   // .优先级高于*</span><br><span class="line"></span><br><span class="line">p-&gt;setSalary(91000);		// 或者</span><br></pre></td></tr></table></figure>
+<p>如果指针没有初始化，NULL，或者指向一个不存在的对象，那么就会出错，但是</p>
+<p>C++不会检查这些错误，程序会导致不可知的错误。</p>
+<p>另外，C++没有自动的垃圾回收，没有使用new创建的对象，在作用域之外会被回收，但new出的对象使用完成后要用delete操作符</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Employee* p = new Employee(&quot;Hacker, Harry&quot;, 38000);</span><br><span class="line"></span><br><span class="line">. . .</span><br><span class="line"></span><br><span class="line">delete p; /* 不在需要这个对象 */</span><br></pre></td></tr></table></figure>
+<p>因此，在C++中尽量少使用指针</p>
+<h3 id="9-继承"><a href="#9-继承" class="headerlink" title="9. 继承"></a>9. 继承</h3><p>C++使用 :public 而不是extend去继承，也有private，但用的很少</p>
+<p>默认，函数是静态绑定的，如果要动态绑定，使用virtual</p>
+<p>动态绑定可以在多态情况下，父类指针调用具体实现字类的方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Manager : public Employee</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">public:</span><br><span class="line"></span><br><span class="line">   Manager(string name, double salary, string dept);</span><br><span class="line"></span><br><span class="line">   virtualvoid print() const;</span><br><span class="line"></span><br><span class="line">private:</span><br><span class="line"></span><br><span class="line">   string department;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>使用父类的构造函数，在类外部的构造函数中调用父类构造函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Manager::Manager(string name, double salary, string dept)</span><br><span class="line"></span><br><span class="line">: Employee(name, salary) /* call superclass constructor */</span><br><span class="line"></span><br><span class="line">&#123;  department = dept;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用父类的方法, 用类名加上::</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">void Manager::print() const</span><br><span class="line"></span><br><span class="line">&#123;  Employee::print(); /* call superclass method */</span><br><span class="line"></span><br><span class="line">   cout &lt;&lt; department &lt;&lt; &quot;\n&quot;;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>C++中的多态，如果T*表示T或者T的字类，而vector\&lt;T>就可以混合元素T以及T的字类。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/c/" rel="tag"># c++</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="loick">
+            
+              <p class="site-author-name" itemprop="name">loick</p>
+              <p class="site-description motion-element" itemprop="description">知识收割机</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/loickengit" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:tianguisong@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-数据类型与变量"><span class="nav-number">1.</span> <span class="nav-text">1. 数据类型与变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-变量与常量"><span class="nav-number">2.</span> <span class="nav-text">2. 变量与常量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-类创建"><span class="nav-number">3.</span> <span class="nav-text">3. 类创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-对象操作"><span class="nav-number">4.</span> <span class="nav-text">4. 对象操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-函数"><span class="nav-number">5.</span> <span class="nav-text">5. 函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-Vectors"><span class="nav-number">6.</span> <span class="nav-text">6. Vectors</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-输入输出"><span class="nav-number">7.</span> <span class="nav-text">7. 输入输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-指针"><span class="nav-number">8.</span> <span class="nav-text">8. 指针</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-继承"><span class="nav-number">9.</span> <span class="nav-text">9. 继承</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">loick</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

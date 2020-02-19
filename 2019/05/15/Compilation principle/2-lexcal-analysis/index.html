@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/profile.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/profile.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Lexical AnalysisRegular ExpressionWe need regular expressions to match word in lexical analysis. Introduction of regular exp. Def. The regular expression over epsilon are the smallest set of expressio">
+<meta name="keywords" content="blog, notes">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lexcal Analysis">
+<meta property="og:url" content="http://localhost/2019/05/15/Compilation principle/2-lexcal-analysis/index.html">
+<meta property="og:site_name" content="What&#39;s up?">
+<meta property="og:description" content="Lexical AnalysisRegular ExpressionWe need regular expressions to match word in lexical analysis. Introduction of regular exp. Def. The regular expression over epsilon are the smallest set of expressio">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://localhost/images/compilation/regular_expression.png">
+<meta property="og:image" content="http://localhost/images/compilation/lexical_analysis.png">
+<meta property="og:updated_time" content="2019-05-16T13:40:37.119Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Lexcal Analysis">
+<meta name="twitter:description" content="Lexical AnalysisRegular ExpressionWe need regular expressions to match word in lexical analysis. Introduction of regular exp. Def. The regular expression over epsilon are the smallest set of expressio">
+<meta name="twitter:image" content="http://localhost/images/compilation/regular_expression.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://localhost/2019/05/15/Compilation principle/2-lexcal-analysis/">
+
+
+
+
+
+  <title>Lexcal Analysis | What's up?</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">What's up?</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-reflect">
+          <a href="/categories/reflect" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-yelp"></i> <br>
+            
+            reflect
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-algorithms">
+          <a href="/categories/algorithms" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tree"></i> <br>
+            
+            algorithms
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-openmind">
+          <a href="/categories/openmind" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-snowflake-o"></i> <br>
+            
+            openmind
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sketch">
+          <a href="/categories/todo" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-leaf"></i> <br>
+            
+            sketch
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://localhost/2019/05/15/Compilation principle/2-lexcal-analysis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="loickengit">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="What's up?">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Lexcal Analysis</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-15T08:19:09+08:00">
+                2019-05-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Compilation-principle/" itemprop="url" rel="index">
+                    <span itemprop="name">Compilation principle</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Lexical-Analysis"><a href="#Lexical-Analysis" class="headerlink" title="Lexical Analysis"></a>Lexical Analysis</h3><h4 id="Regular-Expression"><a href="#Regular-Expression" class="headerlink" title="Regular Expression"></a>Regular Expression</h4><p>We need regular expressions to match word in lexical analysis.</p>
+<p>Introduction of regular exp.</p>
+<p><strong>Def.</strong> The regular expression over epsilon are the smallest set of expressions including</p>
+<p><code>Single character</code>, <code>Epsilon</code>, <code>Union</code>, <code>Cancatenation</code>, <code>Iteration</code></p>
+<p><img src="/images/compilation/regular_expression.png" alt></p>
+<hr>
+<h4 id="Goal-of-lexical-analysis"><a href="#Goal-of-lexical-analysis" class="headerlink" title="Goal of lexical analysis"></a>Goal of lexical analysis</h4><p>Classify program substrings according to role</p>
+<p>Communicate tokens to the parser.</p>
+<ol>
+<li><p>Partition the input string into lexemes. This is implemented by reading left-to-right, recognizing one token at a time.</p>
+</li>
+<li><p>“Lookahead” may be required to decide where one token ends and the next token begins.</p>
+</li>
+</ol>
+<p><img src="/images/compilation/lexical_analysis.png" alt="lexical analysis"></p>
+<h5 id="Target-tokens"><a href="#Target-tokens" class="headerlink" title="Target tokens"></a>Target tokens</h5><ul>
+<li><p>Identifier:</p>
+<p>strings of letters or digits, starting with a letter</p>
+</li>
+<li><p>Integer</p>
+<p>a non-empty string of digits</p>
+</li>
+<li><p>Keyword</p>
+<p>“else” or “if” or “begin” or….</p>
+</li>
+<li><p>Whitespace</p>
+<p>a not-empty sequence of blanks, newlines, and tabs</p>
+</li>
+</ul>
+<hr>
+<h4 id="How-to-describe-Integer-String…-in-regular-exp"><a href="#How-to-describe-Integer-String…-in-regular-exp" class="headerlink" title="How to describe Integer, String… in regular exp ?"></a>How to describe Integer, String… in regular exp ?</h4><p><strong>Integer</strong>: a non-empty string of digits</p>
+<p>digit = ‘0’ + ‘1’, ‘2’ +….’9’</p>
+<p>digit digit*   =&gt;   digit+</p>
+<p><strong>Identifier</strong>: strings of letters or digits, starting with a letter</p>
+<p>letter = [a-zA-Z]</p>
+<p>letter(letter+digit)*</p>
+<p><strong>Whitespace</strong>: a non-empty sequence of blanks, newlines, and tabs</p>
+<p>(‘  ‘ + ‘\n’, ‘\t’)+</p>
+<h5 id="A-specification-for-the-predicate"><a href="#A-specification-for-the-predicate" class="headerlink" title="A specification for the predicate"></a>A specification for the predicate</h5><ol>
+<li><p>Write a rexp for the lexemes of each token class</p>
+<ol>
+<li>Number= digit+</li>
+<li>Keyword= “if”, “else”….</li>
+<li>Identifier = letter(letter+digit)*</li>
+<li>OpenPar = “(“</li>
+<li>……</li>
+</ol>
+</li>
+<li><p>Construct R, mathing all lexemes for all tokens</p>
+<p>R = Keyword + Identifier + Number +…..</p>
+</li>
+<li><p>Let input be x1……xn</p>
+<p>for 1 &lt;= i &lt;= n check <code>x1…xi &lt;- L(R)</code></p>
+</li>
+<li><p>If success, then we know that </p>
+<p><code>x1…xi</code> &lt;- L(Rj) for some j</p>
+</li>
+<li><p>Remove <code>x1…xi</code>from input and go to (3)</p>
+</li>
+</ol>
+<h5 id="How-much-input-is-used"><a href="#How-much-input-is-used" class="headerlink" title="How much input is used?"></a>How much input is used?</h5><p>Maximal Match</p>
+<h5 id="Which-token-is-used"><a href="#Which-token-is-used" class="headerlink" title="Which token is used?"></a>Which token is used?</h5><p>choose the one listed first.</p>
+<h5 id="wrap-up"><a href="#wrap-up" class="headerlink" title="wrap up"></a>wrap up</h5><p>Regular expressions are a concise notation for string patterns</p>
+<p>Use in lexical analysis requires small extensions:</p>
+<ul>
+<li><p>To resolve ambiguities</p>
+<ul>
+<li>matches as long as possible</li>
+<li>highest priority match</li>
+</ul>
+</li>
+<li><p>To handle errors</p>
+</li>
+</ul>
+<p>Good algorithms known</p>
+<ul>
+<li>require only single pass over the input</li>
+<li>Few operations per character(table lookup)</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/14/sketch/sissi/memory/" rel="next" title="memory">
+                <i class="fa fa-chevron-left"></i> memory
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/15/tools/git/git-squash-commits/" rel="prev" title="How to squash all commits together?">
+                How to squash all commits together? <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="loickengit">
+            
+              <p class="site-author-name" itemprop="name">loickengit</p>
+              <p class="site-description motion-element" itemprop="description">oups, moto is missing!</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/loickengit" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:tianguisong@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Lexical-Analysis"><span class="nav-number">1.</span> <span class="nav-text">Lexical Analysis</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Regular-Expression"><span class="nav-number">1.1.</span> <span class="nav-text">Regular Expression</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Goal-of-lexical-analysis"><span class="nav-number">1.2.</span> <span class="nav-text">Goal of lexical analysis</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Target-tokens"><span class="nav-number">1.2.1.</span> <span class="nav-text">Target tokens</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#How-to-describe-Integer-String…-in-regular-exp"><span class="nav-number">1.3.</span> <span class="nav-text">How to describe Integer, String… in regular exp ?</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#A-specification-for-the-predicate"><span class="nav-number">1.3.1.</span> <span class="nav-text">A specification for the predicate</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#How-much-input-is-used"><span class="nav-number">1.3.2.</span> <span class="nav-text">How much input is used?</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Which-token-is-used"><span class="nav-number">1.3.3.</span> <span class="nav-text">Which token is used?</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#wrap-up"><span class="nav-number">1.3.4.</span> <span class="nav-text">wrap up</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">loickengit</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

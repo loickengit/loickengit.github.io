@@ -191,36 +191,6 @@
         </li>
       
         
-        <li class="menu-item menu-item-about">
-          <a href="/about/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
-            
-            About
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
-            
-            Tags
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
-            
-            Categories
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
@@ -237,6 +207,36 @@
               <i class="menu-item-icon fa fa-fw fa-yelp"></i> <br>
             
             reflect
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-algorithms">
+          <a href="/categories/algorithms" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tree"></i> <br>
+            
+            algorithms
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-openmind">
+          <a href="/categories/openmind" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-snowflake-o"></i> <br>
+            
+            openmind
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sketch">
+          <a href="/categories/todo" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-leaf"></i> <br>
+            
+            sketch
           </a>
         </li>
       
@@ -273,7 +273,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://localhost/2019/04/09/Spring Cloud服务注册与发现组件/">
+    <link itemprop="mainEntityOfPage" href="http://localhost/2019/04/29/algorithms/Course_schedule/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="loickengit">
@@ -292,7 +292,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/04/09/Spring Cloud服务注册与发现组件/" itemprop="url">Spring Cloud服务注册与发现</a></h1>
+                <a class="post-title-link" href="/2019/04/29/algorithms/Course_schedule/" itemprop="url">Course_schedule</a></h1>
         
 
         <div class="post-meta">
@@ -304,426 +304,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-09T21:26:17+08:00">
-                2019-04-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Eureka"><a href="#Eureka" class="headerlink" title="Eureka"></a>Eureka</h3><p>利用 Eureka 组件可以很轻松地实现服务的注册和发现的功能。 </p>
-<p>Eureka 组件提供了服务的健康监测，以及界面友好的 UI。通过 Eureka 组件提供的 UI, Eureka 组件可以让开发人员随时了 解服务单元的运行情况。</p>
-<p>另外 Spring Cloud 也支持 Consul 和 Zookeeper，用于注册和发现服务 。 </p>
-<p>Eureka是 SpringCloud首选推荐的服务注册与发现组件， 与 SpringCloud其他组件可以无缝对接。</p>
-<h4 id="基本架构"><a href="#基本架构" class="headerlink" title="基本架构"></a>基本架构</h4><p>主要包括3种角色：</p>
-<ul>
-<li>Register Service:服务注册中心，它是一个 Eureka Server，提供服务注册和发现的功能。 </li>
-<li>Provider Service:服务提供者，它是一个 EurekaClient，提供服务。 </li>
-<li>Consumer Service:服务消费者，它是 一个 Eureka Cient，消费服务 。 </li>
-</ul>
-<h4 id="编写"><a href="#编写" class="headerlink" title="编写"></a>编写</h4><h5 id="Eureka-Server"><a href="#Eureka-Server" class="headerlink" title="Eureka Server"></a>Eureka Server</h5><p>起步依赖 spring-cloud-starter-eureka-server</p>
-<p>在默认情况下， Eureka Server 会向自己注 册，这时需要配置eureka.client.registerWithEureka和eureka.client.fetchRegistry为false，防止自己注册自己。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">server:</span><br><span class="line">	port: 8761</span><br><span class="line"></span><br><span class="line">eureka:</span><br><span class="line">	instance: </span><br><span class="line">		hostname: localhost</span><br><span class="line">	client:</span><br><span class="line">		registerWithEureka: false</span><br><span class="line">		fetchRegistry: false</span><br><span class="line">		serviceUrl:</span><br><span class="line">			defaultZone:</span><br><span class="line">				http://$(eureka . instance . hostname ) : ♀( server . port)/eureka/</span><br></pre></td></tr></table></figure>
-<p>启动代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@EnableEurekaServer</span> </span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> class <span class="title">EurekaServerApplication</span> <span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">		<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(String[] args)</span> </span>&#123;</span><br><span class="line">				SpringApplication.run(EurekaServerApplication.class,args);</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="Eureka-client"><a href="#Eureka-client" class="headerlink" title="Eureka client"></a>Eureka client</h5><p>依赖 spring-cloud-starter-eureka</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">eureka: </span><br><span class="line">	client:</span><br><span class="line">		serviceUrl:</span><br><span class="line">			defaultZone: http://localhost:8761/eureka/</span><br><span class="line">server:</span><br><span class="line">	port: 8762 </span><br><span class="line">spring:</span><br><span class="line">	application:</span><br><span class="line">		name: eureka-client</span><br></pre></td></tr></table></figure>
-<p>启动：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@EnableEurekaClient</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> class <span class="title">EurekaClientApplication</span> <span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">		<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(String[] args)</span> </span>&#123;</span><br><span class="line">				SpringApplication.run(EurekaClientApplication.class,args);</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="zookeeper"><a href="#zookeeper" class="headerlink" title="zookeeper"></a>zookeeper</h3><h4 id="What-is-zookeeper"><a href="#What-is-zookeeper" class="headerlink" title="What is zookeeper?"></a>What is zookeeper?</h4><p>ZooKeeper is a centralized service for maintaining configuration information, naming, providing distributed synchronization, and providing group services. </p>
-<p>注册server是集群的，每一个client只向一个server发送请求</p>
-<p>read比write快，servers有一个leader，写必须写到leader，再由leader分发给followers。</p>
-<p>write是原子的</p>
-<p>当leader挂掉的时候，会有选举算法推出新的leader</p>
-<p>采用文件结构，但文件夹有内容，相当于B+树</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://localhost/2019/04/09/单体架构/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="loickengit">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="What's up?">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/09/单体架构/" itemprop="url">单体架构</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-09T21:26:17+08:00">
-                2019-04-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h3><h4 id="单体架构"><a href="#单体架构" class="headerlink" title="单体架构"></a>单体架构</h4><p><img src="/images/single.png" alt="single"></p>
-<p>不足之处：</p>
-<ol>
-<li>所有代码都在一起，业务复杂后，代码可读性、可维护性、可扩展性下降，业务扩展带来的代价越来越大</li>
-<li>随着用户越来越多，程序承受的并发越来越高，单体应用的并发能力有限。</li>
-</ol>
-<h4 id="单体架构使用服务器集群"><a href="#单体架构使用服务器集群" class="headerlink" title="单体架构使用服务器集群"></a>单体架构使用服务器集群</h4><h5 id="服务器集群"><a href="#服务器集群" class="headerlink" title="服务器集群"></a>服务器集群</h5><p>随着业务的发展，大多数公司会将单体应用进行集群部署，并增加负载均衡服务器（Nginx），另外，还需要增加集群部署的缓存服务器和文件服务器，并将数据库读写分离，以应对用户量的增加而带来的高并发访问量。</p>
-<p>用负载均衡服务器分发高并发的网络请求，用户的访问被分派到不同的应用服务器，应用 服务器的负载不再成为瓶颈，用户量增加时，添加应用服务器即可。 </p>
-<h5 id="缓存与数据库读写分离"><a href="#缓存与数据库读写分离" class="headerlink" title="缓存与数据库读写分离"></a>缓存与数据库读写分离</h5><p>通过添加缓存服务器来缓解数据库的数据以及数据库读取数据的压力。大多数的读取操作是由缓存完成的，但是仍然有少数读操作是从数据库读取的，例如缓存失效、实时数据等 。当有大量的读写操作时，将数据库进行读写分离是一个不错的选择，例如 MySQL 的主从热备份，通过相关配置可 以将主数据 库服务器的数据同步到从数据库服务器， 实现数据库的读写分离， 读写分离能够改善数据库的负载能力。 </p>
-<p><img src="/images/single2.png" alt="single2"></p>
-<h5 id="不足："><a href="#不足：" class="headerlink" title="不足："></a>不足：</h5><ol>
-<li>仍然是单体应用，大量的业务必然有大量的代码，维护困难</li>
-<li>面对海量的用户，数据库会成为瓶颈，解决方案将使用分布式数据库，也就是将数据库进行分库分表。</li>
-<li>持续交付能力差，业务越复杂，代码越多，修改和增加代码的时间变长。</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://localhost/2019/04/09/微服务/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="loickengit">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="What's up?">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/09/微服务/" itemprop="url">微服务</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-09T21:26:17+08:00">
-                2019-04-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="微服务"><a href="#微服务" class="headerlink" title="微服务"></a>微服务</h3><h5 id="微服务特点"><a href="#微服务特点" class="headerlink" title="微服务特点"></a>微服务特点</h5><ul>
-<li>按照业务来划分服务，单个服务代码量小，业务单 一 ，易 于维护。 </li>
-<li>每个微服务都有自 己独立 的基础组件 ，例如数据库、 缓存等 ，且运行在独立的进程中。 </li>
-<li>微服务之间的通信是通过 HTTP 协议或者消息组件，且具有容错能力。 </li>
-<li>微服务有一套服务治理的解决方案，服务之间不相合，可以随时加入和剔除服务。 </li>
-<li>单个微服务能够集群化部署，并且有负载均衡的能力。 </li>
-<li>整个微服务系统应该有 一个完整的安全机制，包括用户验证、权限验证、资源保护 等。 </li>
-<li>整个微服务系统有链路追踪的能力。 </li>
-<li>有一套完整 的实时日志系统 。 </li>
-</ul>
-<h5 id="微服务功能主要体现在以下几点："><a href="#微服务功能主要体现在以下几点：" class="headerlink" title="微服务功能主要体现在以下几点："></a>微服务功能主要体现在以下几点：</h5><ul>
-<li><p>服务的注册和发现。 </p>
-</li>
-<li><p>服务的负载均衡 。 </p>
-</li>
-<li>服务的容错。 </li>
-<li>服务网关。  </li>
-<li>服务配置的统一管理。 </li>
-<li>链路追踪。</li>
-<li>实时日志。 </li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://localhost/2019/03/30/mongo_secure/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="loickengit">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="What's up?">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/03/30/mongo_secure/" itemprop="url">Mongo 安装、鉴权与主副本设置</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-30T17:19:17+08:00">
-                2019-03-30
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-29T23:07:15+08:00">
+                2019-04-29
               </time>
             
 
@@ -745,8 +327,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/mongo/" itemprop="url" rel="index">
-                    <span itemprop="name">mongo</span>
+                  <a href="/categories/algorithms/" itemprop="url" rel="index">
+                    <span itemprop="name">algorithms</span>
                   </a>
                 </span>
 
@@ -784,52 +366,1432 @@
       
         
           
-            <h3 id="Mongo鉴权"><a href="#Mongo鉴权" class="headerlink" title="Mongo鉴权"></a>Mongo鉴权</h3><h4 id="创建管理员"><a href="#创建管理员" class="headerlink" title="创建管理员"></a>创建管理员</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ mongo</span><br><span class="line"></span><br><span class="line">use admin</span><br><span class="line">db.createUser(</span><br><span class="line">   &#123;</span><br><span class="line">     user: &quot;admin&quot;,</span><br><span class="line">     pwd: &quot;simu1234&quot;,</span><br><span class="line">     roles: [ &#123; role: &quot;userAdminAnyDatabase&quot;, db: &quot;admin&quot; &#125; ]</span><br><span class="line">   &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<h4 id="开启鉴权"><a href="#开启鉴权" class="headerlink" title="开启鉴权"></a>开启鉴权</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo nano /etc/mongod.conf</span><br></pre></td></tr></table></figure>
-<p>在mongodb.conf添加字段</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> . . .</span><br><span class="line">security:</span><br><span class="line">  authorization: &quot;enabled&quot;</span><br><span class="line"> . . .</span><br></pre></td></tr></table></figure>
-<p>重启mongo</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo systemctl restart mongod</span><br></pre></td></tr></table></figure>
-<p>现在就需要使用用户名，密码连接了。</p>
-<h4 id="创建一般用户"><a href="#创建一般用户" class="headerlink" title="创建一般用户"></a>创建一般用户</h4><ol>
-<li>创建一般用户</li>
+            <h4 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h4><p>here are a total of <em>n</em> courses you have to take, labeled from <code>0</code> to <code>n-1</code>.</p>
+<p>Some courses may have prerequisites, for example to take course 0 you have to first take course 1, which is expressed as a pair: <code>[0,1]</code></p>
+<p>Given the total number of courses and a list of prerequisite <strong>pairs</strong>, is it possible for you to finish all courses?</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Input: 2, [[1,0]] </span><br><span class="line">Output: true</span><br><span class="line">Explanation: There are a total of 2 courses to take. </span><br><span class="line">             To take course 1 you should have finished course 0. So it is possible.</span><br></pre></td></tr></table></figure>
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Input: 2, [[1,0],[0,1]]</span><br><span class="line">Output: false</span><br><span class="line">Explanation: There are a total of 2 courses to take. </span><br><span class="line">             To take course 1 you should have finished course 0, and to take course 0 you should</span><br><span class="line">             also have finished course 1. So it is impossible.</span><br></pre></td></tr></table></figure>
+<h4 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h4><p>BFS</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">canFinish</span><span class="params">(<span class="keyword">int</span> numCourses, <span class="keyword">int</span>[][] prerequisites)</span> </span>&#123;</span><br><span class="line">        ArrayList[] graph = <span class="keyword">new</span> ArrayList[numCourses];</span><br><span class="line">        <span class="keyword">int</span>[] degree = <span class="keyword">new</span> <span class="keyword">int</span>[numCourses];</span><br><span class="line">        Queue queue = <span class="keyword">new</span> LinkedList();</span><br><span class="line">        <span class="keyword">int</span> count=<span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;numCourses;i++)</span><br><span class="line">            graph[i] = <span class="keyword">new</span> ArrayList();</span><br><span class="line">            </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;prerequisites.length;i++)&#123;</span><br><span class="line">            degree[prerequisites[i][<span class="number">1</span>]]++;</span><br><span class="line">            graph[prerequisites[i][<span class="number">0</span>]].add(prerequisites[i][<span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;degree.length;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(degree[i] == <span class="number">0</span>)&#123;</span><br><span class="line">                queue.add(i);</span><br><span class="line">                count++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(queue.size() != <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">int</span> course = (<span class="keyword">int</span>)queue.poll();</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;graph[course].size();i++)&#123;</span><br><span class="line">                <span class="keyword">int</span> pointer = (<span class="keyword">int</span>)graph[course].get(i);</span><br><span class="line">                degree[pointer]--;</span><br><span class="line">                <span class="keyword">if</span>(degree[pointer] == <span class="number">0</span>)&#123;</span><br><span class="line">                    queue.add(pointer);</span><br><span class="line">                    count++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(count == numCourses)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">else</span>    </span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><p><a href="https://leetcode.com/problems/course-schedule/discuss/58524/Java-DFS-and-BFS-solution" target="_blank" rel="noopener">post solution</a></p>
+<p><a href="https://leetcode.com/problems/course-schedule/" target="_blank" rel="noopener">Course Schedule</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://localhost/2019/04/29/algorithms/Bitwise_AND_of_Numbers_Range/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="loickengit">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="What's up?">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/29/algorithms/Bitwise_AND_of_Numbers_Range/" itemprop="url">Bitwise_AND_of_Numbers_Range</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-29T07:45:45+08:00">
+                2019-04-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithms/" itemprop="url" rel="index">
+                    <span itemprop="name">algorithms</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h4><p>Given a range [m, n] where 0 &lt;= m &lt;= n &lt;= 2147483647, return the bitwise AND of all numbers in this range, inclusive.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: [5,7]</span><br><span class="line">Output: 4</span><br></pre></td></tr></table></figure>
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: [0,1]</span><br><span class="line">Output: 0</span><br></pre></td></tr></table></figure>
+<h4 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h4><ol>
+<li>last bit of (odd number &amp; even number) is 0.</li>
+<li>when m != n, There is at least an odd number and an even number, so the last bit position result is 0.</li>
+<li>Move m and n rigth a position.</li>
 </ol>
-<p>在mongo shell中</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">db.createUser(</span><br><span class="line">	&#123;user:&quot;simu_chat&quot;,</span><br><span class="line">	 pwd: &quot;simu1234&quot;,</span><br><span class="line">	 roles: [&#123;role:&quot;readWrite&quot;, db:&quot;new-cloud-chat&quot;&#125;]</span><br><span class="line">	 &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>Keep doing step 1,2,3 until m equal to n, use a factor to record the iteration time.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class Solution &#123;</span><br><span class="line">    public int rangeBitwiseAnd(int m, int n) &#123;</span><br><span class="line">        int i = 0; // i means we have how many bits are 0 on the right</span><br><span class="line">        while(m != n)&#123;</span><br><span class="line">          m &gt;&gt;= 1;</span><br><span class="line">          n &gt;&gt;= 1;</span><br><span class="line">          i++;  </span><br><span class="line">        &#125;  </span><br><span class="line">        return m &lt;&lt; i;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The hardest part of this problem is to find the regular pattern.<br>For example, for number <code>26 to 30</code><br>Their binary form are:<br><code>11010</code><br><code>11011</code><br><code>11100</code>　　<br><code>11101</code>　　<br><code>11110</code></p>
+<p>Because we are trying to find bitwise AND, so if any bit there are at least one <code>0</code> and one <code>1</code>, it always <code>0</code>. In this case, it is <code>11000</code>.<br>So we are go to cut all these bit that they are different. In this case we cut the right <code>3</code> bit.</p>
+<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><p><a href="https://leetcode.com/problems/bitwise-and-of-numbers-range/" target="_blank" rel="noopener">Bitwise AND of Numbers Range</a></p>
+<p><a href="https://leetcode.com/problems/bitwise-and-of-numbers-range/discuss/56729/Bit-operation-solution(JAVA" target="_blank" rel="noopener">Bit operation solution(JAVA)</a>)</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://localhost/2019/04/28/openmind/ted/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="loickengit">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="What's up?">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/28/openmind/ted/" itemprop="url">Ted</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-28T23:38:42+08:00">
+                2019-04-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/openmind/" itemprop="url" rel="index">
+                    <span itemprop="name">openmind</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h5 id="What-baby-boomers-can-learn-from-millennials-at-work-—-and-vice-versa"><a href="#What-baby-boomers-can-learn-from-millennials-at-work-—-and-vice-versa" class="headerlink" title="What baby boomers can learn from millennials at work — and vice versa"></a><a href="https://www.ted.com/talks/leah_georges_how_generational_stereotypes_hold_us_back_at_work/transcript" target="_blank" rel="noopener">What baby boomers can learn from millennials at work — and vice versa</a></h5><p>What can I offer to this team, this company….?</p>
+<h5 id="A-simple-way-to-break-a-bad-habit"><a href="#A-simple-way-to-break-a-bad-habit" class="headerlink" title="A simple way to break a bad habit"></a><a href="https://www.ted.com/talks/judson_brewer_a_simple_way_to_break_a_bad_habit?referrer=playlist-talks_to_form_better_habits#t-548021" target="_blank" rel="noopener">A simple way to break a bad habit</a></h5><p><strong>Be curious</strong></p>
+<p>trigger，behavior， reward， repeat……</p>
+<p>e.g. feeling sad — eat chocolate — fell good — repeat</p>
+<p>A simple way to break this ——— be curious</p>
+<p>e.g. feel eager for sugar/bread(爸爸糖)？ Be curious，what is that for, what happend in my body, why dose this felling come from?</p>
+<h5 id="Try-something-new-for-30-days"><a href="#Try-something-new-for-30-days" class="headerlink" title="Try something new for 30 days"></a><a href="https://www.ted.com/talks/matt_cutts_try_something_new_for_30_days?referrer=playlist-talks_to_form_better_habits&amp;language=en#t-186232" target="_blank" rel="noopener">Try something new for 30 days</a></h5><p>I guarantee you the next 30 days are going to pass whether you like it or not, </p>
+<p>so why not think about something you have always wanted to try and <strong>give it a shot</strong>! Fot the next 30 days.</p>
+<h5 id="Why-dieting-doesn’t-usually-work"><a href="#Why-dieting-doesn’t-usually-work" class="headerlink" title="Why dieting doesn’t usually work"></a><a href="https://www.ted.com/talks/sandra_aamodt_why_dieting_doesn_t_usually_work?referrer=playlist-talks_to_form_better_habits&amp;language=en" target="_blank" rel="noopener">Why dieting doesn’t usually work</a></h5><p>Our body is like a thermostat, if we try to lose weight, if trys to gain it back;</p>
+<p>Like a thermostat, you can try to change the temperature in you house by opening a window in the winter, but that’s not going to change the setting on the thermostat.</p>
+<p>So, the right way to do with you diet is:</p>
+<p><strong>Eat mindfully</strong></p>
+<p>learning to understand your body’s signals </p>
+<p>so that you eat when you’re hungry and stop when you’re full</p>
+<h4 id="Inside-the-mind-of-a-master-procrastinator"><a href="#Inside-the-mind-of-a-master-procrastinator" class="headerlink" title="Inside the mind of a master procrastinator"></a><a href="https://www.ted.com/talks/tim_urban_inside_the_mind_of_a_master_procrastinator" target="_blank" rel="noopener">Inside the mind of a master procrastinator</a></h4><p><a href="https://waitbutwhy.com/2013/10/why-procrastinators-procrastinate.html" target="_blank" rel="noopener">Why Procrastinators Procrastinate</a></p>
+<p><img src="/images/procrastinators/P_brain.png" alt="a procrastinator&#39;s brain"></p>
+<p><img src="/images/procrastinators/PM_Scare_1.png" alt="a procrastinator&#39;s brain"></p>
+<p><img src="/images/procrastinators/PM_Scare_2.png" alt="a procrastinator&#39;s brain"></p>
+<p><img src="/images/procrastinators/PM_Scare_3.png" alt="a procrastinator&#39;s brain"></p>
+<p>那些有deadline的还好，会有一个short term。</p>
+<p>但那些没有的呢，比如小时候的梦想，这些是没有deadline的</p>
+<p>拖延就会导致长期的抑郁…..，旁观自己的生活。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://localhost/2019/04/28/algorithms/Largest_Number/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="loickengit">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="What's up?">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/28/algorithms/Largest_Number/" itemprop="url">Largest Number</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-28T23:13:57+08:00">
+                2019-04-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithms/" itemprop="url" rel="index">
+                    <span itemprop="name">algorithms</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h4><p>Given a list of non negative integers, arrange them such that they form the largest number.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: [10,2]</span><br><span class="line">Output: &quot;210&quot;</span><br></pre></td></tr></table></figure>
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: [3,30,34,5,9]</span><br><span class="line">Output: &quot;9534330&quot;</span><br></pre></td></tr></table></figure>
+<h4 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h4><p><strong>Intuition</strong></p>
+<p>To construct the largest number, we want to ensure that the most significant digits are occupied by the largest digits.</p>
+<p><strong>Algorithm</strong></p>
+<p>First, we convert each integer to a string. Then, we sort the array of strings.</p>
+<p>While it might be tempting to simply sort the numbers in descending order, this causes problems for sets of numbers with the same leading digit. For example, sorting the problem example in descending order would produce the number 95343039534303, while the correct answer can be achieved by transposing the 33 and the 3030. Therefore, for each pairwise comparison during the sort, we compare the numbers achieved by concatenating the pair in both orders. We can prove that this sorts into the proper order as follows:</p>
+<p>Assume that (without loss of generality), for some pair of integers a<em>a</em> and b<em>b</em>, our comparator dictates that a<em>a</em> should precede b<em>b</em> in sorted order. This means that a⌢b&gt;b⌢a<em>a</em>⌢<em>b</em>&gt;<em>b</em>⌢<em>a</em> (where ⌢⌢ represents concatenation). For the sort to produce an incorrect ordering, there must be some c<em>c</em> for which b<em>b</em>precedes c<em>c</em> and c<em>c</em> precedes a<em>a</em>. This is a contradiction because a⌢b&gt;b⌢a<em>a</em>⌢<em>b</em>&gt;<em>b</em>⌢<em>a</em> and b⌢c&gt;c⌢b<em>b</em>⌢<em>c</em>&gt;<em>c</em>⌢<em>b</em>implies a⌢c&gt;c⌢a <em>a</em>⌢<em>c</em>&gt;<em>c</em>⌢<em>a</em>. In other words, our custom comparator preserves transitivity, so the sort is correct.</p>
+<p>Once the array is sorted, the most “signficant” number will be at the front. There is a minor edge case that comes up when the array consists of only zeroes, so if the most significant number is 00, we can simply return 00. Otherwise, we build a string out of the sorted array and return it.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LargerNumKey</span><span class="params">(str)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__lt__</span><span class="params">(x, y)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> x+y &gt; y+x</span><br><span class="line">        </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">largestNumber</span><span class="params">(self, nums)</span>:</span></span><br><span class="line">        largest_num = <span class="string">''</span>.join(sorted(map(str, nums), key=LargerNumKey))</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'0'</span> <span class="keyword">if</span> largest_num[<span class="number">0</span>] == <span class="string">'0'</span> <span class="keyword">else</span> largest_num</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://localhost/2019/04/28/algorithms/python_skill/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="loickengit">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="What's up?">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/28/algorithms/python_skill/" itemprop="url">python_skill</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-28T20:46:32+08:00">
+                2019-04-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithms/" itemprop="url" rel="index">
+                    <span itemprop="name">algorithms</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h5 id="A-triky-use-a-max-function"><a href="#A-triky-use-a-max-function" class="headerlink" title="A triky use a max function"></a>A triky use a max function</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">majorityElement</span><span class="params">(self, nums)</span>:</span></span><br><span class="line">    counts = collections.Counter(nums)</span><br><span class="line">    <span class="keyword">return</span> max(counts.keys(), key=counts.get)</span><br></pre></td></tr></table></figure>
+<p>##### </p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://localhost/2019/04/27/algorithms/Single-Number-III/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="loickengit">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="What's up?">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/27/algorithms/Single-Number-III/" itemprop="url">Single_Number_III</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-27T21:28:38+08:00">
+                2019-04-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithms/" itemprop="url" rel="index">
+                    <span itemprop="name">algorithms</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h4><p>Given an array of numbers <code>nums</code>, in which exactly two elements appear only once and all the other elements appear exactly twice. Find the two elements that appear only once.</p>
+<p><strong>Example:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input:  [1,2,1,3,2,5]</span><br><span class="line">Output: [3,5]</span><br></pre></td></tr></table></figure>
+<h4 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h4><p>Once again, we need to use XOR to solve this problem. But this time, we need to do it in two passes:</p>
+<ul>
+<li>In the first pass, we XOR all elements in the array, and get the XOR of the two numbers we need to find. Note that since the two numbers are distinct, so there must be a set bit (that is, the bit with value ‘1’) in the XOR result. Find<br>out an arbitrary set bit (for example, the rightmost set bit).</li>
+<li>In the second pass, we divide all numbers into two groups, one with the aforementioned bit set, another with the aforementinoed bit unset. Two different numbers we need to find must fall into thte two distrinct groups. XOR numbers in each group, we can find a number in either group.</li>
+</ul>
+<p><strong>A Corner Case:</strong></p>
+<p>When <code>diff == numeric_limits&lt;int&gt;::min()</code>, <code>-diff</code> is also <code>numeric_limits&lt;int&gt;::min()</code>. Therefore, the value of <code>diff</code> after executing <code>diff &amp;= -diff</code> is still <code>numeric_limits&lt;int&gt;::min()</code>. The answer is still correct.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] singleNumber(<span class="keyword">int</span>[] nums) &#123;</span><br><span class="line">        <span class="keyword">int</span> diff = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> num : nums) &#123;</span><br><span class="line">            diff ^= num;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// Get its last set bit</span></span><br><span class="line">      	<span class="comment">// because of two’s complement, diff &amp;= -diff is equal to diff &amp;= 0xFF ^ (diff-1)</span></span><br><span class="line">        diff &amp;= -diff;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span>[] rets = &#123;<span class="number">0</span>, <span class="number">0</span>&#125;; <span class="comment">// this array stores the two numbers we will return</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> num : nums)&#123;</span><br><span class="line">            <span class="keyword">if</span> ((num &amp; diff) == <span class="number">0</span>) <span class="comment">// the bit is not set</span></span><br><span class="line">                rets[<span class="number">0</span>] ^= num;</span><br><span class="line">            <span class="keyword">else</span> <span class="comment">// the bit is set</span></span><br><span class="line">                rets[<span class="number">1</span>] ^= num;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> rets;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><p><a href="https://leetcode.com/problems/single-number-iii/" target="_blank" rel="noopener">Single Number III</a></p>
+<p><a href="https://leetcode.com/problems/single-number-iii/discuss/68900/Accepted-C%2B%2BJava-O(n" target="_blank" rel="noopener">Accepted C++/Java O(n)-time O(1)-space Easy Solution with Detail Explanations</a>-time-O(1)-space-Easy-Solution-with-Detail-Explanations)</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://localhost/2019/04/26/tools/git/git-tag/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="loickengit">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="What's up?">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/26/tools/git/git-tag/" itemprop="url">git_tag</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-26T10:38:52+08:00">
+                2019-04-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="Listing-tags"><a href="#Listing-tags" class="headerlink" title="Listing tags"></a>Listing tags</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag</span><br></pre></td></tr></table></figure>
+<p>This command lists the tags in alphabetical order.</p>
+<p>You can also search for tags that match a particular pattern</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag -l &quot;v.1.8.5*&quot;</span><br></pre></td></tr></table></figure>
+<h4 id="Creating-Tags"><a href="#Creating-Tags" class="headerlink" title="Creating Tags"></a>Creating Tags</h4><p>Git supports two types of tags: lightweight and annotated</p>
+<p>A lightweight tag is very much like a branch that doesn’t change — it’s just a pointer to a specific commit.</p>
+<p>Annotated tags, however, are stored as full objects in the Git database. That is Annotated tags are stored with name, data,author, etc.</p>
+<h5 id="Annotated-Tags"><a href="#Annotated-Tags" class="headerlink" title="Annotated Tags"></a>Annotated Tags</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag -a v1.4 -m &quot;my version 1.4&quot;</span><br></pre></td></tr></table></figure>
+<p>see the tag info</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git show v1.4</span><br></pre></td></tr></table></figure>
+<h5 id="Lightweight-Tags"><a href="#Lightweight-Tags" class="headerlink" title="Lightweight Tags"></a>Lightweight Tags</h5><p>To create a lightweight tag, don’t supply any of the <code>-a</code>, <code>-s</code>, or <code>-m</code>options, just provide a tag name</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag v1.4-lw</span><br></pre></td></tr></table></figure>
+<h4 id="Tagging-Later"><a href="#Tagging-Later" class="headerlink" title="Tagging Later"></a>Tagging Later</h4><p>tag with a commit id</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag -a v1.2 9fceb02</span><br></pre></td></tr></table></figure>
+<h4 id="Sharing-Tags"><a href="#Sharing-Tags" class="headerlink" title="Sharing Tags"></a>Sharing Tags</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin v1.5</span><br></pre></td></tr></table></figure>
+<p>or once for all</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin --tags</span><br></pre></td></tr></table></figure>
+<h4 id="Deleting-Tags"><a href="#Deleting-Tags" class="headerlink" title="Deleting Tags"></a>Deleting Tags</h4><p>locally</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag -d v1.4-lw</span><br></pre></td></tr></table></figure>
+<p>remote delete and once for all</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin --delete &lt;tagname&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="Checking-out-Tags"><a href="#Checking-out-Tags" class="headerlink" title="Checking out Tags"></a>Checking out Tags</h4><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout 2.0.0</span><br></pre></td></tr></table></figure>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="https://git-scm.com/book/en/v2/Git-Basics-Tagging" target="_blank" rel="noopener">Git - Tagging</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://localhost/2019/04/26/tools/kafka/kafka-spring/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="loickengit">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="What's up?">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/26/tools/kafka/kafka-spring/" itemprop="url">Spring Cloud Stream With Kafka</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-26T10:16:53+08:00">
+                2019-04-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/kafka/" itemprop="url" rel="index">
+                    <span itemprop="name">kafka</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h3><p>Build a application with followings:</p>
+<ol>
+<li>Takes a message from a REST API</li>
+<li>Writes it to a Kafka topic</li>
+<li>Reads it from the topic, and</li>
+<li>Outputs it to the console.</li>
+</ol>
+<h4 id="Maven-Dependencies"><a href="#Maven-Dependencies" class="headerlink" title="Maven Dependencies"></a>Maven Dependencies</h4><p>Add necessary dependencies: <code>Spring Cloud Stream</code>, <code>Kafka</code>, <code>Devtools</code> (for hot redeploys during development, optional), <code>Actuator</code> (for monitoring application, optional), <code>Lombok</code> (make sure to also have the Lombok plugin installed in your IDE).</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">      &lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;</span><br><span class="line">  &lt;/dependency&gt;</span><br><span class="line">  &lt;dependency&gt;</span><br><span class="line">      &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">      &lt;artifactId&gt;spring-cloud-stream&lt;/artifactId&gt;</span><br><span class="line">  &lt;/dependency&gt;</span><br><span class="line">  &lt;dependency&gt;</span><br><span class="line">      &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">      &lt;artifactId&gt;spring-cloud-starter-stream-kafka&lt;/artifactId&gt;</span><br><span class="line">  &lt;/dependency&gt;</span><br><span class="line">  &lt;!-- Also install the Lombok plugin in your IDE --&gt;</span><br><span class="line">  &lt;dependency&gt;</span><br><span class="line">      &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;</span><br><span class="line">      &lt;artifactId&gt;lombok&lt;/artifactId&gt;</span><br><span class="line">      &lt;optional&gt;true&lt;/optional&gt;</span><br><span class="line">  &lt;/dependency&gt;</span><br><span class="line">  &lt;!-- hot reload - press Ctrl+F9 in IntelliJ after a code change while application is running --&gt;</span><br><span class="line">  &lt;dependency&gt;</span><br><span class="line">      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">      &lt;artifactId&gt;spring-boot-devtools&lt;/artifactId&gt;</span><br><span class="line">      &lt;optional&gt;true&lt;/optional&gt;</span><br><span class="line">  &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="Define-the-Kafka-Steams"><a href="#Define-the-Kafka-Steams" class="headerlink" title="Define the Kafka Steams"></a>Define the Kafka Steams</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public interface GreetingsStreams &#123;</span><br><span class="line">    String INPUT = &quot;greetings-in&quot;;   // configured in application.yml</span><br><span class="line">    String OUTPUT = &quot;greetings-out&quot;; // .</span><br><span class="line">    </span><br><span class="line">    @Input(INPUT)</span><br><span class="line">    SubscribableChannel inboundGreetings();</span><br><span class="line">    </span><br><span class="line">    @Output(OUTPUT)</span><br><span class="line">    MessageChannel outboundGreetings();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Configure-Spring-Cloud-Stream"><a href="#Configure-Spring-Cloud-Stream" class="headerlink" title="Configure Spring Cloud Stream"></a>Configure Spring Cloud Stream</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@EnableBinding(GreetingsStreams.class)</span><br><span class="line">public class StreamsConfig &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Configuration-Properties-for-Kafka"><a href="#Configuration-Properties-for-Kafka" class="headerlink" title="Configuration Properties for Kafka"></a>Configuration Properties for Kafka</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  cloud:</span><br><span class="line">    stream:</span><br><span class="line">      kafka:</span><br><span class="line">        binder:</span><br><span class="line">          brokers: localhost:9092</span><br><span class="line">      bindings:</span><br><span class="line">        greetings-in:</span><br><span class="line">          destination: greetings</span><br><span class="line">          contentType: application/json</span><br><span class="line">        greetings-out:</span><br><span class="line">          destination: greetings</span><br><span class="line">          contentType: application/json</span><br></pre></td></tr></table></figure>
+<p>another config style,</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  cloud:</span><br><span class="line">    stream:</span><br><span class="line">      bindings:</span><br><span class="line">        notify:</span><br><span class="line">          destination: notify-eternal-dev</span><br><span class="line">          contentType: application/json</span><br><span class="line">      defaultBinder: kafka-notify</span><br><span class="line">      binders:</span><br><span class="line">        kafka-notify:</span><br><span class="line">          type: kafka</span><br><span class="line">          environment:</span><br><span class="line">            spring:</span><br><span class="line">              cloud:</span><br><span class="line">                stream:</span><br><span class="line">                  kafka:</span><br><span class="line">                    binder:</span><br><span class="line">                      brokers: localhost:9092</span><br></pre></td></tr></table></figure>
+<h4 id="Create-the-Message-Object"><a href="#Create-the-Message-Object" class="headerlink" title="Create the Message Object"></a>Create the Message Object</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Getter @Setter @ToString @Builder</span><br><span class="line">public class Greetings &#123;</span><br><span class="line">    private long timestamp;</span><br><span class="line">    private String message;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Create-a-Service-Layer-to-Write-to-Kafka"><a href="#Create-a-Service-Layer-to-Write-to-Kafka" class="headerlink" title="Create a Service Layer to Write to Kafka"></a>Create a Service Layer to Write to Kafka</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">@Service</span><br><span class="line">@Slf4j</span><br><span class="line">public class GreetingsService &#123;</span><br><span class="line">    private final GreetingsStreams greetingsStreams;</span><br><span class="line">    public GreetingsService(GreetingsStreams greetingsStreams) &#123;</span><br><span class="line">        this.greetingsStreams = greetingsStreams;</span><br><span class="line">    &#125;</span><br><span class="line">    public void sendGreeting(final Greetings greetings) &#123;</span><br><span class="line">        log.info(&quot;Sending greetings &#123;&#125;&quot;, greetings);</span><br><span class="line">        MessageChannel messageChannel = greetingsStreams.outboundGreetings();</span><br><span class="line">        messageChannel.send(MessageBuilder</span><br><span class="line">                .withPayload(greetings)</span><br><span class="line">                .setHeader(MessageHeaders.CONTENT_TYPE, MimeTypeUtils.APPLICATION_JSON)</span><br><span class="line">                .build());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Create-a-REST-API"><a href="#Create-a-REST-API" class="headerlink" title="Create a REST API"></a>Create a REST API</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">@RestController</span><br><span class="line">public class GreetingsController &#123;</span><br><span class="line">    private final GreetingsService greetingsService;</span><br><span class="line">    public GreetingsController(GreetingsService greetingsService) &#123;</span><br><span class="line">        this.greetingsService = greetingsService;</span><br><span class="line">    &#125;</span><br><span class="line">    @GetMapping(&quot;/greetings&quot;)</span><br><span class="line">    @ResponseStatus(HttpStatus.ACCEPTED)</span><br><span class="line">    public void greetings(@RequestParam(&quot;message&quot;) String message) &#123;</span><br><span class="line">        Greetings greetings = Greetings.builder()</span><br><span class="line">            .message(message)</span><br><span class="line">            .timestamp(System.currentTimeMillis())</span><br><span class="line">            .build();</span><br><span class="line">        greetingsService.sendGreeting(greetings);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Listening-on-the-Greetings-Kafka-Topic"><a href="#Listening-on-the-Greetings-Kafka-Topic" class="headerlink" title="Listening on the Greetings Kafka Topic"></a>Listening on the Greetings Kafka Topic</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">@Slf4j</span><br><span class="line">public class GreetingsListener &#123;</span><br><span class="line">    @StreamListener(GreetingsStreams.INPUT)</span><br><span class="line">    public void handleGreetings(@Payload Greetings greetings) &#123;</span><br><span class="line">        log.info(&quot;Received greetings: &#123;&#125;&quot;, greetings);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Finally-Run"><a href="#Finally-Run" class="headerlink" title="Finally, Run"></a>Finally, Run</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">public class StreamKafkaApplication &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(StreamKafkaApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Issues"><a href="#Issues" class="headerlink" title="Issues"></a>Issues</h3><p>Solved from <a href="https://github.com/spring-cloud/spring-cloud-stream/issues/952" target="_blank" rel="noopener">Spring Cloud Stream attaches, by default, a contentType header to outbound messages</a></p>
+<p>Consumer revieves message with null character like \u0000, and contentType things before payload.</p>
+<p>To get rid of the contentType header, config your producer,set. </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spring.cloud.stream.bindings.&lt;channelName&gt;.producer.headerMode=raw</span><br></pre></td></tr></table></figure>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="https://dzone.com/articles/spring-cloud-stream-with-kafka" target="_blank" rel="noopener">Spring Cloud Stream With Kafka</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://localhost/2019/04/24/todo/4-24/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="loickengit">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="What's up?">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/24/todo/4-24/" itemprop="url">4_24</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-24T08:00:33+08:00">
+                2019-04-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/todo/" itemprop="url" rel="index">
+                    <span itemprop="name">todo</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="23号，Tuesday"><a href="#23号，Tuesday" class="headerlink" title="23号，Tuesday"></a>23号，Tuesday</h4><p>写了一天的撤回消息，觉得自己的效率不应该这么低，想了一下原因有2个：</p>
+<ol>
+<li>遇到不确定的东西，不敢做，犹豫不决，然后思维就会停滞或者转到其他地方</li>
+</ol>
+<p>遇到这种情况就要就要立一个flag，选择一个去尝试，搞清楚不明白的</p>
 <ol start="2">
-<li>local数据库不能创建用户，但可以授权其他用户访问权限</li>
+<li>在小时的粒度上没有计划，没有计划就没有目标</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">db.grantRolesToUser(&quot;simu_chat&quot;, [&#123;role: &quot;readWrite&quot;, db: &quot;new_test&quot;&#125;])</span><br><span class="line">db.grantRolesToUser(&quot;simu_chat&quot;, [&#123;role: &quot;readWrite&quot;, db: &quot;audit&quot;&#125;])</span><br><span class="line">db.grantRolesToUser(&quot;simu_chat&quot;, [&#123;role: &quot;readWrite&quot;, db: &quot;collector&quot;&#125;])</span><br><span class="line">db.grantRolesToUser(&quot;simu_chat&quot;, [&#123;role: &quot;readWrite&quot;, db: &quot;local&quot;&#125;])</span><br><span class="line">db.grantRolesToUser(&quot;simu_chat&quot;, [&#123;role: &quot;readWrite&quot;, db: &quot;lotor_test&quot;&#125;])</span><br><span class="line">db.grantRolesToUser(&quot;simu_chat&quot;, [&#123;role: &quot;readWrite&quot;, db: &quot;new_test&quot;&#125;])</span><br><span class="line">db.grantRolesToUser(&quot;simu_chat&quot;, [&#123;role: &quot;readWrite&quot;, db: &quot;question&quot;&#125;])</span><br></pre></td></tr></table></figure>
-<h4 id="配置远程连接"><a href="#配置远程连接" class="headerlink" title="配置远程连接"></a>配置远程连接</h4><h5 id="开启UFW"><a href="#开启UFW" class="headerlink" title="开启UFW"></a>开启UFW</h5><p>查看UFW状态</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw status</span><br></pre></td></tr></table></figure>
-<p>开启</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw enable</span><br></pre></td></tr></table></figure>
-<p>允许连接mongo的端口，默认是27017</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw allow from client_ip_address to any port 27017</span><br></pre></td></tr></table></figure>
-<h5 id="配置bindIP"><a href="#配置bindIP" class="headerlink" title="配置bindIP"></a>配置bindIP</h5><p>在 /etc/mongod.conf添加</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> . . .</span><br><span class="line">net:</span><br><span class="line">  port: 27017</span><br><span class="line">  bindIp: 127.0.0.1,IP_of_MongoHost</span><br><span class="line"> . . .</span><br></pre></td></tr></table></figure>
-<p>重启mongo</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl restart mongod</span><br></pre></td></tr></table></figure>
-<h3 id="Mongo-主副本设置"><a href="#Mongo-主副本设置" class="headerlink" title="Mongo 主副本设置"></a>Mongo 主副本设置</h3><p>mongodb的复制至少需要两个节点，主节点记录在其上的所有操作oplog，从节点定期轮询主节点获取这些操作，然后对自己的数据副本执行这些操作，从而保证从节点的数据与主节点一致。</p>
-<p>MongoDB复制结构图如下</p>
-<p><img src="/images/mongo_replication.png" alt="Mongo主副本"></p>
-<p>在 /etc/<strong>mongod.conf</strong> 中增加如下字段</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">replSetName:</span><br><span class="line">  repl_name</span><br></pre></td></tr></table></figure>
-<p>repl_name为”复制集”名称，复制集中的所有mongd实例都必须有相同的名字</p>
-<p>在Mongo客户端使用命令rs.initiate()来启动一个新的副本集。</p>
-<p>我们可以使用rs.conf()来查看副本集的配置</p>
-<p>查看副本集状态使用 rs.status() 命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">rs.initiate(</span><br><span class="line">	&#123;_id: &quot;repl_name,</span><br><span class="line">	 version: &quot;1&quot;,</span><br><span class="line">	 members:[</span><br><span class="line">     &#123;_id: 0, host: &quot;localhost:27017&quot;&#125;</span><br><span class="line">	 ]</span><br><span class="line">	&#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<p>如果已经init过了，可以通过如下方式重新init</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rsconf = rs.conf()</span><br><span class="line">rsconf.members = [&#123;_id: 0, host: &quot;localhost:27017”&#125;]</span><br><span class="line">rs.reconfig(rsconf, &#123;force: true&#125;)</span><br></pre></td></tr></table></figure>
-<p>添加成员</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rs.add(HOST_NAME:PORT)</span><br><span class="line"></span><br><span class="line">eg.</span><br><span class="line">rs.add(&quot;localhost:27018&quot;)</span><br></pre></td></tr></table></figure>
-<p>MongoDB中，只能通过主节点将Mongo服务添加到副本集，可通过mongo shell看是否是PRIMARY，或者</p>
-<p><strong>使用db.isMaster()</strong>查看是否是主节点。</p>
-<h3 id="应用程序连接"><a href="#应用程序连接" class="headerlink" title="应用程序连接"></a>应用程序连接</h3><h4 id="Springboot"><a href="#Springboot" class="headerlink" title="Springboot"></a>Springboot</h4><p>在application.yml中添加下面配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">spring：</span><br><span class="line">	data:</span><br><span class="line">		#uri: mongodb://username:password@host:port/dbname</span><br><span class="line">		host: localhost</span><br><span class="line">		port: 27017</span><br><span class="line">		username: user</span><br><span class="line">		password: pwd</span><br><span class="line">		database: dbname</span><br></pre></td></tr></table></figure>
-<h4 id="Nodejs"><a href="#Nodejs" class="headerlink" title="Nodejs"></a>Nodejs</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const connection = mongoose.createConnection(&apos;mongodb://username:password@host:port/dbname&apos;)</span><br></pre></td></tr></table></figure>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-mongodb-on-ubuntu-16-04" target="_blank" rel="noopener">How to Install and Secure MongoDb on Unbuntu 16.04</a></p>
+<p>今天一天不是很开心，晚上和朱俊毅他们打桌游，感觉融入不了他们，和他们在一起我会有一种被拉在后面的感觉，自己很菜，也不太会说”垃圾话”。</p>
+<p>还不够自信，或者说，还没有什么让自己自信的东西！！！！！！</p>
+<p>今日计划：</p>
+<ol>
+<li>写完撤回，redis存socket</li>
+<li><p>把旧推送格式换掉</p>
+</li>
+<li><p>毕设写完草稿</p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://localhost/2019/04/22/algorithms/DI-String-Match/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="loickengit">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="What's up?">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/22/algorithms/DI-String-Match/" itemprop="url">DI_String_Match</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-22T23:38:42+08:00">
+                2019-04-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithms/" itemprop="url" rel="index">
+                    <span itemprop="name">algorithms</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h4><p>Given a string <code>S</code> that <strong>only</strong> contains “I” (increase) or “D” (decrease), let <code>N = S.length</code>.</p>
+<p>Return <strong>any</strong> permutation <code>A</code> of <code>[0, 1, ..., N]</code> such that for all <code>i = 0, ..., N-1</code>:</p>
+<ul>
+<li>If <code>S[i] == &quot;I&quot;</code>, then <code>A[i] &lt; A[i+1]</code></li>
+<li>If <code>S[i] == &quot;D&quot;</code>, then <code>A[i] &gt; A[i+1]</code></li>
+</ul>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: &quot;IDID&quot;</span><br><span class="line">Output: [0,4,1,3,2]</span><br></pre></td></tr></table></figure>
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: &quot;III&quot;</span><br><span class="line">Output: [0,1,2,3]</span><br></pre></td></tr></table></figure>
+<h4 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h4><p><strong>Intuition</strong></p>
+<p>If we see say <code>S[0] == &#39;I&#39;</code>, we can always put <code>0</code> as the first element; similarly, if we see <code>S[0] == &#39;D&#39;</code>, we can always put <code>N</code> as the first element.</p>
+<p>Say we have a match for the rest of the string <code>S[1], S[2], ...</code> using <code>N</code> distinct elements. Notice it doesn’t matter what the elements are, only that they are distinct and totally ordered. Then, putting <code>0</code> or <code>N</code> at the first character will match, and the rest of the elements (<code>1, 2, ..., N</code> or <code>0, 1, ..., N-1</code>) can use the matching we have.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">diStringMatch</span><span class="params">(self, S)</span>:</span></span><br><span class="line">        lo, hi = <span class="number">0</span>, len(S)</span><br><span class="line">        ans = []</span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> S:</span><br><span class="line">            <span class="keyword">if</span> x == <span class="string">'I'</span>:</span><br><span class="line">                ans.append(lo)</span><br><span class="line">                lo += <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                ans.append(hi)</span><br><span class="line">                hi -= <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ans + [lo]</span><br></pre></td></tr></table></figure>
+<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><p><a href="https://leetcode.com/problems/di-string-match/solution/" target="_blank" rel="noopener">942. DI String Match</a></p>
 
           
         
@@ -869,7 +1831,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -917,7 +1879,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">57</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -928,7 +1890,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -939,7 +1901,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
