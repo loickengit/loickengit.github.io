@@ -79,7 +79,7 @@
 		</nav>
 		<nav>
 			<ul style="font-size:12px; font-weight:100">
-				总文章数：60
+				总文章数：63
 			</ul>
 		</nav>
 		<br/>
@@ -157,6 +157,344 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-utils/mac效率" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/20/utils/mac%E6%95%88%E7%8E%87/">Mac效率</a>
+    </h1>
+  
+
+        
+        <a href="/2021/07/20/utils/mac%E6%95%88%E7%8E%87/" class="archive-article-date">
+  	<time datetime="2021-07-20T14:45:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-20</time>
+</a>
+        
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          
+            <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">1k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">4分</span>
+      </span>
+    </span>
+</div>
+
+          
+        
+        <!-- 添加完成 -->
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          <h2 id="系统优化"><a href="#系统优化" class="headerlink" title="系统优化"></a>系统优化</h2><h3 id="配置优化"><a href="#配置优化" class="headerlink" title="配置优化"></a>配置优化</h3><h4 id="触摸板优化"><a href="#触摸板优化" class="headerlink" title="触摸板优化"></a>触摸板优化</h4><p>点击轻按</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">defaults write com.apple.AppleMultitouchTrackpad Clicking -int 1</span><br><span class="line">defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1</span><br><span class="line">defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1</span><br></pre></td></tr></table></figure>
+
+<p>三指拖拽功能</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -bool true</span><br><span class="line">defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -bool true</span><br></pre></td></tr></table></figure>
+
+<p>完全键盘控制</p>
+<p>很多操作都会弹出系统的对话框，要求我们确认或者取消，开启完全键盘控制，可以使用空格确认</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">defaults write NSGlobalDomain AppleKeyboardUIMode -int 3</span><br></pre></td></tr></table></figure>
+
+<h3 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h3><h4 id="使用-Option-键"><a href="#使用-Option-键" class="headerlink" title="使用 Option 键"></a>使用 Option 键</h4><p>按单词操作</p>
+<ol>
+<li>Option + ←：光标向左移动一个单词</li>
+<li>Option + →：光标向右移动一个单词</li>
+<li>Option + Delete：删除一个单词</li>
+</ol>
+<h4 id="使用-Shift-键"><a href="#使用-Shift-键" class="headerlink" title="使用 Shift 键"></a>使用 Shift 键</h4><p>Shift 键类似于可视模式，比如在某个位置点击光标并<strong>按住 shift 键不松开</strong>，再去另一个位置点击一次，就可以选中两次点击位置之间的文本内容。</p>
+<h4 id="拓展预览程序"><a href="#拓展预览程序" class="headerlink" title="拓展预览程序"></a>拓展预览程序</h4><p>想获得更好的阅读体验，或支持更多类型文件的快速浏览</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json qlimagesize webpquicklook qlvideo provisionql quicklookapk</span><br></pre></td></tr></table></figure>
+
+<h4 id="自动隐藏-Dock"><a href="#自动隐藏-Dock" class="headerlink" title="自动隐藏 Dock"></a>自动隐藏 Dock</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">defaults write com.apple.dock autohide -bool true</span><br></pre></td></tr></table></figure>
+
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><h2 id="IDEA"><a href="#IDEA" class="headerlink" title="IDEA"></a>IDEA</h2><p>自动引入&#x2F;优化：editor-&gt;general-&gt;auto import :: java</p>
+<h3 id="Live-template"><a href="#Live-template" class="headerlink" title="Live-template ~~~~~~~~"></a>Live-template ~~~~~~~~</h3><p>?param? 代表变量</p>
+<p>$pos$ 代表位置限定</p>
+<h3 id="重构"><a href="#重构" class="headerlink" title="重构"></a>重构</h3><p>Cmd + Alt + V: 自动抽取变量</p>
+<p>Cmd + Alt + C: 自动抽取常量</p>
+<p>Cmd + Alt + M: 重构为⽅方法</p>
+<p>Cmd + Alt + T: 自动添加到try catch&#x2F; if &#x2F; for &#x2F; while 等中</p>
+<p>Cmd + Alt + F: 自动抽取为成员变量</p>
+<p>Cmd + Alt + P: 自动抽取为⽅法参数</p>
+<h3 id="打开文件"><a href="#打开文件" class="headerlink" title="打开文件"></a>打开文件</h3><p>Cmd + O 打开类</p>
+<p>双击Shift：打开任意⽂文件</p>
+<p>Cmd + E：最近打开⽂文件列列表</p>
+<h2 id="命令行"><a href="#命令行" class="headerlink" title="命令行"></a>命令行</h2><h3 id="Iterm终端"><a href="#Iterm终端" class="headerlink" title="Iterm终端"></a>Iterm终端</h3><h4 id="定位"><a href="#定位" class="headerlink" title="定位"></a>定位</h4><p>ctrl + A 定位行首</p>
+<p>Ctrl + E 定位行尾</p>
+<p>ctrl + U 删除一行</p>
+<p>Ctrl + K 删除光标后一行</p>
+<p>Ctrl + W 删除光标前一个词</p>
+<p>Ctrl + R 搜索历史命令</p>
+<p>ctrl + K 永久清屏</p>
+<h4 id="tab窗口"><a href="#tab窗口" class="headerlink" title="tab窗口"></a>tab窗口</h4><p>同一个 Tab 内，还可以切分出多个 Pane，有两种切分方式：</p>
+<ol>
+<li>Command + D：水平切分，切分出一左一右两个 Pane</li>
+<li>Command + Shift + D：垂直切分，切分出一上一下两个 Pane</li>
+</ol>
+<h3 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h3><h4 id="ag搜索神器"><a href="#ag搜索神器" class="headerlink" title="ag搜索神器"></a>ag搜索神器</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ag [file_type] [options] pattern [oath]</span><br><span class="line">ag —java “string” .</span><br></pre></td></tr></table></figure>
+
+<h4 id="文件查找mdfind"><a href="#文件查找mdfind" class="headerlink" title="文件查找mdfind"></a>文件查找mdfind</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mdfind [-onlyin /home/loick] test.java</span><br></pre></td></tr></table></figure>
+
+<h4 id="原始命令"><a href="#原始命令" class="headerlink" title="原始命令"></a>原始命令</h4><p>找出所有包含heihei的行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -name “*.in” | xargs grep “heihei”</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -n -ri &quot;tutor-student-order-createOrder&quot; ./</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="历史命令"><a href="#历史命令" class="headerlink" title="历史命令"></a>历史命令</h3><h4 id="bash-history"><a href="#bash-history" class="headerlink" title="bash history"></a>bash history</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat .bash_history</span><br></pre></td></tr></table></figure>
+
+<h4 id="重新执行命令"><a href="#重新执行命令" class="headerlink" title="重新执行命令"></a>重新执行命令</h4><p>Ctrl + r：逆向搜索命令历史 </p>
+<p>Ctrl + g：从历史搜索模式退出 </p>
+<p>Ctrl + p：历史中的上一条命令 </p>
+<p>Ctrl + n：历史中的下一条命令 </p>
+<p>Alt + .：使用上一条命令的最后一个参数</p>
+<h2 id="SSH配置"><a href="#SSH配置" class="headerlink" title="SSH配置"></a>SSH配置</h2><h5 id="免密登录"><a href="#免密登录" class="headerlink" title="免密登录"></a>免密登录</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">brew install ssh-copy-id</span><br><span class="line">ssh-copy-id root@1.2.3.4</span><br><span class="line"># 等价于下面这个命令，省掉了两个默认参数</span><br><span class="line"># ssh-copy-id -i ~/.ssh/id_rsa.pub root@100.100.100.100 -p 22</span><br></pre></td></tr></table></figure>
+
+<p>原理其实是把自己的公钥（默认使用 <code>~/.ssh/id_rsa.pub</code> 这个文件中的内容）复制到目标服务器的 <code>~/.ssh/authorized_keys</code> 文件内</p>
+<h5 id="别名"><a href="#别名" class="headerlink" title="别名"></a>别名</h5><p>即使配置了免密登录，但用户名、IP 地址和端口号还是不想记忆，此时可以利用 SSH 的配置文件来实现。</p>
+<p>编辑 <code>~/.ssh/config</code> 文件，添加以下内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Host testhost</span><br><span class="line">    HostName 1.2.3.4</span><br><span class="line">    User root</span><br><span class="line">    Port 54321</span><br><span class="line">    IdentityFile ~/.ssh/id_rsa</span><br></pre></td></tr></table></figure>
+
+<p>连接：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh testhost</span><br></pre></td></tr></table></figure>
+
+<h5 id="全局-SSH-配置"><a href="#全局-SSH-配置" class="headerlink" title="全局 SSH 配置"></a>全局 SSH 配置</h5><p>ssh 还可以添加一些全局配置，让它变得更好用，我的配置如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Host *</span><br><span class="line">    ForwardAgent yes</span><br><span class="line">    ServerAliveInterval 10</span><br><span class="line">    ServerAliveCountMax 10000</span><br><span class="line">    TCPKeepAlive no</span><br><span class="line">    ControlMaster auto</span><br><span class="line">    ControlPath ~/.ssh/%h-%p-%r</span><br><span class="line">    ControlPersist 4h</span><br><span class="line">    Compression yes</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="自动脚本"><a href="#自动脚本" class="headerlink" title="自动脚本"></a>自动脚本</h2><p>Install expect</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install expect</span><br></pre></td></tr></table></figure>
+
+<p>write shell script</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/expect</span><br><span class="line">set timeout 5</span><br><span class="line">spawn ssh hyq@114.55.28.227</span><br><span class="line">expect &quot;password:&quot;</span><br><span class="line">send &quot;magus123456\r&quot;</span><br><span class="line">interact</span><br></pre></td></tr></table></figure>
+
+<p>execute</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">expect x.script</span><br></pre></td></tr></table></figure>
+
+<p>自动ssh脚本</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">expect 语法：</span><br><span class="line">　　expect [选项] [ -c cmds ] [ [ -[f|b] ] cmdfile ] [ args ]</span><br><span class="line"></span><br><span class="line">常用选项</span><br><span class="line">　　-c：从命令行执行expect脚本，默认expect是交互地执行的</span><br><span class="line">　　　　示例：expect -c &#x27;expect &quot;\n&quot; &#123;send &quot;pressed enter\n&quot;&#125;</span><br><span class="line">　　-d：可以输出输出调试信息</span><br><span class="line">　　　　示例：expect -d ssh.exp</span><br><span class="line"></span><br><span class="line">expect中相关命令</span><br><span class="line">　　spawn：</span><br><span class="line">　　　　启动新的进程</span><br><span class="line">　　send：</span><br><span class="line">　　　　用于向进程发送字符串</span><br><span class="line">　　expect：</span><br><span class="line">　　　　从进程接收字符串</span><br><span class="line">　　interact：</span><br><span class="line">　　　　允许用户交互</span><br><span class="line">　　exp_continue </span><br><span class="line">　　　　匹配多个字符串在执行动作后加此命令</span><br></pre></td></tr></table></figure>
+
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h4 id="停止更新homebrew"><a href="#停止更新homebrew" class="headerlink" title="停止更新homebrew"></a>停止更新homebrew</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// temporally</span><br><span class="line">export HOMEBREW_NO_AUTO_UPDATE=1</span><br><span class="line">// write HOMEBREW_NO_AUTO_UPDATE=1 to ~/.bash_profile for internal</span><br></pre></td></tr></table></figure>
+
+
+      
+      <!-- tags and categories -->
+      
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/util//" class="article-tag-list-link color5">util</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/07/20/utils/mac%E6%95%88%E7%8E%87/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-数据库/Redis/Redis分布式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/17/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis/Redis%E5%88%86%E5%B8%83%E5%BC%8F/">Redis分布式</a>
+    </h1>
+  
+
+        
+        <a href="/2021/07/17/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis/Redis%E5%88%86%E5%B8%83%E5%BC%8F/" class="archive-article-date">
+  	<time datetime="2021-07-16T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-17</time>
+</a>
+        
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          
+            <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">481字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">1分</span>
+      </span>
+    </span>
+</div>
+
+          
+        
+        <!-- 添加完成 -->
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          <h2 id="集群设计原理"><a href="#集群设计原理" class="headerlink" title="集群设计原理"></a>集群设计原理</h2><p><img src="https://img-blog.csdn.net/20171113151113823?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWVqaW5ndGFvNzAz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="集群架构"></p>
+<ul>
+<li><p>多主从结构，类似于分库分表；通过CRC16 hash到对应的节点</p>
+<p>redis维护了一个2*14长度的slot机构，平均分配给各个节点；当有节点退出&#x2F;加入时，会重新分配它对应的slot到其他节点。</p>
+</li>
+<li><p>master只负责写和同步数据给slave</p>
+</li>
+<li><p>slave理论上可以无限扩容，提高读性能，但维护有开销</p>
+</li>
+</ul>
+<p>减轻master压力：树状多从结构，从节点同步给子从节点；在从节点开启AOF，master关闭</p>
+<h2 id="哨兵机制"><a href="#哨兵机制" class="headerlink" title="哨兵机制"></a>哨兵机制</h2><ul>
+<li><p>增加了一个哨兵集群，哨兵定期向主节点和从节点发送info命令获取最新拓扑结构。</p>
+</li>
+<li><p>每隔一秒会向主节点、从节点和其余哨兵发送ping做一次心跳检测。</p>
+</li>
+<li><p>哨兵会向redis数据节点指定频道发送自己对主节点的判断，也会订阅这个频道</p>
+</li>
+<li><p>如果哨兵发现主节点宕机了，会向其他哨兵征求判断，并开始尝试设置自己为领导者，选举算法raft，</p>
+</li>
+</ul>
+<p>成为领导者后，选择数据最全的slave为master，通知客户端切换主节点</p>
+<h2 id="脑裂问题"><a href="#脑裂问题" class="headerlink" title="脑裂问题"></a>脑裂问题</h2><p>redis脑裂指因为网络问题，master、slave、sentinel集群位于不同的网络分区，导致sentinel无法感知到master节点，所以将slave提升为master，此时存在两个master。</p>
+<p>如果客户端还基于旧master写入，新的master无法同步这些信息，在网络恢复后，旧master被置为slave，从新master同步数据，就会造成大量数据的丢失。</p>
+<p>【解决方案】：</p>
+<p>配置参数：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">min-slaves-to-write 3</span><br><span class="line">min-slaves-max-lag 10</span><br></pre></td></tr></table></figure>
+
+<p>第一个表示master的最少slave数量；第二个表示master到slave的最大延迟时间。</p>
+<p>如果不满足这个配置，master就会拒绝写入请求。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/yejingtao703/article/details/78484151">三张图秒懂Redis集群设计原理</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/leeSmall/p/8398401.html">哨兵机制</a></p>
+
+      
+      <!-- tags and categories -->
+      
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Redis//" class="article-tag-list-link color1">Redis</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/07/17/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis/Redis%E5%88%86%E5%B8%83%E5%BC%8F/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-数据库/超卖问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -1356,245 +1694,9 @@
 
 
   
-    <article id="post-languages/Java/spring/Spring Cloud组件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/08/languages/Java/spring/Spring%20Cloud%E7%BB%84%E4%BB%B6/">SpringCloud组件简介</a>
-    </h1>
-  
-
-        
-        <a href="/2021/07/08/languages/Java/spring/Spring%20Cloud%E7%BB%84%E4%BB%B6/" class="archive-article-date">
-  	<time datetime="2021-07-07T23:27:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-08</time>
-</a>
-        
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          
-            <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">587字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">2分</span>
-      </span>
-    </span>
-</div>
-
-          
-        
-        <!-- 添加完成 -->
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          <p>【Eureka】：服务注册中心，分为服务端和客户端，服务端配置eureka的开放端口，客户端配置服务端的地址（可配置多个，防止注册中心单机故障）。eureka可以配置多个，并相互注册为一个服务。</p>
-<p>【Consul】分布式系统的服务注册和发现、健康检查、K&#x2F;V存储、多数据中心。Spring cloud Consul连接spring cloud和Consul。由于Eureka2.0闭源，可用于替代eureka。</p>
-<p>【zuul】网关，部署为单独的微服务应用，有点像反向代理。底层使用了Ribbon和Hystrix。</p>
-<p>【gateway】网关，springcloud官方第二代框架，用于取代zuul。网关作用可以有：鉴权、过滤、限流、日志监控、缓存。</p>
-<p>【Ribbon】：负载均衡组件，它通常和 Eureka、 Zuul、 RestTemplate、 Feign 配合使用。</p>
-<p>【Feign】：用于消费其他服务http接口，代理模式实现，服务端定义feign接口，并实现，对外暴露Feign提供的接口。</p>
-<p>【Hystrix】：熔断器</p>
-<ul>
-<li>当一个接口调用出现故障时，启用备用接口（方式调用阻塞在当前线程上，容器只能多开线程，耗光资源），并在一段时间后，重新去尝试愿接口是否可用</li>
-<li>提供了线程池隔离机制，分离调用方和被调用方，被调用方出现故障就不会影响到调用者。</li>
-</ul>
-<p>【Sentinel】：Hystrix进入维护状态，Hystrix是服务级隔离，Sentinel是用户接口级隔离，有更多优势。</p>
-<p>【config】中心配置服务，分为服务端和客户端。服务端监听多个数据源（文件、数据库、git），对外暴露http接口，查询配置信息。客户端通过http请求路径和参数控制要获取的配置文件（不同应用、不同环境）。</p>
-<p>【Sleuth】分布式链路追踪组件，它封装了 Dapper、 Zipkin和 Kibana等组件，通过它可以知道服务之间的相互依赖关系，并实时观察链路的调用情况 。追踪结果可通过UI展示。核心概念span（一个req和res），trace（链路），annotation。</p>
-<p>【spring boot admin】：一个web程序用来管理和监控spring程序，每个应用被作为client注册到admin server，背后由actuator支持。</p>
-<p>【spring cloud stream】：可以封装 RabbitMq、ActiveMq、Kafka、 Redis 等消息组件， 利用 Spring Cloud Stream 可以实现消息的接收和发送</p>
-
-      
-      <!-- tags and categories -->
-      
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/spring生态//" class="article-tag-list-link color4">spring生态</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/07/08/languages/Java/spring/Spring%20Cloud%E7%BB%84%E4%BB%B6/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-languages/Java/spring/jackson" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/06/languages/Java/spring/jackson/">Jackson多态序列化</a>
-    </h1>
-  
-
-        
-        <a href="/2021/07/06/languages/Java/spring/jackson/" class="archive-article-date">
-  	<time datetime="2021-07-06T12:08:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-06</time>
-</a>
-        
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          
-            <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">110字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">1分</span>
-      </span>
-    </span>
-</div>
-
-          
-        
-        <!-- 添加完成 -->
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          <h4 id="JsonTypeInfo"><a href="#JsonTypeInfo" class="headerlink" title="@JsonTypeInfo"></a>@JsonTypeInfo</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@JsonTypeInfo(</span><br><span class="line">    use = Id.NAME,</span><br><span class="line">    property = &quot;type&quot;,</span><br><span class="line">    include = As.EXTERNAL_PROPERTY,</span><br><span class="line">    defaultImpl = UnknownExtraDataVO.class</span><br><span class="line">)</span><br><span class="line">@JsonSubTypes(&#123;@Type(value=UnknownExtraDataVO.class,name = &quot;0&quot;).....&#125;</span><br><span class="line">private BaseExtraDataVO data;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>use：如何识别&#x2F;区分，是哪一个子类<ul>
-<li>JsonTypeInfo.Id.CLASS，完全类限定</li>
-<li>JsonTypeInfo.Id.NAME，自定义识别码</li>
-<li>…</li>
-</ul>
-</li>
-<li>property：有识别码的情况下，设置识别码的名称。</li>
-<li>include：指定识别码如何被包含进去<ul>
-<li>PROPERTY：作为数据的兄弟属性</li>
-<li>EXTERNAL_PROPERTY：扩展属性</li>
-<li>…</li>
-</ul>
-</li>
-<li>defaultImpl：默认类型</li>
-</ul>
-
-      
-      <!-- tags and categories -->
-      
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/spring生态//" class="article-tag-list-link color4">spring生态</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/07/06/languages/Java/spring/jackson/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -1679,6 +1781,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">分库分表</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+              </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Redis</a>

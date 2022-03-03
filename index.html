@@ -79,7 +79,7 @@
 		</nav>
 		<nav>
 			<ul style="font-size:12px; font-weight:100">
-				总文章数：60
+				总文章数：63
 			</ul>
 		</nav>
 		<br/>
@@ -946,6 +946,152 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/08/30/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%AF%86%E9%9B%86%E5%9E%8B%E5%BA%94%E7%94%A8%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/%E6%95%B0%E6%8D%AE%E5%A4%8D%E5%88%B6/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-数据库/数据分区" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/30/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%88%86%E5%8C%BA/">数据分区</a>
+    </h1>
+  
+
+        
+        <a href="/2021/08/30/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%88%86%E5%8C%BA/" class="archive-article-date">
+  	<time datetime="2021-08-29T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-30</time>
+</a>
+        
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          
+            <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">757字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">2分</span>
+      </span>
+    </span>
+</div>
+
+          
+        
+        <!-- 添加完成 -->
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          <blockquote>
+<p>分区的主要目标：将数据和查询负载均匀分布在所有节点上</p>
+</blockquote>
+<h2 id="如何分区"><a href="#如何分区" class="headerlink" title="如何分区"></a>如何分区</h2><p>假设所有数据都通过键值模型（实际上每条数据行都可以视为主键-数据）</p>
+<h3 id="【关键字区间分区】"><a href="#【关键字区间分区】" class="headerlink" title="【关键字区间分区】"></a>【关键字区间分区】</h3><ul>
+<li><p>区间不一定要均匀，因为数据本身就不一定是均匀的</p>
+</li>
+<li><p>每个分区内可以按照关键字排序保存（SSTables &amp; LSM-Trees）</p>
+</li>
+<li><p>问题：某些访问模式会导致热点，比如按时间分区，新的写入都在一个分区内，可以在时间戳前面加一个特殊标识符做区分，分散到不同的分区再做查询聚合</p>
+</li>
+</ul>
+<h3 id="【hash分区】"><a href="#【hash分区】" class="headerlink" title="【hash分区】"></a>【hash分区】</h3><ul>
+<li>无法支持区间查询，区间查询分散读请求到每一个节点</li>
+<li>hotkey问题：如果所有访问针对一个key（比如抖音大V），也都路由到一台机器上，此时可以通过在hotkey上增加随机值，将hotkey分散到100个节点上，但查询就需要查100个节点进行聚合，所以只针对hotkey这样操作</li>
+</ul>
+<h3 id="【混合】"><a href="#【混合】" class="headerlink" title="【混合】"></a>【混合】</h3><ul>
+<li>使用复合键，一部分标识分区，一部分用于排序</li>
+</ul>
+<h2 id="分区与二级索引"><a href="#分区与二级索引" class="headerlink" title="分区与二级索引"></a>分区与二级索引</h2><p>根据键值的分区，通过分区键查询很容易，但非分区键查询就会导致查询扩散，每个分区查询最后做一个聚合</p>
+<p>对分区创建索引有两种方案：</p>
+<p>1、本地索引（基于文档区分二级索引），每个分区单独维护自己的索引</p>
+<p>2、全局索引（基于此条区分二级索引），构建在分区之外，本身也进行分区以支持均衡流量的目标</p>
+<ul>
+<li>读取可以直接从单个分区中快速读取数据，但写入需要更新二级索引，通常以异步的方式进行更新</li>
+</ul>
+<p><img src="https://gitee.com/loick/image-url/raw/master/partition.png" alt="partition"></p>
+<h2 id="分区再平衡"><a href="#分区再平衡" class="headerlink" title="分区再平衡"></a>分区再平衡</h2><p>查询压力增加、数据规模扩大，分区故障 –&gt; 需要把数据从一个节点转移到另一个节点</p>
+<h3 id="再平衡策略"><a href="#再平衡策略" class="headerlink" title="再平衡策略"></a>再平衡策略</h3><h4 id="固定数量的分区"><a href="#固定数量的分区" class="headerlink" title="固定数量的分区"></a>固定数量的分区</h4><p>一开始创建远远超过节点数的分区，每个节点根据节点本身资源分配一定数量分区，</p>
+<p>在节点宕机后，可以把它所负责的分区平均分配给其他节点，redis、Riak、ES等采用了这种策略</p>
+<h4 id="动态分区"><a href="#动态分区" class="headerlink" title="动态分区"></a>动态分区</h4><blockquote>
+<p>节点可以进行拆分和合并</p>
+</blockquote>
+<p>当分区过大时拆分，过小时合并，HBase，MongoDB</p>
+<h4 id="按节点比例进行分区"><a href="#按节点比例进行分区" class="headerlink" title="按节点比例进行分区"></a>按节点比例进行分区</h4><p>分区数和节点数成正比关系，节点大小可以改变</p>
+<h2 id="请求路由"><a href="#请求路由" class="headerlink" title="请求路由"></a>请求路由</h2><p>路由处理的三种策略：</p>
+<p><img src="https://gitee.com/loick/image-url/raw/master/route.png" alt="route"></p>
+<p>作为路由决策的组件，如何知道分区与节点的对应关系？所有参与者达成共识很重要</p>
+<ul>
+<li>独立的协调服务：zookeeper、…</li>
+<li>节点之间gossip同步状态，请求可以发送到任意节点，由节点负责转发到目标分区节点。<ul>
+<li>负责，但避免了对外部协调服务的依赖</li>
+</ul>
+</li>
+</ul>
+
+      
+      <!-- tags and categories -->
+      
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/数据密集型应用系统设计//" class="article-tag-list-link color2">数据密集型应用系统设计</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/08/30/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%88%86%E5%8C%BA/">展开全文 >></a>
         </p>
       
 
@@ -1909,116 +2055,9 @@
 
 
   
-    <article id="post-微服务/限流算法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/08/08/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E9%99%90%E6%B5%81%E7%AE%97%E6%B3%95/">限流算法</a>
-    </h1>
-  
-
-        
-        <a href="/2021/08/08/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E9%99%90%E6%B5%81%E7%AE%97%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2021-08-07T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-08</time>
-</a>
-        
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          
-            <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">171字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">1分</span>
-      </span>
-    </span>
-</div>
-
-          
-        
-        <!-- 添加完成 -->
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          <h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><h3 id="1、计数算法"><a href="#1、计数算法" class="headerlink" title="1、计数算法"></a>1、计数算法</h3><p>设置一分钟内只能访问100次，可以维护一个counter变量，一分钟内超过100的其他请求会被丢弃</p>
-<p>【问题】：精度太粗，导致请求可以突破限制。比如在每个一分钟的第一秒请求100次</p>
-<h3 id="2、漏斗算法"><a href="#2、漏斗算法" class="headerlink" title="2、漏斗算法"></a>2、漏斗算法</h3><p>漏斗容量有限，流出速度固定；所以当请求数量超过容量时，会被丢弃</p>
-<h3 id="3、令牌桶算法"><a href="#3、令牌桶算法" class="headerlink" title="3、令牌桶算法"></a>3、令牌桶算法</h3><p>设置一个令牌桶，按照固定速率往里面放令牌，请求只有拿到令牌后才能执行。</p>
-<p>【问题】：桶满了后，请求可以瞬间拿到很多令牌</p>
-<h2 id="开源实现"><a href="#开源实现" class="headerlink" title="开源实现"></a>开源实现</h2><p>guava ratelimiter</p>
-
-      
-      <!-- tags and categories -->
-      
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/微服务//" class="article-tag-list-link color4">微服务</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/08/08/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E9%99%90%E6%B5%81%E7%AE%97%E6%B3%95/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -2103,6 +2142,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">分库分表</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+              </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Redis</a>

@@ -79,7 +79,7 @@
 		</nav>
 		<nav>
 			<ul style="font-size:12px; font-weight:100">
-				总文章数：60
+				总文章数：63
 			</ul>
 		</nav>
 		<br/>
@@ -157,6 +157,446 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-golang/并发调度" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/27/golang/%E5%B9%B6%E5%8F%91%E8%B0%83%E5%BA%A6/">go并发模型</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/27/golang/%E5%B9%B6%E5%8F%91%E8%B0%83%E5%BA%A6/" class="archive-article-date">
+  	<time datetime="2020-05-27T09:06:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-27</time>
+</a>
+        
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          
+            <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">271字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">1分</span>
+      </span>
+    </span>
+</div>
+
+          
+        
+        <!-- 添加完成 -->
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          <h2 id="Golang并发模型"><a href="#Golang并发模型" class="headerlink" title="Golang并发模型"></a>Golang并发模型</h2><p>Go的并发是在语言层面做的，go在上层实现了一个调度器调度Goroutine执行，这样不用通过用户态和内核态的切换，实现轻量的并发。</p>
+<ul>
+<li>go会充分利用cpu，开和cpu一样数量的线程来执行goroutine，也可以指定线程数量</li>
+<li>每一个goroutine的栈空间是不固定的，可以动态的扩展</li>
+</ul>
+<h4 id="1、实现并发的3种方式"><a href="#1、实现并发的3种方式" class="headerlink" title="1、实现并发的3种方式"></a>1、实现并发的3种方式</h4><h5 id="Channel"><a href="#Channel" class="headerlink" title="Channel"></a>Channel</h5><p>channel是阻塞的，可以指定大小，当放满了之后，goroutine就会被阻塞，等待其他goroutine读取。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	ch = <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">int</span>)</span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">// do some work</span></span><br><span class="line">        ch &lt;- <span class="number">1</span></span><br><span class="line">	&#125;</span><br><span class="line">    &lt;- ch</span><br><span class="line">    <span class="comment">// finish</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这段程序初始化了一个0大小的channel，当执行到<code>&lt;- ch</code>的时候，ch中没有数据，会一直阻塞，直到里面的goroutine执行完成。</p>
+<h5 id="sync-WaitGroup"><a href="#sync-WaitGroup" class="headerlink" title="sync.WaitGroup"></a>sync.WaitGroup</h5><ul>
+<li>Add，添加需要同步的goroutine数量</li>
+<li>Done，计数减一</li>
+<li>Wait，只有当计数为0时，才会继续执行，否则阻塞等待</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> wg sync.WaitGroup</span><br><span class="line">	wg.add(<span class="number">1</span>)</span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="comment">// ...</span></span><br><span class="line">		<span class="keyword">defer</span> wg.Done()</span><br><span class="line">	&#125;</span><br><span class="line">	wg.Wait()</span><br><span class="line">	<span class="comment">// finish</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="强大的context"><a href="#强大的context" class="headerlink" title="强大的context"></a>强大的context</h5><p>…</p>
+
+      
+      <!-- tags and categories -->
+      
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/languages//" class="article-tag-list-link color5">languages</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/27/golang/%E5%B9%B6%E5%8F%91%E8%B0%83%E5%BA%A6/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-golang/golang基础语法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/11/golang/golang%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/">golang基础</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/11/golang/golang%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" class="archive-article-date">
+  	<time datetime="2020-05-11T01:07:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-11</time>
+</a>
+        
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          
+            <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">495字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">2分</span>
+      </span>
+    </span>
+</div>
+
+          
+        
+        <!-- 添加完成 -->
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          <h2 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h2><h4 id="int-x2F-int64-to-string"><a href="#int-x2F-int64-to-string" class="headerlink" title="int&#x2F;int64 to string"></a>int&#x2F;int64 to string</h4><p>Use <a target="_blank" rel="noopener" href="https://golang.org/pkg/strconv/#Itoa"><code>strconv.Itoa</code></a> to convert an int to a decimal string.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s := strconv.Itoa(97) // s == &quot;97&quot;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Warning:</strong> </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s := string(97) // s == &quot;a&quot;</span><br></pre></td></tr></table></figure>
+
+<p>Use <a target="_blank" rel="noopener" href="https://golang.org/pkg/strconv/#FormatInt"><code>strconv.FormatInt</code></a> to format an int64 in a given base.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var n int64 = 97</span><br><span class="line">s := strconv.FormatInt(n, 10) // s == &quot;97&quot; (decimal)</span><br><span class="line"></span><br><span class="line">var n int64 = 97</span><br><span class="line">s := strconv.FormatInt(n, 16) // s == &quot;61&quot; (hexadecimal)</span><br></pre></td></tr></table></figure>
+
+<h4 id="string-to-int-x2F-int64"><a href="#string-to-int-x2F-int64" class="headerlink" title="string to int&#x2F;int64"></a>string to int&#x2F;int64</h4><p>Use <a target="_blank" rel="noopener" href="https://golang.org/pkg/strconv/#Atoi"><code>strconv.Atoi</code></a> to parse a decimal string to an int.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">s := &quot;97&quot;</span><br><span class="line">if n, err := strconv.Atoi(s); err == nil &#123;</span><br><span class="line">    fmt.Println(n+1)</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    fmt.Println(s, &quot;is not an integer.&quot;)</span><br><span class="line">&#125;</span><br><span class="line">// Output: 98</span><br></pre></td></tr></table></figure>
+
+<p>Use <a target="_blank" rel="noopener" href="https://golang.org/pkg/strconv/#ParseInt"><code>strconv.ParseInt</code></a> to parse a decimal string (base <code>10</code>) and check if it fits into an int64.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">s := &quot;97&quot;</span><br><span class="line">n, err := strconv.ParseInt(s, 10, 64)</span><br><span class="line">if err == nil &#123;</span><br><span class="line">    fmt.Printf(&quot;%d of type %T&quot;, n, n)</span><br><span class="line">&#125;</span><br><span class="line">// Output: 97 of type int64</span><br></pre></td></tr></table></figure>
+
+<h2 id="文件读取"><a href="#文件读取" class="headerlink" title="文件读取"></a>文件读取</h2><h5 id="1、是否存在"><a href="#1、是否存在" class="headerlink" title="1、是否存在"></a>1、是否存在</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">func Exists(path string) bool &#123;</span><br><span class="line">	_, err := os.Stat(path)    //os.Stat获取文件信息</span><br><span class="line">	if err != nil &#123;</span><br><span class="line">		if os.IsExist(err) &#123;</span><br><span class="line">			return true</span><br><span class="line">		&#125;</span><br><span class="line">		return false</span><br><span class="line">	&#125;</span><br><span class="line">	return true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="2、-判断文件夹"><a href="#2、-判断文件夹" class="headerlink" title="2、 判断文件夹"></a>2、 判断文件夹</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">func IsDir(path string) bool &#123;</span><br><span class="line">	s, err := os.Stat(path)</span><br><span class="line">	if err != nil &#123;</span><br><span class="line">		return false</span><br><span class="line">	&#125;</span><br><span class="line">	return s.IsDir()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="3、判断文件"><a href="#3、判断文件" class="headerlink" title="3、判断文件"></a>3、判断文件</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">func IsFile(path string) bool &#123;</span><br><span class="line">	return !IsDir(path)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Exec"><a href="#Exec" class="headerlink" title="Exec"></a>Exec</h2><h4 id="1、构造"><a href="#1、构造" class="headerlink" title="1、构造"></a>1、构造</h4><p>这个方式构造的命令，后面的args总是会被当成一个string处理，为了让命令里的参数生效，一直用的第二种方式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">func Command(name string, arg ...string) *Cmd</span><br></pre></td></tr></table></figure>
+
+<p>执行完整一条命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmd := exec.Command(&quot;/bin/sh&quot;, &quot;-c&quot;, &quot;sudo rm -rf output&quot;)</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2、执行"><a href="#2、执行" class="headerlink" title="2、执行"></a>2、执行</h4><p>返回标准输出与标准错误</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">func (c *Cmd) CombinedOutput() ([]byte, error)</span><br></pre></td></tr></table></figure>
+
+<p>返回标准输出</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">func (c *Cmd) Output() ([]byte, error)</span><br></pre></td></tr></table></figure>
+
+<p>阻塞等待命令执行完成</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">func (c *Cmd) Run() error</span><br></pre></td></tr></table></figure>
+
+<p>不用等待执行完成（和run的区别，不用等error返回吗？）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">func (c *Cmd) Start() error</span><br></pre></td></tr></table></figure>
+
+<p>等待命令执行完成，以及所有的标准stdout, stdin, stderr输出完成</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">func (c *Cmd) Wait() error</span><br></pre></td></tr></table></figure>
+
+<h4 id="3、标准channel"><a href="#3、标准channel" class="headerlink" title="3、标准channel"></a>3、标准channel</h4><p>返回一个和stderr连接的channel</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">func (c *Cmd) StderrPipe() (io.ReadCloser, error)</span><br></pre></td></tr></table></figure>
+
+<p>2、返回和stdin连接的channel（这个好像不常用吧…</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">func (c *Cmd) StdinPipe() (io.WriteCloser, error)</span><br></pre></td></tr></table></figure>
+
+<p>3、返回stdout chennel</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">func (c *Cmd) StdoutPipe() (io.ReadCloser, error)</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h4><p><a target="_blank" rel="noopener" href="https://golang.org/pkg/os/exec/#Cmd.Run">https://golang.org/pkg/os/exec/#Cmd.Run</a></p>
+
+      
+      <!-- tags and categories -->
+      
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/languages//" class="article-tag-list-link color5">languages</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/11/golang/golang%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-utils/git/git" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/16/utils/git/git/">Git收纳</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/16/utils/git/git/" class="archive-article-date">
+  	<time datetime="2020-04-16T10:26:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-16</time>
+</a>
+        
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          
+            <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">385字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">1分</span>
+      </span>
+    </span>
+</div>
+
+          
+        
+        <!-- 添加完成 -->
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          <h2 id="分支操作"><a href="#分支操作" class="headerlink" title="分支操作"></a>分支操作</h2><p>创建分支</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b new_branch</span><br></pre></td></tr></table></figure>
+
+<p>删除分支</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git push --delete &lt;remote_name&gt; &lt;branch_name&gt;	 # 远程</span><br><span class="line">git branch -d &lt;branch_name&gt; # 本地</span><br></pre></td></tr></table></figure>
+
+<p>强制更新远程</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git fetch --all</span><br><span class="line">git reset --hard origin/master</span><br></pre></td></tr></table></figure>
+
+<p>恢复分支</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch recover_branch commit_id</span><br></pre></td></tr></table></figure>
+
+<p>从某个commit切分支</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout commitId -b branchName</span><br></pre></td></tr></table></figure>
+
+<h2 id="一些实用命令"><a href="#一些实用命令" class="headerlink" title="一些实用命令"></a>一些实用命令</h2><p>查看会被删除的文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clean -n</span><br></pre></td></tr></table></figure>
+
+<p>删除</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git clean -f</span><br><span class="line">git clean -fd     # 删除文件夹</span><br></pre></td></tr></table></figure>
+
+<p>统计分支个人提交次数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log | grep &quot;^Author: &quot; | awk &#x27;&#123;print $2&#125;&#x27; | sort | uniq -c | sort -k1,1nr</span><br></pre></td></tr></table></figure>
+
+<p>通过git log file查看对应file的提交历史</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log file</span><br></pre></td></tr></table></figure>
+
+<p>git diff</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Git diff branch1 branch2 --stat  //显示出所有有差异的文件列表</span><br><span class="line"></span><br><span class="line">Git diff branch1 branch2 文件名(带路径)  //显示指定文件的详细差异</span><br><span class="line"></span><br><span class="line">Git diff branch1 branch2          //显示出所有有差异的文件的详细差异</span><br></pre></td></tr></table></figure>
+
+<p>git stash</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">git stash list [&lt;options&gt;]</span><br><span class="line">git stash show [&lt;stash&gt;]</span><br><span class="line">git stash drop [-q|--quiet] [&lt;stash&gt;]</span><br><span class="line">git stash ( pop | apply ) [--index] [-q|--quiet] [&lt;stash&gt;]</span><br><span class="line">git stash branch &lt;branchname&gt; [&lt;stash&gt;]</span><br><span class="line">git stash [push [-p|--patch] [-k|--[no-]keep-index] [-q|--quiet]</span><br><span class="line">	     [-u|--include-untracked] [-a|--all] [-m|--message &lt;message&gt;]</span><br><span class="line">	     [--] [&lt;pathspec&gt;…]]</span><br><span class="line">git stash clear</span><br><span class="line">git stash create [&lt;message&gt;]</span><br><span class="line">git stash store [-m|--message &lt;message&gt;] [-q|--quiet] &lt;commit&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Tag操作"><a href="#Tag操作" class="headerlink" title="Tag操作"></a>Tag操作</h2><h4 id="Creating-Tags"><a href="#Creating-Tags" class="headerlink" title="Creating Tags"></a>Creating Tags</h4><p>Lightweight Tags：简单的指向某个commit</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag v1.4-lw</span><br></pre></td></tr></table></figure>
+
+<p>Annotated Tags：包含author，时间等信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag -a v1.4 -m &quot;my version 1.4&quot;</span><br></pre></td></tr></table></figure>
+
+<p>查看tag</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git tag # list所有tag</span><br><span class="line">git show v1.4</span><br></pre></td></tr></table></figure>
+
+<h4 id="Sharing-Tags"><a href="#Sharing-Tags" class="headerlink" title="Sharing Tags"></a>Sharing Tags</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git push origin v1.5   # push v.15</span><br><span class="line">git push origin --tags # push 所有的tag</span><br></pre></td></tr></table></figure>
+
+<h4 id="Deleting-Tags"><a href="#Deleting-Tags" class="headerlink" title="Deleting Tags"></a>Deleting Tags</h4><p>本地</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag -d v1.4-lw</span><br></pre></td></tr></table></figure>
+
+<p>远程</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin --delete &lt;tagname&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Checking-out-Tags"><a href="#Checking-out-Tags" class="headerlink" title="Checking out Tags"></a>Checking out Tags</h4><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout 2.0.0</span><br></pre></td></tr></table></figure>
+
+      
+      <!-- tags and categories -->
+      
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">git</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/util//" class="article-tag-list-link color5">util</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/16/utils/git/git/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-languages/C++内存回收" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -1178,481 +1618,9 @@
 
 
   
-    <article id="post-容器/docker-service" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/06/%E5%AE%B9%E5%99%A8/docker-service/">docker服务管理</a>
-    </h1>
-  
-
-        
-        <a href="/2019/07/06/%E5%AE%B9%E5%99%A8/docker-service/" class="archive-article-date">
-  	<time datetime="2019-07-06T06:03:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-06</time>
-</a>
-        
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          
-            <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">494字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">2分</span>
-      </span>
-    </span>
-</div>
-
-          
-        
-        <!-- 添加完成 -->
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          <h3 id="1-image-仓库的镜像网址"><a href="#1-image-仓库的镜像网址" class="headerlink" title="1. image 仓库的镜像网址"></a>1. image 仓库的镜像网址</h3><p>把仓库网址改成国内的镜像站</p>
-<p>打开<code>/etc/default/docker</code>文件,在文件的底部加上一行。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DOCKER_OPTS=&quot;--registry-mirror=https://registry.docker-cn.com&quot;</span><br></pre></td></tr></table></figure>
-
-<p>重启</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service docker restart</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-自建-WordPress-容器"><a href="#2-自建-WordPress-容器" class="headerlink" title="2. 自建 WordPress 容器"></a>2. 自建 WordPress 容器</h3><h4 id="2-1-WordPress"><a href="#2-1-WordPress" class="headerlink" title="2.1 WordPress"></a>2.1 WordPress</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">docker container run \</span><br><span class="line">  -d \</span><br><span class="line">  -p 127.0.0.2:8080:80 \</span><br><span class="line">  --rm \</span><br><span class="line">  --name wordpress \</span><br><span class="line">  --env WORDPRESS_DB_PASSWORD=123456 \</span><br><span class="line">  --link wordpressdb:mysql \</span><br><span class="line">  --volume &quot;$PWD/wordpress&quot;:/var/www/html \</span><br><span class="line">  wordpress</span><br></pre></td></tr></table></figure>
-
-<p>–rm：停止运行后，自动删除容器文件。<br>–name wordpress：容器的名字叫做wordpress。<br>–volume “$PWD&#x2F;“:&#x2F;var&#x2F;www&#x2F;html：将当前目录（$PWD）映射到容器的&#x2F;var&#x2F;www&#x2F;html（Apache 对外访问的默认目录）。因此，当前目录的任何修改，都会反映到容器里面，进而被外部访问到。</p>
-<h4 id="2-2-Mysql"><a href="#2-2-Mysql" class="headerlink" title="2.2 Mysql"></a>2.2 Mysql</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker container run \</span><br><span class="line">  -d \</span><br><span class="line">  --rm \</span><br><span class="line">  --name wordpressdb \</span><br><span class="line">  --env MYSQL_ROOT_PASSWORD=123456 \</span><br><span class="line">  --env MYSQL_DATABASE=wordpress \</span><br><span class="line">  mysql:5.7</span><br></pre></td></tr></table></figure>
-
-<p><code>-d</code>：容器启动后，在后台运行。</p>
-<p><code>--rm</code>：容器终止运行后，自动删除容器文件。</p>
-<p><code>--name wordpressdb</code>：容器的名字叫做<code>wordpressdb</code></p>
-<p><code>--env MYSQL_ROOT_PASSWORD=123456</code>：向容器进程传入一个环境变量<code>MYSQL_ROOT_PASSWORD</code>，该变量会被用作 MySQL 的根密码。</p>
-<p><code>--env MYSQL_DATABASE=wordpress</code>：向容器进程传入一个环境变量<code>MYSQL_DATABASE</code>，容器里面的 MySQL 会根据该变量创建一个同名数据库（本例是<code>WordPress</code>）。</p>
-<p>查看正在运行的容器</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker container ls</span><br></pre></td></tr></table></figure>
-
-<h3 id="3-Docker-Compose-工具"><a href="#3-Docker-Compose-工具" class="headerlink" title="3. Docker Compose 工具"></a>3. Docker Compose 工具</h3><p><a target="_blank" rel="noopener" href="https://docs.docker.com/compose/">Compose</a> 是 Docker 公司推出的一个工具软件，可以管理多个 Docker 容器组成一个应用。你需要定义一个 <a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2016/07/yaml.html">YAML</a> 格式的配置文件<code>docker-compose.yml</code>，写好多个容器之间的调用关系。然后，只要一个命令，就能同时启动&#x2F;关闭这些容器。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 启动所有服务</span><br><span class="line">$ docker-compose up</span><br><span class="line"># 关闭所有服务</span><br><span class="line">$ docker-compose stop</span><br></pre></td></tr></table></figure>
-
-<h5 id="新建docker-compose-yml"><a href="#新建docker-compose-yml" class="headerlink" title="新建docker-compose.yml"></a>新建<code>docker-compose.yml</code></h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">mysql:</span><br><span class="line">    image: mysql:5.7</span><br><span class="line">    environment:</span><br><span class="line">     - MYSQL_ROOT_PASSWORD=123456</span><br><span class="line">     - MYSQL_DATABASE=wordpress</span><br><span class="line">web:</span><br><span class="line">    image: wordpress</span><br><span class="line">    links:</span><br><span class="line">     - mysql</span><br><span class="line">    environment:</span><br><span class="line">     - WORDPRESS_DB_PASSWORD=123456</span><br><span class="line">    ports:</span><br><span class="line">     - &quot;127.0.0.3:8080:80&quot;</span><br><span class="line">    working_dir: /var/www/html</span><br><span class="line">    volumes:</span><br><span class="line">     - wordpress:/var/www/html</span><br></pre></td></tr></table></figure>
-
-<p>启动两个容器。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up</span><br></pre></td></tr></table></figure>
-
-<p>现在关闭两个容器。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose stop</span><br></pre></td></tr></table></figure>
-
-<p>删除两个容器文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose rm</span><br></pre></td></tr></table></figure>
-
-      
-      <!-- tags and categories -->
-      
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Docker</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/容器//" class="article-tag-list-link color3">容器</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/06/%E5%AE%B9%E5%99%A8/docker-service/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-容器/docker_intro" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/06/%E5%AE%B9%E5%99%A8/docker_intro/">docker基础</a>
-    </h1>
-  
-
-        
-        <a href="/2019/07/06/%E5%AE%B9%E5%99%A8/docker_intro/" class="archive-article-date">
-  	<time datetime="2019-07-05T17:30:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-06</time>
-</a>
-        
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          
-            <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1.1k字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">4分</span>
-      </span>
-    </span>
-</div>
-
-          
-        
-        <!-- 添加完成 -->
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          <h3 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">docker</span><br><span class="line">docker info</span><br><span class="line">docker command -help</span><br><span class="line"></span><br><span class="line"># 列出本地主机上的镜像。</span><br><span class="line">docker images</span><br><span class="line"></span><br><span class="line"># 可以通过 docker search 命令搜索 httpd 来寻找适合我们的镜像。</span><br><span class="line">docker search httpd</span><br><span class="line"></span><br><span class="line"># 载入镜像</span><br><span class="line">docker pull training/webapp </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">docker run ubuntu:15.10 /bin/echo &quot;Hello world&quot;</span><br><span class="line"></span><br><span class="line"># 使用 --name 标识来命名容器</span><br><span class="line">docker run -d -P --name runoob training/webapp python app.py</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># -i 允许你对容器内的标准输入 (STDIN) 进行交互。</span><br><span class="line"># -t 在新容器内指定一个伪终端或终端。</span><br><span class="line"># exit or ctrl + D to exit.</span><br><span class="line">docker run -i -t ubuntu:15.10 /bin/bash</span><br><span class="line"></span><br><span class="line">docker ps</span><br></pre></td></tr></table></figure>
-
-<h3 id="镜像加速"><a href="#镜像加速" class="headerlink" title="镜像加速"></a>镜像加速</h3><p>在任务栏点击 Docker for mac 应用图标 -&gt; Perferences… -&gt; Daemon -&gt; Registry mirrors。在列表中填写加速器地址即可。修改完成之后，点击 Apply &amp; Restart 按钮，Docker 就会重启并应用配置的镜像地址了。</p>
-<h3 id="运行一个web应用"><a href="#运行一个web应用" class="headerlink" title="运行一个web应用"></a>运行一个web应用</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># -d:让容器在后台运行。</span><br><span class="line"># -P:将容器内部使用的网络端口映射到我们使用的主机上。</span><br><span class="line">docker run -d -P training/webapp python app.py</span><br></pre></td></tr></table></figure>
-
-<h3 id="端口映射"><a href="#端口映射" class="headerlink" title="端口映射"></a>端口映射</h3><p>指定容器绑定的网络地址, -p</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 5000:5000 training/webapp python app.py</span><br><span class="line"></span><br><span class="line"># 如果要绑定 UDP 端口，可以在端口后面加上udp。</span><br><span class="line">ocker run -d -p 127.0.0.1:5000:5000/udp training/webapp python app.py</span><br></pre></td></tr></table></figure>
-
-<p>查看端口的绑定情况</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker port image_name</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="Dockerfile-文件"><a href="#Dockerfile-文件" class="headerlink" title="Dockerfile 文件"></a>Dockerfile 文件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">FROM node:8.4   # centos</span><br><span class="line">COPY . /app</span><br><span class="line">WORKDIR /app</span><br><span class="line">RUN npm install --registry=https://registry.npm.taobao.org</span><br><span class="line">EXPOSE 3000</span><br><span class="line">CMD node demos/01.js</span><br></pre></td></tr></table></figure>
-
-<p>第一条FROM，指定使用哪个镜像源</p>
-<p>RUN 指令告诉docker 在镜像内执行命令，安装了什么</p>
-<p><code>RUN</code>命令在 image 文件的构建阶段执行，执行结果都会打包进入 image 文件；<code>CMD</code>命令则是在容器启动后执行。</p>
-<p>只能有一个<code>CMD</code>命令。</p>
-<p>指定了<code>CMD</code>命令以后，<code>docker container run</code>命令就不能附加命令了，否则它会覆盖<code>CMD</code>命令</p>
-<h5 id="创建-image-文件"><a href="#创建-image-文件" class="headerlink" title="创建 image 文件"></a>创建 image 文件</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># -t name</span><br><span class="line">docker image build -t koa-demo .</span><br><span class="line"># : tag</span><br><span class="line">docker image build -t koa-demo:0.0.1 .</span><br></pre></td></tr></table></figure>
-
-<h5 id="生成容器"><a href="#生成容器" class="headerlink" title="生成容器"></a>生成容器</h5><p><code>docker container run</code>命令会从 image 文件生成容器。</p>
-<p>以使用<code>docker container run</code>命令的<code>--rm</code>参数，在容器终止运行后自动删除容器文件。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker container run --rm -p 8000:3000 -it koa-demo /bin/bash</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="其他有用的命令"><a href="#其他有用的命令" class="headerlink" title="其他有用的命令"></a>其他有用的命令</h3><p><strong>（1）docker container start</strong></p>
-<p><code>docker container run</code>命令是新建容器，每运行一次，就会新建一个容器。同样的命令运行两次，就会生成两个一模一样的容器文件。如果希望重复使用容器，就要使用<code>docker container start</code>命令，它用来启动已经生成、已经停止运行的容器文件。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker container start [containerID]</span><br></pre></td></tr></table></figure>
-
-<p><strong>（2）docker container logs</strong></p>
-<p>日志, 即容器里面 Shell 的标准输出</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker logs</span><br><span class="line">|| docker container logs [containerID]</span><br></pre></td></tr></table></figure>
-
-<p><code>docker container exec</code>命令用于进入一个正在运行的 docker 容器。如果<code>docker run</code>命令运行容器的时候，没有使用<code>-it</code>参数，就要用这个命令进入容器。一旦进入了容器，就可以在容器的 Shell 执行命令了。</p>
-<p><strong>（3）docker container exec</strong></p>
-<p><code>docker container exec</code>命令用于进入一个正在运行的 docker 容器。如果<code>docker run</code>命令运行容器的时候，没有使用<code>-it</code>参数，就要用这个命令进入容器。一旦进入了容器，就可以在容器的 Shell 执行命令了。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker container exec -it [containerID] /bin/bash</span><br></pre></td></tr></table></figure>
-
-<p><strong>（5）docker container cp</strong></p>
-<p><code>docker container cp</code>命令用于从正在运行的 Docker 容器里面，将文件拷贝到本机。下面是拷贝到当前目录的写法。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker container cp [containID]:[/path/to/file] .</span><br></pre></td></tr></table></figure>
-
-<p><strong>(6)  docker inspect name</strong></p>
-<p>使用 docker inspect 查看 Docker 的底层信息。返回一个 JSON 文件记录着 Docker 容器的配置和状态信息。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker inspect name</span><br></pre></td></tr></table></figure>
-
-<p><strong>(7)  others</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker stop name   </span><br><span class="line"></span><br><span class="line">docker start name</span><br><span class="line"></span><br><span class="line">docker restart ...</span><br><span class="line"></span><br><span class="line">docker rm name  </span><br></pre></td></tr></table></figure>
-
-<p>查询最后一次创建的容器</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps -l </span><br></pre></td></tr></table></figure>
-
-<p>使用 docker top 来查看容器内部运行的进程</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker top</span><br></pre></td></tr></table></figure>
-
-<p>删除容器时，容器必须是停止状态, else error</p>
-<p>日志查看,跟踪某个容器的最新日志而不必读取整个日志文件, 还可以使用-t标志为每条日志项加上时间戳.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker logs --tail 0 -f daemon_dave</span><br></pre></td></tr></table></figure>
-
-
-
-<p>“将所有容器的日志都输出到Syslog，或者通过docker run对个别的容器进行日志重定向输出。”</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">“sudo docker run --log-driver=&quot;syslog&quot; --name daemon_dwayne -d”</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2018/02/docker-tutorial.html">Docker 入门教程</a></p>
-
-      
-      <!-- tags and categories -->
-      
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Docker</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/容器//" class="article-tag-list-link color3">容器</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/06/%E5%AE%B9%E5%99%A8/docker_intro/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-utils/git/git_sshkey" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/22/utils/git/git_sshkey/">Git&amp;SSH-Key</a>
-    </h1>
-  
-
-        
-        <a href="/2019/06/22/utils/git/git_sshkey/" class="archive-article-date">
-  	<time datetime="2019-06-22T07:57:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-22</time>
-</a>
-        
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          
-            <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">315字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">1分</span>
-      </span>
-    </span>
-</div>
-
-          
-        
-        <!-- 添加完成 -->
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          <h3 id="Git配置多个SSH-Key"><a href="#Git配置多个SSH-Key" class="headerlink" title="Git配置多个SSH-Key"></a>Git配置多个SSH-Key</h3><p>在使用hexo搭建个人博客时，使用github pages托管，而源码寄存到码云上</p>
-<p>这时就需要2个git账号</p>
-<h5 id="设置方式"><a href="#设置方式" class="headerlink" title="设置方式"></a>设置方式</h5><p>生成github用的SSH-Key</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &#x27;loickengit@github.com&#x27; -f ~/.ssh/github_id_rsa</span><br></pre></td></tr></table></figure>
-
-<p>生成gitee用的SSH-Key</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &#x27;loick@gitee.com&#x27; -f ~/.ssh/gitee_id_rsa</span><br></pre></td></tr></table></figure>
-
-<p>在 ~&#x2F;.ssh 目录下新建一个config文件，添加如下内容（其中Host和HostName填写git服务器的域名，IdentityFile指定私钥的路径）</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># gitee</span><br><span class="line">Host gitee.com</span><br><span class="line">HostName gitee.com</span><br><span class="line">PreferredAuthentications publickey</span><br><span class="line">IdentityFile ~/.ssh/gitee_id_rsa</span><br><span class="line"># github</span><br><span class="line">Host github.com</span><br><span class="line">HostName github.com</span><br><span class="line">PreferredAuthentications publickey</span><br><span class="line">IdentityFile ~/.ssh/github_id_rsa</span><br></pre></td></tr></table></figure>
-
-<p>用ssh命令分别测试</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@gitee.com</span><br><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
-
-<p>这里以gitee为例，成功的话会返回下图内容</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hi loick! You&#x27;ve successfully authenticated, but GITEE.COM does not provide shell access.</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="Git访问方式"><a href="#Git访问方式" class="headerlink" title="Git访问方式"></a>Git访问方式</h3><h5 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h5><p>查看 .git&#x2F;config 设置的访问方式如下，url是ssh的连接方式</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&gt; cat .git/config</span><br><span class="line">[core]</span><br><span class="line">	repositoryformatversion = 0</span><br><span class="line">	filemode = true</span><br><span class="line">	bare = false</span><br><span class="line">	logallrefupdates = true</span><br><span class="line">	ignorecase = true</span><br><span class="line">	precomposeunicode = true</span><br><span class="line">[remote &quot;origin&quot;]</span><br><span class="line">	url = git@github.com:loickengit/loickengit.github.io.git</span><br><span class="line">	fetch = +refs/heads/*:refs/remotes/origin/*</span><br><span class="line">[branch &quot;master&quot;]</span><br><span class="line">	remote = origin</span><br><span class="line">	merge = refs/heads/master</span><br></pre></td></tr></table></figure>
-
-<p>如果使用如下的https方式访问，每次都需要输入username和password</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">url = https://github.com/loickengit/loickengit.github.io.git</span><br></pre></td></tr></table></figure>
-
-<h5 id="git命令设置访问方式"><a href="#git命令设置访问方式" class="headerlink" title="git命令设置访问方式"></a>git命令设置访问方式</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote set-url origin git@github.com:loickengit/loickengit.github.io.git</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id=""><a href="#" class="headerlink" title=""></a></h4>
-      
-      <!-- tags and categories -->
-      
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">git</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/util//" class="article-tag-list-link color5">util</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/06/22/utils/git/git_sshkey/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/4/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/4/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -1737,6 +1705,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">分库分表</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+              </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Redis</a>

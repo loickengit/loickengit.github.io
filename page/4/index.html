@@ -79,7 +79,7 @@
 		</nav>
 		<nav>
 			<ul style="font-size:12px; font-weight:100">
-				总文章数：60
+				总文章数：63
 			</ul>
 		</nav>
 		<br/>
@@ -157,6 +157,386 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-数据库/Mysql索引" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/10/%E6%95%B0%E6%8D%AE%E5%BA%93/Mysql%E7%B4%A2%E5%BC%95/">Mysql索引结构与分类</a>
+    </h1>
+  
+
+        
+        <a href="/2021/07/10/%E6%95%B0%E6%8D%AE%E5%BA%93/Mysql%E7%B4%A2%E5%BC%95/" class="archive-article-date">
+  	<time datetime="2021-07-09T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-10</time>
+</a>
+        
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          
+            <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">757字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">2分</span>
+      </span>
+    </span>
+</div>
+
+          
+        
+        <!-- 添加完成 -->
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          <p>1、索引需要占用<strong>磁盘空间</strong>，因此在创建索引时要考虑到磁盘空间是否足够</p>
+<p>2、创建索引时需要<strong>对表加锁</strong>，因此实际操作中需要在业务空闲期间进行</p>
+<h2 id="索引的分类"><a href="#索引的分类" class="headerlink" title="索引的分类"></a>索引的分类</h2><p>1、主键索引：即主索引，根据主键pk_clolum（length）建立索引，<strong>不允许重复，不允许空值</strong>；</p>
+<p>2、唯一索引：用来建立索引的列的值必须是<strong>唯一的，允许空值</strong></p>
+<p>3、普通索引：用表中的普通列构建的索引，没有任何限制</p>
+<p>4、全文索引：用大文本对象的列构建的索引</p>
+<p>5、组合索引：用多个列组合构建的索引，这多个列中的值不允许有空值</p>
+<h2 id="聚簇索引和非聚簇索引"><a href="#聚簇索引和非聚簇索引" class="headerlink" title="聚簇索引和非聚簇索引"></a>聚簇索引和非聚簇索引</h2><p>【聚簇索引】：在索引中直接保存行数据</p>
+<p>【非聚簇索引】：数据行和索引分开存储，索引存储的是数据行的物理地址</p>
+<ul>
+<li>InnoDB的主键索引是聚簇索引，在叶子结点上，数据和索引存放在一起；</li>
+</ul>
+<p>其他非主键索引都是非聚簇索引，ta们的叶子结点存储的是主键值。因此主键值越小，其他索引存储的索引数据越少，tree的高度小，减少磁盘访问次数。</p>
+<ul>
+<li>Myisam的所有索引类型都是非聚簇索引，存储的是数据行的物理地址，因此对myisam的插入只用修改索引结果，不会导致磁盘页的重新整合（分裂）</li>
+</ul>
+<p><img src="https://gitee.com/loick/image-url/raw/master/index_structure.jpg" alt="索引结果"></p>
+<h2 id="BTree和B-Tree"><a href="#BTree和B-Tree" class="headerlink" title="BTree和B+Tree"></a>BTree和B+Tree</h2><p>【Btree】：非叶子结点有n-1个key和n个指针，key包含键值和数据两部分，也就是说节点包含数据。</p>
+<p>【B+Tree】: </p>
+<ul>
+<li>非叶子结点不存储数据，数据都在叶子结点中；</li>
+<li>增加了顺序访问指针，叶子结点有指向相邻叶子结点的指针。提高了区域访问性。</li>
+</ul>
+<p><strong>局部性原理与磁盘预读：</strong></p>
+<p>磁盘读取慢，为了减少磁盘IO，操作系统会预读（提前读入后面的数据）到内存中，以提高效率。</p>
+<h5 id="B-Tree的优势："><a href="#B-Tree的优势：" class="headerlink" title="B+Tree的优势："></a>B+Tree的优势：</h5><ul>
+<li>索引很大，也是存放在磁盘上，因此要尽量减少磁盘IO，B+tree非叶子结点不存放数据，可以放更多的键值和指针，降低tree的高度，减少磁盘IO。</li>
+<li>叶子结点顺序访问指针，利用了磁盘局部性和预读原理。</li>
+<li>所有的数据都在叶子结点上，因此所有查询速度一样。</li>
+</ul>
+<h2 id="ICP优化"><a href="#ICP优化" class="headerlink" title="ICP优化"></a>ICP优化</h2><p>索引下推。<a target="_blank" rel="noopener" href="http://fivezh.github.io/2020/01/19/mysql-icp/?utm_source=tuicool&utm_medium=referral">MySQL索引下推</a></p>
+<p>场景：联合索引在遇到非等值判断（&lt;, &gt;)时，索引会被截断，后面的字段用不上。InnoDB的默认表现是用前面的字段回表查询所有数据，拿出来后再根据后面的字段过滤。但联合索引上已经有所有字段信息，所以可以先根据覆盖索引字段信息进行过滤，再回表查询，以此减少磁盘IO。</p>
+
+      
+      <!-- tags and categories -->
+      
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">mysql</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/数据库//" class="article-tag-list-link color4">数据库</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/07/10/%E6%95%B0%E6%8D%AE%E5%BA%93/Mysql%E7%B4%A2%E5%BC%95/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-languages/Java/spring/Spring Cloud组件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/08/languages/Java/spring/Spring%20Cloud%E7%BB%84%E4%BB%B6/">SpringCloud组件简介</a>
+    </h1>
+  
+
+        
+        <a href="/2021/07/08/languages/Java/spring/Spring%20Cloud%E7%BB%84%E4%BB%B6/" class="archive-article-date">
+  	<time datetime="2021-07-07T23:27:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-08</time>
+</a>
+        
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          
+            <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">587字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">2分</span>
+      </span>
+    </span>
+</div>
+
+          
+        
+        <!-- 添加完成 -->
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          <p>【Eureka】：服务注册中心，分为服务端和客户端，服务端配置eureka的开放端口，客户端配置服务端的地址（可配置多个，防止注册中心单机故障）。eureka可以配置多个，并相互注册为一个服务。</p>
+<p>【Consul】分布式系统的服务注册和发现、健康检查、K&#x2F;V存储、多数据中心。Spring cloud Consul连接spring cloud和Consul。由于Eureka2.0闭源，可用于替代eureka。</p>
+<p>【zuul】网关，部署为单独的微服务应用，有点像反向代理。底层使用了Ribbon和Hystrix。</p>
+<p>【gateway】网关，springcloud官方第二代框架，用于取代zuul。网关作用可以有：鉴权、过滤、限流、日志监控、缓存。</p>
+<p>【Ribbon】：负载均衡组件，它通常和 Eureka、 Zuul、 RestTemplate、 Feign 配合使用。</p>
+<p>【Feign】：用于消费其他服务http接口，代理模式实现，服务端定义feign接口，并实现，对外暴露Feign提供的接口。</p>
+<p>【Hystrix】：熔断器</p>
+<ul>
+<li>当一个接口调用出现故障时，启用备用接口（方式调用阻塞在当前线程上，容器只能多开线程，耗光资源），并在一段时间后，重新去尝试愿接口是否可用</li>
+<li>提供了线程池隔离机制，分离调用方和被调用方，被调用方出现故障就不会影响到调用者。</li>
+</ul>
+<p>【Sentinel】：Hystrix进入维护状态，Hystrix是服务级隔离，Sentinel是用户接口级隔离，有更多优势。</p>
+<p>【config】中心配置服务，分为服务端和客户端。服务端监听多个数据源（文件、数据库、git），对外暴露http接口，查询配置信息。客户端通过http请求路径和参数控制要获取的配置文件（不同应用、不同环境）。</p>
+<p>【Sleuth】分布式链路追踪组件，它封装了 Dapper、 Zipkin和 Kibana等组件，通过它可以知道服务之间的相互依赖关系，并实时观察链路的调用情况 。追踪结果可通过UI展示。核心概念span（一个req和res），trace（链路），annotation。</p>
+<p>【spring boot admin】：一个web程序用来管理和监控spring程序，每个应用被作为client注册到admin server，背后由actuator支持。</p>
+<p>【spring cloud stream】：可以封装 RabbitMq、ActiveMq、Kafka、 Redis 等消息组件， 利用 Spring Cloud Stream 可以实现消息的接收和发送</p>
+
+      
+      <!-- tags and categories -->
+      
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/spring生态//" class="article-tag-list-link color4">spring生态</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/07/08/languages/Java/spring/Spring%20Cloud%E7%BB%84%E4%BB%B6/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-languages/Java/spring/jackson" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/06/languages/Java/spring/jackson/">Jackson多态序列化</a>
+    </h1>
+  
+
+        
+        <a href="/2021/07/06/languages/Java/spring/jackson/" class="archive-article-date">
+  	<time datetime="2021-07-06T12:08:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-06</time>
+</a>
+        
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          
+            <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">110字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">1分</span>
+      </span>
+    </span>
+</div>
+
+          
+        
+        <!-- 添加完成 -->
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          <h4 id="JsonTypeInfo"><a href="#JsonTypeInfo" class="headerlink" title="@JsonTypeInfo"></a>@JsonTypeInfo</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@JsonTypeInfo(</span><br><span class="line">    use = Id.NAME,</span><br><span class="line">    property = &quot;type&quot;,</span><br><span class="line">    include = As.EXTERNAL_PROPERTY,</span><br><span class="line">    defaultImpl = UnknownExtraDataVO.class</span><br><span class="line">)</span><br><span class="line">@JsonSubTypes(&#123;@Type(value=UnknownExtraDataVO.class,name = &quot;0&quot;).....&#125;</span><br><span class="line">private BaseExtraDataVO data;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>use：如何识别&#x2F;区分，是哪一个子类<ul>
+<li>JsonTypeInfo.Id.CLASS，完全类限定</li>
+<li>JsonTypeInfo.Id.NAME，自定义识别码</li>
+<li>…</li>
+</ul>
+</li>
+<li>property：有识别码的情况下，设置识别码的名称。</li>
+<li>include：指定识别码如何被包含进去<ul>
+<li>PROPERTY：作为数据的兄弟属性</li>
+<li>EXTERNAL_PROPERTY：扩展属性</li>
+<li>…</li>
+</ul>
+</li>
+<li>defaultImpl：默认类型</li>
+</ul>
+
+      
+      <!-- tags and categories -->
+      
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/spring生态//" class="article-tag-list-link color4">spring生态</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/07/06/languages/Java/spring/jackson/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-languages/Java/反射" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -1094,449 +1474,9 @@
 
 
   
-    <article id="post-golang/并发调度" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/27/golang/%E5%B9%B6%E5%8F%91%E8%B0%83%E5%BA%A6/">go并发模型</a>
-    </h1>
-  
-
-        
-        <a href="/2020/05/27/golang/%E5%B9%B6%E5%8F%91%E8%B0%83%E5%BA%A6/" class="archive-article-date">
-  	<time datetime="2020-05-27T09:06:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-27</time>
-</a>
-        
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          
-            <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">271字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">1分</span>
-      </span>
-    </span>
-</div>
-
-          
-        
-        <!-- 添加完成 -->
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          <h2 id="Golang并发模型"><a href="#Golang并发模型" class="headerlink" title="Golang并发模型"></a>Golang并发模型</h2><p>Go的并发是在语言层面做的，go在上层实现了一个调度器调度Goroutine执行，这样不用通过用户态和内核态的切换，实现轻量的并发。</p>
-<ul>
-<li>go会充分利用cpu，开和cpu一样数量的线程来执行goroutine，也可以指定线程数量</li>
-<li>每一个goroutine的栈空间是不固定的，可以动态的扩展</li>
-</ul>
-<h4 id="1、实现并发的3种方式"><a href="#1、实现并发的3种方式" class="headerlink" title="1、实现并发的3种方式"></a>1、实现并发的3种方式</h4><h5 id="Channel"><a href="#Channel" class="headerlink" title="Channel"></a>Channel</h5><p>channel是阻塞的，可以指定大小，当放满了之后，goroutine就会被阻塞，等待其他goroutine读取。</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	ch = <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">int</span>)</span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">// do some work</span></span><br><span class="line">        ch &lt;- <span class="number">1</span></span><br><span class="line">	&#125;</span><br><span class="line">    &lt;- ch</span><br><span class="line">    <span class="comment">// finish</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这段程序初始化了一个0大小的channel，当执行到<code>&lt;- ch</code>的时候，ch中没有数据，会一直阻塞，直到里面的goroutine执行完成。</p>
-<h5 id="sync-WaitGroup"><a href="#sync-WaitGroup" class="headerlink" title="sync.WaitGroup"></a>sync.WaitGroup</h5><ul>
-<li>Add，添加需要同步的goroutine数量</li>
-<li>Done，计数减一</li>
-<li>Wait，只有当计数为0时，才会继续执行，否则阻塞等待</li>
-</ul>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> wg sync.WaitGroup</span><br><span class="line">	wg.add(<span class="number">1</span>)</span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="comment">// ...</span></span><br><span class="line">		<span class="keyword">defer</span> wg.Done()</span><br><span class="line">	&#125;</span><br><span class="line">	wg.Wait()</span><br><span class="line">	<span class="comment">// finish</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="强大的context"><a href="#强大的context" class="headerlink" title="强大的context"></a>强大的context</h5><p>…</p>
-
-      
-      <!-- tags and categories -->
-      
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/languages//" class="article-tag-list-link color5">languages</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/27/golang/%E5%B9%B6%E5%8F%91%E8%B0%83%E5%BA%A6/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-golang/golang基础语法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/11/golang/golang%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/">golang基础</a>
-    </h1>
-  
-
-        
-        <a href="/2020/05/11/golang/golang%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2020-05-11T01:07:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-11</time>
-</a>
-        
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          
-            <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">495字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">2分</span>
-      </span>
-    </span>
-</div>
-
-          
-        
-        <!-- 添加完成 -->
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          <h2 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h2><h4 id="int-x2F-int64-to-string"><a href="#int-x2F-int64-to-string" class="headerlink" title="int&#x2F;int64 to string"></a>int&#x2F;int64 to string</h4><p>Use <a target="_blank" rel="noopener" href="https://golang.org/pkg/strconv/#Itoa"><code>strconv.Itoa</code></a> to convert an int to a decimal string.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s := strconv.Itoa(97) // s == &quot;97&quot;</span><br></pre></td></tr></table></figure>
-
-<p><strong>Warning:</strong> </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s := string(97) // s == &quot;a&quot;</span><br></pre></td></tr></table></figure>
-
-<p>Use <a target="_blank" rel="noopener" href="https://golang.org/pkg/strconv/#FormatInt"><code>strconv.FormatInt</code></a> to format an int64 in a given base.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var n int64 = 97</span><br><span class="line">s := strconv.FormatInt(n, 10) // s == &quot;97&quot; (decimal)</span><br><span class="line"></span><br><span class="line">var n int64 = 97</span><br><span class="line">s := strconv.FormatInt(n, 16) // s == &quot;61&quot; (hexadecimal)</span><br></pre></td></tr></table></figure>
-
-<h4 id="string-to-int-x2F-int64"><a href="#string-to-int-x2F-int64" class="headerlink" title="string to int&#x2F;int64"></a>string to int&#x2F;int64</h4><p>Use <a target="_blank" rel="noopener" href="https://golang.org/pkg/strconv/#Atoi"><code>strconv.Atoi</code></a> to parse a decimal string to an int.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">s := &quot;97&quot;</span><br><span class="line">if n, err := strconv.Atoi(s); err == nil &#123;</span><br><span class="line">    fmt.Println(n+1)</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    fmt.Println(s, &quot;is not an integer.&quot;)</span><br><span class="line">&#125;</span><br><span class="line">// Output: 98</span><br></pre></td></tr></table></figure>
-
-<p>Use <a target="_blank" rel="noopener" href="https://golang.org/pkg/strconv/#ParseInt"><code>strconv.ParseInt</code></a> to parse a decimal string (base <code>10</code>) and check if it fits into an int64.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">s := &quot;97&quot;</span><br><span class="line">n, err := strconv.ParseInt(s, 10, 64)</span><br><span class="line">if err == nil &#123;</span><br><span class="line">    fmt.Printf(&quot;%d of type %T&quot;, n, n)</span><br><span class="line">&#125;</span><br><span class="line">// Output: 97 of type int64</span><br></pre></td></tr></table></figure>
-
-<h2 id="文件读取"><a href="#文件读取" class="headerlink" title="文件读取"></a>文件读取</h2><h5 id="1、是否存在"><a href="#1、是否存在" class="headerlink" title="1、是否存在"></a>1、是否存在</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">func Exists(path string) bool &#123;</span><br><span class="line">	_, err := os.Stat(path)    //os.Stat获取文件信息</span><br><span class="line">	if err != nil &#123;</span><br><span class="line">		if os.IsExist(err) &#123;</span><br><span class="line">			return true</span><br><span class="line">		&#125;</span><br><span class="line">		return false</span><br><span class="line">	&#125;</span><br><span class="line">	return true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="2、-判断文件夹"><a href="#2、-判断文件夹" class="headerlink" title="2、 判断文件夹"></a>2、 判断文件夹</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">func IsDir(path string) bool &#123;</span><br><span class="line">	s, err := os.Stat(path)</span><br><span class="line">	if err != nil &#123;</span><br><span class="line">		return false</span><br><span class="line">	&#125;</span><br><span class="line">	return s.IsDir()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="3、判断文件"><a href="#3、判断文件" class="headerlink" title="3、判断文件"></a>3、判断文件</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">func IsFile(path string) bool &#123;</span><br><span class="line">	return !IsDir(path)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="Exec"><a href="#Exec" class="headerlink" title="Exec"></a>Exec</h2><h4 id="1、构造"><a href="#1、构造" class="headerlink" title="1、构造"></a>1、构造</h4><p>这个方式构造的命令，后面的args总是会被当成一个string处理，为了让命令里的参数生效，一直用的第二种方式</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">func Command(name string, arg ...string) *Cmd</span><br></pre></td></tr></table></figure>
-
-<p>执行完整一条命令</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmd := exec.Command(&quot;/bin/sh&quot;, &quot;-c&quot;, &quot;sudo rm -rf output&quot;)</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="2、执行"><a href="#2、执行" class="headerlink" title="2、执行"></a>2、执行</h4><p>返回标准输出与标准错误</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">func (c *Cmd) CombinedOutput() ([]byte, error)</span><br></pre></td></tr></table></figure>
-
-<p>返回标准输出</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">func (c *Cmd) Output() ([]byte, error)</span><br></pre></td></tr></table></figure>
-
-<p>阻塞等待命令执行完成</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">func (c *Cmd) Run() error</span><br></pre></td></tr></table></figure>
-
-<p>不用等待执行完成（和run的区别，不用等error返回吗？）</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">func (c *Cmd) Start() error</span><br></pre></td></tr></table></figure>
-
-<p>等待命令执行完成，以及所有的标准stdout, stdin, stderr输出完成</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">func (c *Cmd) Wait() error</span><br></pre></td></tr></table></figure>
-
-<h4 id="3、标准channel"><a href="#3、标准channel" class="headerlink" title="3、标准channel"></a>3、标准channel</h4><p>返回一个和stderr连接的channel</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">func (c *Cmd) StderrPipe() (io.ReadCloser, error)</span><br></pre></td></tr></table></figure>
-
-<p>2、返回和stdin连接的channel（这个好像不常用吧…</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">func (c *Cmd) StdinPipe() (io.WriteCloser, error)</span><br></pre></td></tr></table></figure>
-
-<p>3、返回stdout chennel</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">func (c *Cmd) StdoutPipe() (io.ReadCloser, error)</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h4><p><a target="_blank" rel="noopener" href="https://golang.org/pkg/os/exec/#Cmd.Run">https://golang.org/pkg/os/exec/#Cmd.Run</a></p>
-
-      
-      <!-- tags and categories -->
-      
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/languages//" class="article-tag-list-link color5">languages</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/11/golang/golang%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-utils/git/git" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/16/utils/git/git/">Git收纳</a>
-    </h1>
-  
-
-        
-        <a href="/2020/04/16/utils/git/git/" class="archive-article-date">
-  	<time datetime="2020-04-16T10:26:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-16</time>
-</a>
-        
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          
-            <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">385字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">1分</span>
-      </span>
-    </span>
-</div>
-
-          
-        
-        <!-- 添加完成 -->
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          <h2 id="分支操作"><a href="#分支操作" class="headerlink" title="分支操作"></a>分支操作</h2><p>创建分支</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b new_branch</span><br></pre></td></tr></table></figure>
-
-<p>删除分支</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git push --delete &lt;remote_name&gt; &lt;branch_name&gt;	 # 远程</span><br><span class="line">git branch -d &lt;branch_name&gt; # 本地</span><br></pre></td></tr></table></figure>
-
-<p>强制更新远程</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git fetch --all</span><br><span class="line">git reset --hard origin/master</span><br></pre></td></tr></table></figure>
-
-<p>恢复分支</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch recover_branch commit_id</span><br></pre></td></tr></table></figure>
-
-<p>从某个commit切分支</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout commitId -b branchName</span><br></pre></td></tr></table></figure>
-
-<h2 id="一些实用命令"><a href="#一些实用命令" class="headerlink" title="一些实用命令"></a>一些实用命令</h2><p>查看会被删除的文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clean -n</span><br></pre></td></tr></table></figure>
-
-<p>删除</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git clean -f</span><br><span class="line">git clean -fd     # 删除文件夹</span><br></pre></td></tr></table></figure>
-
-<p>统计分支个人提交次数</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log | grep &quot;^Author: &quot; | awk &#x27;&#123;print $2&#125;&#x27; | sort | uniq -c | sort -k1,1nr</span><br></pre></td></tr></table></figure>
-
-<p>通过git log file查看对应file的提交历史</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log file</span><br></pre></td></tr></table></figure>
-
-<p>git diff</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Git diff branch1 branch2 --stat  //显示出所有有差异的文件列表</span><br><span class="line"></span><br><span class="line">Git diff branch1 branch2 文件名(带路径)  //显示指定文件的详细差异</span><br><span class="line"></span><br><span class="line">Git diff branch1 branch2          //显示出所有有差异的文件的详细差异</span><br></pre></td></tr></table></figure>
-
-<p>git stash</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">git stash list [&lt;options&gt;]</span><br><span class="line">git stash show [&lt;stash&gt;]</span><br><span class="line">git stash drop [-q|--quiet] [&lt;stash&gt;]</span><br><span class="line">git stash ( pop | apply ) [--index] [-q|--quiet] [&lt;stash&gt;]</span><br><span class="line">git stash branch &lt;branchname&gt; [&lt;stash&gt;]</span><br><span class="line">git stash [push [-p|--patch] [-k|--[no-]keep-index] [-q|--quiet]</span><br><span class="line">	     [-u|--include-untracked] [-a|--all] [-m|--message &lt;message&gt;]</span><br><span class="line">	     [--] [&lt;pathspec&gt;…]]</span><br><span class="line">git stash clear</span><br><span class="line">git stash create [&lt;message&gt;]</span><br><span class="line">git stash store [-m|--message &lt;message&gt;] [-q|--quiet] &lt;commit&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Tag操作"><a href="#Tag操作" class="headerlink" title="Tag操作"></a>Tag操作</h2><h4 id="Creating-Tags"><a href="#Creating-Tags" class="headerlink" title="Creating Tags"></a>Creating Tags</h4><p>Lightweight Tags：简单的指向某个commit</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag v1.4-lw</span><br></pre></td></tr></table></figure>
-
-<p>Annotated Tags：包含author，时间等信息</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag -a v1.4 -m &quot;my version 1.4&quot;</span><br></pre></td></tr></table></figure>
-
-<p>查看tag</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git tag # list所有tag</span><br><span class="line">git show v1.4</span><br></pre></td></tr></table></figure>
-
-<h4 id="Sharing-Tags"><a href="#Sharing-Tags" class="headerlink" title="Sharing Tags"></a>Sharing Tags</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git push origin v1.5   # push v.15</span><br><span class="line">git push origin --tags # push 所有的tag</span><br></pre></td></tr></table></figure>
-
-<h4 id="Deleting-Tags"><a href="#Deleting-Tags" class="headerlink" title="Deleting Tags"></a>Deleting Tags</h4><p>本地</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag -d v1.4-lw</span><br></pre></td></tr></table></figure>
-
-<p>远程</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin --delete &lt;tagname&gt;</span><br></pre></td></tr></table></figure>
-
-<h4 id="Checking-out-Tags"><a href="#Checking-out-Tags" class="headerlink" title="Checking out Tags"></a>Checking out Tags</h4><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout 2.0.0</span><br></pre></td></tr></table></figure>
-
-      
-      <!-- tags and categories -->
-      
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">git</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/util//" class="article-tag-list-link color5">util</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/16/utils/git/git/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/3/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/3/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/5/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -1621,6 +1561,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">分库分表</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+              </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Redis</a>
