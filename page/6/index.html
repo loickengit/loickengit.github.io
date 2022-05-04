@@ -79,7 +79,7 @@
 		</nav>
 		<nav>
 			<ul style="font-size:12px; font-weight:100">
-				总文章数：63
+				总文章数：66
 			</ul>
 		</nav>
 		<br/>
@@ -157,6 +157,491 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-languages/python/python-file" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/26/languages/python/python-file/">python读写文件</a>
+    </h1>
+  
+
+        
+        <a href="/2019/10/26/languages/python/python-file/" class="archive-article-date">
+  	<time datetime="2019-10-26T15:30:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-26</time>
+</a>
+        
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          
+            <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">128字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">1分</span>
+      </span>
+    </span>
+</div>
+
+          
+        
+        <!-- 添加完成 -->
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          <p>Create nested dirs with os module</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">rootpath = <span class="string">&quot;/Users/loick/Documents/magus/&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> path <span class="keyword">in</span> paths:</span><br><span class="line">    sub = rootpath + path[<span class="number">0</span>:path.rindex(<span class="string">&#x27;/&#x27;</span>)]</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(sub):</span><br><span class="line">        os.makedirs(sub)</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import os</span><br><span class="line">path = &quot;/users/tianfengping/audiofile/&quot;</span><br><span class="line">for file in os.listdir(path):</span><br><span class="line">	# read file</span><br><span class="line">	f = open(path+&quot;/&quot;+file);</span><br><span class="line">	# transfer to the format you want</span><br><span class="line">	# you transfer function goes here</span><br></pre></td></tr></table></figure>
+
+
+
+<p>read nested dir</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import os</span><br><span class="line">def unpack():</span><br><span class="line">    dir = &#x27;/Users/loick/Documents/magus/imgs/retargeting/results/&#x27;</span><br><span class="line">    for path, _, fs in os.walk(dir):</span><br><span class="line">        root, pre_name = dir.split(&#x27;results/&#x27;)</span><br><span class="line">        root += &#x27;results/&#x27;</span><br><span class="line">        for file in fs:</span><br><span class="line">            new_name = root + (pre_name + &#x27;&amp;&#x27; + file).replace(&#x27;/&#x27;, &#x27;&amp;&#x27;)</span><br><span class="line">            os.rename(path+&#x27;/&#x27;+file, new_name)</span><br><span class="line">            # print(new_name)</span><br></pre></td></tr></table></figure>
+
+
+      
+      <!-- tags and categories -->
+      
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/languages//" class="article-tag-list-link color5">languages</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/10/26/languages/python/python-file/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-容器/docker-02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/19/%E5%AE%B9%E5%99%A8/docker-02/">docker镜像</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/19/%E5%AE%B9%E5%99%A8/docker-02/" class="archive-article-date">
+  	<time datetime="2019-07-19T07:47:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-19</time>
+</a>
+        
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          
+            <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">1.6k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">6分</span>
+      </span>
+    </span>
+</div>
+
+          
+        
+        <!-- 添加完成 -->
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          <h4 id="镜像"><a href="#镜像" class="headerlink" title="镜像"></a>镜像</h4><p>每个只读镜像层都是只读的，并且以后永远不会变化。当创建一个新容器时，Docker会构建出一个镜像栈，并在栈的最顶端添加一个读写层。这个读写层再加上其下面的镜像层以及一些配置数据，就构成了一个容器。</p>
+<h4 id="列出镜像"><a href="#列出镜像" class="headerlink" title="列出镜像"></a>列出镜像</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker images</span><br></pre></td></tr></table></figure>
+
+<h4 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull ...</span><br></pre></td></tr></table></figure>
+
+<h4 id="查找镜像"><a href="#查找镜像" class="headerlink" title="查找镜像"></a>查找镜像</h4><p>查找docker hub</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker search puppet</span><br></pre></td></tr></table></figure>
+
+<h3 id="构建镜像"><a href="#构建镜像" class="headerlink" title="构建镜像"></a>构建镜像</h3><ol>
+<li>使用docker commit</li>
+<li>使用docker build命令和Dockerfile文件</li>
+</ol>
+<p>我们并不推荐docker commit，Dockerfile更灵活，更强大</p>
+<ol>
+<li><p>创建docker账号</p>
+</li>
+<li><p>这条命令将会完成登录到Docker Hub的工作，并将认证信息保存起来以供后面使用。可以使用docker logout命令从一个Registry服务器退出。</p>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker login</span><br></pre></td></tr></table></figure>
+
+<p>用户的个人认证信息将会保存到  $HOME&#x2F;.docker&#x2F;config.json</p>
+<h4 id="1-docker-commit"><a href="#1-docker-commit" class="headerlink" title="1. docker commit"></a>1. docker commit</h4><p>修改一个容器，并提交为一个新的容器</p>
+<p>首先运行一个容器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name my_image ubuntu /bin/bash</span><br></pre></td></tr></table></figure>
+
+<p>安装软件…</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ apt-get -yqq update</span><br><span class="line">$ apt-get -y install python</span><br><span class="line">$ exit</span><br></pre></td></tr></table></figure>
+
+<p>提交</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker commit my_image author/image_name</span><br></pre></td></tr></table></figure>
+
+<p>-m 描述信息； -a 作者信息； :webserver, 增加一个webserver的标签</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker commit -m&quot;A new custom image&quot; -a&quot;James Turnbull&quot; 4aab3ce3cb76 jamtur01/apache2:webserver</span><br></pre></td></tr></table></figure>
+
+<p>查看镜像信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker images my_image</span><br><span class="line">//</span><br><span class="line">docker inspect my_image</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-Dockerfile构建镜像"><a href="#2-Dockerfile构建镜像" class="headerlink" title="2. Dockerfile构建镜像"></a>2. Dockerfile构建镜像</h4><p>通过Dockerfile和docker builder构建，可重复、透明和幂等。</p>
+<p>创建上下文</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir static_web　</span><br><span class="line">$ cd static_web　</span><br><span class="line">$ touch Dockerfile</span><br></pre></td></tr></table></figure>
+
+<p>Dockerfile，每条指令都为大写字符</p>
+<p>每个Dockerfile的第一条指令必须是FROM，指定一个基础的镜像，后续指令基于该镜像进行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># Version: 0.0.1　</span><br><span class="line">FROM ubuntu:14.04　</span><br><span class="line"></span><br><span class="line"># 作者信息</span><br><span class="line">MAINTAINER James Turnbull &quot;james@example.com&quot;　</span><br><span class="line">RUN apt-get update &amp;&amp; apt-get install -y nginx　</span><br><span class="line">RUN echo &#x27;Hi, I am in your container&#x27; \　</span><br><span class="line">　　 &gt;/usr/share/nginx/html/index.html　</span><br><span class="line">　　 </span><br><span class="line"># 公开端口</span><br><span class="line">EXPOSE 80</span><br></pre></td></tr></table></figure>
+
+<h5 id="构建"><a href="#构建" class="headerlink" title="构建"></a>构建</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># -t 设置仓库和名称，还可以设置标签 :v1</span><br><span class="line"># . 代表Dockerfile的目录，也可以指定git仓库“git@github.com:jamtur01/docker-static_web“</span><br><span class="line">docker builder -t=&quot;loick/web_image&quot; .</span><br></pre></td></tr></table></figure>
+
+<h5 id="Dockerfile和构建缓存"><a href="#Dockerfile和构建缓存" class="headerlink" title="Dockerfile和构建缓存"></a>Dockerfile和构建缓存</h5><p>由于每一步的构建过程都会将结果提交为镜像。</p>
+<p>它会将之前的镜像层看作缓存。比如，在我们的调试例子里，我们不需要在第1步到第3步之间进行任何修改，因此Docker会将之前构建时创建的镜像当做缓存并作为新的开始点。</p>
+<p>实际上，当再次进行构建时，Docker会直接从第4步开始。如果真的在第1步到第3步之间做了什么修改，Docker则会从第一条发生了变化的指令开始。</p>
+<p>然而，有些时候需要确保构建过程不会使用缓存， 可用docker build的<code>--no-cache</code>标志</p>
+<h5 id="端口映射"><a href="#端口映射" class="headerlink" title="端口映射"></a>端口映射</h5><p>docker run命令将在Docker宿主机上随机打开一个端口，这个端口会连接到容器中的80端口上。</p>
+<p>查看容器端口映射情况</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker port name/ID 80</span><br></pre></td></tr></table></figure>
+
+<p>指定映射端口</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 把容器内80映射到宿主机8080</span><br><span class="line">docker run -d -p (127.0.0.1:)8080:80 --name static_web loick/static_web</span><br></pre></td></tr></table></figure>
+
+<p>公开80端口和EXPOSE命令公开的端口， <code>-P</code>参数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -P --name static_web</span><br></pre></td></tr></table></figure>
+
+<h4 id="Dockerfile指令"><a href="#Dockerfile指令" class="headerlink" title="Dockerfile指令"></a>Dockerfile指令</h4><h5 id="1-CMD"><a href="#1-CMD" class="headerlink" title="1.CMD"></a>1.CMD</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CMD [ &quot;/bin/bash&quot; ]</span><br></pre></td></tr></table></figure>
+
+<p>指定一个容器要启动时要运行的命令</p>
+<p>和 <code>docker run</code> 中的命令等效，但会被覆盖</p>
+<h5 id="2-ENTRYPOINT"><a href="#2-ENTRYPOINT" class="headerlink" title="2.ENTRYPOINT"></a>2.ENTRYPOINT</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ENTRYPOINT [&quot;/usr/sbin/nginx&quot;]</span><br></pre></td></tr></table></figure>
+
+<p>类似于CMD指令，我们也可以通过数组的方式为命令指定相应的参数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ENTRYPOINT [&quot;/usr/sbin/nginx&quot;, &quot;-g&quot;, &quot;daemon off;&quot;]</span><br></pre></td></tr></table></figure>
+
+<h5 id="3-WORKDIR"><a href="#3-WORKDIR" class="headerlink" title="3.WORKDIR"></a>3.WORKDIR</h5><p>WORKDIR指令用来在从镜像创建一个新容器时，在容器内部设置一个工作目录，ENTRYPOINT和CMD指定的程序会在这个目录下执行。</p>
+<p>可以为不同的指令设置不同的工作目录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">WORKDIR /opt/webapp/db　</span><br><span class="line">RUN bundle install　</span><br><span class="line"></span><br><span class="line">WORKDIR /opt/webapp　</span><br><span class="line">ENTRYPOINT [ &quot;rackup&quot; ]</span><br></pre></td></tr></table></figure>
+
+<h5 id="4-ENV"><a href="#4-ENV" class="headerlink" title="4.ENV"></a>4.ENV</h5><p>在镜像构建过程中设置环境变量，持续保存在容器中</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ENV RVM_PATH /home/rvm/</span><br></pre></td></tr></table></figure>
+
+<p>也可以在其他指令中使用这些环境变量，通过<code>$</code>取值</p>
+<h5 id="5-USER"><a href="#5-USER" class="headerlink" title="5.USER"></a>5.USER</h5><p>指定该镜像会以什么样的用户去运行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 以nginx用户的身份运行</span><br><span class="line">USER nginx</span><br></pre></td></tr></table></figure>
+
+<h5 id="6-VOLUME"><a href="#6-VOLUME" class="headerlink" title="6.VOLUME"></a>6.VOLUME</h5><p>向基于镜像创建的容器添加卷。</p>
+<p>一个卷是可以存在于一个或者多个容器内的特定的目录，这个目录可以绕过联合文件系统，</p>
+<p>并提供如下共享数据或者对数据进行持久化的功能。</p>
+<ul>
+<li>卷可以在容器间共享和重用。</li>
+<li>一个容器可以不是必须和其他容器共享卷。</li>
+<li>对卷的修改是立时生效的。</li>
+<li>对卷的修改不会对更新镜像产生影响。</li>
+<li>卷会一直存在直到没有任何容器再使用它。</li>
+</ul>
+<p>卷功能让我们可以将数据（如源代码）、数据库或者其他内容添加到镜像中而不是将这些内容提交到镜像中，并且允许我们在多个容器间共享这些内容。</p>
+<p>我们可以利用此功能来测试容器和内部的应用程序代码，管理日志，或者处理容器内部的数据库。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 为基于此镜像创建的任何容器创建一个名为 /opt/project的挂载点</span><br><span class="line">VOLUME [&quot;/opt/project&quot;, ...]</span><br></pre></td></tr></table></figure>
+
+<h5 id="7-ADD"><a href="#7-ADD" class="headerlink" title="7.ADD"></a>7.ADD</h5><p>将构建环境下的文件和目录复制到镜像中，只能复制上下文中的文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 复制a.hei, 也可以使用url</span><br><span class="line">ADD a.hei /opt/application/a.hei</span><br></pre></td></tr></table></figure>
+
+<h5 id="8-COPY"><a href="#8-COPY" class="headerlink" title="8.COPY"></a>8.COPY</h5><p>非常类似于ADD，根本不同是COPY只关心在构建上下文中复制本地文件，而不会去做文件提取和解压的工作</p>
+<p>原路径必须是与当前构建环境相对的文件或目录，目的位置必须是容器内的绝对路径</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPY conf.d/ /etc/apache2/</span><br></pre></td></tr></table></figure>
+
+<h5 id="9-LABEL"><a href="#9-LABEL" class="headerlink" title="9.LABEL"></a>9.LABEL</h5><p>为Docker镜像添加元数据</p>
+<h5 id="10-STOPSIGNAL"><a href="#10-STOPSIGNAL" class="headerlink" title="10.STOPSIGNAL"></a>10.STOPSIGNAL</h5><p>设置停止容器时，发送什么系统调用信号给容器</p>
+<h5 id="11-ARG"><a href="#11-ARG" class="headerlink" title="11.ARG"></a>11.ARG</h5><p>ARG指令用来定义可以在docker build命令运行时传递给构建运行时的变量</p>
+<h5 id="12-ONBUILD"><a href="#12-ONBUILD" class="headerlink" title="12.ONBUILD"></a>12.ONBUILD</h5><p>ONBUILD指令能为镜像添加触发器。当一个镜像被用做其他镜像的基础镜像时，该镜像中的触发器将会被执行。</p>
+<h4 id="将镜像推送到Docker-Hub"><a href="#将镜像推送到Docker-Hub" class="headerlink" title="将镜像推送到Docker Hub"></a>将镜像推送到Docker Hub</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker push loick/static_web</span><br></pre></td></tr></table></figure>
+
+<p>还可设置github仓库，当有push时，会出发自动构建并推送到Docker Hub</p>
+
+      
+      <!-- tags and categories -->
+      
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Docker</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/容器//" class="article-tag-list-link color3">容器</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/19/%E5%AE%B9%E5%99%A8/docker-02/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-容器/docker-01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/19/%E5%AE%B9%E5%99%A8/docker-01/">docker运行</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/19/%E5%AE%B9%E5%99%A8/docker-01/" class="archive-article-date">
+  	<time datetime="2019-07-19T05:46:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-19</time>
+</a>
+        
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          
+            <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">672字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">2分</span>
+      </span>
+    </span>
+</div>
+
+          
+        
+        <!-- 添加完成 -->
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          <h4 id="创建容器"><a href="#创建容器" class="headerlink" title="创建容器"></a>创建容器</h4><p>首先查看docker程序的运行情况，这条命令会返回docker的所有容器和镜像的数量，Docker使用的执行驱动和存储驱动（execution and storage driver），以及Docker的基本配置。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker info</span><br></pre></td></tr></table></figure>
+
+<p>运行我们的第一个容器，-i保证容器中STDIN是开启的，-t告诉Docker为要创建的容器分配一个伪tty终端。这样我们就可以通过命令行与该容器进行交互。接下来的参数告诉docker，我们基于什么镜像创建容器，这里使用了ubuntu。最后的参数，是我们在启动容器后，运行的命令。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -i -t ubuntu /bin/bash</span><br></pre></td></tr></table></figure>
+
+<p>启动容器后，运行<code>hostname</code>可以看到容器ID和主机名是一样的，docker会自动为创建的容器生成一个ID，为了方便区分，我们可以在创建时为容器指定名称</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name my_first_box -i -t ubuntu /bin/bash</span><br></pre></td></tr></table></figure>
+
+<p>在容器内可以做任何想做的事，在结束后，通过exit退出容器。通过exit退出后，容器会停止运行。默认情况下，<code>docker ps</code>会列举出正在运行的容器，<code>docker ps -a</code>列举所有的容器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps -a</span><br></pre></td></tr></table></figure>
+
+<p>重新启动停止的容器， 使用名字或者容器ID。docker容器启动时，会沿用run指定的参数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker start my_first_box</span><br></pre></td></tr></table></figure>
+
+<p>重新附着到该容器的会话上</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker attach my_first_box</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看日志"><a href="#查看日志" class="headerlink" title="查看日志"></a>查看日志</h4><p>创建守护式容器，不停的打印</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run --name daemon_dave -d ubuntu /bin/sh -c &quot;while</span><br><span class="line">　true; do echo hello world; sleep 1; done</span><br></pre></td></tr></table></figure>
+
+<p>我们也可以跟踪容器日志的某一片段，和之前类似，只需要在tail命令后加入-f –tail标志即可。例如，可以用<code>docker logs --tail 10 daemon_dave</code>获取日志的最后10行内容。另外，也可以用<code>docker logs --tail 0 -f daemon_dave</code>命令来跟踪某个容器的最新日志而不必读取整个日志文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">docker logs box</span><br><span class="line"></span><br><span class="line">#通过-f 监控日志</span><br><span class="line">docker -f logs box</span><br><span class="line"></span><br><span class="line">docker logs --tail 10 box</span><br><span class="line"></span><br><span class="line">docker logs --tail 0 -f box</span><br><span class="line"></span><br><span class="line"># 指定日志输出</span><br><span class="line">sudo docker run --log-driver=&quot;syslog&quot; --name box2 -d</span><br><span class="line">　ubuntu /bin/sh -c &quot;while true; do echo hello world; sleep 1;</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看容器内进程"><a href="#查看容器内进程" class="headerlink" title="查看容器内进程"></a>查看容器内进程</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker top box</span><br></pre></td></tr></table></figure>
+
+<h4 id="Docker统计信息"><a href="#Docker统计信息" class="headerlink" title="Docker统计信息"></a>Docker统计信息</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker stats</span><br></pre></td></tr></table></figure>
+
+<h4 id="在容器内部运行进程"><a href="#在容器内部运行进程" class="headerlink" title="在容器内部运行进程"></a>在容器内部运行进程</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker exec -d box touch hei.js</span><br><span class="line"></span><br><span class="line">// docker exec -d box /bin/bash</span><br></pre></td></tr></table></figure>
+
+<h4 id="停止守护进程"><a href="#停止守护进程" class="headerlink" title="停止守护进程"></a>停止守护进程</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docket stop box</span><br></pre></td></tr></table></figure>
+
+<h4 id="自动重启"><a href="#自动重启" class="headerlink" title="自动重启"></a>自动重启</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># always无论退出代码是什么，都重启</span><br><span class="line"># on-failure,只有当退出码是0，才重启</span><br><span class="line"># on-failur:5,当退出码时0时，重启，最多重启5次</span><br><span class="line"></span><br><span class="line">docker run --restart=always --name box -d ubuntu bin/bash -c &quot;...&quot;</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除容器"><a href="#删除容器" class="headerlink" title="删除容器"></a>删除容器</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker rm name/Id</span><br><span class="line"></span><br><span class="line">#小技巧删除所有的容器</span><br><span class="line">docker rm `docker ps -a -q`</span><br></pre></td></tr></table></figure>
+
+
+      
+      <!-- tags and categories -->
+      
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Docker</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/容器//" class="article-tag-list-link color3">容器</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/19/%E5%AE%B9%E5%99%A8/docker-01/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-容器/docker-service" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -1151,389 +1636,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/04/26/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/kafka/kafka-spring/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-languages/js/pm2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/17/languages/js/pm2/">Nodejs pm2</a>
-    </h1>
-  
-
-        
-        <a href="/2019/04/17/languages/js/pm2/" class="archive-article-date">
-  	<time datetime="2019-04-17T07:52:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-17</time>
-</a>
-        
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          
-            <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">70字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">1分</span>
-      </span>
-    </span>
-</div>
-
-          
-        
-        <!-- 添加完成 -->
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          <h5 id="Create-a-process"><a href="#Create-a-process" class="headerlink" title="Create a process"></a>Create a process</h5><p>hexo_run.js</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//run</span><br><span class="line">const &#123; exec &#125; = require(&#x27;child_process&#x27;)</span><br><span class="line">exec(&#x27;hexo server&#x27;,(error, stdout, stderr) =&gt; &#123;</span><br><span class="line">        if(error)&#123;</span><br><span class="line">                console.log(&#x27;exec error: $&#123;error&#125;&#x27;)</span><br><span class="line">                return</span><br><span class="line">        &#125;</span><br><span class="line">        console.log(&#x27;stdout: $&#123;stdout&#125;&#x27;);</span><br><span class="line">        console.log(&#x27;stderr: $&#123;stderr&#125;&#x27;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>use pm2 to manage it</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 start hexo_run.js</span><br></pre></td></tr></table></figure>
-
-
-
-<p>other commands</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pm2 list</span><br><span class="line">pm2 stop pid/name/...</span><br></pre></td></tr></table></figure>
-
-
-      
-      <!-- tags and categories -->
-      
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/languages//" class="article-tag-list-link color5">languages</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/04/17/languages/js/pm2/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-微服务/消息队列/kafka/kafka-command" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/17/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/kafka/kafka-command/">启动kafka</a>
-    </h1>
-  
-
-        
-        <a href="/2019/04/17/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/kafka/kafka-command/" class="archive-article-date">
-  	<time datetime="2019-04-17T05:50:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-17</time>
-</a>
-        
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          
-            <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">425字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">2分</span>
-      </span>
-    </span>
-</div>
-
-          
-        
-        <!-- 添加完成 -->
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          <h5 id="Start-a-server"><a href="#Start-a-server" class="headerlink" title="Start a server"></a>Start a server</h5><p>ZooKeeper server</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/zookeeper-server-start.sh config/zookeeper.properties</span><br></pre></td></tr></table></figure>
-
-<p>Kafka server</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-server-start.sh config/server.properties</span><br></pre></td></tr></table></figure>
-
-<h5 id="Create-a-topic"><a href="#Create-a-topic" class="headerlink" title="Create a topic"></a>Create a topic</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic test</span><br></pre></td></tr></table></figure>
-
-<h5 id="Delete-a-topic"><a href="#Delete-a-topic" class="headerlink" title="Delete a topic"></a>Delete a topic</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-topics.sh --bootstrap-server 192.168.1.204:9092 --delete --topic my_topic_name</span><br></pre></td></tr></table></figure>
-
-<h5 id="List-topic"><a href="#List-topic" class="headerlink" title="List topic"></a>List topic</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-topics.sh --list --bootstrap-server 192.168.1.204:9092</span><br></pre></td></tr></table></figure>
-
-<h5 id="Send-some-messages"><a href="#Send-some-messages" class="headerlink" title="Send some messages"></a>Send some messages</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-console-producer.sh --broker-list 192.168.1.204:9092 --topic test</span><br></pre></td></tr></table></figure>
-
-<h5 id="Start-a-consumer"><a href="#Start-a-consumer" class="headerlink" title="Start a consumer"></a>Start a consumer</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-console-consumer.sh --bootstrap-server 192.168.1.204:9092 --topic test --from-beginning</span><br></pre></td></tr></table></figure>
-
-<h5 id="Setting-up-a-multi-broker-cluster"><a href="#Setting-up-a-multi-broker-cluster" class="headerlink" title="Setting up a multi-broker cluster"></a>Setting up a multi-broker cluster</h5><p>First we make a config file for each of the brokers</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp config/server.properties config/server-1.properties</span><br><span class="line">cp config/server.properties config/server-2.properties</span><br></pre></td></tr></table></figure>
-
-<p>Now edit these new files and set the following properties:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">config/server-1.properties:</span><br><span class="line">    broker.id=1</span><br><span class="line">    listeners=PLAINTEXT://:9093</span><br><span class="line">    log.dirs=/tmp/kafka-logs-1</span><br><span class="line"> </span><br><span class="line">config/server-2.properties:</span><br><span class="line">    broker.id=2</span><br><span class="line">    listeners=PLAINTEXT://:9094</span><br><span class="line">    log.dirs=/tmp/kafka-logs-2</span><br></pre></td></tr></table></figure>
-
-<p>We already have Zookeeper and our single node started, so we just need to start the two new nodes:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-server-start.sh config/server-1.properties &amp;</span><br><span class="line">...</span><br><span class="line">bin/kafka-server-start.sh config/server-2.properties &amp;</span><br></pre></td></tr></table></figure>
-
-<p>Now create a new topic with a replication factor of three:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 3 --partitions 1 --topic my-replicated-topic</span><br></pre></td></tr></table></figure>
-
-<p>Okay but now that we have a cluster how can we know which broker is doing what? To see that run the “describe topics” command:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-topics.sh --describe --bootstrap-server localhost:9092 --topic my-replicated-topic</span><br><span class="line">Topic:my-replicated-topic   PartitionCount:1    ReplicationFactor:3 Configs:</span><br><span class="line">    Topic: my-replicated-topic  Partition: 0    Leader: 1   Replicas: 1,2,0 Isr: 1,2,0</span><br></pre></td></tr></table></figure>
-
-<p>Here is an explanation of output. The first line gives a summary of all the partitions, each additional line gives information about one partition. Since we have only one partition for this topic there is only one line.</p>
-<ul>
-<li>“leader” is the node responsible for all reads and writes for the given partition. Each node will be the leader for a randomly selected portion of the partitions.</li>
-<li>“replicas” is the list of nodes that replicate the log for this partition regardless of whether they are the leader or even if they are currently alive.</li>
-<li>“isr” is the set of “in-sync” replicas. This is the subset of the replicas list that is currently alive and caught-up to the leader.</li>
-</ul>
-
-      
-      <!-- tags and categories -->
-      
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/微服务//" class="article-tag-list-link color4">微服务</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/04/17/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/kafka/kafka-command/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-languages/python/python-virtualenv" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/13/languages/python/python-virtualenv/">Python virtualenv</a>
-    </h1>
-  
-
-        
-        <a href="/2019/04/13/languages/python/python-virtualenv/" class="archive-article-date">
-  	<time datetime="2019-04-13T07:56:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-13</time>
-</a>
-        
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          
-            <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">125字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">1分</span>
-      </span>
-    </span>
-</div>
-
-          
-        
-        <!-- 添加完成 -->
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          <p>有两种方式创建python virtualenv， 使用pip 安装virtualenv包或者通过Anaconda管理virtualenv</p>
-<h3 id="Pip-virtualenv"><a href="#Pip-virtualenv" class="headerlink" title="Pip virtualenv"></a>Pip virtualenv</h3><p>安装virtualenv包</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install virtualenv</span><br></pre></td></tr></table></figure>
-
-<p>创建一个独立的python运行环境newEnv，不安装任何包</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">virtualenv --no-site-packages newEnv</span><br><span class="line"># virtualenv newEnv --python=python3    指定版本</span><br></pre></td></tr></table></figure>
-
-<p>用source进入该环境</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source newEnv/bin/activate</span><br></pre></td></tr></table></figure>
-
-<p>退出当前venv环境</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">deactivate</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="Anaconda-管理virtualenv"><a href="#Anaconda-管理virtualenv" class="headerlink" title="Anaconda 管理virtualenv"></a>Anaconda 管理virtualenv</h3><p>显示当前已有的virtualenv</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda env list</span><br><span class="line">或者 conda info -e</span><br></pre></td></tr></table></figure>
-
-<p>创建</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create -n env_name python=3.6 </span><br></pre></td></tr></table></figure>
-
-<p>激活</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source activate env_name</span><br></pre></td></tr></table></figure>
-
-<p>失效</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source deactivate env_name</span><br></pre></td></tr></table></figure>
-
-<p>移除</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda remove -n env_name --all</span><br></pre></td></tr></table></figure>
-
-
-
-
-      
-      <!-- tags and categories -->
-      
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/languages//" class="article-tag-list-link color5">languages</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/04/13/languages/python/python-virtualenv/">展开全文 >></a>
         </p>
       
 

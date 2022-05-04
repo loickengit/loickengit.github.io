@@ -79,7 +79,7 @@
 		</nav>
 		<nav>
 			<ul style="font-size:12px; font-weight:100">
-				总文章数：63
+				总文章数：66
 			</ul>
 		</nav>
 		<br/>
@@ -157,6 +157,574 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-微服务/领域驱动" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/13/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8/">领域驱动概念与项目结构</a>
+    </h1>
+  
+
+        
+        <a href="/2021/08/13/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8/" class="archive-article-date">
+  	<time datetime="2021-08-12T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-13</time>
+</a>
+        
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          
+            <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">997字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">3分</span>
+      </span>
+    </span>
+</div>
+
+          
+        
+        <!-- 添加完成 -->
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          <h2 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h2><h5 id="领域建模"><a href="#领域建模" class="headerlink" title="领域建模"></a>领域建模</h5><p>识别领域对象和它对应的行为，通过面相对象的设计原则（聚合、解耦、抽象、组合等多种设计方式）达到系统可复用，可维护，易扩展的能力。</p>
+<h5 id="贫血模型"><a href="#贫血模型" class="headerlink" title="贫血模型"></a>贫血模型</h5><p>这种模型下领域对象只包含所有属性，<strong>没有持久化和业务逻辑</strong>。真正的业务逻辑则由领域服务负责实现</p>
+<h5 id="充血模型"><a href="#充血模型" class="headerlink" title="充血模型"></a>充血模型</h5><p>领域对象包含所有属性，持久化和业务逻辑；比较符合面向对象的设计。</p>
+<h5 id="实体"><a href="#实体" class="headerlink" title="实体"></a>实体</h5><p>当一个对象由其标识（而不是属性，标识唯一）区分时，这种对象称为实体（Entity）。</p>
+<h5 id="值对象"><a href="#值对象" class="headerlink" title="值对象"></a>值对象</h5><p>当一个对象用于对事务进行描述而没有唯一标识时，它被称作值对象（Value Object）。</p>
+<p>值对象创建出来后，就不能再更改。</p>
+<p>理解：实体的对比通过id，值对象通过值</p>
+<h5 id="聚合根"><a href="#聚合根" class="headerlink" title="聚合根"></a>聚合根</h5><p>Aggregate(聚合）是一组相关对象的集合，作为一个整体被外界访问，聚合根（Aggregate Root）是这个聚合的根节点。</p>
+<p>聚合由根实体，值对象和实体组成。</p>
+<h5 id="限界上下文"><a href="#限界上下文" class="headerlink" title="限界上下文"></a>限界上下文</h5><h2 id="读写操作实现"><a href="#读写操作实现" class="headerlink" title="读写操作实现"></a>读写操作实现</h2><p>系统设计一般的步骤都是从底层，数据库字段开始设计，但偏向技术。领域模型的典型实践是从上到下。</p>
+<p>拿到一个业务需求，先与客户方确定好请求数据格式，再实现Controller和ApplicationService，然后实现领域模型</p>
+<h5 id="一些原则"><a href="#一些原则" class="headerlink" title="一些原则"></a>一些原则</h5><p>一个简单的原则：一个业务用例对应applicationService的一个方法，业务方法与事务一一对应</p>
+<p>当所有的类都在领域下时，如果代码结构足够简单，可以不再分具体的子包。</p>
+<ul>
+<li>将业务概念尽量建模为值对象。不需要的时候就可以扔掉</li>
+<li>领域模型中的对象不能直接返回给客户端</li>
+</ul>
+<h5 id="写操作的实现"><a href="#写操作的实现" class="headerlink" title="写操作的实现"></a>写操作的实现</h5><ul>
+<li>通过聚合根完成业务请求</li>
+<li>通过Factory完成聚合根的创建，创建时需要的外部信息，通过工厂模式提供</li>
+<li>通过DomainService（facade）完成业务请求，无法避免的与外部的交互（妥协），在实践中越少越好。</li>
+</ul>
+<p>总结：创建聚合根通过Factory完成；业务逻辑优先在聚合根边界内完成；聚合根中不合适放置的业务逻辑才考虑放到DomainService中。</p>
+<h5 id="读操作的实现"><a href="#读操作的实现" class="headerlink" title="读操作的实现"></a>读操作的实现</h5><ul>
+<li>基于领域模型的读操作(读写操作糅合在了一起，不推荐)</li>
+<li>基于数据模型的读操作(绕过聚合根和资源库，直接返回数据，推荐)</li>
+<li>CQRS(读写操作分别使用不同的数据库)</li>
+</ul>
+<h2 id="项目代码结构"><a href="#项目代码结构" class="headerlink" title="项目代码结构"></a>项目代码结构</h2><h5 id="美团技术团队"><a href="#美团技术团队" class="headerlink" title="美团技术团队"></a>美团技术团队</h5><ul>
+<li><p>service，领域服务，串联领域对象、资源库和防腐层，对其他上下文提供交互的接口。（一个业务方法对应一个用例）</p>
+</li>
+<li><p>domain</p>
+<ul>
+<li>valobj，领域对象-值对象</li>
+<li>entity，领域对象-实体</li>
+<li>aggregate，聚合根</li>
+</ul>
+</li>
+<li><p>repo，领域资源库</p>
+<ul>
+<li>dao<ul>
+<li>po</li>
+</ul>
+</li>
+<li>cache</li>
+</ul>
+</li>
+<li><p>facade，领域防腐层</p>
+</li>
+</ul>
+<p>上述的结构读写都是基于领域模型。基于domain的读写，和基于数据模型的读写区别就在于service中的query部分，通不通过domain。如果直接走repo就是读写分离的。</p>
+<h5 id="CQRS方式"><a href="#CQRS方式" class="headerlink" title="CQRS方式"></a>CQRS方式</h5><ul>
+<li><p>application，读写</p>
+<ul>
+<li>QueryService</li>
+<li>CommandService</li>
+</ul>
+</li>
+<li><p>domain</p>
+<ul>
+<li>command</li>
+<li>entity</li>
+<li>producer</li>
+<li>repo</li>
+<li>DomainManagerClass</li>
+</ul>
+</li>
+<li><p>infra，提供对domain里接口的实现</p>
+<ul>
+<li><p>repo</p>
+<ul>
+<li>cache</li>
+<li>db</li>
+<li>po</li>
+</ul>
+</li>
+<li><p>facade</p>
+</li>
+<li><p>producer</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="架构概念"><a href="#架构概念" class="headerlink" title="架构概念"></a>架构概念</h2><p>当业务膨胀，应用程序涉及到对多个领域服务的编排，本身也包含业务逻辑，此时对内属于应用服务，但对外是领域服务，需要暴露为微服务。</p>
+<h2 id="CQRS"><a href="#CQRS" class="headerlink" title="CQRS"></a>CQRS</h2><p>Command Query Responsibility Segregation</p>
+<p>command和query分离</p>
+<p>原则上两者数据源也应该分离（可以使用不同的数据源），两者可以部署在不同的应用上</p>
+<p>问题：</p>
+<p>1、事务，实时性问题（数据同步的延迟）</p>
+<p>2、没有成熟的框架</p>
+
+      
+      <!-- tags and categories -->
+      
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">领域驱动</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/微服务//" class="article-tag-list-link color4">微服务</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/08/13/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-数据库/数据存储综述" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/10/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E7%BB%BC%E8%BF%B0/">数据存储综述</a>
+    </h1>
+  
+
+        
+        <a href="/2021/08/10/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E7%BB%BC%E8%BF%B0/" class="archive-article-date">
+  	<time datetime="2021-08-09T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-10</time>
+</a>
+        
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          
+            <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">1.7k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">5分</span>
+      </span>
+    </span>
+</div>
+
+          
+        
+        <!-- 添加完成 -->
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          <h2 id="关系型数据库原理与应用"><a href="#关系型数据库原理与应用" class="headerlink" title="关系型数据库原理与应用"></a>关系型数据库原理与应用</h2><h3 id="Mysql架构"><a href="#Mysql架构" class="headerlink" title="Mysql架构"></a>Mysql架构</h3><p>一条sql的执行过程：</p>
+<p><img src="https://gitee.com/loick/image-url/raw/master/mysql/structure.png" alt="mysql架构"></p>
+<p>大多数情况下不要使用查询缓存，为什么呢？因为查询缓存往往弊大于利。查询缓存的失效非常频繁，只要有对一个表的更新，这个表上所有的查询缓存都会被清空。因此很可能你费劲地把结果存起来，还没使用呢，就被一个更新全清空了。对于更新压力大的数据库来说，查询缓存的命中率会非常低。除非你的业务就是有一张静态表，很长时间才会更新一次。比如，一个系统配置表，那这张表上的查询才适合使用查询缓存。</p>
+<h3 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h3><h4 id="事务特性"><a href="#事务特性" class="headerlink" title="事务特性"></a>事务特性</h4><p>1、A：原子性，提交要么执行成功，要么没有执行，没有中间态</p>
+<p>2、C：一致性，事务执行后，数据的完整性约束不能被破坏</p>
+<p>3、I：隔离性，多事务并行，满足可见性控制要求</p>
+<p>4、D：持久性，事务成功后，数据持久化存储，不能丢失（通过redo log来保证）</p>
+<p>问题：提交一次事务后，数据库返回超时，事务执行成功了吗？</p>
+<h4 id="事务隔离级别"><a href="#事务隔离级别" class="headerlink" title="事务隔离级别"></a>事务隔离级别</h4><p>读未提交（read-uncommitted）、不可重复读(read-committed)、可重复读(repeatable-read)、串行化(serialzable)</p>
+<p>Mysql默认隔离级别是RR，在此隔离级别下，mysql为了<strong>解决幻读</strong>的问题，利用Gap锁来防止新行的加入。</p>
+<p>但这种锁并行度不够，冲突很多，经常引起死锁。</p>
+<p><img src="https://gitee.com/loick/image-url/raw/master/mysql/transaction.png" alt="事务隔离级别"></p>
+<h4 id="Mysql锁机制"><a href="#Mysql锁机制" class="headerlink" title="Mysql锁机制"></a>Mysql锁机制</h4><p>在 MySQL 中有三种级别的锁：表级锁、行级锁、页级锁。</p>
+<ul>
+<li><p>表级锁：开销小，加锁快；不会出现死锁；锁定粒度大，发生锁冲突的概率最高，并发度最低。</p>
+</li>
+<li><p>行级锁：开销大，加锁慢；会出现死锁；锁定粒度最小，发生锁冲突的概率最低，并发度最高。</p>
+</li>
+<li><p>页级锁：开销和加锁时间界于表锁和行锁之间；会出现死锁；锁定粒度界于表锁和行锁之间，并发度一般。</p>
+</li>
+</ul>
+<p>InnoDB只支持表锁和行锁，表锁分为意向共享锁（IS）和意向排他锁（IX）</p>
+<h4 id="InnoDB行锁"><a href="#InnoDB行锁" class="headerlink" title="InnoDB行锁"></a>InnoDB行锁</h4><ul>
+<li>Record Lock：行锁，分为共享锁和排他锁</li>
+<li>Gap Lock：间隙锁，锁定一个范围，不包括本身</li>
+</ul>
+<p>间隙锁和间隙锁之间是不互斥的关系</p>
+<p>值不存在的情况下，行锁退化成间隙锁</p>
+<h4 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h4><p>行锁是最细粒度的锁，有利于并发，同时引入死锁风险</p>
+<ul>
+<li><p>互斥条件：一个资源每次只能被一个进程使用</p>
+</li>
+<li><p>请求与保持条件：一个进程因请求资源而阻塞时，对已获得的资源保持不放</p>
+</li>
+<li><p>不剥夺条件：进程已获得的资源，在没使用完之前，不能强行剥夺</p>
+</li>
+<li><p>循环等待条件：多个进程之间形成的一种互相循环等待资源的关系</p>
+</li>
+</ul>
+<p>非主键索引列更新，<strong>主键加锁顺序不可控</strong>—&gt; 形成循环依赖</p>
+<h3 id="Mysql-Log"><a href="#Mysql-Log" class="headerlink" title="Mysql Log"></a>Mysql Log</h3><p>Redo log、Undo log、bin log、slow log</p>
+<h3 id="设计范式"><a href="#设计范式" class="headerlink" title="设计范式"></a>设计范式</h3><p>六种范式：第一范式(1NF)、第二范式(2NF)、第三范式 (3NF)、巴斯-科德范式(BCNF)、第四范式(4NF)和第五范式(5NF，又称完美范式)。各种范式呈递次规范，越高的范式数据库冗余越小。</p>
+<p>通常用到第一范式(<strong>1NF</strong>)，第二范式(<strong>2NF</strong>)，第三范式(<strong>3NF</strong>)</p>
+<ul>
+<li>第一范式要求无重复的列，表中的每一列都是拆分的基本数据项，即列不能够再拆分成 其他几列，强调的是列的原子性。</li>
+<li>第二范式要求非主键列必须完全依赖于主键，而不能只依赖于主键的一部分。</li>
+<li>第三范式要求非主键列必须直接依赖于主键，不能存在间接依赖主键。</li>
+</ul>
+<h3 id="数据库使用原则"><a href="#数据库使用原则" class="headerlink" title="数据库使用原则"></a>数据库使用原则</h3><p>发挥出Mysql的最佳性能：</p>
+<ul>
+<li>不进行复杂计算，尽量让MySQL回归数据存储职能</li>
+<li>查询数据时尽量单表查询，减少跨库查询和多表关联</li>
+<li>一定要杜绝大事务、大批量、大字段等一系列性能杀手</li>
+</ul>
+<p>以上要求会导致反范式设计，通过冗余减少多表关联查询</p>
+<h3 id="索引和查询优化"><a href="#索引和查询优化" class="headerlink" title="索引和查询优化"></a>索引和查询优化</h3><p>Sql查询是数据库核心功能，索引是优化查询的重要手段，大多数索引都是用B+Tree结构，它有两个特征</p>
+<p>1、数据只在叶子结点存储</p>
+<p>2、叶子结点通过双向指针链接</p>
+<p><img src="https://gitee.com/loick/image-url/raw/master/mysql/index.png" alt="索引结构"></p>
+<h4 id="索引类型"><a href="#索引类型" class="headerlink" title="索引类型"></a>索引类型</h4><p>唯一索引更新有代价，加锁粒度小;联合索引最左前缀匹配原则;覆盖索引可遇不可求。</p>
+<p>1、聚簇索引:它表示表中的数据存储顺序和索引顺序一致，即索引组织表。</p>
+<p>InnoDB 的聚簇索引就是按照主键顺序构建 B+Tree，B+Tree 的叶子节点就是行记录，数 据行和主键值紧凑地存储在一起。</p>
+<p>2、非聚簇索引:它表示表中的数据存储顺序和索引顺序不一致，读取数据需要回表。</p>
+<p>InnoDB 辅助索引(二级索引)只是根据索引列构建 B+Tree，但在 B+Tree 的每一行都存 了主键信息，加速回表读取非索引列。</p>
+<p><img src="https://gitee.com/loick/image-url/raw/master/mysql/index_type.png" alt="索引类型"></p>
+<h4 id="索引设计规范"><a href="#索引设计规范" class="headerlink" title="索引设计规范"></a>索引设计规范</h4><p>三星索引:</p>
+<ul>
+<li><p>第一颗星：where表达式所确定的值域范围索引片最小化，即等值谓词优先建索引。</p>
+</li>
+<li><p>第二颗星：索引行的顺序与查询语句需求一致，order by 中的排序和索引顺序一致。</p>
+</li>
+<li><p>第三颗星：索引行包含查询语句中所有的列，即尽量构成覆盖索引。</p>
+</li>
+</ul>
+<p>notes：表数据比较小时，索引需要多次回表点查的情况下，反而不如全表扫描快。</p>
+<h4 id="需要注意的错误实践"><a href="#需要注意的错误实践" class="headerlink" title="需要注意的错误实践"></a>需要注意的错误实践</h4><ul>
+<li>在区分度不高的列上建立了无效索引</li>
+<li>查询条件不符合联合索引最左匹配原则</li>
+<li>没有利用索引自身的有序性来避免排序</li>
+<li>多表联合查询不能通过小表驱动大表</li>
+<li>查询条件和列的数据类型不匹配</li>
+<li>在索引列上做计算导致索引失效</li>
+</ul>
+<h4 id="慢查询优化"><a href="#慢查询优化" class="headerlink" title="慢查询优化"></a>慢查询优化</h4><p>通过explain查看sql执行计划</p>
+<p><strong>type</strong>显示何种类型，从最好到最差依次是:<strong>system&gt;const&gt;eq_ref&gt;ref&gt;range&gt;index&gt;all</strong></p>
+<h3 id="More"><a href="#More" class="headerlink" title="More"></a>More</h3><p>高可用性：</p>
+<ul>
+<li><p>主备复制 </p>
+</li>
+<li><p>主备切换</p>
+</li>
+<li><p>Share Disk</p>
+</li>
+</ul>
+<p>扩展能力：</p>
+<ul>
+<li><p>Scale Up：救急</p>
+</li>
+<li><p>Scale Out：垂直和水平拆分</p>
+</li>
+<li><p>读写分离：存在写后读问题</p>
+</li>
+</ul>
+<p><img src="https://gitee.com/loick/image-url/raw/master/mysql/backup.png" alt="backup"></p>
+
+      
+      <!-- tags and categories -->
+      
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Mysql</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">索引</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">事务</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/缓存//" class="article-tag-list-link color3">缓存</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/08/10/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E7%BB%BC%E8%BF%B0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-数据库/Redis/Redis阻塞原因" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/09/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis/Redis%E9%98%BB%E5%A1%9E%E5%8E%9F%E5%9B%A0/">Redis阻塞原因</a>
+    </h1>
+  
+
+        
+        <a href="/2021/08/09/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis/Redis%E9%98%BB%E5%A1%9E%E5%8E%9F%E5%9B%A0/" class="archive-article-date">
+  	<time datetime="2021-08-08T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-09</time>
+</a>
+        
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          
+            <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">575字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">2分</span>
+      </span>
+    </span>
+</div>
+
+          
+        
+        <!-- 添加完成 -->
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          <h2 id="慢查询"><a href="#慢查询" class="headerlink" title="慢查询"></a>慢查询</h2><p>redis是单线程的，慢查询会导致server阻塞，可以通过slowlog get n获取慢查询日志分析</p>
+<h2 id="bigkey大对象"><a href="#bigkey大对象" class="headerlink" title="bigkey大对象"></a>bigkey大对象</h2><h3 id="bigkey是什么"><a href="#bigkey是什么" class="headerlink" title="bigkey是什么"></a>bigkey是什么</h3><p>指的是rediskey对应的value所占的空间特别大，字符串可以存储512MB内容，列表可以存储2^32-1个元素；一般情况下，value值超过10kb，就算大key。</p>
+<h3 id="bigkey危害"><a href="#bigkey危害" class="headerlink" title="bigkey危害"></a>bigkey危害</h3><p>造成内存分布不均</p>
+<p>操作耗时（单线程），有阻塞风险</p>
+<p>网络阻塞，每次获取都会产生较大网络流量</p>
+<h3 id="如何发现bigkey"><a href="#如何发现bigkey" class="headerlink" title="如何发现bigkey"></a>如何发现bigkey</h3><p>1、redis-cli –bigkeys统计bigkey的分布情况</p>
+<p>2、dump出rdb文件分析（最好在从库上进行）：bgsave&#x2F;redis-rdb-tool</p>
+<p>3、debug object key命令单个key查看，效率低</p>
+<p>4、自己写脚本扫描</p>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><h4 id="当版本-lt-4-0"><a href="#当版本-lt-4-0" class="headerlink" title="当版本&lt;4.0"></a>当版本&lt;4.0</h4><p>对于大key，不要直接用del；对于String类型大key，不要存入redis；对于集合类型，边扫描边清理</p>
+<p>另外也可以对大key进行拆分，拆成hash结构</p>
+<h4 id="当版本-gt-x3D-4-0"><a href="#当版本-gt-x3D-4-0" class="headerlink" title="当版本&gt;&#x3D;4.0"></a>当版本&gt;&#x3D;4.0</h4><p>发现大key：命令memory usage</p>
+<p>删除大key： lazyfree机制</p>
+<ul>
+<li>unlink命令：代替del</li>
+<li>把大key放到后台线程任务队列，异步删除</li>
+</ul>
+<h2 id="swap"><a href="#swap" class="headerlink" title="swap"></a>swap</h2><p>redis数据存放在内存中，如果内存不够用，会导致操作系统swap交换，把不经常使用的写到磁盘上，腾出物理内存。磁盘读写时间比内存慢5个数量级（内存0.1us单位，磁盘10ms）因此redis频繁的swap交换会导致性能降低。</p>
+<p>检查redis内存交换情况：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 识别redis进程号</span><br><span class="line">redis-cli info server | grep process_id</span><br><span class="line"># 根据进程号查询内存交换信息</span><br><span class="line">cat /proc/&#123;process_id&#125;/smaps | grep Swap</span><br></pre></td></tr></table></figure>
+
+<p>预防内存交换：</p>
+<p>1、确保redis有充足内存</p>
+<p>2、设置redis最大可用内存</p>
+<p>3、降低系统swap优先级</p>
+<h2 id="fock子进程"><a href="#fock子进程" class="headerlink" title="fock子进程"></a>fock子进程</h2><p>在RDB生成和AOF重写时，会fork一个子进程去执行。fork操作执行太过耗时也会导致阻塞，fork会去复制父进程空间内存表。</p>
+<p>查看：info stats命令获取lastest_fork_usec 指标，表示 redis 最近一次 fork 操作耗时。</p>
+<h2 id="AOF刷盘"><a href="#AOF刷盘" class="headerlink" title="AOF刷盘"></a>AOF刷盘</h2><p>开启AOF，文件刷盘一般每秒一次，硬盘压力大，fsync需要等待写入完成。</p>
+<p>查看：redis日志或info presistence统计中的aof_delayed_fsync指标</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/jmcui/p/13926397.html#_label0">Redis阻塞原因及其排查方向</a></p>
+
+      
+      <!-- tags and categories -->
+      
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Redis//" class="article-tag-list-link color1">Redis</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/08/09/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis/Redis%E9%98%BB%E5%A1%9E%E5%8E%9F%E5%9B%A0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-微服务/限流算法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -1105,477 +1673,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/07/28/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8/ShardingSphere-JDBC/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-数据库/分库分表/分库分表1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/27/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8/%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A81/">分库分表1---基本概念</a>
-    </h1>
-  
-
-        
-        <a href="/2021/07/27/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8/%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A81/" class="archive-article-date">
-  	<time datetime="2021-07-26T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-27</time>
-</a>
-        
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          
-            <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1.5k字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">5分</span>
-      </span>
-    </span>
-</div>
-
-          
-        
-        <!-- 添加完成 -->
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>数据集中存储在单一节点，在性能、可用性和运维成本上难以满足互联网海量数据场景。</p>
-<p>1、Mysql单表最大尺寸不能超过2TB（操作系统Block大小限制）</p>
-<p>2、数据量变多，B+树索引深度加深，磁盘IO次数增多，导致性能下降</p>
-<p>2、无状态服务，可以以低成本扩容，但最终压力都落在数据库上，高并发请求使得简单的主从架构越来越难以承担</p>
-<p>4、当数据库实例数据量达到阀值以上后，DBA运维压力变大，数据备份和恢复成本愈发无法控制。</p>
-<p>【查询瓶颈】：主从备份，缓存，读写分离</p>
-<p>【读写效率】：分表</p>
-<p>【cpu使用瓶颈&#x2F;写入瓶颈】：分库</p>
-<h2 id="拆分方案"><a href="#拆分方案" class="headerlink" title="拆分方案"></a>拆分方案</h2><h3 id="垂直拆分"><a href="#垂直拆分" class="headerlink" title="垂直拆分"></a>垂直拆分</h3><p>垂直拆分有两种纬度：库和表</p>
-<p>【库】：专库专用，将不同业务功能的表拆分到不同的库中</p>
-<p>【表】：对表中列的拆分，将常用的列和不常用的列分开，存储到两张表中，通过主键连接</p>
-<h3 id="水平拆分"><a href="#水平拆分" class="headerlink" title="水平拆分"></a>水平拆分</h3><p>按照某个字段的某种规则来分散到多个库表之中，每个表中包含一部分数据。</p>
-<h4 id="范围拆分"><a href="#范围拆分" class="headerlink" title="范围拆分"></a>范围拆分</h4><p>比如按照时间或ID区间切分</p>
-<p>优点：单表大小可控，天然水平扩展</p>
-<p>缺点：无法解决集中写入瓶颈问题</p>
-<h4 id="Hash切分"><a href="#Hash切分" class="headerlink" title="Hash切分"></a>Hash切分</h4><p>一般使用mod切分？</p>
-<p>mod 2^n一致性hash？</p>
-<p>【示例】：若采用32*32的分库分表方案，可根据某一字段，比如userId，用userId最后四位mod到32个库中，同时再将userId后四位Div32 Mod32将每个库分为32张表，总计1024张表。线上部署为8个集群（主从），没个集群4个库</p>
-<p>若单表容量太大，可以对单库里的表进行裂变，32*(32*2^n)，但上述规则取userId后四位，最多拆分8192张表。</p>
-<h2 id="唯一ID方案"><a href="#唯一ID方案" class="headerlink" title="唯一ID方案"></a>唯一ID方案</h2><p>分库分表要解决的一个重要问题：分布式唯一主键</p>
-<p>1、数据库自增Id</p>
-<p>优点：最简单；缺点：单机风险，单机性能瓶颈</p>
-<p>2、数据库集群，设置步长</p>
-<p>优点：高可用，简单；缺点：需要单独的数据库集群</p>
-<p>3、Twitter Snowflake</p>
-<p>优点：高性能，高可用，易拓展；缺点：但需要单独的集群和ZK</p>
-<p>雪花算法：1bit + 41bit时间 + 10bit工作进程号 + 12bit序列号</p>
-<p>如果遇到时钟回拨，雪花算法就会出现重复id，为此Snowflake通过检查当前时间和最近生成id时间的差值，如果大于一个阀值直接报错，否则休眠等待时间超过最近id的时间。</p>
-<p>4、GUID、Random算法</p>
-<p>优点：简单；缺点：有重复几率，ID较长</p>
-<p>5、业务属性方案</p>
-<p>时间戳+用户表示码+随机数</p>
-<p>优点：可排序、基本无重复、方便成本低、有用户标示码（自带分库规则）</p>
-<h2 id="数据迁移方案"><a href="#数据迁移方案" class="headerlink" title="数据迁移方案"></a>数据迁移方案</h2><p>垂直拆分只需要换数据源，对于水平拆分来说，数据清洗是个大问题。</p>
-<p>【第一阶段】</p>
-<p>1、数据库双写（事务成功以老模型为准），查询走老模型</p>
-<p>2、job导历史数据</p>
-<p>3、每日job对齐新老数据</p>
-<p>【第二阶段】</p>
-<p>1、历史数据导完，并对账无误</p>
-<p>2、数据库双写（事务成功以新模型为准），查询切新模型</p>
-<p>3、每日job对齐新老数据</p>
-<p>【第三阶段】</p>
-<p>1、老模型不再同步写入，只有订单有终态时，异步补上</p>
-<p>2、此刻只有离线数据依赖老模型</p>
-<h2 id="分库分表步骤"><a href="#分库分表步骤" class="headerlink" title="分库分表步骤"></a>分库分表步骤</h2><p>单表 —&gt; 单库单表 —&gt; 分库分表</p>
-<p>具体为：根据容量（当前容量和增长量）评估分库和分表个数—&gt; 选key（均匀）—&gt; 分表规则（hash&#x2F;range等）—&gt; 执行（一般双写，数据迁移）—&gt; 扩容问题（减少数据移动）</p>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><h3 id="非partiton-key的查询问题"><a href="#非partiton-key的查询问题" class="headerlink" title="非partiton key的查询问题"></a>非partiton key的查询问题</h3><h4 id="1、映射法"><a href="#1、映射法" class="headerlink" title="1、映射法"></a>1、映射法</h4><p>使用一个映射表，记录partition key和查询key的映射关系；</p>
-<p>可以使用索引覆盖加快查询；分布式缓存更快，但要保证缓存高可用；可以表+缓存联合使用。</p>
-<h4 id="2、基因法"><a href="#2、基因法" class="headerlink" title="2、基因法"></a>2、基因法</h4><p>写数据时，将非partition查询key通过生成函数，写进id中，之后就可以通过这个生成函数得到id信息，进而partition查询，这个方法使用与只有一个非partitino 查询key的场景</p>
-<h4 id="3、NoSQL"><a href="#3、NoSQL" class="headerlink" title="3、NoSQL"></a>3、NoSQL</h4><p>应用于非partition key，以及各种复杂查询</p>
-<h5 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h5><p>ES或ES+HBase组合方案，HBase支持海量存储，且根据RowKey查询速度快。</p>
-<p><img src="https://s5.51cto.com/oss/202012/29/891a79d9183fc0002b279e11b66fb502.jpg-wh_600x-s_3006685502.jpg" alt="ES+HBase组合方案"></p>
-<h5 id="NoSQL数据同步问题"><a href="#NoSQL数据同步问题" class="headerlink" title="NoSQL数据同步问题"></a>NoSQL数据同步问题</h5><p>可以利用Canal实时获取MySQL库表中的增量订单数据，推送到消息队列RocketMQ中，消费者获取消息后把数据写入Hbase，并在ES上更新索引。</p>
-<p>Canal原理：</p>
-<p>1、模拟mysql slave的交互协议，把自己伪装成mysql的从库</p>
-<p>2、向master发送dump协议</p>
-<p>3、master收到dump协议，发送binary log给canal</p>
-<p>4、canal解析binary log，根据应用场景对binary log做响应处理</p>
-<h3 id="扩容问题"><a href="#扩容问题" class="headerlink" title="扩容问题"></a>扩容问题</h3><h4 id="一致性Hash"><a href="#一致性Hash" class="headerlink" title="一致性Hash"></a>一致性Hash</h4><p>分库分表采用一致性Hash环的方式，减少数据迁移，双倍扩容</p>
-<h4 id="水平扩容（升级从库）"><a href="#水平扩容（升级从库）" class="headerlink" title="水平扩容（升级从库）"></a>水平扩容（升级从库）</h4><p>1、从原来的主从备份架构中，将从库提升为主库</p>
-<p>2、解除旧的主从备份，建立新的主从备份</p>
-<p>3、两个主从结构中，存在冗余数据，删除</p>
-<p>水平扩容是成倍的。</p>
-<h4 id="水平扩容表（双写迁移）"><a href="#水平扩容表（双写迁移）" class="headerlink" title="水平扩容表（双写迁移）"></a>水平扩容表（双写迁移）</h4><p>按需设置新的表数量（如为原来的两倍），然后配置双写（同步或异步）策略，将部分数据写入新表</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://tech.meituan.com/2016/11/18/dianping-order-db-sharding.html">大众点评订单系统分库分表实践</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/uxiAD7442KMy1X86DtM3/article/details/103047646">不用找了，大厂在用的分库分表方案，都在这里！</a></p>
-<p><a target="_blank" rel="noopener" href="https://database.51cto.com/art/202012/637727.htm">一次完美的分库分表</a></p>
-<p><a target="_blank" rel="noopener" href="https://database.51cto.com/art/202012/637727.htm">进来抄作业</a></p>
-
-      
-      <!-- tags and categories -->
-      
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Mysql</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/分库分表//" class="article-tag-list-link color5">分库分表</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/07/27/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8/%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A81/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-数据库/缓存综述" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/26/%E6%95%B0%E6%8D%AE%E5%BA%93/%E7%BC%93%E5%AD%98%E7%BB%BC%E8%BF%B0/">缓存技术综述</a>
-    </h1>
-  
-
-        
-        <a href="/2021/07/26/%E6%95%B0%E6%8D%AE%E5%BA%93/%E7%BC%93%E5%AD%98%E7%BB%BC%E8%BF%B0/" class="archive-article-date">
-  	<time datetime="2021-07-25T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-26</time>
-</a>
-        
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          
-            <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">547字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">1分</span>
-      </span>
-    </span>
-</div>
-
-          
-        
-        <!-- 添加完成 -->
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          <h2 id="缓存技术实践与应用"><a href="#缓存技术实践与应用" class="headerlink" title="缓存技术实践与应用"></a>缓存技术实践与应用</h2><p><img src="https://gitee.com/loick/image-url/raw/master/cache_outline.png" alt="缓存大纲"></p>
-<h3 id="访问时间"><a href="#访问时间" class="headerlink" title="访问时间"></a>访问时间</h3><p><img src="https://gitee.com/loick/image-url/raw/master/visit_time.png" alt="访问时间"></p>
-<h3 id="Memcache-存在的一些限制："><a href="#Memcache-存在的一些限制：" class="headerlink" title="Memcache 存在的一些限制："></a>Memcache 存在的一些限制：</h3><ul>
-<li><p>纯内存模式</p>
-</li>
-<li><p>KV有大小限制</p>
-</li>
-<li><p>无法持久化，存在冷启动问题</p>
-</li>
-<li><p>没有主备复制，可用性不够</p>
-</li>
-<li><p>只支持KV类型，不支持计算</p>
-</li>
-</ul>
-<h3 id="缓存相关问题"><a href="#缓存相关问题" class="headerlink" title="缓存相关问题"></a>缓存相关问题</h3><h4 id="冷启动"><a href="#冷启动" class="headerlink" title="冷启动"></a>冷启动</h4><p>现象：在刚启动的系统中，如果缓存中没有任何数据，依靠用户请求的方式重建缓存数 据，那么对DB压力非常大，而且系统的性能开销也是巨大的。</p>
-<p>应对办法：提前把热点数据进行预热加载。</p>
-<h4 id="缓存集体失效"><a href="#缓存集体失效" class="headerlink" title="缓存集体失效"></a>缓存集体失效</h4><p>现象：设定一个统一的超时时间，当并发量很大的时候会出现在同一时刻加载大量缓存，一旦过期时间到达，又在同一时刻失效；所有的请求都转发到DB上，造成巨大压力。</p>
-<p>应对办法：将失效时间尽量分开，比如在原有失效时间上增加一个随机值。</p>
-<h4 id="缓存穿透"><a href="#缓存穿透" class="headerlink" title="缓存穿透"></a>缓存穿透</h4><p>现象：如果一个key不在缓存中，每次请求都会查询db，这样缓存就失去了意义。</p>
-<p>应对办法：设置一个特殊的value，让缓存命中</p>
-<h4 id="缓存并发"><a href="#缓存并发" class="headerlink" title="缓存并发"></a>缓存并发</h4><p>现象：当缓存失效时，多个并发线程同时查询db更新缓存，并发量大的话对db造成压力</p>
-<p>应对办法：细化缓存查询加锁粒度，如果key不存在，加锁访问db；其他线程等待锁释放</p>
-<h4 id="缓存降级"><a href="#缓存降级" class="headerlink" title="缓存降级"></a>缓存降级</h4><p>现象：如果缓存服务不可用，导致db跟着发生雪崩</p>
-<p>应对办法：对于不重要的数据，如果缓存挂了，直接返回默认值，不去访问db</p>
-<h3 id="缓存一致性"><a href="#缓存一致性" class="headerlink" title="缓存一致性"></a>缓存一致性</h3><p>根本原因：更新db和cache不是一个原子操作</p>
-<p>最终一致性：在更新数据库的时候，先删除缓存</p>
-<h4 id="最终一致性推荐方案"><a href="#最终一致性推荐方案" class="headerlink" title="最终一致性推荐方案"></a>最终一致性推荐方案</h4><p><img src="https://gitee.com/loick/image-url/raw/master/images/mq_cache.png" alt="缓存解决方案"></p>
-<h3 id="分布式锁"><a href="#分布式锁" class="headerlink" title="分布式锁"></a>分布式锁</h3><p>多进程分布式环境下临界资源并发访问控制：DB、Redis、ZK</p>
-<p>redission客户端</p>
-<ul>
-<li>实现可重入锁、读写锁、公平锁、信号量等很多种复杂的锁语义</li>
-<li>接口getLock(), lock(), unlock()很简单</li>
-</ul>
-
-      
-      <!-- tags and categories -->
-      
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">分布式锁</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/缓存//" class="article-tag-list-link color3">缓存</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/07/26/%E6%95%B0%E6%8D%AE%E5%BA%93/%E7%BC%93%E5%AD%98%E7%BB%BC%E8%BF%B0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-微服务/zookeeper" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/22/%E5%BE%AE%E6%9C%8D%E5%8A%A1/zookeeper/">Zookeeper</a>
-    </h1>
-  
-
-        
-        <a href="/2021/07/22/%E5%BE%AE%E6%9C%8D%E5%8A%A1/zookeeper/" class="archive-article-date">
-  	<time datetime="2021-07-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-22</time>
-</a>
-        
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          
-            <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">571字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">2分</span>
-      </span>
-    </span>
-</div>
-
-          
-        
-        <!-- 添加完成 -->
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          <h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><p>zookeeper可以用于命名、配置管理、服务注册与发现等。在分布式应用开发中，开发者可以使用zookeeper提供的高度抽象的API，完成应用间的协调与同步。</p>
-<h2 id="设计原理"><a href="#设计原理" class="headerlink" title="设计原理"></a>设计原理</h2><h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h3><p>zookeeper的数据机构非常像文件系统，由一个root节点 <code>/</code> 开始，可以在下面创建其他文件，与文件系统不同的是，这些文件夹本身可以存储数据，因此zookeeper官方用znode来表示这些节点。</p>
-<p><img src="https://gitee.com/loick/image-url/raw/master/images/zookeeper/zknamespace.jpg" alt="znode"></p>
-<p>zookeeper所有数据保存在内存中，通过事务日志和快照来持久化数据</p>
-<h3 id="集群结构"><a href="#集群结构" class="headerlink" title="集群结构"></a>集群结构</h3><p><img src="https://gitee.com/loick/image-url/raw/master/images/zookeeper/zkservice.jpg" alt="zkservice"></p>
-<p>三类角色：</p>
-<ul>
-<li><p>zookeeper集群只有一个leader，负责写入；广播给所有的follower，当半数以上写入成功后commit</p>
-</li>
-<li><p>follower负责从leader同步数据，参与事务决策和投票；在leader宕机后，会根据ZAB（原子广播协议）选举新的leader。</p>
-</li>
-<li><p>observer只负责读，不参与事务决策</p>
-</li>
-</ul>
-<p>客户端连接到</p>
-<h2 id="一致性协议"><a href="#一致性协议" class="headerlink" title="一致性协议"></a>一致性协议</h2><p>服务启动期间，或无法与leader保持通信时，follower发起leader选举</p>
-<p>选举leader的过程，如何让所有的follower达成一致？</p>
-<p>选举步骤：</p>
-<p>1、所有followers设置自己为leader，向其他节点广播投票（自身ID，和事务ZXID）</p>
-<p>2、follower收到外部广播，和自己保存的数据PK，如果外部投票胜出（根据ZXID，ID进行排序），则再次广播这个投票</p>
-<p>3、统计投票是否超过半数，并且leader在参与者中，如果是，就退出选举</p>
-<p>使用类似于2PC的协议进行事务提交，leader作为协调者</p>
-<h2 id="分布式锁实现"><a href="#分布式锁实现" class="headerlink" title="分布式锁实现"></a>分布式锁实现</h2><ul>
-<li>创建一个锁目录 &#x2F;lock；</li>
-<li>当一个客户端需要获取锁时，在 &#x2F;lock 下创建临时的且有序的子节点；</li>
-<li>客户端获取 &#x2F;lock 下的子节点列表，判断自己创建的子节点是否为当前子节点列表中序号最小的子节点，如果是则认为获得锁；否则监听自己的前一个子节点，获得子节点的变更通知后重复此步骤直至获得锁；</li>
-<li>执行业务代码，完成后，删除对应的子节点。</li>
-</ul>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/25594630">浅析Zookeeper的一致性原理</a></p>
-
-      
-      <!-- tags and categories -->
-      
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Zookeeper</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/中间件//" class="article-tag-list-link color4">中间件</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/07/22/%E5%BE%AE%E6%9C%8D%E5%8A%A1/zookeeper/">展开全文 >></a>
         </p>
       
 

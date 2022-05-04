@@ -79,7 +79,7 @@
 		</nav>
 		<nav>
 			<ul style="font-size:12px; font-weight:100">
-				总文章数：63
+				总文章数：66
 			</ul>
 		</nav>
 		<br/>
@@ -157,6 +157,389 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-languages/js/pm2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/17/languages/js/pm2/">Nodejs pm2</a>
+    </h1>
+  
+
+        
+        <a href="/2019/04/17/languages/js/pm2/" class="archive-article-date">
+  	<time datetime="2019-04-17T07:52:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-17</time>
+</a>
+        
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          
+            <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">70字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">1分</span>
+      </span>
+    </span>
+</div>
+
+          
+        
+        <!-- 添加完成 -->
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          <h5 id="Create-a-process"><a href="#Create-a-process" class="headerlink" title="Create a process"></a>Create a process</h5><p>hexo_run.js</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//run</span><br><span class="line">const &#123; exec &#125; = require(&#x27;child_process&#x27;)</span><br><span class="line">exec(&#x27;hexo server&#x27;,(error, stdout, stderr) =&gt; &#123;</span><br><span class="line">        if(error)&#123;</span><br><span class="line">                console.log(&#x27;exec error: $&#123;error&#125;&#x27;)</span><br><span class="line">                return</span><br><span class="line">        &#125;</span><br><span class="line">        console.log(&#x27;stdout: $&#123;stdout&#125;&#x27;);</span><br><span class="line">        console.log(&#x27;stderr: $&#123;stderr&#125;&#x27;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>use pm2 to manage it</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 start hexo_run.js</span><br></pre></td></tr></table></figure>
+
+
+
+<p>other commands</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pm2 list</span><br><span class="line">pm2 stop pid/name/...</span><br></pre></td></tr></table></figure>
+
+
+      
+      <!-- tags and categories -->
+      
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/languages//" class="article-tag-list-link color5">languages</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/04/17/languages/js/pm2/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-微服务/消息队列/kafka/kafka-command" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/17/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/kafka/kafka-command/">启动kafka</a>
+    </h1>
+  
+
+        
+        <a href="/2019/04/17/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/kafka/kafka-command/" class="archive-article-date">
+  	<time datetime="2019-04-17T05:50:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-17</time>
+</a>
+        
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          
+            <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">425字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">2分</span>
+      </span>
+    </span>
+</div>
+
+          
+        
+        <!-- 添加完成 -->
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          <h5 id="Start-a-server"><a href="#Start-a-server" class="headerlink" title="Start a server"></a>Start a server</h5><p>ZooKeeper server</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/zookeeper-server-start.sh config/zookeeper.properties</span><br></pre></td></tr></table></figure>
+
+<p>Kafka server</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-server-start.sh config/server.properties</span><br></pre></td></tr></table></figure>
+
+<h5 id="Create-a-topic"><a href="#Create-a-topic" class="headerlink" title="Create a topic"></a>Create a topic</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic test</span><br></pre></td></tr></table></figure>
+
+<h5 id="Delete-a-topic"><a href="#Delete-a-topic" class="headerlink" title="Delete a topic"></a>Delete a topic</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-topics.sh --bootstrap-server 192.168.1.204:9092 --delete --topic my_topic_name</span><br></pre></td></tr></table></figure>
+
+<h5 id="List-topic"><a href="#List-topic" class="headerlink" title="List topic"></a>List topic</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-topics.sh --list --bootstrap-server 192.168.1.204:9092</span><br></pre></td></tr></table></figure>
+
+<h5 id="Send-some-messages"><a href="#Send-some-messages" class="headerlink" title="Send some messages"></a>Send some messages</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-console-producer.sh --broker-list 192.168.1.204:9092 --topic test</span><br></pre></td></tr></table></figure>
+
+<h5 id="Start-a-consumer"><a href="#Start-a-consumer" class="headerlink" title="Start a consumer"></a>Start a consumer</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-console-consumer.sh --bootstrap-server 192.168.1.204:9092 --topic test --from-beginning</span><br></pre></td></tr></table></figure>
+
+<h5 id="Setting-up-a-multi-broker-cluster"><a href="#Setting-up-a-multi-broker-cluster" class="headerlink" title="Setting up a multi-broker cluster"></a>Setting up a multi-broker cluster</h5><p>First we make a config file for each of the brokers</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp config/server.properties config/server-1.properties</span><br><span class="line">cp config/server.properties config/server-2.properties</span><br></pre></td></tr></table></figure>
+
+<p>Now edit these new files and set the following properties:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">config/server-1.properties:</span><br><span class="line">    broker.id=1</span><br><span class="line">    listeners=PLAINTEXT://:9093</span><br><span class="line">    log.dirs=/tmp/kafka-logs-1</span><br><span class="line"> </span><br><span class="line">config/server-2.properties:</span><br><span class="line">    broker.id=2</span><br><span class="line">    listeners=PLAINTEXT://:9094</span><br><span class="line">    log.dirs=/tmp/kafka-logs-2</span><br></pre></td></tr></table></figure>
+
+<p>We already have Zookeeper and our single node started, so we just need to start the two new nodes:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-server-start.sh config/server-1.properties &amp;</span><br><span class="line">...</span><br><span class="line">bin/kafka-server-start.sh config/server-2.properties &amp;</span><br></pre></td></tr></table></figure>
+
+<p>Now create a new topic with a replication factor of three:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 3 --partitions 1 --topic my-replicated-topic</span><br></pre></td></tr></table></figure>
+
+<p>Okay but now that we have a cluster how can we know which broker is doing what? To see that run the “describe topics” command:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-topics.sh --describe --bootstrap-server localhost:9092 --topic my-replicated-topic</span><br><span class="line">Topic:my-replicated-topic   PartitionCount:1    ReplicationFactor:3 Configs:</span><br><span class="line">    Topic: my-replicated-topic  Partition: 0    Leader: 1   Replicas: 1,2,0 Isr: 1,2,0</span><br></pre></td></tr></table></figure>
+
+<p>Here is an explanation of output. The first line gives a summary of all the partitions, each additional line gives information about one partition. Since we have only one partition for this topic there is only one line.</p>
+<ul>
+<li>“leader” is the node responsible for all reads and writes for the given partition. Each node will be the leader for a randomly selected portion of the partitions.</li>
+<li>“replicas” is the list of nodes that replicate the log for this partition regardless of whether they are the leader or even if they are currently alive.</li>
+<li>“isr” is the set of “in-sync” replicas. This is the subset of the replicas list that is currently alive and caught-up to the leader.</li>
+</ul>
+
+      
+      <!-- tags and categories -->
+      
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/微服务//" class="article-tag-list-link color4">微服务</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/04/17/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/kafka/kafka-command/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-languages/python/python-virtualenv" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/13/languages/python/python-virtualenv/">Python virtualenv</a>
+    </h1>
+  
+
+        
+        <a href="/2019/04/13/languages/python/python-virtualenv/" class="archive-article-date">
+  	<time datetime="2019-04-13T07:56:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-13</time>
+</a>
+        
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          
+            <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">125字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">1分</span>
+      </span>
+    </span>
+</div>
+
+          
+        
+        <!-- 添加完成 -->
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          <p>有两种方式创建python virtualenv， 使用pip 安装virtualenv包或者通过Anaconda管理virtualenv</p>
+<h3 id="Pip-virtualenv"><a href="#Pip-virtualenv" class="headerlink" title="Pip virtualenv"></a>Pip virtualenv</h3><p>安装virtualenv包</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install virtualenv</span><br></pre></td></tr></table></figure>
+
+<p>创建一个独立的python运行环境newEnv，不安装任何包</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">virtualenv --no-site-packages newEnv</span><br><span class="line"># virtualenv newEnv --python=python3    指定版本</span><br></pre></td></tr></table></figure>
+
+<p>用source进入该环境</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source newEnv/bin/activate</span><br></pre></td></tr></table></figure>
+
+<p>退出当前venv环境</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">deactivate</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Anaconda-管理virtualenv"><a href="#Anaconda-管理virtualenv" class="headerlink" title="Anaconda 管理virtualenv"></a>Anaconda 管理virtualenv</h3><p>显示当前已有的virtualenv</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda env list</span><br><span class="line">或者 conda info -e</span><br></pre></td></tr></table></figure>
+
+<p>创建</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create -n env_name python=3.6 </span><br></pre></td></tr></table></figure>
+
+<p>激活</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source activate env_name</span><br></pre></td></tr></table></figure>
+
+<p>失效</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source deactivate env_name</span><br></pre></td></tr></table></figure>
+
+<p>移除</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda remove -n env_name --all</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+      <!-- tags and categories -->
+      
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/languages//" class="article-tag-list-link color5">languages</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/04/13/languages/python/python-virtualenv/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-微服务/消息队列/kafka/kafka" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">

@@ -79,7 +79,7 @@
 		</nav>
 		<nav>
 			<ul style="font-size:12px; font-weight:100">
-				总文章数：63
+				总文章数：66
 			</ul>
 		</nav>
 		<br/>
@@ -158,19 +158,429 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-golang/入门了解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-golang/Go垃圾回收机制" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/02/20/golang/%E5%85%A5%E9%97%A8%E4%BA%86%E8%A7%A3/">Gin实现机制</a>
+      <a class="article-title" href="/2022/05/04/golang/Go%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/">Inside go：垃圾回收机制</a>
     </h1>
   
 
         
-        <a href="/2022/02/20/golang/%E5%85%A5%E9%97%A8%E4%BA%86%E8%A7%A3/" class="archive-article-date">
+        <a href="/2022/05/04/golang/Go%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/" class="archive-article-date">
+  	<time datetime="2022-05-03T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-04</time>
+</a>
+        
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          
+            <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">0字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">1分</span>
+      </span>
+    </span>
+</div>
+
+          
+        
+        <!-- 添加完成 -->
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          <h2 id=""><a href="#" class="headerlink" title=""></a></h2>
+      
+      <!-- tags and categories -->
+      
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Go//" class="article-tag-list-link color3">Go</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/05/04/golang/Go%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-golang/Go内存分配机制" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/04/29/golang/Go%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E6%9C%BA%E5%88%B6/">Inside go：内存分配机制</a>
+    </h1>
+  
+
+        
+        <a href="/2022/04/29/golang/Go%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E6%9C%BA%E5%88%B6/" class="archive-article-date">
+  	<time datetime="2022-04-28T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-29</time>
+</a>
+        
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          
+            <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">2.7k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">9分</span>
+      </span>
+    </span>
+</div>
+
+          
+        
+        <!-- 添加完成 -->
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>得益于Go内置的内存管理机制，我们不用关心内存处理细节。一方面，了解这些底层逻辑，可以帮助我们更合理创建对象，提高内存使用效率。另一方面，Go对内存的管理机制本身就很有意思。</p>
+<h2 id="我们所熟知的堆和栈"><a href="#我们所熟知的堆和栈" class="headerlink" title="我们所熟知的堆和栈"></a>我们所熟知的堆和栈</h2><p>在大多数编程语言中，栈指的是操作系统线程的栈，用于存储函数参数、局部变量。栈是一个LIFO(last in first out)的结构，一个函数调用会压入一个栈帧，函数调用返回会pop一个栈帧，它所占用的内存也都会被释放，所以任何引用栈上对象的指针，在此之后都会不可用。因此我们需要用到堆。</p>
+<p><img src="https://miro.medium.com/max/1400/1*t4_KKb6fEkINGsTwbcuk5w.png" alt="overview of stack"></p>
+<p>堆是一个更复杂的内存空间，应用程序从操作系统拿到的是一块连续的虚拟地址空间，如何高效率的分配与回收内存，减少内存碎片，这是应用程序的事。</p>
+<h2 id="Go的堆和栈"><a href="#Go的堆和栈" class="headerlink" title="Go的堆和栈"></a>Go的堆和栈</h2><p>Go语言用并发度更好的goroutine来替代线程，与线程类似，每个goroutine都有自己的栈。不同与线程的是，goroutine位于用户空间，因此它的行为是由运行时（而不是操作系统）来定义。</p>
+<p>线程创建时，会由操作系统分配固定大小的栈，而goroutine的栈一开始是2KB（目前），之后可以在运行过程中扩容和缩容。需要注意的是，go采用了连续栈的实现方式，也就是说栈扩容或缩容时，我们会找到一块符合大小的空间，然后将原栈上的内容全部拷贝到新的空间内。</p>
+<ul>
+<li>栈扩容</li>
+</ul>
+<p>在每次函数调用前，go运行时会检查栈空间是否足够，不足会触发扩容机制。</p>
+<p><img src="https://gitee.com/loick/image-url/raw/master/go_runtime/stack_grow.png" alt="stack grow"></p>
+<ul>
+<li>栈缩容</li>
+</ul>
+<p>当goroutine栈使用率不足1&#x2F;4时，会触发缩容，内存缩减为原来的1&#x2F;2</p>
+<p><img src="https://gitee.com/loick/image-url/raw/master/go_runtime/stack_shrink.png" alt="stack grow"></p>
+<p>堆在概念上是类似的，所有的goroutine共享一个栈。但它的内存管理策略要复杂的多，需要解决分配内存，回收内存，解决内存碎片化等一系列问题。</p>
+<p>我们一般说内存管理，都是指的堆内存，操作系统线程的栈不需要程序去操心。goroutine的栈是由Go runtime定义的，这也意味着它和堆共享了同一块内存空间，在设计上也很类似，堆和栈共用了底层数据结构span，以及线程缓存机制减少锁并发。这也可以理解，为什么栈可以无限扩容了。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/NjvicFU9uBtacnr4PU5ja25H9WlKgrgzykXFMVNUO90NFTEfyhh5QQX6dmpjpbibw17Rm6HT9LXyN3ZYMpbBazGA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="内存管理"></p>
+<p>下面我们主要看堆内存是如何组织的，如上图的三部分：内存分配，内存回收，内存组织块。</p>
+<h2 id="TCMalloc"><a href="#TCMalloc" class="headerlink" title="TCMalloc"></a>TCMalloc</h2><p>TCMalloc是Thread Cache Malloc的简称，是Go内存管理的起源；随着Go的迭代，Go的内存管理与TCMalloc不一致地方在不断扩大。但其主要思想、原理和概念都是和TCMalloc一致的。掌握TCMalloc的理念，可以更好的理解Go的内存管理方式。</p>
+<p>内存管理库最重要的目标：更快的分配。</p>
+<p>TCMalloc的做法是<strong>为每个线程预分配一块缓存，线程申请小内存时，可以从缓存分配内存</strong>，这样做有两个好处：</p>
+<ul>
+<li>为线程分配缓存需要一次系统调用，后续线程申请小内存是，从缓存分配，都是在用户态进行，没有系统调用，降低了分配时间。</li>
+<li>多个线程申请小内存时，都从缓存中分配，没有并发加锁的竞争。</li>
+</ul>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_svg/lpHDr05YrIQUfyqx1PLwDx3c2qJh00ZK0XhEZJJ47QXiaopcLFHMjsJAM6RNymnbibVoFvibKqLh9lmK5NOnNNYEJR3PreYib4Zo/640?wx_fmt=svg&wxfrom=5&wx_lazy=1&wx_co=1" alt="TCMalloc概要图"></p>
+<p>对照上图，我们来理解几个核心概念：</p>
+<h3 id="Page"><a href="#Page" class="headerlink" title="Page"></a>Page</h3><p>操作系统对内存的管理以页为单位，TCMallloc也是，不过TCMalloc的Page大小和操作系统的不一定相等，而是倍数关系。目前Go以8KB为一页。</p>
+<h3 id="Span"><a href="#Span" class="headerlink" title="Span"></a>Span</h3><p>一组连续的page称为span，比如可以有2页大小的span，或16页大小的span。span比page高一个层级，是TCMalloc中内存管理的基本单位。</p>
+<h3 id="ThreadCache"><a href="#ThreadCache" class="headerlink" title="ThreadCache"></a>ThreadCache</h3><p>每个线程自己的Cache，一个Cache有多个内存块链表，每个链表连接的是都是内存块，同一个链表上的内存块大小相同。可以说根据内存块大小，对内存做了分类，这样就可以根据申请内存的大小，快速的从合适的链表上选择空闲内存块。由于每个线程都有自己的ThreadCache，所以访问它不需要加锁。</p>
+<h3 id="CentralCache"><a href="#CentralCache" class="headerlink" title="CentralCache"></a>CentralCache</h3><p>是所有线程共享的Cache，也是保存的空闲内存块链表，链表数量和ThreadCache相等。当ThreadCache内存不足时，可以从CentralCache中取，当ThreadCache内存块多时，可以返还给CentralCache。CentralCache是线程共享的，因此访问需要加锁。</p>
+<h3 id="PageHeap"><a href="#PageHeap" class="headerlink" title="PageHeap"></a>PageHeap</h3><p>PageHeap是堆内存的抽象，也是保存的若干链表。当CentralCache没有内存时，会从PageHeap取，当CentralCache内存多时，会放回PageHeap。如下图，分别是保存的1页page的span链表，2页page的span链表，最后是large span链表，用来存法大对象。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_svg/lpHDr05YrIQUfyqx1PLwDx3c2qJh00ZKf9UCUibdUbBDPfialqQNtiaOZSlk988OnA2RVVDa0MCTBjxVwPPu44KMdmYHMkbicrdD/640?wx_fmt=svg&wxfrom=5&wx_lazy=1&wx_co=1" alt="PageHeap"></p>
+<p>上面提到了大对象的概念，TCMalloc中关于对象大小的定义：</p>
+<ol>
+<li>小对象大小：0~256KB</li>
+<li>中对象大小：257~1MB</li>
+<li>大对象大小：&gt;1MB</li>
+</ol>
+<p>小对象的分配流程：ThreadCache -&gt; CentralCache -&gt; PageHeap，大部分时候ThreadCache内存都是充足的，不需要访问CenralCache和PageHeap，分配效率非常高。</p>
+<p>中对象存储流程：从PageHeap中选择适当的大小即可，128Page能保存的最大内存是1MB</p>
+<p>大对象分配流程：从large span set中选择数量合适的页组成span，用于存储数据。</p>
+<h2 id="Go内存管理"><a href="#Go内存管理" class="headerlink" title="Go内存管理"></a>Go内存管理</h2><p>Go的内存管理起源于TCMalloc，但它还包括了另外两样东西：逃逸分析和垃圾收集。逃逸分析我们下面会介绍，垃圾收集是另一个比较大的话题，我会在另一篇文章中介绍它。</p>
+<p>Go内存管理的基本理念和TCMalloc类似，名称有些变化。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/NjvicFU9uBtacnr4PU5ja25H9WlKgrgzyRhlHmq3tibW6efkRoKia4AIcMsQx6kAm8t6iaWiaynD0Rj0wneuhePfaTQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="Go内存管理"></p>
+<h3 id="Page-1"><a href="#Page-1" class="headerlink" title="Page"></a>Page</h3><p>和TCMalloc中page相同，在X86下page大小是8KB，上图最下方蓝色方格带遍的就是一个page。</p>
+<h3 id="Span-1"><a href="#Span-1" class="headerlink" title="Span"></a>Span</h3><p>与TCMalloc中span相同，一组连续的页组成一个span，为内存管理的基本单位，代码中为mspan。</p>
+<p><img src="https://miro.medium.com/max/1400/1*EU3BwOrCI7KIFEninr-bxA.png"></p>
+<p>span有哪些类型呢？源码里有注释，一共是67种。超过32K的对象由class 0表示，该类class只包含一个对象。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/NjvicFU9uBtacnr4PU5ja25H9WlKgrgzyo8mNic2gWicPJvgoFJibib9JnkCyfKoibEohiaXOYq5pZnIibuUd3f9nOW6aQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1"></p>
+<h3 id="mcache"><a href="#mcache" class="headerlink" title="mcache"></a>mcache</h3><p>mcache与TCMalloc中的ThreadCache类似，mcache保存的是各种大小的span链表，小对象直接从mcache分配，它起到缓存的作用，并且无需加锁访问。</p>
+<p>不同于ThreadCache的是，TCMalloc中是每个线程一个ThreadCache，而Go中是每个P拥有一个mcache。P是和线程绑定的，Go中最多有GOMAXPROCS个线程运行，因此每个P一个cache同样可以保证mcache的无锁访问。</p>
+<p><img src="https://miro.medium.com/max/1400/1*5eLTsavMYrixqr4H99FwmA.png"></p>
+<p>另外一个不同点，相对于TCMalloc中的ThreadCache，mcache对每个级别的span，保存了两个链表：</p>
+<ul>
+<li>scan – 包含指针的对象</li>
+<li>noscan – 不包含指针的对象</li>
+</ul>
+<p>这样设计的好处在于，垃圾回收阶段，我们不需要扫描noscan类型的链表去查看是否还有回收对象。</p>
+<h3 id="mcentral"><a href="#mcentral" class="headerlink" title="mcentral"></a>mcentral</h3><p>与TCMalloc的CentralCache类似，是所有线程的缓存，访问需要加锁。它按span class对span进行分类，串联成链表。当mcache中某个级别的span不够时，会向mcentral申请一个当前级别的span。</p>
+<p>与TCMalloc不同的是，mcentral对于每个级别的链表，保存了两个链表，用于协助Go垃圾回收：</p>
+<ul>
+<li>empty – 所有的span都不确定里面是否有空闲的对象空间。当一个span交给mcache的时候，就会加入到empty链表</li>
+<li>noempty – 所有span都至少有1个空闲的对象空间。mcache释放span时加入到该链表的</li>
+</ul>
+<p><img src="https://miro.medium.com/max/1400/1*_j2eG0lUdVQ8NRwgYy-DyA.png"></p>
+<h3 id="mheap"><a href="#mheap" class="headerlink" title="mheap"></a>mheap</h3><p>mheap是堆内存的抽象，它将从OS获取的内存页组织成span保存起来。当mcentral内存不够用是，会向mheap申请；mheap不够用时，会向OS申请。</p>
+<p>TCMalloc将span组织成链表，而mheap将span组织成了树结构，而且是两颗二叉排序树。</p>
+<ul>
+<li>free – 保存的是空闲的并且非垃圾回收的span</li>
+<li>scav – 保存的是空闲，并且垃圾回收的span</li>
+</ul>
+<p>如果是垃圾回收得到的空闲span，会放到free中，否则放到scav中（比如刚从OS申请得到的内存页）。</p>
+<p>当mcentral向mheap申请内存时，提供需要的内存页数和span class，mheap会按照先free后scav的顺序搜索可用的span，如果没有找到，会向OS申请新内存。如果找到的span比需求的大，会将span拆分成两个，1个刚好够大小，交给mcentral，另一个则会放到free中。</p>
+<h2 id="Go内存分配"><a href="#Go内存分配" class="headerlink" title="Go内存分配"></a>Go内存分配</h2><p>Go不想TCMalloc一样将对象分为大、中、小，只有大对象和小对象。但在小对象里分出了一个Tiny对象，指的是从1byte到16byte之间，不包含指针的对象。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/NjvicFU9uBtacnr4PU5ja25H9WlKgrgzyKI5Wu9qJlibmeiajCBtxuiaibp9nsbKj7v1SAWwXzVw0p7IfuYoibU7tZNQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1"></p>
+<p>分配流程：</p>
+<p>1、如果对象大于32K，直接分配到mheap上</p>
+<p>2、如果对象在16B～32K之间，计算最合适的size class，将它分配到mcache上对应的mspan中</p>
+<p>3、如果对象小于16B，Go会使用Tiny allocator算法，将多个小对象合并到同一个内存块中</p>
+<p>大对象分配，和mcentral向mheap申请内存的方式是类似的。</p>
+<h2 id="Appendix"><a href="#Appendix" class="headerlink" title="Appendix"></a>Appendix</h2><p>上面提到的mspan，mcache，mcentral，mheap数据都是直接从OS申请而来的，并不在Go堆管理的那部分内存内。Go程序启动时的内存组织如图所示：</p>
+<p><img src="https://user-images.githubusercontent.com/7698088/54165891-9e6cde80-449d-11e9-8947-14e6f75f4089.png"></p>
+<p>预申请的内存划分为spans、bitmap、arena三部分。其中arena即为所谓的堆区，应用中需要的内存从这里分配。其中spans和bitmap是为了管理arena区而存在的。</p>
+<ul>
+<li>spans区域用于存放mspan元数据，它的结构如下：</li>
+</ul>
+<p>startAddr是在span初始化时就指定了arena中某个页的地址</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">type mspan struct &#123;</span><br><span class="line">	next *mspan			//链表前向指针，用于将span链接起来</span><br><span class="line">	prev *mspan			//链表前向指针，用于将span链接起来</span><br><span class="line">	startAddr uintptr // 起始地址，也即所管理页的地址</span><br><span class="line">	npages    uintptr // 管理的页数</span><br><span class="line">	</span><br><span class="line">	nelems uintptr // 块个数，也即有多少个块可供分配</span><br><span class="line"></span><br><span class="line">	allocBits  *gcBits //分配位图，每一位代表一个块是否已分配</span><br><span class="line"></span><br><span class="line">	allocCount  uint16     // 已分配块的个数</span><br><span class="line">	spanclass   spanClass  // class表中的class ID</span><br><span class="line"></span><br><span class="line">	elemsize    uintptr    // class表中的对象大小，也即块大小</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>allocBits指向bitmaps区域中的一个位图，每位代表一个块是否被分配。</li>
+</ul>
+<h2 id="好文"><a href="#好文" class="headerlink" title="好文"></a>好文</h2><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/3gGbJaeuvx4klqcv34hmmw">Go内存分配那些事，就这么简单！</a></p>
+<p><a target="_blank" rel="noopener" href="https://medium.com/eureka-engineering/understanding-allocations-in-go-stack-heap-memory-9a2631b5035d">Understanding Allocations in Go</a></p>
+<p><a target="_blank" rel="noopener" href="https://medium.com/@ankur_anand/a-visual-guide-to-golang-memory-allocator-from-ground-up-e132258453ed">A visual guide to Go Memory Allocator from scratch (Golang)</a></p>
+<p><a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/652551">简单易懂的 Go 内存分配原理解读</a></p>
+
+      
+      <!-- tags and categories -->
+      
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Go//" class="article-tag-list-link color3">Go</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/04/29/golang/Go%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E6%9C%BA%E5%88%B6/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-方法论/博客的前言怎么写？" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/04/29/%E6%96%B9%E6%B3%95%E8%AE%BA/%E5%8D%9A%E5%AE%A2%E7%9A%84%E5%89%8D%E8%A8%80%E6%80%8E%E4%B9%88%E5%86%99%EF%BC%9F/">博客的前言该怎么写？</a>
+    </h1>
+  
+
+        
+        <a href="/2022/04/29/%E6%96%B9%E6%B3%95%E8%AE%BA/%E5%8D%9A%E5%AE%A2%E7%9A%84%E5%89%8D%E8%A8%80%E6%80%8E%E4%B9%88%E5%86%99%EF%BC%9F/" class="archive-article-date">
+  	<time datetime="2022-04-28T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-29</time>
+</a>
+        
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          
+            <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">339字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">1分</span>
+      </span>
+    </span>
+</div>
+
+          
+        
+        <!-- 添加完成 -->
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>前言该怎么写的前言。我看过很多中文英文的技术博客，对比下来两者的风格差异很大。近从前言来说，中文博客写的比较死板，带有官方口吻。而英文博客大体上来说就非常平易近人，作者经历了什么，为什么要写这篇博客，感受如何。不至于一上来就带有浓厚的“专业性”味道。</p>
+<p>因此在我提笔想要写技术博客时，在前言这部分，反而不知道如何下笔。我不希望博客口吻太专业，因为我本身对技术的理解可能就谈不上专业；然而有实在不会用生活化的口吻，总觉的唠叨啰嗦。左右为难。</p>
+<p>因而希望从多个我觉得好的英文博客中，提炼出一个普适性的叙述结构，分享给大家。</p>
+<p><strong>其实前言很简单，就是为什么要写这个博客</strong></p>
+<h2 id="风格"><a href="#风格" class="headerlink" title="风格"></a>风格</h2><h3 id="1、带你探索型"><a href="#1、带你探索型" class="headerlink" title="1、带你探索型"></a>1、带你探索型</h3><h4 id="Case1"><a href="#Case1" class="headerlink" title="Case1"></a>Case1</h4><p><a target="_blank" rel="noopener" href="https://medium.com/@ankur_anand/a-visual-guide-to-golang-memory-allocator-from-ground-up-e132258453ed">A visual guide to Go Memory Allocator from scratch (Golang)</a></p>
+<p>When I first started trying to understand the memory allocator of Go, it was maddening. Everything seemed like a mystical black box. As almost every technical wizardry is hidden beneath abstractions, you need to peel off those layers one by one to understand it.</p>
+<p>In this blog post, we will exactly do that. Do you want to learn everything about Go memory allocator? You’re reading the right article.</p>
+<p>2、</p>
+
+      
+      <!-- tags and categories -->
+      
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/方法论//" class="article-tag-list-link color4">方法论</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/04/29/%E6%96%B9%E6%B3%95%E8%AE%BA/%E5%8D%9A%E5%AE%A2%E7%9A%84%E5%89%8D%E8%A8%80%E6%80%8E%E4%B9%88%E5%86%99%EF%BC%9F/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-golang/Gin入门了解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/02/20/golang/Gin%E5%85%A5%E9%97%A8%E4%BA%86%E8%A7%A3/">Gin实现机制</a>
+    </h1>
+  
+
+        
+        <a href="/2022/02/20/golang/Gin%E5%85%A5%E9%97%A8%E4%BA%86%E8%A7%A3/" class="archive-article-date">
   	<time datetime="2022-02-19T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-20</time>
 </a>
         
@@ -406,7 +816,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2022/02/20/golang/%E5%85%A5%E9%97%A8%E4%BA%86%E8%A7%A3/">展开全文 >></a>
+          <a class="article-more-a" href="/2022/02/20/golang/Gin%E5%85%A5%E9%97%A8%E4%BA%86%E8%A7%A3/">展开全文 >></a>
         </p>
       
 
@@ -1458,574 +1868,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/08/17/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis/Redis%E5%9F%BA%E7%A1%80/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-微服务/领域驱动" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/08/13/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8/">领域驱动概念与项目结构</a>
-    </h1>
-  
-
-        
-        <a href="/2021/08/13/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8/" class="archive-article-date">
-  	<time datetime="2021-08-12T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-13</time>
-</a>
-        
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          
-            <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">997字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">3分</span>
-      </span>
-    </span>
-</div>
-
-          
-        
-        <!-- 添加完成 -->
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          <h2 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h2><h5 id="领域建模"><a href="#领域建模" class="headerlink" title="领域建模"></a>领域建模</h5><p>识别领域对象和它对应的行为，通过面相对象的设计原则（聚合、解耦、抽象、组合等多种设计方式）达到系统可复用，可维护，易扩展的能力。</p>
-<h5 id="贫血模型"><a href="#贫血模型" class="headerlink" title="贫血模型"></a>贫血模型</h5><p>这种模型下领域对象只包含所有属性，<strong>没有持久化和业务逻辑</strong>。真正的业务逻辑则由领域服务负责实现</p>
-<h5 id="充血模型"><a href="#充血模型" class="headerlink" title="充血模型"></a>充血模型</h5><p>领域对象包含所有属性，持久化和业务逻辑；比较符合面向对象的设计。</p>
-<h5 id="实体"><a href="#实体" class="headerlink" title="实体"></a>实体</h5><p>当一个对象由其标识（而不是属性，标识唯一）区分时，这种对象称为实体（Entity）。</p>
-<h5 id="值对象"><a href="#值对象" class="headerlink" title="值对象"></a>值对象</h5><p>当一个对象用于对事务进行描述而没有唯一标识时，它被称作值对象（Value Object）。</p>
-<p>值对象创建出来后，就不能再更改。</p>
-<p>理解：实体的对比通过id，值对象通过值</p>
-<h5 id="聚合根"><a href="#聚合根" class="headerlink" title="聚合根"></a>聚合根</h5><p>Aggregate(聚合）是一组相关对象的集合，作为一个整体被外界访问，聚合根（Aggregate Root）是这个聚合的根节点。</p>
-<p>聚合由根实体，值对象和实体组成。</p>
-<h5 id="限界上下文"><a href="#限界上下文" class="headerlink" title="限界上下文"></a>限界上下文</h5><h2 id="读写操作实现"><a href="#读写操作实现" class="headerlink" title="读写操作实现"></a>读写操作实现</h2><p>系统设计一般的步骤都是从底层，数据库字段开始设计，但偏向技术。领域模型的典型实践是从上到下。</p>
-<p>拿到一个业务需求，先与客户方确定好请求数据格式，再实现Controller和ApplicationService，然后实现领域模型</p>
-<h5 id="一些原则"><a href="#一些原则" class="headerlink" title="一些原则"></a>一些原则</h5><p>一个简单的原则：一个业务用例对应applicationService的一个方法，业务方法与事务一一对应</p>
-<p>当所有的类都在领域下时，如果代码结构足够简单，可以不再分具体的子包。</p>
-<ul>
-<li>将业务概念尽量建模为值对象。不需要的时候就可以扔掉</li>
-<li>领域模型中的对象不能直接返回给客户端</li>
-</ul>
-<h5 id="写操作的实现"><a href="#写操作的实现" class="headerlink" title="写操作的实现"></a>写操作的实现</h5><ul>
-<li>通过聚合根完成业务请求</li>
-<li>通过Factory完成聚合根的创建，创建时需要的外部信息，通过工厂模式提供</li>
-<li>通过DomainService（facade）完成业务请求，无法避免的与外部的交互（妥协），在实践中越少越好。</li>
-</ul>
-<p>总结：创建聚合根通过Factory完成；业务逻辑优先在聚合根边界内完成；聚合根中不合适放置的业务逻辑才考虑放到DomainService中。</p>
-<h5 id="读操作的实现"><a href="#读操作的实现" class="headerlink" title="读操作的实现"></a>读操作的实现</h5><ul>
-<li>基于领域模型的读操作(读写操作糅合在了一起，不推荐)</li>
-<li>基于数据模型的读操作(绕过聚合根和资源库，直接返回数据，推荐)</li>
-<li>CQRS(读写操作分别使用不同的数据库)</li>
-</ul>
-<h2 id="项目代码结构"><a href="#项目代码结构" class="headerlink" title="项目代码结构"></a>项目代码结构</h2><h5 id="美团技术团队"><a href="#美团技术团队" class="headerlink" title="美团技术团队"></a>美团技术团队</h5><ul>
-<li><p>service，领域服务，串联领域对象、资源库和防腐层，对其他上下文提供交互的接口。（一个业务方法对应一个用例）</p>
-</li>
-<li><p>domain</p>
-<ul>
-<li>valobj，领域对象-值对象</li>
-<li>entity，领域对象-实体</li>
-<li>aggregate，聚合根</li>
-</ul>
-</li>
-<li><p>repo，领域资源库</p>
-<ul>
-<li>dao<ul>
-<li>po</li>
-</ul>
-</li>
-<li>cache</li>
-</ul>
-</li>
-<li><p>facade，领域防腐层</p>
-</li>
-</ul>
-<p>上述的结构读写都是基于领域模型。基于domain的读写，和基于数据模型的读写区别就在于service中的query部分，通不通过domain。如果直接走repo就是读写分离的。</p>
-<h5 id="CQRS方式"><a href="#CQRS方式" class="headerlink" title="CQRS方式"></a>CQRS方式</h5><ul>
-<li><p>application，读写</p>
-<ul>
-<li>QueryService</li>
-<li>CommandService</li>
-</ul>
-</li>
-<li><p>domain</p>
-<ul>
-<li>command</li>
-<li>entity</li>
-<li>producer</li>
-<li>repo</li>
-<li>DomainManagerClass</li>
-</ul>
-</li>
-<li><p>infra，提供对domain里接口的实现</p>
-<ul>
-<li><p>repo</p>
-<ul>
-<li>cache</li>
-<li>db</li>
-<li>po</li>
-</ul>
-</li>
-<li><p>facade</p>
-</li>
-<li><p>producer</p>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="架构概念"><a href="#架构概念" class="headerlink" title="架构概念"></a>架构概念</h2><p>当业务膨胀，应用程序涉及到对多个领域服务的编排，本身也包含业务逻辑，此时对内属于应用服务，但对外是领域服务，需要暴露为微服务。</p>
-<h2 id="CQRS"><a href="#CQRS" class="headerlink" title="CQRS"></a>CQRS</h2><p>Command Query Responsibility Segregation</p>
-<p>command和query分离</p>
-<p>原则上两者数据源也应该分离（可以使用不同的数据源），两者可以部署在不同的应用上</p>
-<p>问题：</p>
-<p>1、事务，实时性问题（数据同步的延迟）</p>
-<p>2、没有成熟的框架</p>
-
-      
-      <!-- tags and categories -->
-      
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">领域驱动</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/微服务//" class="article-tag-list-link color4">微服务</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/08/13/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-数据库/数据存储综述" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/08/10/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E7%BB%BC%E8%BF%B0/">数据存储综述</a>
-    </h1>
-  
-
-        
-        <a href="/2021/08/10/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E7%BB%BC%E8%BF%B0/" class="archive-article-date">
-  	<time datetime="2021-08-09T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-10</time>
-</a>
-        
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          
-            <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1.7k字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">5分</span>
-      </span>
-    </span>
-</div>
-
-          
-        
-        <!-- 添加完成 -->
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          <h2 id="关系型数据库原理与应用"><a href="#关系型数据库原理与应用" class="headerlink" title="关系型数据库原理与应用"></a>关系型数据库原理与应用</h2><h3 id="Mysql架构"><a href="#Mysql架构" class="headerlink" title="Mysql架构"></a>Mysql架构</h3><p>一条sql的执行过程：</p>
-<p><img src="https://gitee.com/loick/image-url/raw/master/mysql/structure.png" alt="mysql架构"></p>
-<p>大多数情况下不要使用查询缓存，为什么呢？因为查询缓存往往弊大于利。查询缓存的失效非常频繁，只要有对一个表的更新，这个表上所有的查询缓存都会被清空。因此很可能你费劲地把结果存起来，还没使用呢，就被一个更新全清空了。对于更新压力大的数据库来说，查询缓存的命中率会非常低。除非你的业务就是有一张静态表，很长时间才会更新一次。比如，一个系统配置表，那这张表上的查询才适合使用查询缓存。</p>
-<h3 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h3><h4 id="事务特性"><a href="#事务特性" class="headerlink" title="事务特性"></a>事务特性</h4><p>1、A：原子性，提交要么执行成功，要么没有执行，没有中间态</p>
-<p>2、C：一致性，事务执行后，数据的完整性约束不能被破坏</p>
-<p>3、I：隔离性，多事务并行，满足可见性控制要求</p>
-<p>4、D：持久性，事务成功后，数据持久化存储，不能丢失（通过redo log来保证）</p>
-<p>问题：提交一次事务后，数据库返回超时，事务执行成功了吗？</p>
-<h4 id="事务隔离级别"><a href="#事务隔离级别" class="headerlink" title="事务隔离级别"></a>事务隔离级别</h4><p>读未提交（read-uncommitted）、不可重复读(read-committed)、可重复读(repeatable-read)、串行化(serialzable)</p>
-<p>Mysql默认隔离级别是RR，在此隔离级别下，mysql为了<strong>解决幻读</strong>的问题，利用Gap锁来防止新行的加入。</p>
-<p>但这种锁并行度不够，冲突很多，经常引起死锁。</p>
-<p><img src="https://gitee.com/loick/image-url/raw/master/mysql/transaction.png" alt="事务隔离级别"></p>
-<h4 id="Mysql锁机制"><a href="#Mysql锁机制" class="headerlink" title="Mysql锁机制"></a>Mysql锁机制</h4><p>在 MySQL 中有三种级别的锁：表级锁、行级锁、页级锁。</p>
-<ul>
-<li><p>表级锁：开销小，加锁快；不会出现死锁；锁定粒度大，发生锁冲突的概率最高，并发度最低。</p>
-</li>
-<li><p>行级锁：开销大，加锁慢；会出现死锁；锁定粒度最小，发生锁冲突的概率最低，并发度最高。</p>
-</li>
-<li><p>页级锁：开销和加锁时间界于表锁和行锁之间；会出现死锁；锁定粒度界于表锁和行锁之间，并发度一般。</p>
-</li>
-</ul>
-<p>InnoDB只支持表锁和行锁，表锁分为意向共享锁（IS）和意向排他锁（IX）</p>
-<h4 id="InnoDB行锁"><a href="#InnoDB行锁" class="headerlink" title="InnoDB行锁"></a>InnoDB行锁</h4><ul>
-<li>Record Lock：行锁，分为共享锁和排他锁</li>
-<li>Gap Lock：间隙锁，锁定一个范围，不包括本身</li>
-</ul>
-<p>间隙锁和间隙锁之间是不互斥的关系</p>
-<p>值不存在的情况下，行锁退化成间隙锁</p>
-<h4 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h4><p>行锁是最细粒度的锁，有利于并发，同时引入死锁风险</p>
-<ul>
-<li><p>互斥条件：一个资源每次只能被一个进程使用</p>
-</li>
-<li><p>请求与保持条件：一个进程因请求资源而阻塞时，对已获得的资源保持不放</p>
-</li>
-<li><p>不剥夺条件：进程已获得的资源，在没使用完之前，不能强行剥夺</p>
-</li>
-<li><p>循环等待条件：多个进程之间形成的一种互相循环等待资源的关系</p>
-</li>
-</ul>
-<p>非主键索引列更新，<strong>主键加锁顺序不可控</strong>—&gt; 形成循环依赖</p>
-<h3 id="Mysql-Log"><a href="#Mysql-Log" class="headerlink" title="Mysql Log"></a>Mysql Log</h3><p>Redo log、Undo log、bin log、slow log</p>
-<h3 id="设计范式"><a href="#设计范式" class="headerlink" title="设计范式"></a>设计范式</h3><p>六种范式：第一范式(1NF)、第二范式(2NF)、第三范式 (3NF)、巴斯-科德范式(BCNF)、第四范式(4NF)和第五范式(5NF，又称完美范式)。各种范式呈递次规范，越高的范式数据库冗余越小。</p>
-<p>通常用到第一范式(<strong>1NF</strong>)，第二范式(<strong>2NF</strong>)，第三范式(<strong>3NF</strong>)</p>
-<ul>
-<li>第一范式要求无重复的列，表中的每一列都是拆分的基本数据项，即列不能够再拆分成 其他几列，强调的是列的原子性。</li>
-<li>第二范式要求非主键列必须完全依赖于主键，而不能只依赖于主键的一部分。</li>
-<li>第三范式要求非主键列必须直接依赖于主键，不能存在间接依赖主键。</li>
-</ul>
-<h3 id="数据库使用原则"><a href="#数据库使用原则" class="headerlink" title="数据库使用原则"></a>数据库使用原则</h3><p>发挥出Mysql的最佳性能：</p>
-<ul>
-<li>不进行复杂计算，尽量让MySQL回归数据存储职能</li>
-<li>查询数据时尽量单表查询，减少跨库查询和多表关联</li>
-<li>一定要杜绝大事务、大批量、大字段等一系列性能杀手</li>
-</ul>
-<p>以上要求会导致反范式设计，通过冗余减少多表关联查询</p>
-<h3 id="索引和查询优化"><a href="#索引和查询优化" class="headerlink" title="索引和查询优化"></a>索引和查询优化</h3><p>Sql查询是数据库核心功能，索引是优化查询的重要手段，大多数索引都是用B+Tree结构，它有两个特征</p>
-<p>1、数据只在叶子结点存储</p>
-<p>2、叶子结点通过双向指针链接</p>
-<p><img src="https://gitee.com/loick/image-url/raw/master/mysql/index.png" alt="索引结构"></p>
-<h4 id="索引类型"><a href="#索引类型" class="headerlink" title="索引类型"></a>索引类型</h4><p>唯一索引更新有代价，加锁粒度小;联合索引最左前缀匹配原则;覆盖索引可遇不可求。</p>
-<p>1、聚簇索引:它表示表中的数据存储顺序和索引顺序一致，即索引组织表。</p>
-<p>InnoDB 的聚簇索引就是按照主键顺序构建 B+Tree，B+Tree 的叶子节点就是行记录，数 据行和主键值紧凑地存储在一起。</p>
-<p>2、非聚簇索引:它表示表中的数据存储顺序和索引顺序不一致，读取数据需要回表。</p>
-<p>InnoDB 辅助索引(二级索引)只是根据索引列构建 B+Tree，但在 B+Tree 的每一行都存 了主键信息，加速回表读取非索引列。</p>
-<p><img src="https://gitee.com/loick/image-url/raw/master/mysql/index_type.png" alt="索引类型"></p>
-<h4 id="索引设计规范"><a href="#索引设计规范" class="headerlink" title="索引设计规范"></a>索引设计规范</h4><p>三星索引:</p>
-<ul>
-<li><p>第一颗星：where表达式所确定的值域范围索引片最小化，即等值谓词优先建索引。</p>
-</li>
-<li><p>第二颗星：索引行的顺序与查询语句需求一致，order by 中的排序和索引顺序一致。</p>
-</li>
-<li><p>第三颗星：索引行包含查询语句中所有的列，即尽量构成覆盖索引。</p>
-</li>
-</ul>
-<p>notes：表数据比较小时，索引需要多次回表点查的情况下，反而不如全表扫描快。</p>
-<h4 id="需要注意的错误实践"><a href="#需要注意的错误实践" class="headerlink" title="需要注意的错误实践"></a>需要注意的错误实践</h4><ul>
-<li>在区分度不高的列上建立了无效索引</li>
-<li>查询条件不符合联合索引最左匹配原则</li>
-<li>没有利用索引自身的有序性来避免排序</li>
-<li>多表联合查询不能通过小表驱动大表</li>
-<li>查询条件和列的数据类型不匹配</li>
-<li>在索引列上做计算导致索引失效</li>
-</ul>
-<h4 id="慢查询优化"><a href="#慢查询优化" class="headerlink" title="慢查询优化"></a>慢查询优化</h4><p>通过explain查看sql执行计划</p>
-<p><strong>type</strong>显示何种类型，从最好到最差依次是:<strong>system&gt;const&gt;eq_ref&gt;ref&gt;range&gt;index&gt;all</strong></p>
-<h3 id="More"><a href="#More" class="headerlink" title="More"></a>More</h3><p>高可用性：</p>
-<ul>
-<li><p>主备复制 </p>
-</li>
-<li><p>主备切换</p>
-</li>
-<li><p>Share Disk</p>
-</li>
-</ul>
-<p>扩展能力：</p>
-<ul>
-<li><p>Scale Up：救急</p>
-</li>
-<li><p>Scale Out：垂直和水平拆分</p>
-</li>
-<li><p>读写分离：存在写后读问题</p>
-</li>
-</ul>
-<p><img src="https://gitee.com/loick/image-url/raw/master/mysql/backup.png" alt="backup"></p>
-
-      
-      <!-- tags and categories -->
-      
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Mysql</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">索引</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">事务</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/缓存//" class="article-tag-list-link color3">缓存</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/08/10/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E7%BB%BC%E8%BF%B0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-数据库/Redis/Redis阻塞原因" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/08/09/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis/Redis%E9%98%BB%E5%A1%9E%E5%8E%9F%E5%9B%A0/">Redis阻塞原因</a>
-    </h1>
-  
-
-        
-        <a href="/2021/08/09/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis/Redis%E9%98%BB%E5%A1%9E%E5%8E%9F%E5%9B%A0/" class="archive-article-date">
-  	<time datetime="2021-08-08T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-09</time>
-</a>
-        
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          
-            <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">575字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">2分</span>
-      </span>
-    </span>
-</div>
-
-          
-        
-        <!-- 添加完成 -->
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          <h2 id="慢查询"><a href="#慢查询" class="headerlink" title="慢查询"></a>慢查询</h2><p>redis是单线程的，慢查询会导致server阻塞，可以通过slowlog get n获取慢查询日志分析</p>
-<h2 id="bigkey大对象"><a href="#bigkey大对象" class="headerlink" title="bigkey大对象"></a>bigkey大对象</h2><h3 id="bigkey是什么"><a href="#bigkey是什么" class="headerlink" title="bigkey是什么"></a>bigkey是什么</h3><p>指的是rediskey对应的value所占的空间特别大，字符串可以存储512MB内容，列表可以存储2^32-1个元素；一般情况下，value值超过10kb，就算大key。</p>
-<h3 id="bigkey危害"><a href="#bigkey危害" class="headerlink" title="bigkey危害"></a>bigkey危害</h3><p>造成内存分布不均</p>
-<p>操作耗时（单线程），有阻塞风险</p>
-<p>网络阻塞，每次获取都会产生较大网络流量</p>
-<h3 id="如何发现bigkey"><a href="#如何发现bigkey" class="headerlink" title="如何发现bigkey"></a>如何发现bigkey</h3><p>1、redis-cli –bigkeys统计bigkey的分布情况</p>
-<p>2、dump出rdb文件分析（最好在从库上进行）：bgsave&#x2F;redis-rdb-tool</p>
-<p>3、debug object key命令单个key查看，效率低</p>
-<p>4、自己写脚本扫描</p>
-<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><h4 id="当版本-lt-4-0"><a href="#当版本-lt-4-0" class="headerlink" title="当版本&lt;4.0"></a>当版本&lt;4.0</h4><p>对于大key，不要直接用del；对于String类型大key，不要存入redis；对于集合类型，边扫描边清理</p>
-<p>另外也可以对大key进行拆分，拆成hash结构</p>
-<h4 id="当版本-gt-x3D-4-0"><a href="#当版本-gt-x3D-4-0" class="headerlink" title="当版本&gt;&#x3D;4.0"></a>当版本&gt;&#x3D;4.0</h4><p>发现大key：命令memory usage</p>
-<p>删除大key： lazyfree机制</p>
-<ul>
-<li>unlink命令：代替del</li>
-<li>把大key放到后台线程任务队列，异步删除</li>
-</ul>
-<h2 id="swap"><a href="#swap" class="headerlink" title="swap"></a>swap</h2><p>redis数据存放在内存中，如果内存不够用，会导致操作系统swap交换，把不经常使用的写到磁盘上，腾出物理内存。磁盘读写时间比内存慢5个数量级（内存0.1us单位，磁盘10ms）因此redis频繁的swap交换会导致性能降低。</p>
-<p>检查redis内存交换情况：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 识别redis进程号</span><br><span class="line">redis-cli info server | grep process_id</span><br><span class="line"># 根据进程号查询内存交换信息</span><br><span class="line">cat /proc/&#123;process_id&#125;/smaps | grep Swap</span><br></pre></td></tr></table></figure>
-
-<p>预防内存交换：</p>
-<p>1、确保redis有充足内存</p>
-<p>2、设置redis最大可用内存</p>
-<p>3、降低系统swap优先级</p>
-<h2 id="fock子进程"><a href="#fock子进程" class="headerlink" title="fock子进程"></a>fock子进程</h2><p>在RDB生成和AOF重写时，会fork一个子进程去执行。fork操作执行太过耗时也会导致阻塞，fork会去复制父进程空间内存表。</p>
-<p>查看：info stats命令获取lastest_fork_usec 指标，表示 redis 最近一次 fork 操作耗时。</p>
-<h2 id="AOF刷盘"><a href="#AOF刷盘" class="headerlink" title="AOF刷盘"></a>AOF刷盘</h2><p>开启AOF，文件刷盘一般每秒一次，硬盘压力大，fsync需要等待写入完成。</p>
-<p>查看：redis日志或info presistence统计中的aof_delayed_fsync指标</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/jmcui/p/13926397.html#_label0">Redis阻塞原因及其排查方向</a></p>
-
-      
-      <!-- tags and categories -->
-      
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Redis//" class="article-tag-list-link color1">Redis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/08/09/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis/Redis%E9%98%BB%E5%A1%9E%E5%8E%9F%E5%9B%A0/">展开全文 >></a>
         </p>
       
 

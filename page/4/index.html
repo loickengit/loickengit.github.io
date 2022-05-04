@@ -79,7 +79,7 @@
 		</nav>
 		<nav>
 			<ul style="font-size:12px; font-weight:100">
-				总文章数：63
+				总文章数：66
 			</ul>
 		</nav>
 		<br/>
@@ -157,6 +157,447 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-微服务/分布式系统模式/Folower reads" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/13/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E6%A8%A1%E5%BC%8F/Folower%20reads/">分布式系统合集</a>
+    </h1>
+  
+
+        
+        <a href="/2021/07/13/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E6%A8%A1%E5%BC%8F/Folower%20reads/" class="archive-article-date">
+  	<time datetime="2021-07-12T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-13</time>
+</a>
+        
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          
+            <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">1.3k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">4分</span>
+      </span>
+    </span>
+</div>
+
+          
+        
+        <!-- 添加完成 -->
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          <h1 id="Follower-Reads"><a href="#Follower-Reads" class="headerlink" title="Follower Reads"></a>Follower Reads</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://martinfowler.com/articles/patterns-of-distributed-systems/follower-reads.html">Follower Reads</a></p>
+<p>主从结构如果所有请求都由leader处理，leader负载和延迟都会很高</p>
+</blockquote>
+<p>clients可以连接到followers进行读取操作，会有主从延迟</p>
+<p>clients可以选择连接到最近的follower上，和follower维持socket连接，并可以根据follwers的延迟情况，选择最优的发起 请求</p>
+<p>followers可能和leader失联，数据落后，为了避免这种情况对clients的影响，follower在失联后拒绝对外提供服务</p>
+<h3 id="读后写问题"><a href="#读后写问题" class="headerlink" title="读后写问题"></a>读后写问题</h3><p>client在发起写请求时，带上一个version，后续read带上version，follower在处理读请求时，检查自身的version是否大于等于这个版本，如果当前的值时旧的</p>
+<ul>
+<li>等待leader新值的同步</li>
+<li>将请求转发到leader</li>
+</ul>
+<h1 id="Generation-Clock"><a href="#Generation-Clock" class="headerlink" title="Generation Clock"></a>Generation Clock</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://martinfowler.com/articles/patterns-of-distributed-systems/generation.html">Generation Clock</a></p>
+<p>单调递增的数字，代表当前集群的版本</p>
+</blockquote>
+<h3 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h3><p>在集群中leader可能宕机，或者出于垃圾收集无法响应heartbeat时，其他followers会选出新的leader；</p>
+<p>当旧leader恢复后，就会产生脑裂，所以需要有一个机制来保证</p>
+<ul>
+<li>其他follower能识别来自旧leader的请求</li>
+<li>旧leader能知道自己失联重启，并降级为follower</li>
+</ul>
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>每个节点都在自己的<a target="_blank" rel="noopener" href="https://martinfowler.com/articles/patterns-of-distributed-systems/wal.html">Write-Ahead Log</a>中存储一个Generation Clock，节点重启时可以从log中读取Generation Clock，在leader选举时，将自己的Generation Clock做为vote的一部分发送出去，选举完成后，集群中的Generation Clock都是一样的。</p>
+<p>之后leader发往follower的所有请求和heartbeat都带上Generation Clock，如果follower发现Generation Clock太旧了，返回一个失败结果带上新的Generation Clock，旧leader收到相应后就会发现将自己设置为follwer</p>
+<h1 id="Gossip-Dissemination"><a href="#Gossip-Dissemination" class="headerlink" title="Gossip Dissemination"></a>Gossip Dissemination</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://martinfowler.com/articles/patterns-of-distributed-systems/gossip-dissemination.html">Gossip Dissemination</a></p>
+<p>随机选择节点传递信息，以确保它到达集群中的所有节点而不会泛滥网络</p>
+</blockquote>
+<p>集群中的每个节点都需要和其他节点同步信息，如果建立全连接，会有带宽限制；需要一种机制保证信息在某些连接失效的情况下，将信息传递到集群中的每个节点。</p>
+<h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution"></a>Solution</h3><p>在固定间隔内，每个节点随机选取一些节点发起sync请求</p>
+<p>当集群变大时，需要考虑：</p>
+<ul>
+<li>设置每个node产生的消息数量（limit）</li>
+<li>控制消息的大小，避免影响应用程序的数据传输</li>
+<li>具备网络故障容错能力，一些节点down了也不会影响</li>
+</ul>
+<p>每个节点都存储了原数据信息（比如分片索引，节点自身的属性），在gossip开始后，需要至少和其他一个节点联系以传递信息。需要处理</p>
+<ul>
+<li>收到消息中本地没有的部分</li>
+<li>本地有，收到的消息没有</li>
+<li>收到消息数据的version比本地高</li>
+</ul>
+<p>然后把incoming message确实的部分，作为resp发送回去</p>
+<h4 id="Avoiding-unnecessary-state-exchange"><a href="#Avoiding-unnecessary-state-exchange" class="headerlink" title="Avoiding unnecessary state exchange"></a>Avoiding unnecessary state exchange</h4><p>节点不是每次都有必要发送全量的数据，因此对每一个value使用一个version记录当前的state，每次本地数据有更新就increase version，并向外gossip</p>
+<h4 id="Failure-Detection"><a href="#Failure-Detection" class="headerlink" title="Failure Detection"></a>Failure Detection</h4><p>如何维护活跃的节点列表？</p>
+<ul>
+<li>use a separate probing component，负责探测是否有节点失联，并随机选择一些节点gossip这个信息</li>
+<li>节点之间通过heart beat更新彼此状态</li>
+</ul>
+<h2 id="Write-Ahead-log"><a href="#Write-Ahead-log" class="headerlink" title="Write-Ahead log"></a>Write-Ahead log</h2><p>预写日志，在真正执行client请求前，将请求作为一条commond写入磁盘中，避免数据丢失</p>
+<ul>
+<li>操作系统write其实写的缓冲区，什么时候刷进磁盘由操作系统决定，存在丢失数据的可能</li>
+<li>但提供了强制刷磁盘的命令，但每一个请求都写磁盘，效率很低，就算批量写也会有数据丢失的可能</li>
+<li>Write-Ahead log需要保证自己是幂等的，对于clients的重复请求能够识别</li>
+<li>Write-Ahead log会膨胀，可以通过<a target="_blank" rel="noopener" href="https://martinfowler.com/articles/patterns-of-distributed-systems/log-segmentation.html">Segmented Log</a> and <a target="_blank" rel="noopener" href="https://martinfowler.com/articles/patterns-of-distributed-systems/low-watermark.html">Low-Water Mark</a>来解决</li>
+</ul>
+<h2 id="HeartBeat"><a href="#HeartBeat" class="headerlink" title="HeartBeat"></a>HeartBeat</h2><p>Timeout Interval &gt; Request Interval &gt; Network round trip time</p>
+<h4 id="Technical-Considerations"><a href="#Technical-Considerations" class="headerlink" title="Technical Considerations"></a>Technical Considerations</h4><p>对于发送方和接收方：如果使用<a target="_blank" rel="noopener" href="https://martinfowler.com/articles/patterns-of-distributed-systems/single-socket-channel.html">Single Socket Channel</a>，heartbeat虽然收到，但被其他请求阻塞（如load非常重的读写磁盘），无法及时响应而被认为失联。可以使用<a target="_blank" rel="noopener" href="https://martinfowler.com/articles/patterns-of-distributed-systems/request-pipeline.html">Request Pipeline</a>来避免串行的请求响应过程。</p>
+<p>HeartBeat对于不适用于大型集群</p>
+<ul>
+<li>每个server产生的消息数量有limit</li>
+<li>消耗的网络带宽有上限，不能影响正常的数据传输</li>
+</ul>
+<p>节点如何发现自己与集群失联了？</p>
+<ul>
+<li>设置一个upper bound，在这个时间内没有收到heartbeat，就自动fail</li>
+</ul>
+<h1 id="High-Water-Mark"><a href="#High-Water-Mark" class="headerlink" title="High-Water Mark"></a>High-Water Mark</h1><h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>Write-Ahead log可以保证请求被leader响应后，节点宕机数据也不会丢失；但仍然可能会出错</p>
+<ul>
+<li>leader在宕机之前没有将log发送给followers</li>
+<li>leader在宕机之前只发给少数followers，但不是大多数</li>
+</ul>
+<h4 id="Solution-2"><a href="#Solution-2" class="headerlink" title="Solution"></a>Solution</h4><p>High-Water Mark是一个index，用来记录被大多数followers同步的log entry，所有的节点对clients只提供High-Water Mark以下的数据</p>
+<p>leader在给followers同步时，同样带上Generation Clock，leader记录根据响应每个follower上的log index</p>
+<p>leader可以通过heartbeat或数据传输，把High-Water Mark同步给followers</p>
+<p>当一个节点加入集群时，会找leader检查有没有log冲突（作为前leader处理了一些没有同步到followers上的请求），然后和leader对齐</p>
+<h2 id="Lease"><a href="#Lease" class="headerlink" title="Lease"></a>Lease</h2><p>Use time bound leases for cluster nodes to coordinate their activities.</p>
+<h2 id="Low-Water-Mark"><a href="#Low-Water-Mark" class="headerlink" title="Low-Water Mark"></a>Low-Water Mark</h2><p>预写日志，可以丢弃的水位</p>
+
+      
+      <!-- tags and categories -->
+      
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/分布式系统//" class="article-tag-list-link color1">分布式系统</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/07/13/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E6%A8%A1%E5%BC%8F/Folower%20reads/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-微服务/CDN原理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/13/%E5%BE%AE%E6%9C%8D%E5%8A%A1/CDN%E5%8E%9F%E7%90%86/">CDN原理</a>
+    </h1>
+  
+
+        
+        <a href="/2021/07/13/%E5%BE%AE%E6%9C%8D%E5%8A%A1/CDN%E5%8E%9F%E7%90%86/" class="archive-article-date">
+  	<time datetime="2021-07-12T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-13</time>
+</a>
+        
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          
+            <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">238字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">1分</span>
+      </span>
+    </span>
+</div>
+
+          
+        
+        <!-- 添加完成 -->
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>【目标】：加速网站访问</p>
+<p>【设计思想】：缓存，把源站内容缓存在全国多个节点，在用户访问时，选择距离近延迟小的节点访问获取数据。分布在各地的节点就是CDN服务器。</p>
+<h2 id="为什么要有CDN？"><a href="#为什么要有CDN？" class="headerlink" title="为什么要有CDN？"></a>为什么要有CDN？</h2><p>当下互联网应用包含大量静态内容，这些静态内容和准静态内容耗费带宽（比如视频），如果都请求主站服务器，不仅qps大，而且也极其耗费带宽。</p>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p><img src="https://segmentfault.com/img/remote/1460000039045544" alt="CDN过程"></p>
+<p>1、客户端请求域名解析</p>
+<p>2、DNS服务器发现域名被调整了，cname转发请求到CDN专用DNS服务器</p>
+<p>3、CDN专用DNS服务器返回CDN全局<strong>负载均衡设备</strong></p>
+<p>4、客户端访问负载均衡设备</p>
+<p>5、负载均衡设备按照一定策略返回一个局部CDN缓存服务器</p>
+<p>6、客户端访问缓存服务器，得到数据内容</p>
+
+      
+      <!-- tags and categories -->
+      
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CDN</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/中间件//" class="article-tag-list-link color4">中间件</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/07/13/%E5%BE%AE%E6%9C%8D%E5%8A%A1/CDN%E5%8E%9F%E7%90%86/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-微服务/nginx" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/13/%E5%BE%AE%E6%9C%8D%E5%8A%A1/nginx/">Nginx配置</a>
+    </h1>
+  
+
+        
+        <a href="/2021/07/13/%E5%BE%AE%E6%9C%8D%E5%8A%A1/nginx/" class="archive-article-date">
+  	<time datetime="2021-07-12T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-13</time>
+</a>
+        
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          
+            <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">445字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">1分</span>
+      </span>
+    </span>
+</div>
+
+          
+        
+        <!-- 添加完成 -->
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          <h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><p>1、静态页面的web服务器</p>
+<p>2、正向代理</p>
+<p>3、反向代理</p>
+<p>4、负载均衡</p>
+<p>5、动静分离：把动态页面和静态页面由不同的服务器来解析</p>
+<h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"># 全局块，从开始到events块前</span><br><span class="line">worker_processes  1;</span><br><span class="line"></span><br><span class="line"># events块</span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections  1024;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># http块</span><br><span class="line">http &#123;</span><br><span class="line">    include       mime.types;</span><br><span class="line">    default_type  application/octet-stream;</span><br><span class="line">    sendfile        on;</span><br><span class="line">    keepalive_timeout  65;</span><br><span class="line"></span><br><span class="line">    server &#123;</span><br><span class="line">        listen       80;</span><br><span class="line">        server_name  localhost;</span><br><span class="line"></span><br><span class="line">        location / &#123;</span><br><span class="line">            root   html;</span><br><span class="line">            index  index.html index.htm;</span><br><span class="line">        &#125;</span><br><span class="line">        error_page   500 502 503 504  /50x.html;</span><br><span class="line">        location = /50x.html &#123;</span><br><span class="line">            root   html;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20210705195044641.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xvaWNrZXRMb3Jlbnpv,size_16,color_FFFFFF,t_70"></p>
+<p>【全局块】：影响nginx 服务器整体运行的配置指令</p>
+<p>【events块】：网络连接、是否序列化、work_pregress最大连接数、事件驱动模型等</p>
+<p>【http块】</p>
+<ul>
+<li>全局http块：日志定义，超时时间，单连接请求上限…</li>
+<li>server块(多)<ul>
+<li>全局server配置：端口 &amp; host…</li>
+<li>Location(多)：页面导航</li>
+</ul>
+</li>
+</ul>
+<h2 id="配置示例"><a href="#配置示例" class="headerlink" title="配置示例"></a>配置示例</h2><h4 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h4><p>根据不同访问路径，跳转不同url，可用正则表达式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">	listen 80;</span><br><span class="line">	server_name 1.1.1.1;</span><br><span class="line">	</span><br><span class="line">	location /cat/ &#123;</span><br><span class="line">		proxy_pass http://2.2.2.2:8080</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	location /dag/ &#123;</span><br><span class="line">		proxy_pass http://3.3.3.3:8080</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h4><p>默认轮询方式，可配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">upstream myserver&#123;</span><br><span class="line">	server 1.1.1.1:8080;</span><br><span class="line">	server 2.2.2.2:8080;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">	...</span><br><span class="line">	location &#123;</span><br><span class="line">		root html;</span><br><span class="line">		proxy_pass  http://myserver;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="主从设置"><a href="#主从设置" class="headerlink" title="主从设置"></a>主从设置</h2><h2 id="nginx原理"><a href="#nginx原理" class="headerlink" title="nginx原理"></a>nginx原理</h2><ul>
+<li><p>两类进程master和worker，master只有一个，worker可以有多个。</p>
+</li>
+<li><p>请求首先到达master，worker争抢处理请求，每个worker挂了后，master可以重启worker。</p>
+</li>
+<li><p>worker内使用和redis类似的io多路复用，进程内单线程，异步非阻塞方式处理请求。因此设置和cpu同等数量的worker效率最高。</p>
+</li>
+<li><p>worker可以最大建立1024个连接</p>
+<ul>
+<li>建立http1.1使用两个连接，因此一个worker最大建立512个连接</li>
+<li>如果nginx作为反向代理，只能建立1024&#x2F;4个连接</li>
+</ul>
+</li>
+</ul>
+
+      
+      <!-- tags and categories -->
+      
+      
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">nginx</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/07/13/%E5%BE%AE%E6%9C%8D%E5%8A%A1/nginx/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-数据库/Mysql索引" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -1003,448 +1444,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/07/02/languages/Java/spring/VO&DO&DTO/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-数据库/Mysql/jdbcTemplate" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/06/13/%E6%95%B0%E6%8D%AE%E5%BA%93/Mysql/jdbcTemplate/">jdbcTemplate使用</a>
-    </h1>
-  
-
-        
-        <a href="/2021/06/13/%E6%95%B0%E6%8D%AE%E5%BA%93/Mysql/jdbcTemplate/" class="archive-article-date">
-  	<time datetime="2021-06-12T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-13</time>
-</a>
-        
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          
-            <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">285字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">1分</span>
-      </span>
-    </span>
-</div>
-
-          
-        
-        <!-- 添加完成 -->
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          <p>【是什么】：spring对jdbc的封装</p>
-<h2 id="连接方式"><a href="#连接方式" class="headerlink" title="连接方式"></a>连接方式</h2><p>1、hibernate，mybatis配置连接</p>
-<p>2、代码内连接</p>
-<p>配置—-最短的方式：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public NamedParameterJdbcTemplate createJdbcTemplate() &#123;</span><br><span class="line">    DriverManagerDataSource dataSource = new DriverManagerDataSource();</span><br><span class="line">    dataSource.setDriverClassName(&quot;com.mysql.jdbc.Driver&quot;);</span><br><span class="line">    dataSource.setUrl(&quot;jdbc:mysql://tutor-mysql-test:3306/tutor_sale&quot;);</span><br><span class="line">    dataSource.setUsername(&quot;tutor&quot;);</span><br><span class="line">    dataSource.setPassword(&quot;tutor123&quot;);</span><br><span class="line">    return new NamedParameterJdbcTemplate(dataSource);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="函数用法"><a href="#函数用法" class="headerlink" title="函数用法"></a>函数用法</h2><ul>
-<li>针对简单查询，优选<code>query()</code>和<code>queryForObject()</code>，只需提供SQL语句、参数和<code>RowMapper</code>；<ul>
-<li>query：使用RowMapper（BeanRowMapper）将结果映射为Bean对象，需要保证字段名一模一样</li>
-<li>queryForObject，只返回一行</li>
-</ul>
-</li>
-<li>针对更新（插入、更新、删除）操作，优选<code>update()</code>&#x2F;<code>batchUpdate</code>，只需提供SQL语句和参数；<ul>
-<li>keyHolder获取自增id</li>
-<li>参数：sqlStr, SqlParameterSource&#x2F;Map&lt;String, ?&gt;, KeyHolder</li>
-</ul>
-</li>
-<li>任何复杂的操作，最终也可以通过<code>execute(ConnectionCallback)</code>实现，因为拿到<code>Connection</code>就可以做任何JDBC操作。</li>
-</ul>
-<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>查询</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># rowmapper函数接口，如何映射数据库字段和对象属性</span><br><span class="line">private static final RowMapper&lt;TwinMarkRecord&gt; ROW_MAPPER = (rs, rowNum) -&gt; &#123;&#125;</span><br><span class="line"></span><br><span class="line">String sql = &quot;SELECT * FROM `mark_record` WHERE `userId` = :userId;</span><br><span class="line">SqlParameterSource param = new MapSqlParameterSource().addValue(&quot;userId&quot;, userId);</span><br><span class="line">return writer.query(sql, param, ROW_MAPPER);</span><br></pre></td></tr></table></figure>
-
-<p>批量操作</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String sql = ...</span><br><span class="line">SqlParameterSource[] sqlParameterSources = ...</span><br><span class="line">writer.batchUpdate(sql, sqlParameterSources);</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/1252599548343744/1282383699509281">廖雪峰—-使用JDBC</a></p>
-
-      
-      <!-- tags and categories -->
-      
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Mysql</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">jdbcTemplate</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Mysql//" class="article-tag-list-link color1">Mysql</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/06/13/%E6%95%B0%E6%8D%AE%E5%BA%93/Mysql/jdbcTemplate/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-数据库/Redis/Redis空间占用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/17/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis/Redis%E7%A9%BA%E9%97%B4%E5%8D%A0%E7%94%A8/">Redis存储计算</a>
-    </h1>
-  
-
-        
-        <a href="/2021/02/17/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis/Redis%E7%A9%BA%E9%97%B4%E5%8D%A0%E7%94%A8/" class="archive-article-date">
-  	<time datetime="2021-02-16T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-17</time>
-</a>
-        
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          
-            <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">339字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">1分</span>
-      </span>
-    </span>
-</div>
-
-          
-        
-        <!-- 添加完成 -->
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          <h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><p>dictEntry: 24 byte</p>
-<p>redisObject: 16 byte（如果value是数值，直接赋值到指针上(8byte)，不使用SDS了)</p>
-<p>SDS: 9+len+free，（Jemalloc内存分配器，占用10byte-&gt;16byte，24byte-&gt;16+16byte）</p>
-<p>value字符串计算：32(dictEntry)+X(key sds)+16(value redisObject)+X(value sds)</p>
-<p>value数值计算：</p>
-<ul>
-<li><p>value 0~10000</p>
-<p>&#x3D; 32(dictEntry)+16(key sds)</p>
-</li>
-<li><p>else </p>
-<p>&#x3D; 32(dictEntry)+16(key sds)+16(value redisObject)</p>
-</li>
-</ul>
-<h2 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h2><p>一个hmset命令最终会产生以下几个消耗内存的结构：</p>
-<ul>
-<li>1个dictEntry结构，24字节，负责保存当前的哈希对象；</li>
-<li>1个SDS结构，（key长度 9）字节，用作key字符串；</li>
-<li>1个redisObject结构，16字节，指向当前key下属的dict结构；</li>
-<li>1个dict结构，88字节，负责保存哈希对象的键值对；</li>
-<li>n个dictEntry结构，24*n字节，负责保存具体的field和value，n等于field个数；</li>
-<li>n个redisObject结构，16*n字节，用作field对象；</li>
-<li>n个redisObject结构，16*n字节，用作value对象；</li>
-<li>n个SDS结构，（field长度 9）*n字节，用作field字符串；</li>
-<li>n个SDS结构，（value长度 9）*n字节，用作value字符串；</li>
-</ul>
-<p>和string相比，多了1的结构，key变成了redisObject；</p>
-<p>比如key为ID，如果key的前缀不大于16byte（redisObject），还是建议用string，占用空间更小一点</p>
-<p>Ref</p>
-<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6886726965030551559">一起学习Redis–怎么计算字符串内存空间的占用</a></p>
-<p><a target="_blank" rel="noopener" href="http://www.wangwenyong.com/?p=286">redis存储数据占用内存大小估算</a></p>
-
-      
-      <!-- tags and categories -->
-      
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Redis//" class="article-tag-list-link color1">Redis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/02/17/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis/Redis%E7%A9%BA%E9%97%B4%E5%8D%A0%E7%94%A8/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-languages/Java/spring/基础概念" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/13/languages/Java/spring/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/">Spring基础概念</a>
-    </h1>
-  
-
-        
-        <a href="/2020/11/13/languages/Java/spring/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" class="archive-article-date">
-  	<time datetime="2020-11-13T06:30:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-13</time>
-</a>
-        
-        <!-- 需要添加的位置 -->
-        <!-- 开始添加字数统计-->
-        
-          
-            <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">705字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">2分</span>
-      </span>
-    </span>
-</div>
-
-          
-        
-        <!-- 添加完成 -->
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          <h2 id="Spring核心"><a href="#Spring核心" class="headerlink" title="Spring核心"></a>Spring核心</h2><p>Spring的核心是提供了一个容器（container），通常称为Spring应用上下文（Spring application context），它们会创建和管理应用组件。这些组件也可以称为bean，会在Spring应用上下文中装配在一起，从而形成一个完整的应用程序</p>
-<h2 id="注解如何起作用"><a href="#注解如何起作用" class="headerlink" title="注解如何起作用"></a>注解如何起作用</h2><p>1、定义注解，指定作用对象，作用范围（一般runtime）<br>2、在其他地方通过反射机制，获取对象的注解信息，执行注解对应的逻辑</p>
-<p>比如公司的@DynamicConfig注解，可以在项目里任何地方使用，对于它的处理在fenbi-dynamic-config项目DynamicFieldProcessor中，DynamicFieldProcessor实现了BeanPostProcessor（spring提供的接口，用于在bean初始化的过程中添加内容），可以在每个bean装配的过程中检查有没有@DynamicConfig注解，然后运用观察者模式注册监听器，实现动态配置。</p>
-<h2 id="SpringBoot注解"><a href="#SpringBoot注解" class="headerlink" title="SpringBoot注解"></a>SpringBoot注解</h2><p>@SpringBootApplication是一个组合注解</p>
-<ul>
-<li>@SpringBootConfiguration：将该类声明为配置类。</li>
-<li>@EnableAutoConfiguration：启用Spring Boot的自动配置</li>
-<li>@ComponentScan：启用组件扫描。</li>
-</ul>
-<h3 id="注入Bean"><a href="#注入Bean" class="headerlink" title="注入Bean"></a>注入Bean</h3><p>【@Qualifier】当遇到多个实现bean时，使用它，并在括号内指明要注入的是哪个实现类</p>
-<p>【@Autowired】默认按照byType装配bean</p>
-<p>【@Resource】默认按照byName装配bean，可配置name和type，根据配置寻找符合条件的bean</p>
-<p>【@Primary】当遇到多个实现bean时，优先使用被primary注解的实现类</p>
-<p>【@Configuration】创建一个配置bean</p>
-<p>【@Bean】</p>
-<ul>
-<li><p>与@Configuration共同使用，注解在方法上，spring会执行这个方法一次，把返回的bean放到ioc容器中。@Bean(name&#x3D;”xx”)，如果有name，则用来区分类型一样，但属性不一样的两个bean。</p>
-</li>
-<li><p>Spring的@Bean注解用于告诉方法，产生一个Bean对象，然后这个Bean对象交给Spring管理。 产生这个Bean对象的方法Spring只会调用一次，随后这个Spring将会将这个Bean对象放在自己的IOC容器中</p>
-</li>
-</ul>
-<p>【@ConfigurationProperties】绑定yml中的属性到这个bean中</p>
-<p>【*@DirtiesContext*】测试注解，通过classMode或者methodMode控制测试用例之间的数据隔离性</p>
-<p>【@ContextConfiguration】和@RunWith(SpringJUnit4ClassRunner.class)一起使用，表示要导入测试类的bean</p>
-<p>【@ConditionalOnBean】当这个bean存在的时候，才注入；</p>
-<p>【@ConditionalOnMissingBean】当这个bean不存在的时候，才注入</p>
-<p>这两个注解会遇到一个问题：如何保证bean注入的先后顺序。</p>
-<p>spring ioc的解析bean的先后顺序：</p>
-<p>1、@Componeng, @Service, @Controller;</p>
-<p>2、@configuration</p>
-<p>3、@bean</p>
-<p>如果遇到一个@bean依赖另一个@bean，无法保证先后，这里可以通过用class文件替代来解决@ConditionalOnBean(Bean2.class)。</p>
-<h2 id="Bean的生命周期"><a href="#Bean的生命周期" class="headerlink" title="Bean的生命周期"></a>Bean的生命周期</h2><h3 id="Spring-Bean-初始化"><a href="#Spring-Bean-初始化" class="headerlink" title="Spring Bean 初始化"></a>Spring Bean 初始化</h3><ul>
-<li>@PostConstruct 注解方式</li>
-<li>实现 InitializingBean 的afterPropertiesSet 方法</li>
-<li>自定义方式:@Bean(initMethod &#x3D; “xxx”)</li>
-</ul>
-<h3 id="Spring-Bean-销毁"><a href="#Spring-Bean-销毁" class="headerlink" title="Spring Bean 销毁"></a>Spring Bean 销毁</h3><ul>
-<li>@PreDestroy 注解方式</li>
-<li>实现 DisposableBean的destroy方法</li>
-<li>自定义方式:@Bean(destroy &#x3D; “xxx”)</li>
-</ul>
-
-      
-      <!-- tags and categories -->
-      
-      
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">interview</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/spring生态//" class="article-tag-list-link color4">spring生态</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/13/languages/Java/spring/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/">展开全文 >></a>
         </p>
       
 
